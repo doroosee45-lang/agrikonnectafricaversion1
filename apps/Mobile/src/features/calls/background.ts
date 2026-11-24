@@ -21,7 +21,7 @@ export function enregistrerReceptionEnArrierePlan(): void {
   const firebase = chargerMessaging();
   if (!firebase) return;
   void configurerAppelSysteme();
-  firebase.setBackgroundMessageHandler(firebase.getMessaging(), async (message) => {
+  firebase.setBackgroundMessageHandler(firebase.getMessaging(), async (message: any) => {
     const invitation = lireInvitation(message.data);
     if (invitation) {
       await afficherAppelEntrant(invitation.callId, invitation.callerName);

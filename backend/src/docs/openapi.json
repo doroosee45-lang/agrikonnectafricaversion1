@@ -22222,6 +22222,16 @@
           }
         }
       }
+    },
+    "/api/v1/messaging/sync": {
+      "post": {
+        "summary": "Synchronisation différentielle Delta Sync",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }

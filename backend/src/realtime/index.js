@@ -1,6 +1,7 @@
 import { Server } from 'socket.io';
 import { supabase } from '../config/supabase.js';
 import { prisma } from '../config/prisma.js';
+import { postMessage } from '../modules/messaging/messaging.service.js';
 import { env } from '../config/env.js';
 import { isOriginAllowed } from '../config/cors.js';
 import { logger } from '../shared/http/logger.js';
@@ -152,6 +153,32 @@ export const attachRealtime = (httpServer) => {
     });
 
     /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
+    
+    /** Envoi temps réel idempotent via localTempId avec accusé de réception immédiat (Offline-First). */
+    socket.on('send_message', async (payload = {}, ack) => {
+      try {
+        const { roomId, content, attachments = [], localTempId } = payload;
+        if (!roomId || !content) return ack?.({ ok: false, error: 'INVALID_PAYLOAD' });
+        const orgId = organizationIds[0];
+        if (!orgId) return ack?.({ ok: false, error: 'NO_ACTIVE_ORG' });
+
+        const created = await postMessage(
+          roomId,
+          { body: String(content), attachments, localTempId },
+          { user: { id: userId }, tenant: { organizationId: orgId }, headers: {}, ip: 'socket' },
+        );
+        socket.join(roomForConversation(roomId));
+        socket.data.conversationIds.add(roomId);
+        return ack?.({
+          ok: true,
+          serverId: created.id,
+          serverTimestamp: new Date(created.createdAt).getTime(),
+        });
+      } catch (err) {
+        return ack?.({ ok: false, error: err?.message ?? 'SEND_FAILED' });
+      }
+    });
+
     socket.on('ping:app', (ack) => ack?.({ at: new Date().toISOString() }));
 
     socket.on('disconnect', (reason) => {

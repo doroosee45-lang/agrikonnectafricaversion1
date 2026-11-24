@@ -64,6 +64,15 @@ router.post('/conversations/:id/members', authorize('messages.write'), validate(
 router.delete('/conversations/:id/members/:orgId', authorize('messages.write'), asyncHandler(async (req, res) =>
   success(res, await service.removeGroupMember(req.params.id, req.params.orgId, req), { message: 'Membre retiré' })));
 
+
+const deltaSyncSchema = z.object({
+  lastPulledAt: z.number().int().nonnegative().default(0),
+  roomIds: z.array(z.string().min(1).max(60)).max(200).optional(),
+});
+
+router.post('/sync', authorize('messages.read'), validate(deltaSyncSchema), asyncHandler(async (req, res) =>
+  success(res, await service.deltaSync(req.body, req))));
+
 router.get('/conversations', authorize('messages.read'), validate(listSchema, 'query'), asyncHandler(async (req, res) => {
   const { items, total, page, limit, totalUnread } = await service.listConversations(req.query, req);
   return success(res, { items, totalUnread }, {

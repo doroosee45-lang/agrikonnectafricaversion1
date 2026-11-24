@@ -14,6 +14,7 @@ import { COLORS, DARK } from '@/theme/colors';
 import { useAppFonts } from '@/theme/typography';
 import { queryClient } from '@/services/query';
 import { realtime } from '@/services/realtime';
+import { offlineSyncEngine } from '@/services/OfflineSyncEngine';
 import { useAuthStore } from '@/store/auth';
 import { useLocaleSync } from '@/hooks/useLocaleSync';
 import { CallOverlay } from '@/features/calls/CallOverlay';

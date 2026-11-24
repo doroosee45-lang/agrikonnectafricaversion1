@@ -156,7 +156,7 @@ export const useCalls = create<CallsStore>((set, get) => {
       const firebase = chargerMessaging();
       if (firebase) {
         nettoyages.push(
-          firebase.onMessage(firebase.getMessaging(), (message) => {
+          firebase.onMessage(firebase.getMessaging(), (message: any) => {
             const invitation = lireInvitation(message.data);
             if (invitation) void get().rafraichir(invitation.callId);
           }),

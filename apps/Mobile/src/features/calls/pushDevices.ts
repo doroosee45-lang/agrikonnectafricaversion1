@@ -46,7 +46,7 @@ async function jetonVoip(): Promise<string | null> {
   if (!voip) return null;
   return new Promise((resolve) => {
     const delai = setTimeout(() => resolve(null), 10_000);
-    voip.addEventListener('register', (jeton) => {
+    voip.addEventListener('register', (jeton: any) => {
       clearTimeout(delai);
       resolve(jeton);
     });

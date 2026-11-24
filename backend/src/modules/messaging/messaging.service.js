@@ -375,7 +375,13 @@ export const listMessages = async (conversationId, query, req) => {
   };
 };
 
-export const postMessage = async (conversationId, { body, attachments }, req) => {
+export const postMessage = async (conversationId, { body, attachments, localTempId }, req) => {
+  if (localTempId) {
+    const existing = await prisma.message.findUnique({ where: { id: localTempId } });
+    if (existing && existing.conversationId === conversationId) {
+      return existing;
+    }
+  }
   const conversation = await prisma.conversation.findUnique({ where: { id: conversationId } });
   if (!conversation || !conversation.participantOrgIds.includes(req.tenant.organizationId)) {
     throw ApiError.notFound('Conversation introuvable');
@@ -387,7 +393,7 @@ export const postMessage = async (conversationId, { body, attachments }, req) =>
   const message = await prisma.$transaction(async (tx) => {
     const created = await tx.message.create({
       data: {
-        id: resolveId(),
+        id: localTempId || resolveId(),
         conversationId,
         senderId: req.user.id,
         senderOrgId: req.tenant.organizationId,
@@ -492,4 +498,55 @@ export const blockConversation = async (conversationId, { reason }, req) => {
 
   emitToConversation(conversationId, 'conversation:blocked', { conversationId, reason: reason ?? null });
   return updated;
+};
+
+
+export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
+  const serverTimestamp = Date.now();
+  const since = new Date(Number(lastPulledAt) || 0);
+
+  const allowedConvs = await prisma.conversation.findMany({
+    where: {
+      participantOrgIds: { has: req.tenant.organizationId },
+      ...(roomIds.length > 0 ? { id: { in: roomIds } } : {}),
+    },
+    select: { id: true },
+  });
+  const allowedIds = allowedConvs.map((c) => c.id);
+  if (allowedIds.length === 0) {
+    return { created: [], updated: [], deleted: [], serverTimestamp };
+  }
+
+  const rows = await prisma.message.findMany({
+    where: {
+      conversationId: { in: allowedIds },
+      createdAt: { gt: since },
+    },
+    orderBy: { createdAt: 'asc' },
+    take: 500,
+  });
+
+  const mapped = rows.map((m) => ({
+    id: m.id,
+    server_id: m.id,
+    local_temp_id: m.id,
+    room_id: m.conversationId,
+    sender_id: m.senderId,
+    sender_org_id: m.senderOrgId,
+    type: m.attachments?.some((a) => /\.(webm|m4a|mp3|ogg|wav)$/i.test(a)) ? 'AUDIO' : m.attachments?.length ? 'DOCUMENT' : 'TEXT',
+    content: m.body,
+    remote_media_url: m.attachments?.[0] ?? null,
+    attachments: m.attachments ?? [],
+    read_by: m.readBy ?? [],
+    created_at: new Date(m.createdAt).getTime(),
+    updated_at: new Date(m.createdAt).getTime(),
+    deleted_at: null,
+  }));
+
+  return {
+    created: mapped,
+    updated: [],
+    deleted: [],
+    serverTimestamp,
+  };
 };

@@ -27,10 +27,10 @@ const diffuser = (reponse: Reponse) => {
   ecouteurs.forEach((ecouteur) => ecouteur(reponse));
 };
 
-export function configurerAppelSysteme(): Promise<boolean> {
+export function configurerAppelSysteme(): Promise<boolean | null> {
   const callKeep = chargerCallKeep();
   if (!callKeep) return Promise.resolve(false);
-  if (configure) return configure;
+  if (configure) return configure!;
   configure = callKeep
     .setup({
       ios: { appName: 'AgriKonnect', supportsVideo: false, maximumCallGroups: '1', maximumCallsPerCallGroup: '1', includesCallsInRecents: false },
@@ -49,14 +49,14 @@ export function configurerAppelSysteme(): Promise<boolean> {
       },
     })
     .then(() => {
-      callKeep.addEventListener('answerCall', ({ callUUID }) => {
+      callKeep.addEventListener('answerCall', ({ callUUID }: any) => {
         const callId = appelsAffiches.get(callUUID);
         if (callId) {
           callKeep.backToForeground();
           diffuser({ callId, action: 'answer' });
         }
       });
-      callKeep.addEventListener('endCall', ({ callUUID }) => {
+      callKeep.addEventListener('endCall', ({ callUUID }: any) => {
         const callId = appelsAffiches.get(callUUID);
         appelsAffiches.delete(callUUID);
         if (callId) diffuser({ callId, action: 'end' });
@@ -67,7 +67,7 @@ export function configurerAppelSysteme(): Promise<boolean> {
       configure = null;
       return false;
     });
-  return configure;
+  return configure ?? Promise.resolve(false);
 }
 
 /** Fait sonner l'écran d'appel natif pour une invitation reçue par push. */
