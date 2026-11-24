@@ -171,7 +171,7 @@ export function getProfileRoute(user: UserLike | null, activeOrganizationId?: st
   }
   if (roles.includes('FARMER')) return '/farmer/profile';
   if (roles.some((role) => ['AGRONOMIST', 'LAB_PARTNER', 'BUYER', 'SUPPLIER', 'TRANSPORTER'].includes(role))) {
-    return '/professional/profile';
+    return '/app/profile';
   }
   return '/app/profile';
 }

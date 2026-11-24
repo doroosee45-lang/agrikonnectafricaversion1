@@ -1,3 +1,4 @@
+import { avertissementDemarrage } from "./modules/calls/callsConfig.js";
 import { createApp } from './app.js';
 import { attachRealtime } from './realtime/index.js';
 import { startScheduler, stopScheduler } from './jobs/index.js';

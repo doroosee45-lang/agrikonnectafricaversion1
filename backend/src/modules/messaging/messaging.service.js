@@ -47,8 +47,13 @@ const partiesOf = (subject) =>
   ].filter(Boolean);
 
 export const listContacts = async (req) => {
+  const myOrgId = req.tenant?.organizationId;
   const orgs = await prisma.organization.findMany({
-    where: { deletedAt: null, id: { not: req.tenant.organizationId } },
+    where: {
+      deletedAt: null,
+      ...(myOrgId ? { id: { not: myOrgId } } : {}),
+      type: { in: ['INDIVIDUAL', 'COOPERATIVE', 'COMPANY', 'NGO', 'GOVERNMENT', 'RESEARCH'] },
+    },
     select: { id: true, name: true, type: true, countryCode: true },
     orderBy: { name: 'asc' },
     take: 50,

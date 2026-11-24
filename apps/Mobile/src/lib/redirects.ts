@@ -181,7 +181,7 @@ export function resolveActiveContext(
 export function getUserProfileRoute(roles: readonly string[]): string {
   if (roles.includes('INVESTOR')) return '/investment/profile';
   if (roles.includes('FARMER')) return '/farmer/profile';
-  return '/professional/profile';
+  return '/profil';
 }
 
 /** Paramètres personnels; la configuration plateforme exige sa permission dédiée. */

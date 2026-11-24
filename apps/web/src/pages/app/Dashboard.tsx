@@ -42,6 +42,7 @@ export default function AppDashboard() {
   const { t } = useI18n();
   const { locale } = useI18n();
   const isAuthenticated = useAuthStore((state) => state.status === 'authenticated');
+  const permissions = useAuthStore((state) => state.permissions);
 
   const dashboard = useQuery({
     queryKey: queryKeys.dashboard.farmer,
