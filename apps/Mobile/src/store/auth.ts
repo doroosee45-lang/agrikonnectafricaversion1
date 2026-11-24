@@ -4,7 +4,6 @@ import { authApi } from '@/services/api/endpoints';
 import { setSessionLostHandler } from '@/services/api/http';
 import { profileStorage, sessionStore } from '@/services/api/session';
 import type { LoginPayload, MeResult, PublicUser, RegisterPayload, Session } from '@/services/api/types';
-import { retirerCetAppareil } from '@/features/calls/pushDevices';
 
 /**
  * Session applicative.
@@ -146,7 +145,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
 
     async logout() {
       // Appels : retire les jetons push de cette installation tant que la session est valide.
-      await retirerCetAppareil();
       try {
         await authApi.logout();
       } catch {

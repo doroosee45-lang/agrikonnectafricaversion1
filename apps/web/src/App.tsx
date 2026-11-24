@@ -24,7 +24,6 @@ const AdminCountryDetail = lazy(() => import('@/pages/admin/CountryDetail'));
 const AdminCrops = lazy(() => import('@/pages/admin/Crops'));
 const AdminCooperatives = lazy(() => import('@/pages/admin/Cooperatives'));
 const AdminVerifications = lazy(() => import('@/pages/admin/Verifications'));
-const AdminModeration = lazy(() => import('@/pages/admin/Moderation'));
 const AdminReports = lazy(() => import('@/pages/admin/Reports'));
 const AdminAuditLog = lazy(() => import('@/pages/admin/AuditLog'));
 const AdminSettings = lazy(() => import('@/pages/admin/Settings'));
@@ -168,7 +167,6 @@ function App() {
             <Route path="/admin/countries/:code" element={<AdminCountryDetail />} />
             <Route path="/admin/crops" element={<AdminCrops />} />
             <Route path="/admin/cooperatives" element={<AdminCooperatives />} />            <Route path="/admin/verifications" element={<AdminVerifications />} />
-            <Route path="/admin/moderation" element={<AdminModeration />} />
             <Route path="/admin/reports" element={<AdminReports />} />
             <Route path="/admin/audit" element={<AdminAuditLog />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
