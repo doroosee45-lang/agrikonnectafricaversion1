@@ -238,7 +238,6 @@ function useColumns(t: Translator): FooterColumn[] {
         { label: tr('ui.espaceProducteur'), href: '/farmer' },
         { label: tr('ui.connexion'), href: '/auth/login' },
         { label: tr('ui.creerUnCompte'), href: '/auth/register' },
-        { label: tr('ui.apiDeveloppeurs'), href: '/developers' },
         { label: tr('ui.monProfil'), href: '/profil' },
       ],
     },

@@ -75,14 +75,14 @@ const ESPACE_PAR_ROLE: Record<string, string> = {
   COOPERATIVE_ADMIN: '/organization',
   COOPERATIVE_MEMBER: '/organization',
   AGRICULTURAL_COMPANY: '/organization',
-  BUYER: '/market/app',
-  SUPPLIER: '/market/app',
-  TRANSPORTER: '/app/transport',
-  AGRONOMIST: '/reviewer/missions',
-  LAB_PARTNER: '/reviewer/missions',
-  INVESTOR: '/investment',
-  SUPPORT_AGENT: '/app/agent',
-  API_CLIENT: '/developers',
+  BUYER: '/app',
+  SUPPLIER: '/app',
+  TRANSPORTER: '/app',
+  AGRONOMIST: '/app',
+  LAB_PARTNER: '/app',
+  INVESTOR: '/app',
+  SUPPORT_AGENT: '/app',
+  API_CLIENT: '/app',
   PUBLIC_USER: '/app',
 };
 
@@ -92,7 +92,7 @@ const CONFIG_PAR_ROLE: Record<string, string> = {
   COOPERATIVE_ADMIN: '/organization/profile',
   COOPERATIVE_MEMBER: '/organization/profile',
   AGRICULTURAL_COMPANY: '/organization/profile',
-  INVESTOR: '/investment/profile',
+  
 };
 
 /** Ecrans sures (aucun espace metier arbitraire). */

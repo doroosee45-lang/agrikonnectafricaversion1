@@ -5,14 +5,6 @@ const PERMISSIONS: Record<string, string> = {
   '/farmer/plots': 'plots.read',
   '/farmer/productions': 'productions.read',
   '/farmer/soil': 'soil.read',
-  '/farmer/lots': 'lots.read',
-  '/farmer/export': 'export.read',
-  '/farmer/projects': 'projects.read',
-  '/farmer/certifications': 'certifications.read',
-  '/farmer/devices': 'iot.read',
-  '/farmer/alerts': 'alerts.read',
-  '/farmer/sync': 'sync.write',
-  '/farmer/sync/conflicts': 'sync.write',
   '/farmer/verification': 'verifications.read',
 };
 

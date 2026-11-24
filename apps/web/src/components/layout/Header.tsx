@@ -12,10 +12,7 @@ const NAV = [
   { get label() { return tr('ui.accueil'); }, href: '/' },
   { get label() { return tr('ui.aPropos'); }, href: '/a-propos' },
   { get label() { return tr('ui.services'); }, href: '/services' },
-  { get label() { return tr('ui.marche'); }, href: '/market' },
   { get label() { return tr('ui.producteurs'); }, href: '/public/farmers' },
-  { get label() { return tr('ui.investissement'); }, href: '/public/projects' },
-  { get label() { return tr('ui.donnees'); }, href: '/insights' },
 ];
 
 export function Header() {
@@ -32,7 +29,7 @@ export function Header() {
    * centrale calculee). La session n est jamais perdue : simple
    * navigation, aucun logout.
    */
-  const PREFIXES_ESPACE = ['/admin', '/farmer', '/organization', '/market', '/app', '/reviewer', '/investment', '/developers'];
+  const PREFIXES_ESPACE = ['/admin', '/farmer', '/organization', '/app'];
   const dansEspace = PREFIXES_ESPACE.some(
     (prefixe) => location.pathname === prefixe || location.pathname.startsWith(prefixe + '/'),
   );

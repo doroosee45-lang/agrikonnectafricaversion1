@@ -12,9 +12,6 @@ const FOOTER_COLUMNS = [
     get title() { return tr('ui.plateforme'); },
     links: [
       { get label() { return tr('ui.services'); }, href: '/services' },
-      { get label() { return tr('ui.marches'); }, href: '/market' },
-      { get label() { return tr('ui.appelsDOffres'); }, href: '/public/tenders' },
-      { get label() { return tr('ui.projets'); }, href: '/public/projects' },
       { get label() { return tr('ui.carteAgricole'); }, href: '/public/map' },
     ],
   },
@@ -45,7 +42,6 @@ const FOOTER_COLUMNS = [
       { get label() { return tr('ui.espaceProducteur'); }, href: '/farmer' },
       { get label() { return tr('ui.connexion'); }, href: '/auth/login' },
       { get label() { return tr('ui.creerUnCompte'); }, href: '/auth/register' },
-      { get label() { return tr('ui.apiDeveloppeurs'); }, href: '/developers' },
       { get label() { return tr('ui.monProfil'); }, href: '/app/profile' },
     ],
   },
