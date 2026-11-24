@@ -47,36 +47,32 @@ const partiesOf = (subject) =>
   ].filter(Boolean);
 
 export const listContacts = async (req) => {
-  const myOrgId = req.tenant?.organizationId;
-  const orgs = await prisma.organization.findMany({
-    where: {
-      deletedAt: null,
-      ...(myOrgId ? { id: { not: myOrgId } } : {}),
-      type: { in: ['INDIVIDUAL', 'COOPERATIVE', 'COMPANY', 'NGO', 'GOVERNMENT', 'RESEARCH'] },
-    },
-    select: {
-      id: true,
-      name: true,
-      type: true,
-      countryCode: true,
-      memberships: {
-        where: { status: 'ACTIVE' },
-        take: 1,
-        select: { user: { select: { firstName: true, lastName: true, email: true } } },
-      },
-    },
-    orderBy: { name: 'asc' },
-    take: 50,
-  });
-  return orgs.map((o) => {
-    const u = o.memberships?.[0]?.user;
-    const owner = u ? [u.firstName, u.lastName].filter(Boolean).join(' ') || u.email : '';
-    return {
-      id: o.id,
-      name: owner && owner !== o.name ? o.name + ' (' + owner + ')' : o.name,
-      type: o.type,
-      countryCode: o.countryCode,
-    };
+  const myOrgId = req.tenant?.organizationId ?? '';
+  const rows = await prisma.$queryRaw`
+    SELECT o.id, o.name, o.type::text AS type, o.country_code AS "countryCode",
+           p.first_name AS "firstName", p.last_name AS "lastName", p.email
+    FROM organizations o
+    LEFT JOIN memberships m ON m.organization_id = o.id AND m.status = 'ACTIVE'
+    LEFT JOIN profiles p ON p.id = m.user_id
+    WHERE o.deleted_at IS NULL AND o.id <> ${myOrgId}
+    ORDER BY o.name ASC
+    LIMIT 60
+  `;
+  const seen = new Set();
+  const contacts = [];
+  for (const r of rows) {
+    if (seen.has(r.id)) continue;
+    seen.add(r.id);
+    const owner = [r.firstName, r.lastName].filter(Boolean).join(' ') || r.email || '';
+    contacts.push({
+      id: r.id,
+      name: owner && owner !== r.name ? `${r.name} (${owner})` : r.name,
+      type: r.type,
+      countryCode: r.countryCode,
+    });
+  }
+  return contacts;
+};
   });
 };
 
