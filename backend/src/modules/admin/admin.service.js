@@ -249,7 +249,7 @@ export const listUsers = async (query) => {
         createdAt: true,
         lastLoginAt: true,
         memberships: {
-          select: { organizationId: true, roles: true, status: true },
+          select: { organizationId: true, status: true },
         },
       },
     }),

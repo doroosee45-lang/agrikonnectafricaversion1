@@ -47,24 +47,45 @@ const partiesOf = (subject) =>
   ].filter(Boolean);
 
 export const listContacts = async (req) => {
-  const myOrgId = req.tenant?.organizationId ?? "";
-  const rows = await prisma.$queryRaw`
-    SELECT id, name, type::text AS type, country_code AS "countryCode"
-    FROM organizations
-    WHERE deleted_at IS NULL AND id <> ${myOrgId}
-    ORDER BY name ASC
-    LIMIT 60
-  `;
+  const myOrgId = req.tenant.organizationId;
+  const myCountry = req.tenant.organization?.countryCode ?? "";
+  const isPlatformAdmin = (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+
+  const rows = isPlatformAdmin
+    ? await prisma.$queryRaw`
+        SELECT id, name, type::text AS type, country_code AS "countryCode"
+        FROM organizations
+        WHERE deleted_at IS NULL AND id <> ${myOrgId}
+        ORDER BY name ASC
+        LIMIT 60
+      `
+    : await prisma.$queryRaw`
+        SELECT id, name, type::text AS type, country_code AS "countryCode"
+        FROM organizations
+        WHERE deleted_at IS NULL
+          AND id <> ${myOrgId}
+          AND country_code = ${myCountry}
+        ORDER BY name ASC
+        LIMIT 60
+      `;
   return rows;
 };
 
-const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = []) => {
-  if (subjectType === 'DIRECT') {
+const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = [], req = null) => {
+  if (subjectType === "DIRECT") {
+    const myCountry = req?.tenant?.organization?.countryCode;
+    const isPlatformAdmin = (req?.tenant?.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
     const others = await prisma.organization.findMany({
-      where: { id: { in: participantOrgIds }, deletedAt: null },
+      where: {
+        id: { in: participantOrgIds },
+        deletedAt: null,
+        ...(!isPlatformAdmin && myCountry ? { countryCode: myCountry } : {}),
+      },
       select: { id: true },
     });
-    if (others.length === 0) throw ApiError.notFound('Organisation destinataire introuvable');
+    if (others.length === 0) {
+      throw ApiError.forbidden("Destinataire introuvable ou hors de votre périmètre géographique autorisé");
+    }
     return { subject: { id: subjectId }, parties: [...new Set([organizationId, ...others.map((o) => o.id)])] };
   }
   if (!SUBJECT_TYPES.includes(subjectType)) {
@@ -95,7 +116,7 @@ const assertAttachments = (attachments = []) => {
 };
 
 export const startConversation = async ({ subjectType, subjectId, participantOrgIds = [], firstMessage }, req) => {
-  const { parties } = await loadSubject(subjectType, subjectId, req.tenant.organizationId, participantOrgIds);
+  const { parties } = await loadSubject(subjectType, subjectId, req.tenant.organizationId, participantOrgIds, req);
 
   const participants = [...new Set([req.tenant.organizationId, ...participantOrgIds])];
   if (participants.length < 2) {
