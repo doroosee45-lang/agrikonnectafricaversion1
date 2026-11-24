@@ -58,7 +58,7 @@ export const listContacts = async (req) => {
           o.name AS "orgName",
           o.type::text AS type,
           o.country_code AS "countryCode",
-          o.logo_url AS "avatarUrl",
+          NULL AS "avatarUrl",
           p.first_name AS "firstName",
           p.last_name AS "lastName",
           m.roles::text[] AS roles
@@ -75,7 +75,7 @@ export const listContacts = async (req) => {
           o.name AS "orgName",
           o.type::text AS type,
           o.country_code AS "countryCode",
-          o.logo_url AS "avatarUrl",
+          NULL AS "avatarUrl",
           p.first_name AS "firstName",
           p.last_name AS "lastName",
           m.roles::text[] AS roles
@@ -283,7 +283,7 @@ export const listConversations = async (query, req) => {
 
   const allOrgIds = [...new Set(items.flatMap((c) => c.participantOrgIds))];
   const orgRows = allOrgIds.length > 0
-    ? await prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE id = ANY(${allOrgIds}::text[])`
+    ? await prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", NULL AS "avatarUrl" FROM organizations WHERE id = ANY(${allOrgIds}::text[])`
     : [];
   const orgMap = new Map(orgRows.map((o) => [o.id, o]));
   return {
