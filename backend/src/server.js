@@ -103,7 +103,7 @@ const io = env.REALTIME_ENABLED === 'false' ? null : attachRealtime(server);
  * absent), et rappel que la sonnerie temps réel dépend de Socket.IO.
  */
 {
-  const avertissementAppels = null;
+  const avertissementAppels = avertissementDemarrage();
   if (avertissementAppels) logger.warn(`[appels] ${avertissementAppels}`);
   const avertissementNotifPush = avertissementPush();
   if (avertissementNotifPush) logger.warn(`[push] ${avertissementNotifPush}`);

@@ -106,6 +106,7 @@ export const ESPACES: EspaceDef[] = [
       {
         get titre() { return tr('ui.compteConformite'); },
         items: [
+          { to: '/app/messages', get label() { return 'Messages'; }, icone: 'message' },
           { to: '/farmer/profile', get label() { return tr('ui.monProfil'); }, icone: 'personne' },
           { to: '/farmer/public-profile', get label() { return tr('ui.fichePublique'); }, icone: 'globe' },
           { to: '/farmer/verification', get label() { return tr('ui.verificationKyc'); }, icone: 'verification' },
@@ -141,6 +142,7 @@ export const ESPACES: EspaceDef[] = [
       {
         get titre() { return tr('ui.compteConformite'); },
         items: [
+          { to: '/app/messages', get label() { return 'Messages'; }, icone: 'message' },
           { to: '/organization/profile', get label() { return tr('ui.monProfil'); }, icone: 'personne' },
           { to: '/organization/verification', get label() { return tr('ui.verificationKyc'); }, icone: 'verification' },
           { to: '/organization/settings', get label() { return tr('ui.parametres_ef8f0'); }, icone: 'reglages' },
@@ -157,6 +159,7 @@ export const ESPACES: EspaceDef[] = [
         items: [
           { to: '/app', get label() { return tr('ui.tableauDeBord'); }, icone: 'graphe' },
           { to: '/app/profile', get label() { return tr('ui.monProfil'); }, icone: 'personne' },
+          { to: '/app/messages', get label() { return 'Messages'; }, icone: 'message' },
           { to: '/app/notifications', get label() { return tr('ui.notifications'); }, icone: 'cloche' },
         ],
       },

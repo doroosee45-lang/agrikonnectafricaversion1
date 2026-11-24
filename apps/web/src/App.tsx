@@ -43,7 +43,9 @@ const AppPlots = lazy(() => import('@/pages/app/Plots'));
 const AppPlotDetail = lazy(() => import('@/pages/app/PlotDetail'));
 const AppProductions = lazy(() => import('@/pages/app/Productions'));
 const AppSoil = lazy(() => import('@/pages/app/Soil'));
-const AppNotifications = lazy(() => import('@/pages/app/Notifications'));
+const AppMessages = lazy(() => import("@/pages/app/Messages"));
+const AppConversation = lazy(() => import("@/pages/app/Conversation"));
+const AppNotifications = lazy(() => import("@/pages/app/Notifications"));
 const AppSmsConsent = lazy(() => import('@/pages/app/SmsConsent'));
 const AppNotificationPreferences = lazy(() => import('@/pages/app/NotificationPreferences'));
 const AppProfile = lazy(() => import('@/pages/app/Profile'));
@@ -181,7 +183,9 @@ function App() {
             <Route path="/app/plots" element={<AppPlots />} />
             <Route path="/app/plots/:id" element={<AppPlotDetail />} />
             <Route path="/app/productions" element={<AppProductions />} />
-            <Route path="/app/soil" element={<AppSoil />} />            <Route path="/app/notifications" element={<AppNotifications />} />
+            <Route path="/app/soil" element={<AppSoil />} />            <Route path="/app/messages" element={<AppMessages />} />
+              <Route path="/app/messages/:id" element={<AppConversation />} />
+              <Route path="/app/notifications" element={<AppNotifications />} />
             <Route path="/app/sms-consent" element={<AppSmsConsent />} />
             <Route path="/notifications/preferences" element={<AppNotificationPreferences />} />
             <Route path="/notifications/sms-consent" element={<Navigate to="/app/sms-consent" replace />} />            <Route path="/app/profile" element={<AppProfile />} />

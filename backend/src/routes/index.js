@@ -18,6 +18,10 @@ import adminRoutes from "../modules/admin/admin.routes.js";
 import dashboardRoutes from "../modules/dashboard/dashboard.routes.js";
 import countriesRoutes from "../modules/countries/countries.routes.js";
 import notificationsRoutes from "../modules/notifications/notifications.routes.js";
+import messagingRoutes from "../modules/messaging/messaging.routes.js";
+import callsRoutes from "../modules/calls/calls.routes.js";
+import livekitWebhookRoutes from "../modules/calls/calls.webhook.js";
+import pushDevicesRoutes from "../modules/push/push.routes.js";
 
 const router = Router();
 
@@ -40,8 +44,12 @@ router.use("/countries", countriesRoutes);
 
 // Authentification & Identité V1
 router.use("/auth", authRoutes);
+router.use("/me/push-devices", pushDevicesRoutes);
 router.use("/me", usersRoutes);
 router.use("/notifications", notificationsRoutes);
+router.use("/messaging", messagingRoutes);
+router.use("/calls", callsRoutes);
+router.use("/webhooks/livekit", livekitWebhookRoutes);
 
 // Organisations & Coopératives V1
 router.use("/organizations", organizationsRoutes);

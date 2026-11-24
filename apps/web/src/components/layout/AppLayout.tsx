@@ -9,6 +9,7 @@ import { cn } from '@/design-system/lib/utils';
 import type { SidebarGroup, SidebarItem, SidebarStatusCard } from '@/design-system';
 import { getActiveOrganizationId, getProfileRoute, setActiveOrganizationId } from '@/lib/redirects';
 import { resolveEspace } from '@/lib/space-nav';
+import { CallOverlay } from '@/features/calls/CallOverlay';
 import { useAuthStore } from '@/store/auth';
 import { Footer } from './Footer';
 import { Header } from './Header';

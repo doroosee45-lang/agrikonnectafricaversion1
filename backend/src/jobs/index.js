@@ -163,7 +163,8 @@ export const JOBS = {
     intervalMs: 60 * 1000,
     run: async () => {
       if (env.CALLS_ENABLED !== 'true') return { skipped: 'CALLS_ENABLED=false' };
-      return { skipped: "V1" };
+      const { expirerSonneries } = await import("../modules/calls/calls.service.js");
+      return expirerSonneries();
     },
   },
 
