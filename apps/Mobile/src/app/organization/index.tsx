@@ -6,6 +6,7 @@ import { router } from 'expo-router';
 import { AppHeader } from '@/components/app/AppHeader';
 import {
   AuthGate,
+  Button,
   EmptyState,
   ErrorState,
   LoadingState,
@@ -67,6 +68,7 @@ export default function OrganizationIndex() {
       />
       <Section bare contentStyle={styles.section}>
         <AuthGate isAuthenticated={isAuthenticated} title={t('ui.monOrganisation')} icon="business-outline">
+          <View style={{ marginBottom: SPACING.sm }}><Button label="Messages" variant="outline" onPress={() => router.push('/messages' as never)} /></View>
           {query.isLoading ? (
             <LoadingState count={2} height={110} />
           ) : query.isError ? (

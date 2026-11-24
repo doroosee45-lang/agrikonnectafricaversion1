@@ -45,25 +45,17 @@ export function FarmerHeader({ title, subtitle }: { title: string; subtitle?: st
         { label: t('ui.mesParcelles'), route: '/farmer/plots' },
         { label: t('ui.productionsDeclarees'), route: '/farmer/productions' },
         { label: t('ui.analysesDeSol'), route: '/farmer/soil' },
-        { label: t('ui.lotsQrTracabilite'), route: '/farmer/lots' },
+        { label: 'Messages', route: '/messages' },
       ],
     },
     {
       title: t('ui.commerceProjets'),
       items: [
-        { label: t('ui.dossiersDExport'), route: '/farmer/export' },
-        { label: t('ui.projetsDInvestissement'), route: '/farmer/projects' },
-        { label: t('ui.certifications'), route: '/farmer/certifications' },
       ],
     },
     {
       title: t('ui.capteursTerrain'),
       items: [
-        { label: t('ui.sondesCapteursIot'), route: '/farmer/devices' },
-        { label: t('ui.boiteDAlertes'), route: '/farmer/alerts' },
-        { label: t('ui.enquetesTerrain'), route: '/farmer/surveys' },
-        { label: t('ui.synchronisationHorsLigne'), route: '/farmer/sync' },
-        { label: t('ui.conflitsDeSynchro'), route: '/farmer/sync/conflicts' },
         { label: t('ui.galerieMedias'), route: '/farmer/gallery' },
       ],
     },

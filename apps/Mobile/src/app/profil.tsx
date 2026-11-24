@@ -61,6 +61,7 @@ export default function Profil() {
           description={t('ui.votreProfilRegroupeVotreIdentiteL')}
           icon="person-outline"
         >
+          <View style={{ marginBottom: SPACING.md }}><Button label="Messages & Appels" variant="outline" onPress={() => router.push('/messages' as never)} /></View>
           {me.isLoading ? (
             <LoadingState count={2} height={120} />
           ) : me.isError ? (
