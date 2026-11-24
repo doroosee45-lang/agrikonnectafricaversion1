@@ -18,8 +18,6 @@ const FOOTER_COLUMNS = [
   {
     get title() { return tr('ui.donnees'); },
     links: [
-      { get label() { return tr('ui.prixAgricoles'); }, href: '/prices' },
-      { get label() { return tr('ui.meteo'); }, href: '/weather' },
       { get label() { return tr('ui.catalogueDeDonnees'); }, href: '/public/data' },
       { get label() { return tr('ui.tracabiliteDUnLot'); }, href: '/public/lots/demo' },
       { get label() { return tr('ui.agricultureParPays'); }, href: '/public/agriculture/CD' },

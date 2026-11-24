@@ -39,7 +39,6 @@ export const PUBLIC_NAV: NavItem[] = [
   { key: 'data', href: '/public-site/data', labelKey: 'ui.donnees' },
   { key: 'actualites', href: '/actualites', labelKey: 'nav.news' },
   { key: 'contact', href: '/contact', labelKey: 'nav.contact' },
-  { key: 'tenders', href: '/tenders', labelKey: 'nav.tenders' },
 ];
 
 /**
