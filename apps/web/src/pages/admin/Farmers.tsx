@@ -1,0 +1,30 @@
+import { ResourcePage } from '@/components/pages';
+import { adminApi } from '@/services/endpoints';
+import { queryKeys } from '@/services/query';
+
+import { DateCell, StatusChip, render, type Row } from '@/components/pages';
+import { useI18n } from '@/i18n';
+
+/** ADMIN — comptes producteurs. */
+export default function AdminFarmers() {
+  const { t } = useI18n();
+  return (
+    <ResourcePage<Row>
+      title={t('ui.producteurs')}
+      subtitle={t('ui.comptesDontLeRoleInclutLa')}
+      icon="🧑‍🌾"
+      queryKey={queryKeys.admin.users({ role: 'FARMER', limit: 100 })}
+      fetch={() => adminApi.users({ role: 'FARMER', limit: 100 }).then((result) => result.data)}
+      rowKey={(row) => String(row.id)}
+      columns={[
+        { key: 'email', label: t('ui.email'), render: render('email') },
+        { key: 'name', label: t('ui.nom'), render: (row) => `${String(row.firstName ?? '')} ${String(row.lastName ?? '')}`.trim() || '—' },
+        { key: 'countryCode', label: t('ui.pays'), render: render('countryCode') },
+        { key: 'status', label: t('ui.statut'), render: (row) => <StatusChip value={row.status} /> },
+        { key: 'createdAt', label: t('ui.creeLe'), render: (row) => <DateCell value={row.createdAt} /> },
+      ]}
+      emptyTitle={t('ui.aucunProducteur')}
+      emptyDescription={t('ui.aucunCompteProducteurNAEte')}
+    />
+  );
+}

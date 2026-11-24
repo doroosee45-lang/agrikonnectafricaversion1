@@ -1,0 +1,14 @@
+diff --git a/node_modules/expo-constants/build/Constants.js b/node_modules/expo-constants/build/Constants.js
+index fd9f041..d832286 100644
+--- a/node_modules/expo-constants/build/Constants.js
++++ b/node_modules/expo-constants/build/Constants.js
+@@ -5,9 +5,6 @@ import { Platform, NativeModules } from 'react-native';
+ import { ExecutionEnvironment } from './Constants.types';
+ import ExponentConstants from './ExponentConstants';
+ export { AppOwnership, ExecutionEnvironment, UserInterfaceIdiom } from './Constants.types';
+-if (!ExponentConstants) {
+-    console.warn("No native ExponentConstants module found, are you sure the expo-constants's module is linked properly?");
+-}
+ const ExpoUpdates = requireOptionalNativeModule('ExpoUpdates');
+ let rawUpdatesManifest = null;
+ // If expo-updates defines a non-empty manifest, prefer that one

@@ -1,0 +1,16 @@
+diff --git a/node_modules/@expo/metro-file-map/build/watchers/NativeWatcher.js b/node_modules/@expo/metro-file-map/build/watchers/NativeWatcher.js
+index 00d65e7..ab0c19b 100644
+--- a/node_modules/@expo/metro-file-map/build/watchers/NativeWatcher.js
++++ b/node_modules/@expo/metro-file-map/build/watchers/NativeWatcher.js
+@@ -103,7 +103,10 @@ const RECRAWL_EVENT = 'recrawl';
+ class NativeWatcher extends _AbstractWatcher.AbstractWatcher {
+     #fsWatcher;
+     static isSupported() {
+-        return (0, _os().platform)() === 'darwin';
++        return [
++            'darwin',
++            'win32'
++        ].includes((0, _os().platform)());
+     }
+     // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+     constructor(dir, opts){

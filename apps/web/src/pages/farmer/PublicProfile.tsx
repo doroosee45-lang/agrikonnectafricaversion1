@@ -1,0 +1,98 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+import { AuthGate, Button, Card, Chip, LoadingState, Section, Text } from '@/components/ui';
+import { authApi, farmApi } from '@/services/endpoints';
+import { queryKeys } from '@/services/query';
+import { useAuthStore } from '@/store/auth';
+import { formatDate } from '@/lib/format';
+import { useI18n } from '@/i18n';
+import { COLORS, DURATION, EASE } from '@/theme';
+
+/** FARMER — aperçu de la fiche publique et contrôle de publication. */
+export default function FarmerPublicProfile() {
+  const { t } = useI18n();
+  const isAuthenticated = useAuthStore((state) => state.status === 'authenticated');
+  const { locale } = useI18n();
+
+  const me = useQuery({ queryKey: queryKeys.me, queryFn: () => authApi.me().then((result) => result.data), enabled: isAuthenticated, retry: false });
+  const farms = useQuery({ queryKey: queryKeys.farms.list({ limit: 50 }), queryFn: () => farmApi.list({ limit: 50 }).then((result) => result.data), enabled: isAuthenticated, retry: false });
+
+  const published = farms.data?.filter((farm) => farm.isPublic) ?? [];
+  const professional = me.data?.user.professionalProfile;
+
+  return (
+    <Section>
+      <AuthGate isAuthenticated={isAuthenticated} title={t('ui.maFichePublique')} icon="🌍">
+        <Text preset="h1" style={{ marginBottom: 8 }}>{t('ui.maFichePublique')}</Text>
+        <Text preset="bodyMd" color={COLORS.slateGray} style={{ marginBottom: 32 }}>{t('ui.ceQueLesVisiteursVoientLes')}</Text>
+
+        {me.isLoading || farms.isLoading ? (
+          <LoadingState count={2} height={110} />
+        ) : (
+          <>
+            <Card tone="white" style={{ marginBottom: 24 }}>
+              <Text preset="h3" style={{ marginBottom: 12 }}>
+                {me.data?.user.firstName} {me.data?.user.lastName}
+              </Text>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+                <Chip label={me.data?.user.countryCode ?? '—'} tone="neutral" size="sm" />
+                <Chip label={professional?.publicProfile ? 'Profil professionnel public' : 'Profil professionnel privé'} tone={professional?.publicProfile ? 'success' : 'warning'} size="sm" />
+              </div>
+              {professional?.publicProfile && professional.jobTitle ? <Text preset="bodyMd" style={{ marginBottom: 4 }}>{professional.jobTitle}</Text> : null}
+              {professional?.publicProfile && professional.activityDomain ? <Text preset="caption" color={COLORS.slateGray}>{professional.activityDomain}</Text> : null}
+              {professional?.publicProfile && professional.biography ? (
+                <Text preset="bodySm" color={COLORS.slateGray} style={{ marginTop: 12, lineHeight: 1.7 }}>{professional.biography}</Text>
+              ) : null}
+              {professional?.publicProfile && (professional.services?.length ?? 0) > 0 ? (
+                <Text preset="caption" color={COLORS.slateGray} style={{ marginTop: 12 }}>
+                  Services : {professional.services?.join(', ')}
+                </Text>
+              ) : null}
+              {professional?.publicProfile && (professional.certifications?.length ?? 0) > 0 ? (
+                <Text preset="caption" color={COLORS.slateGray} style={{ marginTop: 4 }}>
+                  Certifications : {professional.certifications?.join(', ')}
+                </Text>
+              ) : null}
+              <Text preset="caption" color={COLORS.slateGray} style={{ marginTop: 12 }}>
+                Aucun e-mail, numéro de téléphone ou identifiant privé n’est affiché.
+              </Text>
+            </Card>
+
+            <Text preset="h3" style={{ marginBottom: 12 }}>{t('ui.exploitationsPubliees')}</Text>
+            {published.length === 0 ? (
+              <Card tone="pale">
+                <Text preset="bodySm" color={COLORS.slateGray}>{t('ui.aucuneExploitationNEstPublieePubliez')}</Text>
+              </Card>
+            ) : (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
+                {published.map((farm, index) => (
+                  <motion.div
+                    key={farm.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: DURATION.base / 1000, delay: Math.min(index, 8) * 0.04, ease: EASE.out }}
+                  >
+                    <Card tone="white" hover>
+                      <Text preset="h4" style={{ marginBottom: 4 }}>
+                        {farm.name}
+                      </Text>
+                      <Text preset="caption" color={COLORS.slateGray}>{t('ui.miseAJour_8b606', { countryCode: farm.countryCode, updatedAt: formatDate(farm.updatedAt, locale) })}</Text>
+                      <div style={{ marginTop: 12 }}>
+                        <Link to={`/public/farms/${farm.slug}`}>
+                          <Button label={t('ui.voirLaFiche')} variant="outline" size="sm" />
+                        </Link>
+                      </div>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </AuthGate>
+    </Section>
+  );
+}
