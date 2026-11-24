@@ -1,135 +1,90 @@
-import { StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useQuery } from '@tanstack/react-query';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AppHeader } from '@/components/app/AppHeader';
-import {
-  AuthGate,
-  Card,
-  Chip,
-  EmptyState,
-  ErrorState,
-  LoadingState,
-  PressableCard,
-  Reveal,
-  Screen,
-  Section,
-  Text,
-} from '@/components/ui';
-import { useI18n, tr } from '@/i18n';
-import { formatNumber, formatRelative } from '@/lib/format';
+import { AuthGate, Chip, Button, Card, EmptyState, ErrorState, LoadingState, Screen, Section, Text } from '@/components/ui';
+import { useI18n } from '@/i18n';
+import { formatDate } from '@/lib/format';
 import { messagingApi } from '@/services/api/endpoints';
 import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
-import { COLORS, TINTS } from '@/theme/colors';
-import { RADIUS, SPACING } from '@/theme/space';
+import { COLORS } from '@/theme/colors';
+import { SPACING } from '@/theme/space';
 
-const SUBJECT_LABELS: Record<string, string> = {
-  get LISTING() { return tr('ui.annonce'); },
-  get ORDER() { return tr('ui.commande'); },
-  get TRANSPORT() { return tr('ui.transport'); },
-  get DISPUTE() { return tr('ui.litige'); },
-  get PROJECT() { return tr('ui.projet'); },
-};
-
-/** Messagerie (MSG-01) : conversations rattachées à un objet métier. */
-export default function Messages() {
+export default function MessagesScreen() {
   const { t, locale } = useI18n();
   const isAuthenticated = useAuthStore((state) => state.status === 'authenticated');
 
-  const conversations = useQuery({
+  const query = useQuery({
     queryKey: queryKeys.messaging.conversations,
-    queryFn: () => messagingApi.conversations({ limit: 50 }).then((result) => result.data),
+    queryFn: () => messagingApi.conversations({ limit: 50 }).then((r) => r.data),
+    enabled: isAuthenticated,
+    retry: false,
+  });
+
+  const contactsQuery = useQuery({
+    queryKey: ['messaging', 'contacts'],
+    queryFn: () => messagingApi.contacts().then((r) => r.data.items),
     enabled: isAuthenticated,
   });
 
-  const items = conversations.data?.items ?? [];
+  const startConv = useMutation({
+    mutationFn: (targetOrgId: string) =>
+      messagingApi.start({ subjectType: 'DIRECT', subjectId: targetOrgId, participantOrgIds: [targetOrgId] }),
+    onSuccess: (res) => {
+      const convId = (res.data as { id?: string })?.id;
+      if (convId) router.push(('/messages/' + convId) as never);
+    },
+  });
+
+  const items = query.data?.items ?? [];
+  const contacts = contactsQuery.data ?? [];
 
   return (
     <Screen background={COLORS.naturalWhite}>
-      <AppHeader title={t('nav.messages')} subtitle={t('ui.echangesLiesAUneAnnonceUne')} />
-
+      <AppHeader title={t('ui.messagerie')} subtitle={t('ui.conversations')} />
       <Section bare contentStyle={styles.section}>
-        <AuthGate
-          isAuthenticated={isAuthenticated}
-          title={t('ui.messagerieReserveeAuxComptesActifs')}
-          description={t('ui.connectezVousPourEchangerAvecUn')}
-          icon="chatbubbles-outline"
-        >
-          {conversations.isLoading ? (
-            <LoadingState count={3} height={90} />
-          ) : conversations.isError ? (
-            <ErrorState error={conversations.error} onRetry={() => void conversations.refetch()} />
-          ) : (
-            <>
-              <Card tone="white" style={styles.summary}>
-                <Text preset="bodyMedium" color={COLORS.textPrimary}>{t('ui.conversationSMessageSNonLu', { length: formatNumber(items.length, locale), value: formatNumber(conversations.data?.totalUnread ?? 0, locale) })}</Text>
-                <Text preset="caption" color={COLORS.slateGray} style={styles.lineHeight}>{t('ui.uneConversationEstToujoursRattacheeA')}</Text>
-              </Card>
+        <AuthGate isAuthenticated={isAuthenticated} title={t('ui.messagerie')} icon="chatbubbles-outline">
+          {contacts.length > 0 ? (
+            <Card tone="pale" style={styles.contactsCard}>
+              <Text preset="bodyMedium" color={COLORS.forestGreen}>Nouvelle discussion</Text>
+              <View style={styles.contactRow}>
+                {contacts.slice(0, 6).map((c) => (
+                  <Button
+                    key={c.id}
+                    label={c.name}
+                    variant="outline"
+                    loading={startConv.isPending}
+                    onPress={() => startConv.mutate(c.id)}
+                  />
+                ))}
+              </View>
+            </Card>
+          ) : null}
 
-              {items.length === 0 ? (
-                <EmptyState
-                  title={t('ui.aucuneConversation')}
-                  description={t('ui.contactezUnVendeurDepuisUneAnnonce_ac1ee')}
-                  icon="chatbubbles-outline"
-                  action={{ label: t('ui.voirLesAnnonces'), onPress: () => router.push('/annonces') }}
-                />
-              ) : (
-                <View style={styles.list}>
-                  {items.map((conversation, index) => (
-                    <Reveal key={conversation.id} index={index} variant="up">
-                      <PressableCard
-                        onPress={() => router.push(`/messages/${conversation.id}` as never)}
-                        style={styles.card}
-                      >
-                        <View style={styles.icon}>
-                          <Ionicons name="chatbubble-ellipses-outline" size={16} color={COLORS.forestGreen} />
-                        </View>
-                        <View style={styles.body}>
-                          <View style={styles.head}>
-                            <Text preset="bodyMedium" color={COLORS.textPrimary} numberOfLines={1}>
-                              {conversation.subjectType
-                                ? `${SUBJECT_LABELS[conversation.subjectType] ?? conversation.subjectType} · ${conversation.subjectId}`
-                                : t('ui.conversation')}
-                            </Text>
-                            <Chip label={conversation.status} tone={conversation.status === 'BLOCKED' ? 'error' : 'neutral'} size="sm" />
-                          </View>
-                          <Text preset="caption" color={COLORS.slateGray} numberOfLines={2} style={styles.lineHeight}>
-                            {conversation.lastMessage?.body ?? t('ui.aucunMessagePourLeMoment')}
-                          </Text>
-                          <Text preset="caption" color={COLORS.slateGray}>
-                            {formatRelative(conversation.updatedAt, locale)}
-                            {conversation.unread > 0 ? t('ui.nonLuS_4c803', { unread: formatNumber(conversation.unread, locale) }) : ''}
-                          </Text>
-                        </View>
-                      </PressableCard>
-                    </Reveal>
-                  ))}
-                </View>
+          {query.isLoading ? <LoadingState count={3} height={80} /> : query.isError ? <ErrorState error={query.error} onRetry={() => void query.refetch()} /> : items.length === 0 ? (
+            <EmptyState title={t('ui.aucuneConversation')} description={t('ui.filDeDiscussion')} icon="chatbubbles-outline" />
+          ) : (
+            <FlatList
+              data={items}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <Pressable onPress={() => router.push(('/messages/' + item.id) as never)}>
+                  <Card tone="white" style={styles.card}>
+                    <View style={styles.row}>
+                      <Text preset="h3" color={COLORS.forestGreen}>{item.subjectType ?? 'DIRECT'}</Text>
+                      <Chip label={item.status} tone="info" size="sm" />
+                    </View>
+                    <Text preset="caption" color={COLORS.slateGray}>{formatDate(item.updatedAt, locale)}</Text>
+                  </Card>
+                </Pressable>
               )}
-            </>
+            />
           )}
         </AuthGate>
       </Section>
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md },
-  lineHeight: { lineHeight: 18 },
-  summary: { gap: 4 },
-  card: { flexDirection: 'row', gap: SPACING.md, alignItems: 'flex-start' },
-  icon: {
-    width: 34,
-    height: 34,
-    borderRadius: RADIUS.md,
-    backgroundColor: TINTS.forestGreenBg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  body: { flex: 1, gap: 4 },
-  head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: SPACING.md },
-  list: { gap: SPACING.sm },
-});
+const styles = StyleSheet.create({ section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md }, contactsCard: { gap: SPACING.xs, marginBottom: SPACING.sm }, contactRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.xs }, card: { marginBottom: SPACING.sm, gap: 4 }, row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' } });

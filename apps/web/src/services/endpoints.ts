@@ -578,6 +578,9 @@ export const dashboardApi = {
 // ─── Messaging & notifications ────────────────────────────────
 
 export const messagingApi = {
+  contacts: () => api.get<{ items: { id: string; name: string; type: string; countryCode: string }[] }>('/messaging/contacts'),
+  start: (payload: { subjectType: string; subjectId: string; participantOrgIds: string[]; firstMessage?: string }) =>
+    api.post<{ id: string }>('/messaging/conversations', payload),
   /** GET /messaging/conversations → { items, total, page, limit, totalUnread }. */
   conversations: (params: { page?: number; limit?: number } = {}) =>
     api.get<ConversationListResult>('/messaging/conversations', { params: cleanQuery(params) }),

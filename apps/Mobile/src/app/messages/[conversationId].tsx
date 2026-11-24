@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Linking, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useQuery, useMutation } from '@tanstack/react-query';
 
@@ -15,9 +15,8 @@ import { CallButton } from '@/features/calls/CallButton';
 import { SPACING } from '@/theme/space';
 
 export default function ConversationDetail() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { conversationId } = useLocalSearchParams<{ conversationId: string }>();
-  const { locale } = useI18n();
   const isAuthenticated = useAuthStore((state) => state.status === 'authenticated');
   const userId = useAuthStore((state) => state.user?.id);
   const [body, setBody] = useState('');
@@ -27,6 +26,7 @@ export default function ConversationDetail() {
     queryKey: queryKeys.messaging.messages(conversationId ?? ''),
     queryFn: () => messagingApi.messages(conversationId ?? '', { limit: 50 }).then((r) => r.data),
     enabled: isAuthenticated && Boolean(conversationId),
+    refetchInterval: 4000,
     retry: false,
   });
 
@@ -52,6 +52,9 @@ export default function ConversationDetail() {
                 renderItem={({ item }) => (
                   <Card tone={item.senderId === userId ? 'pale' : 'white'} style={styles.message}>
                     <Text preset="bodySm">{item.body}</Text>
+                    {item.attachments?.map((att, idx) => (
+                      <Button key={idx} label="Écouter / Ouvrir la pièce jointe" variant="outline" onPress={() => void Linking.openURL(att)} />
+                    ))}
                     <Text preset="caption" color={COLORS.slateGray}>{formatDate(item.createdAt, locale)}</Text>
                   </Card>
                 )}

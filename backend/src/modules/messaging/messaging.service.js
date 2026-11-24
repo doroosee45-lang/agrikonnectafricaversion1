@@ -46,7 +46,25 @@ const partiesOf = (subject) =>
     subject.ownerOrgId,
   ].filter(Boolean);
 
-const loadSubject = async (subjectType, subjectId, organizationId) => {
+export const listContacts = async (req) => {
+  const orgs = await prisma.organization.findMany({
+    where: { deletedAt: null, id: { not: req.tenant.organizationId } },
+    select: { id: true, name: true, type: true, countryCode: true },
+    orderBy: { name: 'asc' },
+    take: 50,
+  });
+  return orgs;
+};
+
+const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = []) => {
+  if (subjectType === 'DIRECT') {
+    const others = await prisma.organization.findMany({
+      where: { id: { in: participantOrgIds }, deletedAt: null },
+      select: { id: true },
+    });
+    if (others.length === 0) throw ApiError.notFound('Organisation destinataire introuvable');
+    return { subject: { id: subjectId }, parties: [...new Set([organizationId, ...others.map((o) => o.id)])] };
+  }
   if (!SUBJECT_TYPES.includes(subjectType)) {
     throw ApiError.badRequest(`Objet métier invalide. Valeurs acceptées : ${SUBJECT_TYPES.join(', ')}`);
   }
@@ -75,7 +93,7 @@ const assertAttachments = (attachments = []) => {
 };
 
 export const startConversation = async ({ subjectType, subjectId, participantOrgIds = [], firstMessage }, req) => {
-  const { parties } = await loadSubject(subjectType, subjectId, req.tenant.organizationId);
+  const { parties } = await loadSubject(subjectType, subjectId, req.tenant.organizationId, participantOrgIds);
 
   const participants = [...new Set([req.tenant.organizationId, ...participantOrgIds])];
   if (participants.length < 2) {

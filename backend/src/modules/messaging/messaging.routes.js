@@ -10,7 +10,7 @@ import { paginationSchema } from '../../shared/pagination.js';
 import * as service from './messaging.service.js';
 
 const startSchema = z.object({
-  subjectType: z.enum(['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT']),
+  subjectType: z.enum(['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'ORGANIZATION', 'COOPERATIVE', 'FARM']),
   subjectId: z.string().min(10).max(60),
   participantOrgIds: z.array(z.string().min(10).max(60)).min(1).max(5),
   firstMessage: z.string().trim().max(3000).optional(),
@@ -40,6 +40,11 @@ router.post('/conversations', authorize('messages.write'), validate(startSchema)
   return replayed
     ? success(res, conversation, { message: 'Conversation existante réutilisée' })
     : created(res, conversation, { message: 'Conversation ouverte' });
+}));
+
+router.get('/contacts', authorize('messages.read'), asyncHandler(async (req, res) => {
+  const items = await service.listContacts(req);
+  return success(res, { items });
 }));
 
 router.get('/conversations', authorize('messages.read'), validate(listSchema, 'query'), asyncHandler(async (req, res) => {

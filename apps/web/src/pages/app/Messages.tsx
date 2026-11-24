@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AuthGate, Button, Card, Chip, EmptyState, ErrorState, Input, LoadingState, Section, Text } from '@/components/ui';
+import { AuthGate, Button, Card, Chip, EmptyState, ErrorState, LoadingState, Section, Text } from '@/components/ui';
 import { messagingApi } from '@/services/endpoints';
 import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
@@ -11,171 +11,70 @@ import { formatRelative } from '@/lib/format';
 import { useI18n } from '@/i18n';
 import { COLORS, DURATION, EASE } from '@/theme';
 
-export default function Messages() {
-  const { t } = useI18n();
-  const { id } = useParams<{ id: string }>();
-  const { locale } = useI18n();
-  const queryClient = useQueryClient();
+export default function AppMessages() {
+  const { t, locale } = useI18n();
+  const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.status === 'authenticated');
-  const [draft, setDraft] = useState('');
-  const [error, setError] = useState<unknown>(null);
+  const [selectedOrgId, setSelectedOrgId] = useState('');
 
-  const conversations = useQuery({
+  const query = useQuery({
     queryKey: queryKeys.messaging.conversations,
     queryFn: () => messagingApi.conversations({ limit: 50 }).then((result) => result.data),
     enabled: isAuthenticated,
   });
 
-  const thread = useQuery({
-    queryKey: queryKeys.messaging.messages(id!),
-    queryFn: () => messagingApi.messages(id!, { limit: 100 }).then((result) => result.data),
-    enabled: isAuthenticated && Boolean(id),
+  const contactsQuery = useQuery({
+    queryKey: ['messaging', 'contacts'],
+    queryFn: () => messagingApi.contacts().then((r) => r.data.items),
+    enabled: isAuthenticated,
   });
 
-  const send = useMutation({
-    mutationFn: () => messagingApi.send(id!, { body: draft.trim() }),
-    onSuccess: () => {
-      setError(null);
-      setDraft('');
-      void queryClient.invalidateQueries({ queryKey: queryKeys.messaging.messages(id!) });
-      void queryClient.invalidateQueries({ queryKey: queryKeys.messaging.conversations });
+  const startConv = useMutation({
+    mutationFn: (targetOrgId: string) =>
+      messagingApi.start({ subjectType: 'DIRECT', subjectId: targetOrgId, participantOrgIds: [targetOrgId] }),
+    onSuccess: (res) => {
+      const convId = (res.data as { id?: string })?.id;
+      if (convId) navigate('/app/messages/' + convId);
     },
-    onError: (caught) => setError(caught),
   });
 
-  const items = conversations.data?.items ?? [];
-  const messages = thread.data?.items ?? [];
+  const items = query.data?.items ?? [];
+  const contacts = contactsQuery.data ?? [];
 
   return (
     <Section>
-      <AuthGate
-        isAuthenticated={isAuthenticated}
-        title={t('ui.messagerie')}
-        description={t('ui.connectezVousPourEchangerAvecLes')}
-        icon="💬"
-      >
-        <div style={{ marginBottom: 32 }}>
-          <Text preset="h1" style={{ marginBottom: 8 }}>{t('ui.messagerie')}</Text>
-          <Text preset="bodyMd" color={COLORS.slateGray}>{t('ui.chaqueConversationEstRattacheeAUn')}</Text>
+      <AuthGate isAuthenticated={isAuthenticated} title={t('ui.messagerie')} description={t('ui.filDeDiscussion')} icon="💬">
+        <div style={{ marginBottom: 16 }}>
+          <Text preset="h2" color={COLORS.forestGreen}>{t('ui.conversations')}</Text>
         </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 340px) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
-          <Card tone="white" style={{ padding: 0, overflow: 'hidden' }}>
-            <div style={{ padding: '16px 20px', borderBottom: `1px solid ${COLORS.lightBorder}` }}>
-              <Text preset="overline" color={COLORS.forestGreen}>{t('ui.conversations')}</Text>
-            </div>
-
-            {conversations.isLoading ? (
-              <div style={{ padding: 20 }}>
-                <LoadingState count={3} height={60} />
-              </div>
-            ) : conversations.isError ? (
-              <div style={{ padding: 20 }}>
-                <ErrorState error={conversations.error} onRetry={() => void conversations.refetch()} />
-              </div>
-            ) : items.length === 0 ? (
-              <EmptyState title={t('ui.aucuneConversation')} description={t('ui.contactezUnVendeurDepuisUneAnnonce')} icon="💬" />
-            ) : (
-              <div style={{ maxHeight: 520, overflowY: 'auto' }}>
-                {items.map((conversation) => {
-                  const active = conversation.id === id;
-                  return (
-                    <Link
-                      key={conversation.id}
-                      to={`/messages/${conversation.id}`}
-                      style={{
-                        display: 'block',
-                        padding: '14px 20px',
-                        borderBottom: `1px solid ${COLORS.lightBorder}`,
-                        backgroundColor: active ? COLORS.paleGreen : 'transparent',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}>
-                        <Text preset="bodySm" color={COLORS.textPrimary} style={{ fontWeight: conversation.unread > 0 ? 600 : 400 }}>
-                          {conversation.subjectType ?? t('ui.conversation')}
-                        </Text>
-                        {conversation.unread > 0 ? <Chip label={String(conversation.unread)} tone="forest" size="sm" /> : null}
+        <Card tone="pale" style={{ marginBottom: 20, display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+          <select value={selectedOrgId} onChange={(e) => setSelectedOrgId(e.target.value)} style={{ flex: 1, minWidth: 220, padding: '10px 12px', borderRadius: 8, border: '1px solid #cbd5e1', background: '#fff' }}>
+            <option value="">Choisir un contact / coopérative / producteur...</option>
+            {contacts.map((c) => <option key={c.id} value={c.id}>{c.name} ({c.type} - {c.countryCode})</option>)}
+          </select>
+          <Button label="Démarrer une discussion" disabled={!selectedOrgId} loading={startConv.isPending} onClick={() => { if (selectedOrgId) startConv.mutate(selectedOrgId); }} />
+        </Card>
+        {query.isLoading ? <LoadingState count={3} height={80} /> : query.isError ? <ErrorState error={query.error} onRetry={() => void query.refetch()} showRequestId /> : items.length === 0 ? (
+          <EmptyState title={t('ui.aucuneConversation')} description="Sélectionnez un contact ci-dessus pour démarrer votre première discussion ou appel audio." icon="💬" />
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {items.map((conversation, index) => (
+              <motion.div key={conversation.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: DURATION.base / 1000, delay: Math.min(index, 8) * 0.04, ease: EASE.out }}>
+                <Link to={'/app/messages/' + conversation.id} style={{ textDecoration: 'none' }}>
+                  <Card tone="white">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+                      <div>
+                        <Text preset="h3" color={COLORS.forestGreen}>{conversation.subjectType ?? 'DIRECT'}</Text>
+                        <Text preset="caption" color={COLORS.slateGray}>{t('ui.miseAJour')}{formatRelative(conversation.updatedAt, locale)}</Text>
                       </div>
-                      <Text preset="caption" color={COLORS.slateGray} style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {conversation.lastMessage?.body ?? t('ui.aucunMessage')}
-                      </Text>
-                      <Text preset="caption" color={COLORS.slateGray}>
-                        {formatRelative(conversation.updatedAt, locale)}
-                      </Text>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </Card>
-
-          <Card tone="white" style={{ display: 'flex', flexDirection: 'column', minHeight: 480 }}>
-            {!id ? (
-              <EmptyState title={t('ui.selectionnezUneConversation')} description={t('ui.choisissezUnFilDansLaListe')} icon="💬" />
-            ) : thread.isLoading ? (
-              <LoadingState count={4} height={60} />
-            ) : thread.isError ? (
-              <ErrorState error={thread.error} onRetry={() => void thread.refetch()} />
-            ) : (
-              <>
-                <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16, maxHeight: 420 }}>
-                  {messages.length === 0 ? (
-                    <EmptyState title={t('ui.aucunMessage')} description={t('ui.envoyezLePremierMessageDeCette')} icon="✉️" />
-                  ) : (
-                    messages.map((message, index) => (
-                      <motion.div
-                        key={message.id}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: DURATION.fast / 1000, delay: index * 0.02, ease: EASE.out }}
-                        style={{
-                          alignSelf: 'flex-start',
-                          maxWidth: '80%',
-                          padding: '10px 14px',
-                          backgroundColor: COLORS.paleGreen,
-                          borderRadius: 'var(--radius-md)',
-                        }}
-                      >
-                        <Text preset="bodySm" color={COLORS.textPrimary} style={{ lineHeight: 1.6 }}>
-                          {message.body}
-                        </Text>
-                        <Text preset="caption" color={COLORS.slateGray} style={{ marginTop: 4 }}>
-                          {formatRelative(message.createdAt, locale)}
-                        </Text>
-                      </motion.div>
-                    ))
-                  )}
-                </div>
-
-                {error ? (
-                  <div style={{ marginBottom: 12 }}>
-                    <ErrorState error={error} showRequestId />
-                  </div>
-                ) : null}
-
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (draft.trim()) send.mutate();
-                  }}
-                  style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}
-                >
-                  <div style={{ flex: 1 }}>
-                    <Input
-                      label={t('ui.message')}
-                      value={draft}
-                      onChange={(e) => setDraft(e.target.value)}
-                      placeholder={t('ui.ecrivezVotreMessage')}
-                      maxLength={3000}
-                    />
-                  </div>
-                  <Button label={t('ui.envoyer')} type="submit" loading={send.isPending} disabled={!draft.trim()} />
-                </form>
-              </>
-            )}
-          </Card>
-        </div>
+                      <Chip label={conversation.status} tone="info" size="sm" />
+                    </div>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </AuthGate>
     </Section>
   );
