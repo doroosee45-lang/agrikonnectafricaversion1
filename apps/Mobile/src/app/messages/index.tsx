@@ -115,7 +115,7 @@ export default function MessagesScreen() {
               ))}
             </View>
             {canWrite ? (
-              <Pressable onPress={() => { setModalMode(tab === 'GROUP' ? 'GROUP' : 'DIRECT'); setModalOpen(true); }} accessibilityLabel="Nouvelle conversation" style={styles.plusBtn}>
+              <Pressable onPress={() => router.push(('/messages/new?mode=' + (tab === 'GROUP' ? 'GROUP' : 'DIRECT')) as never)} accessibilityLabel="Nouvelle conversation" style={styles.plusBtn}>
                 <Ionicons name="add" size={24} color={COLORS.pureWhite} />
               </Pressable>
             ) : null}

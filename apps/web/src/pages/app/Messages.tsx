@@ -271,7 +271,7 @@ export default function AppMessages() {
                         style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 8px', borderRadius: 6, border: '1px solid #e2e8f0', background: checked ? '#dcfce7' : '#fff', cursor: 'pointer', textAlign: 'left' }}
                       >
                         <span style={{ fontSize: 12, fontWeight: 600, color: COLORS.forestGreen }}>{c.name}</span>
-                        <span style={{ fontSize: 11, color: COLORS.slateGray }}>{c.type} · {c.countryCode}</span>
+                        <span style={{ fontSize: 11, color: COLORS.slateGray }}>{(c as { role?: string }).role ?? c.type} · {(c as { agency?: string }).agency ?? c.countryCode}</span>
                       </button>
                     );
                   })}

@@ -50,9 +50,60 @@ export const listContacts = async (req) => {
   const myOrgId = req.tenant.organizationId;
   const myCountry = req.tenant.organization?.countryCode ?? "";
   const isPlatformAdmin = (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
-  return isPlatformAdmin
-    ? prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE deleted_at IS NULL AND id <> ${myOrgId} ORDER BY name ASC LIMIT 80`
-    : prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE deleted_at IS NULL AND id <> ${myOrgId} AND country_code = ${myCountry} ORDER BY name ASC LIMIT 80`;
+
+  const rows = isPlatformAdmin
+    ? await prisma.$queryRaw`
+        SELECT DISTINCT ON (o.id)
+          o.id,
+          o.name AS "orgName",
+          o.type::text AS type,
+          o.country_code AS "countryCode",
+          o.logo_url AS "avatarUrl",
+          p.first_name AS "firstName",
+          p.last_name AS "lastName",
+          m.roles::text[] AS roles
+        FROM organizations o
+        LEFT JOIN memberships m ON m."organizationId" = o.id AND m.status = 'ACTIVE'
+        LEFT JOIN profiles p ON p.id = m."userId"
+        WHERE o.deleted_at IS NULL AND o.id <> ${myOrgId}
+        ORDER BY o.id, o.name ASC
+        LIMIT 100
+      `
+    : await prisma.$queryRaw`
+        SELECT DISTINCT ON (o.id)
+          o.id,
+          o.name AS "orgName",
+          o.type::text AS type,
+          o.country_code AS "countryCode",
+          o.logo_url AS "avatarUrl",
+          p.first_name AS "firstName",
+          p.last_name AS "lastName",
+          m.roles::text[] AS roles
+        FROM organizations o
+        LEFT JOIN memberships m ON m."organizationId" = o.id AND m.status = 'ACTIVE'
+        LEFT JOIN profiles p ON p.id = m."userId"
+        WHERE o.deleted_at IS NULL
+          AND o.id <> ${myOrgId}
+          AND o.country_code = ${myCountry}
+        ORDER BY o.id, o.name ASC
+        LIMIT 100
+      `;
+
+  return rows
+    .map((r) => {
+      const fullName = [r.firstName, r.lastName].filter(Boolean).join(" ").trim();
+      const primaryRole = Array.isArray(r.roles) && r.roles.length > 0 ? r.roles : r.type;
+      return {
+        id: r.id,
+        name: fullName || r.orgName,
+        agency: r.orgName,
+        role: primaryRole,
+        type: r.type,
+        countryCode: r.countryCode,
+        avatarUrl: r.avatarUrl ?? null,
+      };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const validateAllowedOrgs = async (orgIds, req) => {
