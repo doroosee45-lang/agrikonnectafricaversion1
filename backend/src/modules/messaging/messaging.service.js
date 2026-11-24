@@ -47,7 +47,7 @@ const partiesOf = (subject) =>
   ].filter(Boolean);
 
 export const listContacts = async (req) => {
-  const myOrgId = req.tenant?.organizationId ?? '';
+  const myOrgId = req.tenant?.organizationId ?? "";
   const rows = await prisma.$queryRaw`
     SELECT o.id, o.name, o.type::text AS type, o.country_code AS "countryCode",
            p.first_name AS "firstName", p.last_name AS "lastName", p.email
@@ -63,7 +63,7 @@ export const listContacts = async (req) => {
   for (const r of rows) {
     if (seen.has(r.id)) continue;
     seen.add(r.id);
-    const owner = [r.firstName, r.lastName].filter(Boolean).join(' ') || r.email || '';
+    const owner = [r.firstName, r.lastName].filter(Boolean).join(" ") || r.email || "";
     contacts.push({
       id: r.id,
       name: owner && owner !== r.name ? `${r.name} (${owner})` : r.name,
@@ -72,8 +72,6 @@ export const listContacts = async (req) => {
     });
   }
   return contacts;
-};
-  });
 };
 
 const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = []) => {
