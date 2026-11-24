@@ -22182,6 +22182,16 @@
         },
         "x-permission": "admin.users"
       }
+    },
+    "/api/v1/messaging/contacts": {
+      "get": {
+        "summary": "Liste des contacts joignables en messagerie",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
