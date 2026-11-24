@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, Linking, StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useQuery, useMutation } from '@tanstack/react-query';
 
@@ -46,20 +46,17 @@ export default function ConversationDetail() {
           {conversationId ? <CallButton conversationId={conversationId} /> : null}
           {query.isLoading ? <LoadingState count={3} height={80} /> : query.isError ? <ErrorState error={query.error} onRetry={() => void query.refetch()} /> : (
             <>
-              <FlatList
-                data={messages}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <Card tone={item.senderId === userId ? 'pale' : 'white'} style={styles.message}>
+              <View style={styles.list}>
+                {messages.map((item) => (
+                  <Card key={item.id} tone={item.senderId === userId ? 'pale' : 'white'} style={styles.message}>
                     <Text preset="bodySm">{item.body}</Text>
                     {item.attachments?.map((att, idx) => (
                       <Button key={idx} label="Écouter / Ouvrir la pièce jointe" variant="outline" onPress={() => void Linking.openURL(att)} />
                     ))}
                     <Text preset="caption" color={COLORS.slateGray}>{formatDate(item.createdAt, locale)}</Text>
                   </Card>
-                )}
-                style={styles.list}
-              />
+                ))}
+              </View>
               <Card tone="white">
                 <View style={styles.inputRow}>
                   <Input label="" value={body} onChangeText={setBody} placeholder={t('ui.ecrireUnMessage')} containerStyle={styles.input} />
@@ -74,4 +71,4 @@ export default function ConversationDetail() {
     </Screen>
   );
 }
-const styles = StyleSheet.create({ section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md }, list: { maxHeight: 400, marginBottom: SPACING.md }, message: { gap: 4 }, inputRow: { flexDirection: 'row', gap: SPACING.sm, alignItems: 'flex-end' }, input: { flex: 1 } });
+const styles = StyleSheet.create({ section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md }, list: { gap: SPACING.sm, marginBottom: SPACING.md }, message: { gap: 4 }, inputRow: { flexDirection: 'row', gap: SPACING.sm, alignItems: 'flex-end' }, input: { flex: 1 } });

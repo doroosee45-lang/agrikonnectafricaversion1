@@ -1,9 +1,9 @@
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AppHeader } from '@/components/app/AppHeader';
-import { AuthGate, Chip, Button, Card, EmptyState, ErrorState, LoadingState, Screen, Section, Text } from '@/components/ui';
+import { AuthGate, Button, Card, Chip, EmptyState, ErrorState, LoadingState, Screen, Section, Text } from '@/components/ui';
 import { useI18n } from '@/i18n';
 import { formatDate } from '@/lib/format';
 import { messagingApi } from '@/services/api/endpoints';
@@ -50,7 +50,7 @@ export default function MessagesScreen() {
             <Card tone="pale" style={styles.contactsCard}>
               <Text preset="bodyMedium" color={COLORS.forestGreen}>Nouvelle discussion</Text>
               <View style={styles.contactRow}>
-                {contacts.slice(0, 6).map((c) => (
+                {contacts.slice(0, 8).map((c) => (
                   <Button
                     key={c.id}
                     label={c.name}
@@ -66,11 +66,9 @@ export default function MessagesScreen() {
           {query.isLoading ? <LoadingState count={3} height={80} /> : query.isError ? <ErrorState error={query.error} onRetry={() => void query.refetch()} /> : items.length === 0 ? (
             <EmptyState title={t('ui.aucuneConversation')} description={t('ui.filDeDiscussion')} icon="chatbubbles-outline" />
           ) : (
-            <FlatList
-              data={items}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <Pressable onPress={() => router.push(('/messages/' + item.id) as never)}>
+            <View style={{ gap: SPACING.sm }}>
+              {items.map((item) => (
+                <Pressable key={item.id} onPress={() => router.push(('/messages/' + item.id) as never)}>
                   <Card tone="white" style={styles.card}>
                     <View style={styles.row}>
                       <Text preset="h3" color={COLORS.forestGreen}>{item.subjectType ?? 'DIRECT'}</Text>
@@ -79,12 +77,12 @@ export default function MessagesScreen() {
                     <Text preset="caption" color={COLORS.slateGray}>{formatDate(item.updatedAt, locale)}</Text>
                   </Card>
                 </Pressable>
-              )}
-            />
+              ))}
+            </View>
           )}
         </AuthGate>
       </Section>
     </Screen>
   );
 }
-const styles = StyleSheet.create({ section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md }, contactsCard: { gap: SPACING.xs, marginBottom: SPACING.sm }, contactRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.xs }, card: { marginBottom: SPACING.sm, gap: 4 }, row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' } });
+const styles = StyleSheet.create({ section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md }, contactsCard: { gap: SPACING.xs, marginBottom: SPACING.sm }, contactRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.xs }, card: { gap: 4 }, row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' } });
