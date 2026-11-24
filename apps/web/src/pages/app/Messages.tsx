@@ -39,7 +39,7 @@ export default function AppMessages() {
   });
 
   const items = query.data?.items ?? [];
-  const contacts = contactsQuery.data ?? [];
+  const contacts = Array.isArray(contactsQuery.data) ? contactsQuery.data : (contactsQuery.data as { items?: { id: string; name: string; type: string; countryCode: string }[] } | undefined)?.items ?? [];
 
   return (
     <Section>

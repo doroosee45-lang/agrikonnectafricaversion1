@@ -32,20 +32,22 @@ const threadSchema = z.object({
 const idParam = z.object({ id: z.string().min(10).max(60) });
 
 const router = Router();
-router.use(authenticate, resolveTenant);
+router.use(authenticate);
 
 // MSG-01 — une conversation est toujours rattachée à un objet métier
-router.post('/conversations', authorize('messages.write'), validate(startSchema), asyncHandler(async (req, res) => {
+router.post('/conversations', resolveTenant, authorize('messages.write'), validate(startSchema), asyncHandler(async (req, res) => {
   const { conversation, replayed } = await service.startConversation(req.body, req);
   return replayed
     ? success(res, conversation, { message: 'Conversation existante réutilisée' })
     : created(res, conversation, { message: 'Conversation ouverte' });
 }));
 
-router.get('/contacts', authorize('messages.read'), asyncHandler(async (req, res) => {
+router.get('/contacts', asyncHandler(async (req, res) => {
   const items = await service.listContacts(req);
   return success(res, { items });
 }));
+
+router.use(resolveTenant);
 
 router.get('/conversations', authorize('messages.read'), validate(listSchema, 'query'), asyncHandler(async (req, res) => {
   const { items, total, page, limit, totalUnread } = await service.listConversations(req.query, req);
