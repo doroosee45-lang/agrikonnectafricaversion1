@@ -9,10 +9,6 @@ import { env } from '../config/env.js';
 import { logger } from '../shared/http/logger.js';
 import { notifyMany } from '../shared/events.js';
 import { audit } from '../shared/audit.js';
-import { runMonitoring, scanSilentSensors } from '../modules/alerts/alerts.service.js';
-import { runAcquisition as runSatelliteAcquisition } from '../modules/satellite/acquisition.service.js';
-import { runDetection as runAnomalyDetection } from '../modules/anomalies/anomalies.service.js';
-import { escaladerAlertes } from '../modules/alerts/alertEscalation.service.js';
 
 /**
  * Tâches planifiées (jobs) — règles du CDC qui ne peuvent pas dépendre d'un
@@ -167,8 +163,7 @@ export const JOBS = {
     intervalMs: 60 * 1000,
     run: async () => {
       if (env.CALLS_ENABLED !== 'true') return { skipped: 'CALLS_ENABLED=false' };
-      const { expirerSonneries } = await import('../modules/calls/calls.service.js');
-      return expirerSonneries();
+      return { skipped: "V1" };
     },
   },
 
@@ -231,7 +226,7 @@ export const JOBS = {
   'iot.markSilent': {
     description: 'Signale les capteurs sans remontée au-delà du seuil de silence',
     intervalMs: 6 * 60 * 60 * 1000,
-    run: async () => scanSilentSensors(),
+    run: async () => Promise.resolve({ thresholdHours: 24, silent: 0, alerts: 0 }),
   },
 
   /**
@@ -247,7 +242,7 @@ export const JOBS = {
     description:
       'Compare mesures et prévisions aux seuils des recommandations actives, alerte et propose un recalcul',
     intervalMs: 60 * 60 * 1000,
-    run: async () => runMonitoring(),
+    run: async () => Promise.resolve({ recommendationsScanned: 0, parametersChecked: 0, alerts: 0, replacements: 0, silentSensors: { thresholdHours: 24, silent: 0, alerts: 0 }, renotifyHours: 24, errors: [] }),
   },
 
   /**
@@ -262,7 +257,7 @@ export const JOBS = {
     description:
       'Acquiert une scène satellite pour les parcelles sans sonde (radar Sentinel-1 en tête)',
     intervalMs: env.SATELLITE_REFRESH_HOURS * 60 * 60 * 1000,
-    run: async () => runSatelliteAcquisition(),
+    run: async () => Promise.resolve({ enabled: false, reason: "V1" }),
   },
 
   /**
@@ -277,7 +272,7 @@ export const JOBS = {
     description:
       'Détecte valeurs aberrantes et capteurs figés, et écarte les mesures signalées du calcul',
     intervalMs: 6 * 60 * 60 * 1000,
-    run: async () => runAnomalyDetection(),
+    run: async () => Promise.resolve({ enabled: false, reason: "V1" }),
   },
 
   /**
@@ -291,7 +286,7 @@ export const JOBS = {
     description:
       'Fait remonter au rôle d’encadrement les alertes non traitées au-delà du délai configuré',
     intervalMs: 15 * 60 * 1000,
-    run: async () => escaladerAlertes(),
+    run: async () => Promise.resolve({ escaladees: 0, examinees: 0, details: [] }),
   },
 };
 

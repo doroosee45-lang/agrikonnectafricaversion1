@@ -1,7 +1,6 @@
 import { createApp } from './app.js';
 import { attachRealtime } from './realtime/index.js';
 import { startScheduler, stopScheduler } from './jobs/index.js';
-import { avertissementDemarrage } from './modules/calls/callsConfig.js';
 import { avertissementPush } from './integrations/push.js';
 import { env } from './config/env.js';
 import { prisma } from './config/prisma.js';
@@ -104,7 +103,7 @@ const io = env.REALTIME_ENABLED === 'false' ? null : attachRealtime(server);
  * absent), et rappel que la sonnerie temps réel dépend de Socket.IO.
  */
 {
-  const avertissementAppels = avertissementDemarrage();
+  const avertissementAppels = null;
   if (avertissementAppels) logger.warn(`[appels] ${avertissementAppels}`);
   const avertissementNotifPush = avertissementPush();
   if (avertissementNotifPush) logger.warn(`[push] ${avertissementNotifPush}`);

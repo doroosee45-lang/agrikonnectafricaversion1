@@ -15,8 +15,6 @@ import { ApiError } from '../../shared/errors/ApiError.js';
 import { logger } from '../../shared/http/logger.js';
 import { notify } from '../../shared/events.js';
 import { paginationArgs, orderBy } from '../../shared/pagination.js';
-import { moderate as moderateListing } from '../market/listings/listings.service.js';
-import { moderate as moderateReview } from '../market/reviews/reviews.service.js';
 import { review as reviewVerification } from '../verification/verification.service.js';
 
 /**
@@ -32,7 +30,7 @@ const ROUTES = {
     proprietaire: (item) => item.createdBy ?? null,
     appliquer: (id, decision, reason, req) => {
       const status = decision === 'approve' ? 'PUBLISHED' : decision === 'reject' ? 'HIDDEN' : 'ARCHIVED';
-      return moderateListing(id, { status, reason }, req);
+      return Promise.reject(Object.assign(new Error("V2 désactivé"), { status: 404 }));
     },
   },
   review: {
@@ -48,7 +46,7 @@ const ROUTES = {
       return org?.createdBy ?? null;
     },
     appliquer: (id, decision, reason, req) =>
-      moderateReview(id, { decision: decision === 'approve' ? 'KEEP' : 'REMOVE', reason }, req),
+      Promise.reject(Object.assign(new Error("V2 désactivé"), { status: 404 })),
   },
   verification: {
     resource: 'verifications',
