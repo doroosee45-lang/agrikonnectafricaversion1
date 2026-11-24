@@ -1,3 +1,4 @@
+const dynamicRequire = (id: string) => { try { return Function("m", "return require(m)")(id); } catch { return null; } };
 import { NativeModules, Platform } from 'react-native';
 
 /**
@@ -49,25 +50,25 @@ let globalesWebRtc = false;
 /** SDK LiveKit + WebRTC natif (globales WebRTC enregistrées une seule fois). */
 export function chargerLiveKit(): { client: LiveKitClient; rn: LiveKitReactNative } | null {
   return essayer(() => {
-    const rn = require('@livekit/react-native') as LiveKitReactNative;
+    const rn = dynamicRequire('@livekit/react-native') as LiveKitReactNative;
     if (!globalesWebRtc) {
       rn.registerGlobals();
       globalesWebRtc = true;
     }
-    const client = require('livekit-client') as LiveKitClient;
+    const client = dynamicRequire('livekit-client') as LiveKitClient;
     return { client, rn };
   });
 }
 
 export function chargerCallKeep(): CallKeep | null {
-  return essayer(() => (require('react-native-callkeep') as { default: CallKeep }).default);
+  return essayer(() => (dynamicRequire('react-native-callkeep') as { default: CallKeep }).default);
 }
 
 export function chargerMessaging(): Messaging | null {
-  return essayer(() => require('@react-native-firebase/messaging') as Messaging);
+  return essayer(() => dynamicRequire('@react-native-firebase/messaging') as Messaging);
 }
 
 export function chargerVoipPush(): VoipPush | null {
   if (Platform.OS !== 'ios' || !IOS_VOIP_PRET) return null;
-  return essayer(() => (require('react-native-voip-push-notification') as { default: VoipPush }).default);
+  return essayer(() => (dynamicRequire('react-native-voip-push-notification') as { default: VoipPush }).default);
 }
