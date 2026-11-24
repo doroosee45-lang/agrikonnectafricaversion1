@@ -59,7 +59,7 @@ export function FarmerTabBar({ state, emitter, navigateToTab, navigation }: TabB
   const unread = (convQ.data as { totalUnread?: number } | undefined)?.totalUnread ?? 0;
   const { width } = useWindowDimensions();
   const { onglets, actif } = ongletsVisibles(state.routes, state.index);
-  const nombre = Math.max(onglets.length, 1);
+  const nombre = Math.max(onglets.length + 1, 1);
 
   // Largeur intérieure réelle de la capsule (mesurée), estimée avant la première mesure.
   const estimation = Math.min(width, MAX_LARGEUR) - 2 * MARGE_CAPSULE - 2 * RETRAIT;
@@ -100,6 +100,24 @@ export function FarmerTabBar({ state, emitter, navigateToTab, navigation }: TabB
             />
           );
         })}
+        <PressableScale
+          onPress={() => router.push('/messages' as never)}
+          accessibilityRole="button"
+          accessibilityLabel="Messages"
+          style={styles.item}
+        >
+          <View style={styles.itemInner}>
+            <View style={{ position: 'relative' }}>
+              <Ionicons name="chatbubbles-outline" size={22} color={COLORS.forestGreen} />
+              {unread > 0 ? (
+                <View style={{ position: 'absolute', top: -4, right: -8, backgroundColor: '#dc2626', borderRadius: 8, minWidth: 15, height: 15, paddingHorizontal: 3, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text preset="caption" color={COLORS.pureWhite} style={{ fontSize: 9, fontWeight: '700' }}>{unread > 99 ? '99+' : String(unread)}</Text>
+                </View>
+              ) : null}
+            </View>
+            <Text preset="caption" color={COLORS.forestGreen} style={styles.label} numberOfLines={1}>Messages</Text>
+          </View>
+        </PressableScale>
       </View>
     </View>
   );
