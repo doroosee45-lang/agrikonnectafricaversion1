@@ -49,29 +49,13 @@ const partiesOf = (subject) =>
 export const listContacts = async (req) => {
   const myOrgId = req.tenant?.organizationId ?? "";
   const rows = await prisma.$queryRaw`
-    SELECT o.id, o.name, o.type::text AS type, o.country_code AS "countryCode",
-           p.first_name AS "firstName", p.last_name AS "lastName", p.email
-    FROM organizations o
-    LEFT JOIN memberships m ON m.organization_id = o.id AND m.status = 'ACTIVE'
-    LEFT JOIN profiles p ON p.id = m.user_id
-    WHERE o.deleted_at IS NULL AND o.id <> ${myOrgId}
-    ORDER BY o.name ASC
+    SELECT id, name, type::text AS type, country_code AS "countryCode"
+    FROM organizations
+    WHERE deleted_at IS NULL AND id <> ${myOrgId}
+    ORDER BY name ASC
     LIMIT 60
   `;
-  const seen = new Set();
-  const contacts = [];
-  for (const r of rows) {
-    if (seen.has(r.id)) continue;
-    seen.add(r.id);
-    const owner = [r.firstName, r.lastName].filter(Boolean).join(" ") || r.email || "";
-    contacts.push({
-      id: r.id,
-      name: owner && owner !== r.name ? `${r.name} (${owner})` : r.name,
-      type: r.type,
-      countryCode: r.countryCode,
-    });
-  }
-  return contacts;
+  return rows;
 };
 
 const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = []) => {
