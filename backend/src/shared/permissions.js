@@ -167,16 +167,16 @@ export const PERMISSIONS = {
   'inventory.write': COMMERCE,
   'transport.read': TRANSPORT,
   'transport.write': TRANSPORT,
-  'messages.read': [...PRODUCER, 'BUYER', 'SUPPLIER', 'TRANSPORTER', ...MODERATION],
-  'messages.write': [...PRODUCER, 'BUYER', 'SUPPLIER', 'TRANSPORTER', ...MODERATION],
+  'messages.read': ['SUPER_ADMIN', 'ADMIN', 'MODERATOR', 'FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY', 'BUYER', 'SUPPLIER', 'TRANSPORTER', 'AGRONOMIST', 'LAB_PARTNER', 'INVESTOR', 'SUPPORT_AGENT', 'API_CLIENT', 'PUBLIC_USER'],
+  'messages.write': ['SUPER_ADMIN', 'ADMIN', 'MODERATOR', 'FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY', 'BUYER', 'SUPPLIER', 'TRANSPORTER', 'AGRONOMIST', 'LAB_PARTNER', 'INVESTOR', 'SUPPORT_AGENT', 'API_CLIENT', 'PUBLIC_USER'],
   'messages.moderate': MODERATION,
   /**
    * Appels audio : mêmes acteurs que la messagerie (un appel naît dans une
    * conversation). La permission ne suffit pas : le service vérifie en plus
    * l'appartenance ACTIVE aux organisations de la conversation, et l'invitation.
    */
-  'calls.start': [...PRODUCER, 'BUYER', 'SUPPLIER', 'TRANSPORTER', ...MODERATION],
-  'calls.join': [...PRODUCER, 'BUYER', 'SUPPLIER', 'TRANSPORTER', ...MODERATION],
+  'calls.start': ['SUPER_ADMIN', 'ADMIN', 'MODERATOR', 'FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY', 'BUYER', 'SUPPLIER', 'TRANSPORTER', 'AGRONOMIST', 'LAB_PARTNER', 'INVESTOR', 'SUPPORT_AGENT', 'API_CLIENT', 'PUBLIC_USER'],
+  'calls.join': ['SUPER_ADMIN', 'ADMIN', 'MODERATOR', 'FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY', 'BUYER', 'SUPPLIER', 'TRANSPORTER', 'AGRONOMIST', 'LAB_PARTNER', 'INVESTOR', 'SUPPORT_AGENT', 'API_CLIENT', 'PUBLIC_USER'],
   'notifications.read': EVERYONE,
   'notifications.write': EVERYONE,
   'invoices.read': [...COMMERCE, ...ADMIN_ROLES],

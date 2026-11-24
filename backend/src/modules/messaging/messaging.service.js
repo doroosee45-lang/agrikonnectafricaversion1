@@ -54,11 +54,30 @@ export const listContacts = async (req) => {
       ...(myOrgId ? { id: { not: myOrgId } } : {}),
       type: { in: ['INDIVIDUAL', 'COOPERATIVE', 'COMPANY', 'NGO', 'GOVERNMENT', 'RESEARCH'] },
     },
-    select: { id: true, name: true, type: true, countryCode: true },
+    select: {
+      id: true,
+      name: true,
+      type: true,
+      countryCode: true,
+      memberships: {
+        where: { status: 'ACTIVE' },
+        take: 1,
+        select: { user: { select: { firstName: true, lastName: true, email: true } } },
+      },
+    },
     orderBy: { name: 'asc' },
     take: 50,
   });
-  return orgs;
+  return orgs.map((o) => {
+    const u = o.memberships?.[0]?.user;
+    const owner = u ? [u.firstName, u.lastName].filter(Boolean).join(' ') || u.email : '';
+    return {
+      id: o.id,
+      name: owner && owner !== o.name ? o.name + ' (' + owner + ')' : o.name,
+      type: o.type,
+      countryCode: o.countryCode,
+    };
+  });
 };
 
 const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = []) => {
