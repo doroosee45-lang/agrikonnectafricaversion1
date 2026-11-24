@@ -10,7 +10,7 @@ import { paginationSchema } from '../../shared/pagination.js';
 import * as service from './messaging.service.js';
 
 const startSchema = z.object({
-  subjectType: z.enum(['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'ORGANIZATION', 'COOPERATIVE', 'FARM']),
+  subjectType: z.enum(['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'GROUP', 'ORGANIZATION', 'COOPERATIVE', 'FARM']),
   subjectId: z.string().min(10).max(60),
   participantOrgIds: z.array(z.string().min(10).max(60)).min(1).max(5),
   firstMessage: z.string().trim().max(3000).optional(),
@@ -46,6 +46,23 @@ router.get('/contacts', authorize('messages.read'), asyncHandler(async (req, res
   const items = await service.listContacts(req);
   return success(res, { items });
 }));
+
+
+const groupCreateSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  description: z.string().trim().max(300).optional(),
+  participantOrgIds: z.array(z.string().min(10).max(60)).min(1).max(30),
+});
+const groupMemberSchema = z.object({ organizationId: z.string().min(10).max(60) });
+
+router.post('/groups', authorize('messages.write'), validate(groupCreateSchema), asyncHandler(async (req, res) =>
+  created(res, await service.createGroup(req.body, req), { message: 'Groupe créé' })));
+
+router.post('/conversations/:id/members', authorize('messages.write'), validate(idParam, 'params'), validate(groupMemberSchema), asyncHandler(async (req, res) =>
+  success(res, await service.addGroupMember(req.params.id, req.body.organizationId, req), { message: 'Membre ajouté' })));
+
+router.delete('/conversations/:id/members/:orgId', authorize('messages.write'), asyncHandler(async (req, res) =>
+  success(res, await service.removeGroupMember(req.params.id, req.params.orgId, req), { message: 'Membre retiré' })));
 
 router.get('/conversations', authorize('messages.read'), validate(listSchema, 'query'), asyncHandler(async (req, res) => {
   const { items, total, page, limit, totalUnread } = await service.listConversations(req.query, req);

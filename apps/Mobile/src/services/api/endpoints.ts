@@ -554,7 +554,14 @@ export const dashboardApi = {
 // ─── Messaging & notifications ────────────────────────────────
 
 export const messagingApi = {
-  contacts: () => api.get<{ items: { id: string; name: string; type: string; countryCode: string }[] }>('/messaging/contacts'),
+  contacts: () => api.get<{ items: { id: string; name: string; type: string; countryCode: string; avatarUrl?: string | null }[] }>('/messaging/contacts'),
+  createGroup: (payload: { name: string; description?: string; participantOrgIds: string[] }) =>
+    api.post<{ id: string }>('/messaging/groups', payload),
+  addMember: (conversationId: string, organizationId: string) =>
+    api.post('/messaging/conversations/' + conversationId + '/members', { organizationId }),
+  removeMember: (conversationId: string, organizationId: string) =>
+    api.delete('/messaging/conversations/' + conversationId + '/members/' + organizationId),
+  callsHistory: () => api.get<{ items: Array<{ id: string; status: string; direction?: string; startedAt: string; endedAt?: string | null; conversationId: string; initiator?: { firstName?: string; lastName?: string } }> }>('/calls'),
   start: (payload: { subjectType: string; subjectId: string; participantOrgIds: string[]; firstMessage?: string }) =>
     api.post<{ id: string }>('/messaging/conversations', payload),
   /** GET /messaging/conversations → { items, total, page, limit, totalUnread }. */

@@ -11,7 +11,7 @@ import { logger } from './http/logger.js';
  * une conversation existe toujours pour un dossier, entre ses parties.
  */
 
-export const SUBJECT_TYPES = ['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'ORGANIZATION', 'COOPERATIVE', 'FARM'];
+export const SUBJECT_TYPES = ['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'GROUP', 'ORGANIZATION', 'COOPERATIVE', 'FARM'];
 
 /**
  * Retourne la conversation ouverte du dossier, ou la crée.

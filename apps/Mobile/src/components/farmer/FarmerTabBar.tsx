@@ -3,6 +3,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
+import { messagingApi } from '@/services/api/endpoints';
+import { queryKeys } from '@/services/query';
 
 import { COLORS } from '@/theme/colors';
 import { SPRING } from '@/theme/motion';
@@ -50,6 +54,9 @@ const LABELS: Record<string, string> = {
  */
 export function FarmerTabBar({ state, emitter, navigateToTab, navigation }: TabBarProps) {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const convQ = useQuery({ queryKey: queryKeys.messaging.conversations, queryFn: () => messagingApi.conversations({ limit: 30 }).then((r) => r.data), refetchInterval: 8000 });
+  const unread = (convQ.data as { totalUnread?: number } | undefined)?.totalUnread ?? 0;
   const { width } = useWindowDimensions();
   const { onglets, actif } = ongletsVisibles(state.routes, state.index);
   const nombre = Math.max(onglets.length, 1);

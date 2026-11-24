@@ -22192,6 +22192,36 @@
           }
         }
       }
+    },
+    "/api/v1/messaging/groups": {
+      "post": {
+        "summary": "Créer un groupe",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/messaging/conversations/{id}/members": {
+      "post": {
+        "summary": "Ajouter un membre",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/messaging/conversations/{id}/members/{orgId}": {
+      "delete": {
+        "summary": "Retirer un membre",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }

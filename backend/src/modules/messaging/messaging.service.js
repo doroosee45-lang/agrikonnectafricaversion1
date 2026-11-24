@@ -50,42 +50,24 @@ export const listContacts = async (req) => {
   const myOrgId = req.tenant.organizationId;
   const myCountry = req.tenant.organization?.countryCode ?? "";
   const isPlatformAdmin = (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+  return isPlatformAdmin
+    ? prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE deleted_at IS NULL AND id <> ${myOrgId} ORDER BY name ASC LIMIT 80`
+    : prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE deleted_at IS NULL AND id <> ${myOrgId} AND country_code = ${myCountry} ORDER BY name ASC LIMIT 80`;
+};
 
-  const rows = isPlatformAdmin
-    ? await prisma.$queryRaw`
-        SELECT id, name, type::text AS type, country_code AS "countryCode"
-        FROM organizations
-        WHERE deleted_at IS NULL AND id <> ${myOrgId}
-        ORDER BY name ASC
-        LIMIT 60
-      `
-    : await prisma.$queryRaw`
-        SELECT id, name, type::text AS type, country_code AS "countryCode"
-        FROM organizations
-        WHERE deleted_at IS NULL
-          AND id <> ${myOrgId}
-          AND country_code = ${myCountry}
-        ORDER BY name ASC
-        LIMIT 60
-      `;
-  return rows;
+const validateAllowedOrgs = async (orgIds, req) => {
+  const myCountry = req?.tenant?.organization?.countryCode;
+  const isPlatformAdmin = (req?.tenant?.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+  return prisma.organization.findMany({
+    where: { id: { in: orgIds }, deletedAt: null, ...(!isPlatformAdmin && myCountry ? { countryCode: myCountry } : {}) },
+    select: { id: true, name: true },
+  });
 };
 
 const loadSubject = async (subjectType, subjectId, organizationId, participantOrgIds = [], req = null) => {
-  if (subjectType === "DIRECT") {
-    const myCountry = req?.tenant?.organization?.countryCode;
-    const isPlatformAdmin = (req?.tenant?.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
-    const others = await prisma.organization.findMany({
-      where: {
-        id: { in: participantOrgIds },
-        deletedAt: null,
-        ...(!isPlatformAdmin && myCountry ? { countryCode: myCountry } : {}),
-      },
-      select: { id: true },
-    });
-    if (others.length === 0) {
-      throw ApiError.forbidden("Destinataire introuvable ou hors de votre périmètre géographique autorisé");
-    }
+  if (subjectType === "DIRECT" || subjectType === "GROUP") {
+    const others = await validateAllowedOrgs(participantOrgIds, req);
+    if (others.length === 0) throw ApiError.forbidden("Destinataire introuvable ou hors de votre périmètre géographique autorisé");
     return { subject: { id: subjectId }, parties: [...new Set([organizationId, ...others.map((o) => o.id)])] };
   }
   if (!SUBJECT_TYPES.includes(subjectType)) {
@@ -183,6 +165,44 @@ export const contactAboutListing = async (listingId, { message }, req) => {
   );
 };
 
+
+export const createGroup = async ({ name, description, participantOrgIds = [] }, req) => {
+  const allowed = await validateAllowedOrgs(participantOrgIds, req);
+  if (allowed.length === 0) throw ApiError.forbidden("Aucun membre autorisé sélectionné");
+  const participants = [...new Set([req.tenant.organizationId, ...allowed.map((o) => o.id)])];
+  const intro = description?.trim() ? `Groupe « ${name.trim()} » créé — ${description.trim()}` : `Groupe « ${name.trim()} » créé`;
+  const conversation = await ensureBusinessConversation({
+    subjectType: "GROUP",
+    subjectId: `GRP:${name.trim()}`,
+    participantOrgIds: participants,
+    firstMessage: intro,
+    actorUserId: req.user.id,
+  });
+  emitToOrganizations(participants.filter((id) => id !== req.tenant.organizationId), "conversation:new", { conversationId: conversation.id, subjectType: "GROUP", title: name.trim() });
+  return conversation;
+};
+
+export const addGroupMember = async (conversationId, orgId, req) => {
+  const conv = await prisma.conversation.findUnique({ where: { id: conversationId } });
+  if (!conv || conv.subjectType !== "GROUP" || !conv.participantOrgIds.includes(req.tenant.organizationId)) throw ApiError.notFound("Groupe introuvable");
+  const isAdmin = conv.participantOrgIds[0] === req.tenant.organizationId || (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+  if (!isAdmin) throw ApiError.forbidden("Seul l'administrateur du groupe peut ajouter des membres");
+  const allowed = await validateAllowedOrgs([orgId], req);
+  if (allowed.length === 0) throw ApiError.forbidden("Organisation non autorisée");
+  const updated = await prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: [...new Set([...conv.participantOrgIds, orgId])] } });
+  await postMessage(conversationId, { body: `+ ${allowed[0].name} a rejoint le groupe`, attachments: [] }, req);
+  return updated;
+};
+
+export const removeGroupMember = async (conversationId, orgId, req) => {
+  const conv = await prisma.conversation.findUnique({ where: { id: conversationId } });
+  if (!conv || conv.subjectType !== "GROUP" || !conv.participantOrgIds.includes(req.tenant.organizationId)) throw ApiError.notFound("Groupe introuvable");
+  const isAdmin = conv.participantOrgIds[0] === req.tenant.organizationId || (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+  if (!isAdmin && orgId !== req.tenant.organizationId) throw ApiError.forbidden("Seul l'administrateur du groupe peut retirer un membre");
+  if (orgId === conv.participantOrgIds[0]) throw ApiError.badRequest("L'administrateur principal ne peut pas être retiré");
+  return prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: conv.participantOrgIds.filter((id) => id !== orgId) } });
+};
+
 export const listConversations = async (query, req) => {
   const { page, limit } = query;
   const where = { participantOrgIds: { has: req.tenant.organizationId } };
@@ -210,13 +230,32 @@ export const listConversations = async (query, req) => {
   });
   const unreadByConversation = new Map(unreadGroups.map((g) => [g.conversationId, g._count._all]));
 
+  const allOrgIds = [...new Set(items.flatMap((c) => c.participantOrgIds))];
+  const orgRows = allOrgIds.length > 0
+    ? await prisma.$queryRaw`SELECT id, name, type::text AS type, country_code AS "countryCode", logo_url AS "avatarUrl" FROM organizations WHERE id = ANY(${allOrgIds}::text[])`
+    : [];
+  const orgMap = new Map(orgRows.map((o) => [o.id, o]));
   return {
-    items: items.map((conversation) => ({
-      ...conversation,
-      unread: unreadByConversation.get(conversation.id) ?? 0,
-      lastMessage: conversation.messages?.[0] ?? null,
-      otherParticipants: conversation.participantOrgIds.filter((id) => id !== req.tenant.organizationId),
-    })),
+    items: items.map((conversation) => {
+      const unread = unreadByConversation.get(conversation.id) ?? 0;
+      const otherIds = conversation.participantOrgIds.filter((id) => id !== req.tenant.organizationId);
+      const participants = conversation.participantOrgIds.map((id) => orgMap.get(id) ?? { id, name: "Membre", type: "INDIVIDUAL", countryCode: "", avatarUrl: null });
+      const primaryPeer = orgMap.get(otherIds[0]) ?? participants[0];
+      const isGroup = conversation.subjectType === "GROUP";
+      const title = isGroup && conversation.subjectId?.startsWith("GRP:") ? conversation.subjectId.slice(4) : isGroup ? (conversation.subjectId || "Groupe") : (primaryPeer?.name ?? "Discussion");
+      return {
+        ...conversation,
+        title,
+        subtitle: isGroup ? `${participants.length} participants` : `${primaryPeer?.type ?? "ACTIF"} · ${primaryPeer?.countryCode ?? ""}`,
+        avatarUrl: isGroup ? null : (primaryPeer?.avatarUrl ?? null),
+        adminOrgId: isGroup ? conversation.participantOrgIds[0] : null,
+        participants,
+        unread,
+        unreadCount: unread,
+        lastMessage: conversation.messages[0] ?? null,
+        otherParticipants: otherIds,
+      };
+    }),
     total,
     page,
     limit,
