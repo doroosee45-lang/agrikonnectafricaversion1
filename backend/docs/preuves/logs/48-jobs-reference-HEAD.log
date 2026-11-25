@@ -1,0 +1,147 @@
+⚠️  Messagerie : TWILIO_ACCOUNT_SID a une forme inhabituelle (22 caractères au lieu de 34). L’envoi peut échouer en 20003.
+⚠️  Messagerie : TWILIO_WEBHOOK_BASE_URL est vide : la signature des accusés de remise sera reconstruite depuis les en-têtes de la requête, ce qui est fragile derrière un mandataire. Renseigne l'URL publique du backend (un tunnel ngrok ou cloudflared en développement).
+⚠️  Messagerie : TWILIO_STATUS_CALLBACK_URL est vide : Twilio n'enverra aucun accusé de remise. Renseigne l'URL publique du backend (un tunnel ngrok ou cloudflared en développement).
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:56638/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 375.153 ms - 1112[0m
+[0mPOST /api/v1/auth/register [32m201[0m 28.066 ms - 1097[0m
+[0mPOST /api/v1/auth/register [32m201[0m 27.701 ms - 1116[0m
+[0mPOST /api/v1/auth/login [32m200[0m 53.061 ms - 948[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.097 ms - 938[0m
+[0mPOST /api/v1/farms [32m201[0m 54.553 ms - 874[0m
+[0mPOST /api/v1/plots [32m201[0m 21.897 ms - 706[0m
+[0mPOST /api/v1/agronomic-ranges [33m404[0m 0.927 ms - 149[0m
+✖ Job d’alertes : un franchissement envoie un SMS à Twilio, au destinataire qui a consenti (18781.1807ms)
+✖ Job d’alertes : le journal de lot compte l’envoyé et le retenu, par raison (1.1002ms)
+✖ Job d’alertes : le consentement SMS ne coupe ni l’email ni l’in-app (0.1406ms)
+✖ Job d’alertes : le retrait du consentement coupe les envois suivants (0.0712ms)
+[2026-11-25T16:43:54.367Z] [INFO] [job] listings.expire terminé en 1488 ms { expired: 2, at: '2026-11-25T16:43:52.880Z' }
+[2026-11-25T16:43:54.370Z] [INFO] [job] orders.expirePending terminé en 0 ms {
+  cancelled: 1,
+  stockReleased: false,
+  cutoff: '2026-11-18T16:43:54.370Z'
+}
+[2026-11-25T16:43:54.372Z] [INFO] [job] dataroom.expireAccess terminé en 1 ms { expired: 1, at: '2026-11-25T16:43:54.372Z' }
+[2026-11-25T16:43:54.373Z] [INFO] [job] apikeys.expire terminé en 0 ms { revoked: 1, at: '2026-11-25T16:43:54.373Z' }
+[2026-11-25T16:43:54.375Z] [INFO] [job] disputes.sla terminé en 1 ms { disputes: 1, alerted: 1, slaDays: 5 }
+[2026-11-25T16:43:54.375Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 1, alerted: 0, slaDays: 5 }
+[2026-11-25T16:43:54.376Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 1, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:43:54.381Z] [INFO] [job] notifications.purge terminé en 1 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:43:54.382Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:43:54.383Z] [ERROR] [job] notifications.purge en échec : échec de test
+[2026-11-25T16:43:54.385Z] [INFO] [job] listings.expire terminé en 0 ms { expired: 0, at: '2026-11-25T16:43:54.385Z' }
+[2026-11-25T16:43:54.385Z] [INFO] [job] orders.expirePending terminé en 0 ms {
+  cancelled: 0,
+  stockReleased: false,
+  cutoff: '2026-11-18T16:43:54.385Z'
+}
+[2026-11-25T16:43:54.385Z] [INFO] [job] dataroom.expireAccess terminé en 0 ms { expired: 0, at: '2026-11-25T16:43:54.385Z' }
+[2026-11-25T16:43:54.385Z] [INFO] [job] apikeys.expire terminé en 0 ms { revoked: 0, at: '2026-11-25T16:43:54.385Z' }
+✔ MKT-06 : le job d’expiration ne touche que les annonces réellement échues (1492.1324ms)
+✔ ORD-02 : une commande PENDING trop ancienne est annulée avec un motif tracé (1.6957ms)
+✔ DR-02 : les accès data room échus sont révoqués et journalisés (1.0596ms)
+✔ API-02 : les clés d’API expirées ne restent jamais ACTIVE (0.9617ms)
+✔ DISP-02 : le SLA notifie les modérateurs une seule fois par jour et par litige (2.2156ms)
+✔ NOTIF-02 : seules les notifications lues et anciennes sont purgées (1.9765ms)
+﹣ IOT-03 : un capteur silencieux est signalé à son organisation (0.4673ms) # Hors périmètre V1 : module IoT non déployé (iot.markSilent est inactif)
+✔ Supervision : chaque tâche est listée avec sa cadence et son dernier résultat (1.5039ms)
+✔ Supervision : le déclenchement manuel est audité, un nom inconnu renvoie null (1.4388ms)
+✔ Verrou scheduler : PostgreSQL acquiert puis libère le verrou en cas de succès (0.9904ms)
+✔ Verrou scheduler : libération garantie si le job échoue (1.3259ms)
+✔ Verrou scheduler : un verrou détenu par un autre processus saute le job (0.4508ms)
+﹣ Planificateur : démarrage et arrêt sans laisser de minuteur actif (0.0592ms) # JOBS_ENABLED=false dans cet environnement : relancer avec JOBS_ENABLED=true
+[2026-11-25T16:43:57.296Z] [INFO] [job] calls.expireRinging terminé en 2911 ms { examined: 0, processed: 0 }
+[2026-11-25T16:43:57.296Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 0, alerted: 0, slaDays: 5 }
+[2026-11-25T16:43:57.613Z] [INFO] [job] idempotency.purge terminé en 317 ms { deleted: 0 }
+[2026-11-25T16:43:57.614Z] [INFO] [job] notifications.purge terminé en 1 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:43:57.614Z] [INFO] [job] iot.markSilent terminé en 0 ms { thresholdHours: 24, silent: 0, alerts: 0 }
+[2026-11-25T16:43:57.614Z] [INFO] [job] recommendations.monitor terminé en 0 ms {
+  recommendationsScanned: 0,
+  parametersChecked: 0,
+  alerts: 0,
+  replacements: 0,
+  silentSensors: { thresholdHours: 24, silent: 0, alerts: 0 },
+  renotifyHours: 24,
+  errors: []
+}
+[2026-11-25T16:43:57.615Z] [INFO] [job] satellite.acquire terminé en 0 ms { enabled: false, reason: 'V1' }
+[2026-11-25T16:43:57.615Z] [INFO] [job] sensors.detectAnomalies terminé en 0 ms { enabled: false, reason: 'V1' }
+[2026-11-25T16:43:57.615Z] [INFO] [job] alerts.escalate terminé en 0 ms { escaladees: 0, examinees: 0, details: [] }
+✔ Robustesse : un job en échec n’interrompt pas les autres (3231.7141ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 12
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 31136.5301
+
+✖ failing tests:
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:288:1
+✖ Job d’alertes : un franchissement envoie un SMS à Twilio, au destinataire qui a consenti (18781.1807ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"e4beab5c-cc46-4bd0-a989-efe5265af826"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:326:1
+✖ Job d’alertes : le journal de lot compte l’envoyé et le retenu, par raison (1.1002ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"e4beab5c-cc46-4bd0-a989-efe5265af826"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:347:1
+✖ Job d’alertes : le consentement SMS ne coupe ni l’email ni l’in-app (0.1406ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"e4beab5c-cc46-4bd0-a989-efe5265af826"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:360:1
+✖ Job d’alertes : le retrait du consentement coupe les envois suivants (0.0712ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"e4beab5c-cc46-4bd0-a989-efe5265af826"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -512,7 +512,8 @@ export const createFakePrisma = (initial = {}) => {
   fake.$transaction = async (arg) => (Array.isArray(arg) ? Promise.all(arg) : arg(fake));
   fake.$queryRaw = async (query) => {
     const sql = Array.isArray(query) ? query.join('?') : String(query);
-    if (sql.includes('pg_try_advisory_lock')) return [{ locked: true }];
+    // JOBS-1 : verrou de transaction des tâches (l'ancien verrou de session reste reconnu).
+    if (sql.includes('pg_try_advisory_xact_lock') || sql.includes('pg_try_advisory_lock')) return [{ locked: true }];
     if (sql.includes('pg_advisory_unlock')) return [{ unlocked: true }];
     return [];
   };

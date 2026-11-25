@@ -1,0 +1,152 @@
+[2026-11-25T16:41:18.488Z] [WARN] [req-test] GET /test — 422 un message
+✔ contrat — chaque fabrique ApiError porte un code et le bon statut (1.2031ms)
+✔ contrat — aucune fabrique ne renvoie un code vide (0.3931ms)
+[2026-11-25T16:41:18.496Z] [WARN] [req-test] GET /test — 401 un message
+[2026-11-25T16:41:18.497Z] [WARN] [req-test] GET /test — 403 un message
+[2026-11-25T16:41:18.497Z] [WARN] [req-test] GET /test — 404 un message
+[2026-11-25T16:41:18.497Z] [WARN] [req-test] GET /test — 409 un message
+[2026-11-25T16:41:18.497Z] [WARN] [req-test] GET /test — 413 un message
+[2026-11-25T16:41:18.497Z] [WARN] [req-test] GET /test — 429 un message
+[2026-11-25T16:41:18.497Z] [ERROR] [req-test] GET /test — {
+  name: 'ApiError',
+  message: 'un message',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: un message\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/errorCodeContract.test.mjs:84:67)\n' +
+    '    at async Test.run (node:internal/test_runner/test:1409:7)\n' +
+    '    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)'
+}
+[2026-11-25T16:41:18.498Z] [WARN] [req-test] GET /test — 418 théière
+✔ contrat — le corps d’erreur expose `code`, sans rien retirer (10.357ms)
+[2026-11-25T16:41:18.500Z] [WARN] [req-test] GET /test — 422 Validation error
+✔ contrat — `code` est présent même quand l’erreur n’en porte pas (1.088ms)
+[2026-11-25T16:41:18.501Z] [WARN] [req-test] GET /test — 422 Corps de requête JSON invalide
+✔ contrat — une erreur Zod normalisée porte un code (1.7568ms)
+[2026-11-25T16:41:18.502Z] [WARN] [req-test] GET /test — 413 Corps de requête trop volumineux
+✔ contrat — un corps JSON invalide normalisé porte un code (0.4014ms)
+[2026-11-25T16:41:18.502Z] [ERROR] [req-test] GET /test — {
+  name: 'Error',
+  message: 'secret de la pile',
+  code: null,
+  stack: 'Error: secret de la pile\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/errorCodeContract.test.mjs:136:44)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n' +
+    '    at Test.postRun (node:internal/test_runner/test:1542:19)\n' +
+    '    at Test.run (node:internal/test_runner/test:1467:12)\n' +
+    '    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)'
+}
+✔ contrat — un corps trop volumineux normalisé porte PAYLOAD_TOO_LARGE (0.4501ms)
+✔ contrat — une erreur inconnue devient INTERNAL_ERROR, sans fuite de détail (0.6373ms)
+✔ contrat — les limiteurs de débit exposent `code` à la racine (1.2934ms)
+✔ contrat — l’OpenAPI déclare `code` comme requis dans ErrorEnvelope (7.8482ms)
+✔ contrat — le 413 est documenté (8.2697ms)
+[2026-11-25T16:41:18.589Z] [WARN] [req-test] GET /test — 401 Code de double authentification requis
+✔ contrat — aucune fabrique ApiError ne reçoit plus d’arguments qu’elle n’en déclare (68.123ms)
+✔ contrat — unauthorized et forbidden portent bien `details` quand on leur en donne (0.3396ms)
+✔ contrat — `details.mfaRequired` atteint le corps de la réponse 401 (0.5471ms)
+[2026-11-25T16:41:18.506Z] [ERROR] [req-pool] POST /test — {
+  name: 'PrismaClientKnownRequestError',
+  message: 'Timed out fetching a new connection from the connection pool. (Current connection pool timeout: 10, connection limit: 5)',
+  code: 'P2024',
+  stack: 'PrismaClientKnownRequestError: Timed out fetching a new connection from the connection pool. (Current connection pool timeout: 10, connection limit: 5)\n' +
+    '    at erreurPrisma (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:33:3)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:36:22)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.start (node:internal/test_runner/test:1262:17)\n' +
+    '    at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)'
+}
+[2026-11-25T16:41:18.511Z] [ERROR] [req-pool] POST /test — {
+  name: 'PrismaClientKnownRequestError',
+  message: 'Transaction API error: Unable to start a transaction in the given time.',
+  code: 'P2028',
+  stack: 'PrismaClientKnownRequestError: Transaction API error: Unable to start a transaction in the given time.\n' +
+    '    at erreurPrisma (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:33:3)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:46:22)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n' +
+    '    at Test.postRun (node:internal/test_runner/test:1542:19)\n' +
+    '    at Test.run (node:internal/test_runner/test:1467:12)\n' +
+    '    at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)'
+}
+[2026-11-25T16:41:18.512Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2028)
+[2026-11-25T16:41:18.512Z] [WARN] [req-pool] POST /test — 409 Cette valeur existe déjà (valeur unique)
+[2026-11-25T16:41:18.512Z] [WARN] [req-pool] POST /test — 404 Ressource introuvable
+[2026-11-25T16:41:18.512Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2034)
+✔ POOL-1a — P2024 (délai de connexion au pool) → 503 DB_POOL_EXHAUSTED + Retry-After (4.67ms)
+✔ POOL-1b — P2028 « Unable to start a transaction » (maxWait dépassé) → 503 (0.7429ms)
+✔ POOL-1c — autres P2028 (transaction expirée) : traitement inchangé (422), pas de Retry-After (0.3363ms)
+✔ POOL-1d — non-régression : P2002 → 409, P2025 → 404, code inconnu → 422 (0.4769ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 301.7396
+--- contre-preuve (errorHandler de HEAD)
+[2026-11-25T16:41:20.373Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2024)
+[2026-11-25T16:41:20.376Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2028)
+[2026-11-25T16:41:20.376Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2028)
+[2026-11-25T16:41:20.377Z] [WARN] [req-pool] POST /test — 409 Cette valeur existe déjà (valeur unique)
+[2026-11-25T16:41:20.377Z] [WARN] [req-pool] POST /test — 404 Ressource introuvable
+[2026-11-25T16:41:20.377Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2034)
+✖ POOL-1a — P2024 (délai de connexion au pool) → 503 DB_POOL_EXHAUSTED + Retry-After (3.2293ms)
+✖ POOL-1b — P2028 « Unable to start a transaction » (maxWait dépassé) → 503 (0.4693ms)
+✔ POOL-1c — autres P2028 (transaction expirée) : traitement inchangé (422), pas de Retry-After (0.3792ms)
+✔ POOL-1d — non-régression : P2002 → 409, P2025 → 404, code inconnu → 422 (0.4874ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179.3675
+
+✖ failing tests:
+
+test at tests\poolSaturationV1.test.mjs:35:1
+✖ POOL-1a — P2024 (délai de connexion au pool) → 503 DB_POOL_EXHAUSTED + Retry-After (3.2293ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  422 !== 503
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:37:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 422,
+    expected: 503,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\poolSaturationV1.test.mjs:45:1
+✖ POOL-1b — P2028 « Unable to start a transaction » (maxWait dépassé) → 503 (0.4693ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  422 !== 503
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:47:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 422,
+    expected: 503,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

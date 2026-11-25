@@ -5,6 +5,15 @@ import { logger } from './logger.js';
 import { env } from '../../config/env.js';
 import { translateMessage, zodIssuesToFieldErrors } from '../i18n/index.js';
 
+/** Délai conseillé au client avant de rejouer une requête refusée pour saturation. */
+export const RETRY_AFTER_POOL_SECONDES = 2;
+
+const poolSature = () =>
+  new ApiError(503, 'Service momentanément surchargé, réessaie dans quelques instants', {
+    code: 'DB_POOL_EXHAUSTED',
+    details: { retryAfterSeconds: RETRY_AFTER_POOL_SECONDES },
+  });
+
 /** Traduit les erreurs connues (Prisma, Zod, JSON…) en ApiError lisibles. */
 const normalize = (err, locale) => {
   if (err instanceof ApiError) return err;
@@ -25,6 +34,21 @@ const normalize = (err, locale) => {
         return ApiError.badRequest('Référence invalide vers une ressource liée');
       case 'P2014':
         return ApiError.badRequest('Relation requise manquante');
+      /*
+       * POOL-1 — saturation du pool de connexions : indisponibilité TEMPORAIRE
+       * du serveur, pas une erreur du client. Elle était renvoyée en 422
+       * (« Erreur base de données ») : le client croyait sa requête invalide et
+       * ne la rejouait pas. 503 + Retry-After : la file hors ligne rejoue.
+       *  - P2024 : délai d'obtention d'une connexion dépassé ;
+       *  - P2028 « Unable to start a transaction » : `maxWait` d'une
+       *    transaction interactive dépassé (même cause). Les autres P2028
+       *    (transaction expirée…) gardent le traitement par défaut.
+       */
+      case 'P2024':
+        return poolSature();
+      case 'P2028':
+        if (/unable to start a transaction/i.test(err.message ?? '')) return poolSature();
+        return ApiError.badRequest(`Erreur base de données (${err.code})`);
       default:
         return ApiError.badRequest(`Erreur base de données (${err.code})`);
     }
@@ -107,6 +131,7 @@ export const errorHandler = (err, req, res, _next) => {
   }
   if (apiError.details) body.details = apiError.details;
   if (env.isDev && apiError.status >= 500) body.stack = err?.stack;
+  if (apiError.code === 'DB_POOL_EXHAUSTED') res.set?.('Retry-After', String(RETRY_AFTER_POOL_SECONDES));
 
   return res.status(apiError.status).json(body);
 };

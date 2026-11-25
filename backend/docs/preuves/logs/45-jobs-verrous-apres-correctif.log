@@ -1,0 +1,15 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:60372/email : injoignable hors de cette machine.
+[2026-11-25T16:39:45.640Z] [ERROR] [job] test.verrou.jobs en échec : Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 200 ms, however 748 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+✔ JOBS-1a — transaction expirée pendant la tâche : aucun verrou ne survit, la tâche suivante s’exécute (17796.6653ms)
+ℹ JOBS-1a : 1re exécution {"erreur":"Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 200 ms ; verrous consultatifs restants=0 ; exécutions suivantes refusées=0/6
+[2026-11-25T16:39:45.777Z] [ERROR] [job] test.verrou.jobs en échec : panne tâche
+✔ JOBS-1b — tâche en erreur : verrou libéré (10.2111ms)
+✔ JOBS-1c — autre processus détenteur du verrou : exécution refusée, puis acceptée après sa fin (58.8312ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 30557.8097

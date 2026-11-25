@@ -381,18 +381,21 @@ export const runJob = async (name, { actorId = null, req = null, reason = null }
   try {
     const execution = await enFileUnique(() => prisma.$transaction(
       async (tx) => {
+        /*
+         * JOBS-1 — verrou de TRANSACTION, libéré par PostgreSQL au COMMIT ou au
+         * ROLLBACK, quoi qu'il arrive. L'ancien verrou de SESSION
+         * (`pg_try_advisory_lock` + `pg_advisory_unlock` dans un `finally`)
+         * survivait à une transaction expirée ou coupée : le déverrouillage
+         * échouait et le verrou restait sur la connexion rendue au pool — ou
+         * sur le serveur partagé par PgBouncer en mode transaction — bloquant la
+         * tâche sans limite (preuve : journal 44). Même espace de clés
+         * (`hashtext(nom)`) : l'exclusion entre processus est inchangée.
+         */
         const [lock] = await tx.$queryRaw`
-          SELECT pg_try_advisory_lock(hashtext(${name})) AS locked
+          SELECT pg_try_advisory_xact_lock(hashtext(${name})) AS locked
         `;
         if (!lock?.locked) return { acquired: false };
-
-        try {
-          return { acquired: true, result: await job.run() };
-        } finally {
-          await tx.$queryRaw`
-            SELECT pg_advisory_unlock(hashtext(${name}))
-          `;
-        }
+        return { acquired: true, result: await job.run() };
       },
       { maxWait: 10_000, timeout: 30 * 60 * 1000 },
     ));

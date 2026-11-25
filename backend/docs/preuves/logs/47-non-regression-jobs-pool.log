@@ -1,0 +1,466 @@
+⚠️  Messagerie : TWILIO_ACCOUNT_SID a une forme inhabituelle (22 caractères au lieu de 34). L’envoi peut échouer en 20003.
+⚠️  Messagerie : TWILIO_WEBHOOK_BASE_URL est vide : la signature des accusés de remise sera reconstruite depuis les en-têtes de la requête, ce qui est fragile derrière un mandataire. Renseigne l'URL publique du backend (un tunnel ngrok ou cloudflared en développement).
+⚠️  Messagerie : TWILIO_STATUS_CALLBACK_URL est vide : Twilio n'enverra aucun accusé de remise. Renseigne l'URL publique du backend (un tunnel ngrok ou cloudflared en développement).
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:54505/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 95.546 ms - 1112[0m
+[0mPOST /api/v1/auth/register [32m201[0m 15.016 ms - 1097[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.194 ms - 1116[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.748 ms - 948[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.269 ms - 938[0m
+[0mPOST /api/v1/farms [32m201[0m 61.620 ms - 874[0m
+[0mPOST /api/v1/plots [32m201[0m 17.060 ms - 706[0m
+[0mPOST /api/v1/agronomic-ranges [33m404[0m 0.664 ms - 149[0m
+✖ Job d’alertes : un franchissement envoie un SMS à Twilio, au destinataire qui a consenti (10360.621ms)
+✖ Job d’alertes : le journal de lot compte l’envoyé et le retenu, par raison (0.4631ms)
+✖ Job d’alertes : le consentement SMS ne coupe ni l’email ni l’in-app (0.1043ms)
+✖ Job d’alertes : le retrait du consentement coupe les envois suivants (0.039ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:55272/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 102.799 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 26.946 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.050 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.210 ms - 923[0m
+[0mPOST /api/v1/farms [33m409[0m 201.879 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 206.343 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 197.721 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 203.216 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 205.234 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 202.656 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 210.281 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 203.003 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 206.373 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 205.133 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 228.916 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 212.010 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 236.865 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 239.602 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 246.889 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 235.241 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 253.002 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 259.468 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 331.497 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 343.345 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 7.346 ms - 809[0m
+✔ ID-1 — 20 requêtes SIMULTANÉES, même clé : 1 exploitation ; 201 (exécution/rejeu) ou 409 en cours ; le renvoi rejoue (10650.5092ms)
+ℹ ID-1 : exécutée 1 ; rejouées 2 ; 409 en cours 17 ; autres  ; exploitations 1 ; renvoi 201 rejoué=true
+[0mPOST /api/v1/farms [33m409[0m 69.114 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.508 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.643 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.073 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.894 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.633 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.143 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.035 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.446 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.181 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.123 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 70.771 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.378 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 71.909 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 72.282 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 86.498 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.211 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.537 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 88.428 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 88.449 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.010 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.258 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.661 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 88.825 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 87.517 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 89.318 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 86.639 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 88.543 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 88.935 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 107.778 ms - 811[0m
+[0mGET /api/v1/me [32m200[0m 76.577 ms - 1171[0m
+✔ ID-1b — rafale de 30 requêtes sur la même clé : le pool de connexions n’est pas épuisé (requête sans rapport servie) (142.4317ms)
+ℹ ID-1b : GET /me pendant la rafale 200 en 105 ms ; statuts rafale 201,409 ; exploitations 1
+[2026-11-25T16:48:03.198Z] [ERROR] [fda47a29-69e0-479a-a454-98ec71c5f30c] POST /api/v1/farms — {
+  name: 'Error',
+  message: 'panne après écriture métier',
+  code: null,
+  stack: 'Error: panne après écriture métier\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:86:108\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async executerIdempotent (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/idempotency.js:233:19)'
+}
+[0mPOST /api/v1/farms [31m500[0m 17.558 ms - 130[0m
+[0mPOST /api/v1/farms [32m201[0m 14.294 ms - 809[0m
+✔ ID-2 (I4c) — erreur APRÈS l’écriture métier, avant validation : rien n’est validé ; la reprise crée 1 exploitation (69.1322ms)
+ℹ ID-2 : 1er appel 500 ; après panne {"fermes":0,"cles":0,"audits":0} ; reprise 201 rejouée=false ; exploitations finales 1
+[0mPOST /api/v1/farms [32m201[0m 16.227 ms - 809[0m
+✔ ID-3 — ARRÊT RÉEL du serveur (SIGKILL) pendant la transaction : rien de validé ; la reprise crée 1 exploitation (1033.0213ms)
+ℹ ID-3 : requête vers l’instance tuée interrompue (ECONNRESET) ; état après arrêt {"fermes":0,"cles":0} ; reprise 201 rejouée=false ; exploitations finales 1
+[0mPOST /api/v1/farms [32m201[0m 16.847 ms - 813[0m
+[0mPOST /api/v1/farms [33m422[0m 4.406 ms - 300[0m
+✔ ID-4 (I6b) — même clé, corps différent : 422 IDEMPOTENCY_KEY_REUSED, aucune 2e création (26.6148ms)
+[0mPOST /api/v1/farms [32m201[0m 14.206 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 4.744 ms - 809[0m
+✔ ID-5 — rejeu après succès : réponse identique, en-tête Idempotent-Replayed, aucune 2e création ni 2e audit (26.3309ms)
+[0mPOST /api/v1/farms [32m201[0m 14.832 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 16.324 ms - 811[0m
+✔ ID-6 (I7) — clé expirée : nouvelle exécution (pas de rejeu) ; la purge supprime les clés expirées (44.3112ms)
+[0mPOST /api/v1/farms [33m409[0m 4.245 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 13.093 ms - 809[0m
+✔ ID-7 (I4b, transition) — ligne « en cours » héritée de l’ancien mécanisme : 409 tant qu’elle vit, reprise après expiration (24.5375ms)
+[0mPOST /api/v1/farms [32m201[0m 13.029 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 16.721 ms - 811[0m
+[0mPOST /api/v1/organizations [32m201[0m 14.986 ms - 575[0m
+[0mPOST /api/v1/farms [32m201[0m 34.895 ms - 811[0m
+[0mPOST /api/v1/plots [32m201[0m 20.094 ms - 628[0m
+✔ ID-8 — même clé : autre utilisateur, autre organisation active, autre opération → portées indépendantes (113.854ms)
+[0mPOST /api/v1/farms [32m201[0m 14.878 ms - 809[0m
+[0mPOST /api/v1/plots [32m201[0m 17.168 ms - 621[0m
+[0mPOST /api/v1/plots [32m201[0m 7.285 ms - 621[0m
+[0mPOST /api/v1/plots/01M89SPWY308R15KR750289GPH/crop-history [32m201[0m 31.403 ms - 609[0m
+[0mPOST /api/v1/plots/01M89SPWY308R15KR750289GPH/crop-history [32m201[0m 6.010 ms - 609[0m
+[0mPOST /api/v1/productions [32m201[0m 21.882 ms - 738[0m
+[0mPOST /api/v1/productions [32m201[0m 4.409 ms - 738[0m
+✔ ID-9 — les quatre créations idempotentes rejouent (exploitation, parcelle, production, historique cultural) (124.6142ms)
+[0mPOST /api/v1/farms [32m201[0m 8.681 ms - 811[0m
+[0mPOST /api/v1/farms [32m201[0m 10.412 ms - 813[0m
+✔ ID-10 — sans en-tête (Web) : comportement inchangé, deux créations (23.4471ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:52401/email : injoignable hors de cette machine.
+[2026-11-25T16:48:25.899Z] [ERROR] [job] test.verrou.jobs en échec : Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 200 ms, however 704 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+✔ JOBS-1a — transaction expirée pendant la tâche : aucun verrou ne survit, la tâche suivante s’exécute (9718.3118ms)
+ℹ JOBS-1a : 1re exécution {"erreur":"Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 200 ms ; verrous consultatifs restants=0 ; exécutions suivantes refusées=0/6
+[2026-11-25T16:48:26.032Z] [ERROR] [job] test.verrou.jobs en échec : panne tâche
+✔ JOBS-1b — tâche en erreur : verrou libéré (7.2052ms)
+✔ JOBS-1c — autre processus détenteur du verrou : exécution refusée, puis acceptée après sa fin (38.5744ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:52416/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 84.562 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.724 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.699 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.145 ms - 919[0m
+[2026-11-25T16:48:47.581Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne injectée avant validation',
+  code: null,
+  stack: 'Error: panne injectée avant validation\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:51:65\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:14)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[2026-11-25T16:48:47.582Z] [ERROR] [b8c070ca-d157-4eb5-b5b8-393d45361ba9] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:200:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 15.870 ms - 154[0m
+[0mPOST /api/v1/auth/login [33m401[0m 3.599 ms - 126[0m
+[0mPOST /api/v1/auth/register [32m201[0m 10.924 ms - 1075[0m
+✔ TX-1a — panne DANS la transaction d’inscription : rien n’est validé, Supabase compensé, réinscription possible (9720.3421ms)
+ℹ TX-1a : inscription 500 ; profils 0 ; jetons 0 ; connexion après échec 401 ; réinscription 201
+[0mPOST /api/v1/auth/register [32m201[0m 10.746 ms - 1075[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.390 ms - 917[0m
+✔ TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes (25.6402ms)
+ℹ TX-1b : inscription 201 ; profils 1 ; jetons 1 ; connexion 200
+[0mPOST /api/v1/messaging/conversations [32m200[0m 171.123 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 175.842 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 185.286 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 187.579 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 179.553 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 189.717 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 191.332 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 186.852 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 193.646 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 195.456 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 208.053 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 219.139 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 209.809 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 210.549 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 211.229 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 224.890 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 213.681 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 214.857 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 216.978 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 231.467 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 233.097 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 238.181 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 231.470 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 230.960 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 221.006 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 224.263 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 225.954 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 226.917 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 226.952 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 230.350 ms - 343[0m
+✔ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (274.0289ms)
+ℹ TX-2 : statuts 201,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200 ; fils créés 1
+[0mPOST /api/v1/messaging/groups [32m201[0m 71.221 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 72.245 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 73.388 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 74.084 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 76.153 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 77.078 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 78.189 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 80.885 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 77.839 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 79.126 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 81.108 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 82.665 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 84.032 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 84.714 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 86.878 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 88.530 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 89.905 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 90.939 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 92.019 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 93.073 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 93.980 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 110.548 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 95.321 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 97.007 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 97.388 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 97.836 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 99.033 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 100.477 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 101.331 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 102.233 ms - 331[0m
+✔ TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe (129.727ms)
+ℹ TX-3 : statuts 201 ; groupes créés 1 ; identifiants renvoyés distincts 1
+[0mPOST /api/v1/messaging/conversations [32m201[0m 16.110 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 15.879 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.279 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.445 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.328 ms - 332[0m
+✔ TX-2/TX-3 — sujets différents : pas de sérialisation abusive (fils distincts créés en parallèle) (24.2979ms)
+[2026-11-25T16:48:59.780Z] [WARN] [req-test] GET /test — 422 un message
+✔ contrat — chaque fabrique ApiError porte un code et le bon statut (0.8231ms)
+✔ contrat — aucune fabrique ne renvoie un code vide (0.2843ms)
+[2026-11-25T16:48:59.785Z] [WARN] [req-test] GET /test — 401 un message
+[2026-11-25T16:48:59.785Z] [WARN] [req-test] GET /test — 403 un message
+[2026-11-25T16:48:59.786Z] [WARN] [req-test] GET /test — 404 un message
+[2026-11-25T16:48:59.786Z] [WARN] [req-test] GET /test — 409 un message
+[2026-11-25T16:48:59.786Z] [WARN] [req-test] GET /test — 413 un message
+[2026-11-25T16:48:59.786Z] [WARN] [req-test] GET /test — 429 un message
+[2026-11-25T16:48:59.786Z] [ERROR] [req-test] GET /test — {
+  name: 'ApiError',
+  message: 'un message',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: un message\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/errorCodeContract.test.mjs:84:67)\n' +
+    '    at async Test.run (node:internal/test_runner/test:1409:7)\n' +
+    '    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)'
+}
+[2026-11-25T16:48:59.787Z] [WARN] [req-test] GET /test — 418 théière
+✔ contrat — le corps d’erreur expose `code`, sans rien retirer (6.9502ms)
+[2026-11-25T16:48:59.788Z] [WARN] [req-test] GET /test — 422 Validation error
+✔ contrat — `code` est présent même quand l’erreur n’en porte pas (0.739ms)
+[2026-11-25T16:48:59.789Z] [WARN] [req-test] GET /test — 422 Corps de requête JSON invalide
+✔ contrat — une erreur Zod normalisée porte un code (1.2326ms)
+[2026-11-25T16:48:59.789Z] [WARN] [req-test] GET /test — 413 Corps de requête trop volumineux
+✔ contrat — un corps JSON invalide normalisé porte un code (0.3808ms)
+[2026-11-25T16:48:59.790Z] [ERROR] [req-test] GET /test — {
+  name: 'Error',
+  message: 'secret de la pile',
+  code: null,
+  stack: 'Error: secret de la pile\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/errorCodeContract.test.mjs:136:44)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n' +
+    '    at Test.postRun (node:internal/test_runner/test:1542:19)\n' +
+    '    at Test.run (node:internal/test_runner/test:1467:12)\n' +
+    '    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)'
+}
+✔ contrat — un corps trop volumineux normalisé porte PAYLOAD_TOO_LARGE (0.368ms)
+✔ contrat — une erreur inconnue devient INTERNAL_ERROR, sans fuite de détail (0.9414ms)
+✔ contrat — les limiteurs de débit exposent `code` à la racine (1.4869ms)
+✔ contrat — l’OpenAPI déclare `code` comme requis dans ErrorEnvelope (5.9602ms)
+✔ contrat — le 413 est documenté (5.7687ms)
+[2026-11-25T16:48:59.952Z] [WARN] [req-test] GET /test — 401 Code de double authentification requis
+✔ contrat — aucune fabrique ApiError ne reçoit plus d’arguments qu’elle n’en déclare (147.6806ms)
+✔ contrat — unauthorized et forbidden portent bien `details` quand on leur en donne (0.3266ms)
+✔ contrat — `details.mfaRequired` atteint le corps de la réponse 401 (0.5588ms)
+[2026-11-25T16:49:00.175Z] [INFO] [job] listings.expire terminé en 15 ms { expired: 2, at: '2026-11-25T16:49:00.160Z' }
+[2026-11-25T16:49:00.177Z] [INFO] [job] orders.expirePending terminé en 0 ms {
+  cancelled: 1,
+  stockReleased: false,
+  cutoff: '2026-11-18T16:49:00.177Z'
+}
+[2026-11-25T16:49:00.178Z] [INFO] [job] dataroom.expireAccess terminé en 0 ms { expired: 1, at: '2026-11-25T16:49:00.178Z' }
+[2026-11-25T16:49:00.179Z] [INFO] [job] apikeys.expire terminé en 1 ms { revoked: 1, at: '2026-11-25T16:49:00.178Z' }
+[2026-11-25T16:49:00.180Z] [INFO] [job] disputes.sla terminé en 1 ms { disputes: 1, alerted: 1, slaDays: 5 }
+[2026-11-25T16:49:00.180Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 1, alerted: 0, slaDays: 5 }
+[2026-11-25T16:49:00.181Z] [INFO] [job] notifications.purge terminé en 1 ms { deleted: 1, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:49:00.183Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:49:00.184Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:49:00.185Z] [ERROR] [job] notifications.purge en échec : échec de test
+[2026-11-25T16:49:00.186Z] [INFO] [job] listings.expire terminé en 0 ms { expired: 0, at: '2026-11-25T16:49:00.186Z' }
+[2026-11-25T16:49:00.186Z] [INFO] [job] orders.expirePending terminé en 0 ms {
+  cancelled: 0,
+  stockReleased: false,
+  cutoff: '2026-11-18T16:49:00.186Z'
+}
+[2026-11-25T16:49:00.186Z] [INFO] [job] dataroom.expireAccess terminé en 0 ms { expired: 0, at: '2026-11-25T16:49:00.186Z' }
+[2026-11-25T16:49:00.186Z] [INFO] [job] apikeys.expire terminé en 0 ms { revoked: 0, at: '2026-11-25T16:49:00.186Z' }
+✔ MKT-06 : le job d’expiration ne touche que les annonces réellement échues (18.9815ms)
+✔ ORD-02 : une commande PENDING trop ancienne est annulée avec un motif tracé (1.0161ms)
+✔ DR-02 : les accès data room échus sont révoqués et journalisés (0.6032ms)
+✔ API-02 : les clés d’API expirées ne restent jamais ACTIVE (0.4763ms)
+✔ DISP-02 : le SLA notifie les modérateurs une seule fois par jour et par litige (1.3402ms)
+✔ NOTIF-02 : seules les notifications lues et anciennes sont purgées (1.3363ms)
+﹣ IOT-03 : un capteur silencieux est signalé à son organisation (0.1732ms) # Hors périmètre V1 : module IoT non déployé (iot.markSilent est inactif)
+✔ Supervision : chaque tâche est listée avec sa cadence et son dernier résultat (0.7813ms)
+✔ Supervision : le déclenchement manuel est audité, un nom inconnu renvoie null (0.7572ms)
+✔ Verrou scheduler : PostgreSQL acquiert un verrou de transaction (libéré au COMMIT) en cas de succès (0.6532ms)
+✔ Verrou scheduler : échec du job → la transaction est annulée (verrou libéré au ROLLBACK) (0.9081ms)
+✔ Verrou scheduler : un verrou détenu par un autre processus saute le job (0.3245ms)
+﹣ Planificateur : démarrage et arrêt sans laisser de minuteur actif (0.0489ms) # JOBS_ENABLED=false dans cet environnement : relancer avec JOBS_ENABLED=true
+[2026-11-25T16:49:01.189Z] [INFO] [job] calls.expireRinging terminé en 1003 ms { examined: 0, processed: 0 }
+[2026-11-25T16:49:01.189Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 0, alerted: 0, slaDays: 5 }
+[2026-11-25T16:49:01.451Z] [INFO] [job] idempotency.purge terminé en 262 ms { deleted: 0 }
+[2026-11-25T16:49:01.451Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T16:49:01.451Z] [INFO] [job] iot.markSilent terminé en 0 ms { thresholdHours: 24, silent: 0, alerts: 0 }
+[2026-11-25T16:49:01.451Z] [INFO] [job] recommendations.monitor terminé en 0 ms {
+  recommendationsScanned: 0,
+  parametersChecked: 0,
+  alerts: 0,
+  replacements: 0,
+  silentSensors: { thresholdHours: 24, silent: 0, alerts: 0 },
+  renotifyHours: 24,
+  errors: []
+}
+[2026-11-25T16:49:01.452Z] [INFO] [job] satellite.acquire terminé en 1 ms { enabled: false, reason: 'V1' }
+[2026-11-25T16:49:01.452Z] [INFO] [job] sensors.detectAnomalies terminé en 0 ms { enabled: false, reason: 'V1' }
+[2026-11-25T16:49:01.452Z] [INFO] [job] alerts.escalate terminé en 0 ms { escaladees: 0, examinees: 0, details: [] }
+✔ Robustesse : un job en échec n’interrompt pas les autres (1266.2503ms)
+[2026-11-25T16:49:01.612Z] [ERROR] [req-pool] POST /test — {
+  name: 'PrismaClientKnownRequestError',
+  message: 'Timed out fetching a new connection from the connection pool. (Current connection pool timeout: 10, connection limit: 5)',
+  code: 'P2024',
+  stack: 'PrismaClientKnownRequestError: Timed out fetching a new connection from the connection pool. (Current connection pool timeout: 10, connection limit: 5)\n' +
+    '    at erreurPrisma (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:33:3)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:36:22)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.start (node:internal/test_runner/test:1262:17)\n' +
+    '    at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)'
+}
+[2026-11-25T16:49:01.616Z] [ERROR] [req-pool] POST /test — {
+  name: 'PrismaClientKnownRequestError',
+  message: 'Transaction API error: Unable to start a transaction in the given time.',
+  code: 'P2028',
+  stack: 'PrismaClientKnownRequestError: Transaction API error: Unable to start a transaction in the given time.\n' +
+    '    at erreurPrisma (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:33:3)\n' +
+    '    at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/poolSaturationV1.test.mjs:46:22)\n' +
+    '    at Test.runInAsyncScope (node:async_hooks:226:14)\n' +
+    '    at Test.run (node:internal/test_runner/test:1402:25)\n' +
+    '    at Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n' +
+    '    at Test.postRun (node:internal/test_runner/test:1542:19)\n' +
+    '    at Test.run (node:internal/test_runner/test:1467:12)\n' +
+    '    at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)'
+}
+[2026-11-25T16:49:01.616Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2028)
+[2026-11-25T16:49:01.617Z] [WARN] [req-pool] POST /test — 409 Cette valeur existe déjà (valeur unique)
+[2026-11-25T16:49:01.617Z] [WARN] [req-pool] POST /test — 404 Ressource introuvable
+[2026-11-25T16:49:01.617Z] [WARN] [req-pool] POST /test — 422 Erreur base de données (P2034)
+✔ POOL-1a — P2024 (délai de connexion au pool) → 503 DB_POOL_EXHAUSTED + Retry-After (3.6589ms)
+✔ POOL-1b — P2028 « Unable to start a transaction » (maxWait dépassé) → 503 (0.4049ms)
+✔ POOL-1c — autres P2028 (transaction expirée) : traitement inchangé (422), pas de Retry-After (0.2496ms)
+✔ POOL-1d — non-régression : P2002 → 409, P2025 → 404, code inconnu → 422 (0.3183ms)
+✔ codes Twilio : les 10 codes exigés sont tous gérés (0.7139ms)
+✔ codes Twilio : chaque code exigé a un résumé qui nomme le problème (1.2059ms)
+✔ codes Twilio : chaque code donne une cause ET une action (0.1604ms)
+✔ codes Twilio : 20003 nomme les deux variables à vérifier (0.0908ms)
+✔ codes Twilio : 63016 nomme la RDC et le réglage à changer (0.0876ms)
+✔ codes Twilio : 21608 explique la limite du compte d’essai (0.1221ms)
+✔ codes Twilio : 21614 dit de ne pas réessayer (0.0981ms)
+✔ codes Twilio : seuls 30003 et 30005 sont rejouables (0.133ms)
+✔ codes Twilio : un code inconnu reste nommé, pas muet (0.1768ms)
+✔ codes Twilio : un code inconnu mais connu de nom reprend le motif du fournisseur (0.2925ms)
+✔ codes Twilio : aucun message ne contient de Markdown (0.3198ms)
+✔ codes Twilio : le message tient sur une seule ligne (0.2355ms)
+✔ codes Twilio : le message commence toujours par le code (0.1729ms)
+✔ codes Twilio : un code absent ou vide ne lève pas (0.1042ms)
+ℹ tests 69
+ℹ suites 0
+ℹ pass 63
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 91516.1263
+
+✖ failing tests:
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:288:1
+✖ Job d’alertes : un franchissement envoie un SMS à Twilio, au destinataire qui a consenti (10360.621ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"556f9052-5219-4bee-9320-304d0d03ce0e"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:326:1
+✖ Job d’alertes : le journal de lot compte l’envoyé et le retenu, par raison (0.4631ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"556f9052-5219-4bee-9320-304d0d03ce0e"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:347:1
+✖ Job d’alertes : le consentement SMS ne coupe ni l’email ni l’in-app (0.1043ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"556f9052-5219-4bee-9320-304d0d03ce0e"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\alertSmsJob.e2e.test.mjs:360:1
+✖ Job d’alertes : le retrait du consentement coupe les envois suivants (0.039ms)
+  AssertionError [ERR_ASSERTION]: plage ph : {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/agronomic-ranges","requestId":"556f9052-5219-4bee-9320-304d0d03ce0e"}
+  
+  404 !== 201
+  
+      at before.timeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/alertSmsJob.e2e.test.mjs:224:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -278,29 +278,35 @@ test('Supervision : le déclenchement manuel est audité, un nom inconnu renvoie
   }
 });
 
-test('Verrou scheduler : PostgreSQL acquiert puis libère le verrou en cas de succès', async () => {
+/*
+ * JOBS-1 — contrat du verrou : verrou de TRANSACTION (`pg_try_advisory_xact_lock`),
+ * libéré par PostgreSQL au COMMIT/ROLLBACK. Aucun `pg_advisory_unlock` explicite :
+ * c'est lui qui, en échouant sur une transaction expirée, laissait fuir l'ancien
+ * verrou de session. La libération réelle est prouvée sur PostgreSQL
+ * (tests/e2e/jobsVerrousV1.e2e.test.mjs).
+ */
+test('Verrou scheduler : PostgreSQL acquiert un verrou de transaction (libéré au COMMIT) en cas de succès', async () => {
   const { fake, restore } = await withFakePrisma(prisma, baseStore());
   const calls = [];
   fake.$queryRaw = async (query, ...values) => {
     const sql = Array.isArray(query) ? query.join('?') : String(query);
     calls.push({ sql, values });
-    if (sql.includes('pg_try_advisory_lock')) return [{ locked: true }];
-    if (sql.includes('pg_advisory_unlock')) return [{ unlocked: true }];
+    if (sql.includes('pg_try_advisory_xact_lock')) return [{ locked: true }];
     return [];
   };
   try {
     const outcome = await runJob('notifications.purge');
     assert.equal(outcome.ok, true);
-    assert.equal(calls.length, 2);
-    assert.match(calls[0].sql, /pg_try_advisory_lock\(hashtext\(\?\)\)/);
-    assert.match(calls[1].sql, /pg_advisory_unlock\(hashtext\(\?\)\)/);
-    assert.deepEqual(calls.map((call) => call.values), [['notifications.purge'], ['notifications.purge']]);
+    assert.equal(calls.length, 1);
+    assert.match(calls[0].sql, /pg_try_advisory_xact_lock\(hashtext\(\?\)\)/);
+    assert.equal(calls.some((call) => /pg_advisory_unlock/.test(call.sql)), false, 'aucun déverrouillage de session');
+    assert.deepEqual(calls.map((call) => call.values), [['notifications.purge']]);
   } finally {
     restore();
   }
 });
 
-test('Verrou scheduler : libération garantie si le job échoue', async () => {
+test('Verrou scheduler : échec du job → la transaction est annulée (verrou libéré au ROLLBACK)', async () => {
   const { fake, restore } = await withFakePrisma(prisma, baseStore());
   const name = 'notifications.purge';
   const originalRun = JOBS[name].run;
@@ -309,16 +315,21 @@ test('Verrou scheduler : libération garantie si le job échoue', async () => {
   fake.$queryRaw = async (query, ...values) => {
     const sql = Array.isArray(query) ? query.join('?') : String(query);
     calls.push({ sql, values });
-    if (sql.includes('pg_try_advisory_lock')) return [{ locked: true }];
-    if (sql.includes('pg_advisory_unlock')) return [{ unlocked: true }];
+    if (sql.includes('pg_try_advisory_xact_lock')) return [{ locked: true }];
     return [];
+  };
+  let transactionEnEchec = false;
+  const transactionOriginale = prisma.$transaction;
+  prisma.$transaction = async (arg, o) => {
+    try { return await transactionOriginale(arg, o); } catch (e) { transactionEnEchec = true; throw e; }
   };
   try {
     await assert.rejects(() => runJob(name), /échec de test/);
-    assert.equal(calls.length, 2, 'le déverrouillage est appelé après l’échec');
-    assert.match(calls[1].sql, /pg_advisory_unlock/);
+    assert.equal(calls.length, 1, 'un seul appel : le verrou est pris dans la transaction');
+    assert.equal(transactionEnEchec, true, 'l’erreur sort de la transaction : ROLLBACK, verrou libéré par PostgreSQL');
   } finally {
     JOBS[name].run = originalRun;
+    prisma.$transaction = transactionOriginale;
     restore();
   }
 });
