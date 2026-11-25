@@ -71,5 +71,14 @@
     "@types/react": "~19.3.0",
     "typescript": "~6.0.3"
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "autolinking": {
+      "android": {
+        "buildFromSource": [
+          "expo-sqlite"
+        ]
+      }
+    }
+  }
 }

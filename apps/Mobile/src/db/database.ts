@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import * as SQLite from 'expo-sqlite';
+import type * as SQLiteTypes from 'expo-sqlite';
 import { CREATE_TABLES_SQL, DB_NAME } from './schema';
 import type { LocalMessage, LocalRoom, MediaUploadQueueItem, MessageContentType, MessageSyncStatus, OutboxQueueItem } from './models';
 import { appliquerMessageServeur, cleLocaleExistante, type ExecuteurSql } from './deltaPlan';
@@ -14,8 +14,26 @@ export function generateUuidV4(): string {
 
 type DbListener = () => void;
 
+declare const require: (id: string) => any;
+
+/**
+ * expo-sqlite chargé À LA DEMANDE : un `import` en tête évaluait le module natif
+ * au chargement de l'écran, et un binaire où `ExpoSQLite` n'est pas enregistré
+ * faisait planter toute l'application (« Cannot find native module
+ * 'ExpoSQLite' »). Sans SQLite, la base passe en mémoire (aucune persistance
+ * entre deux lancements) au lieu de bloquer l'application.
+ */
+function chargerSqlite(): typeof SQLiteTypes | null {
+  try {
+    return require('expo-sqlite') as typeof SQLiteTypes;
+  } catch (erreur) {
+    console.warn('[db] SQLite indisponible, base locale en mémoire :', erreur instanceof Error ? erreur.message : erreur);
+    return null;
+  }
+}
+
 class LocalCommsDatabase {
-  private sqliteDb: SQLite.SQLiteDatabase | null = null;
+  private sqliteDb: SQLiteTypes.SQLiteDatabase | null = null;
   private initPromise: Promise<void> | null = null;
   private listeners = new Set<DbListener>();
 
@@ -44,7 +62,15 @@ class LocalCommsDatabase {
         this.hydrateWebStorage();
         return;
       }
-      this.sqliteDb = await SQLite.openDatabaseAsync(DB_NAME);
+      const SQLite = chargerSqlite();
+      if (!SQLite) return; // repli mémoire : les chemins `!this.sqliteDb` prennent le relais
+      try {
+        this.sqliteDb = await SQLite.openDatabaseAsync(DB_NAME);
+      } catch (erreur) {
+        console.warn('[db] ouverture SQLite impossible, base locale en mémoire :', erreur instanceof Error ? erreur.message : erreur);
+        this.sqliteDb = null;
+        return;
+      }
       await this.sqliteDb.execAsync('PRAGMA journal_mode = WAL;');
       for (const sql of CREATE_TABLES_SQL) {
         await this.sqliteDb.execAsync(sql);
