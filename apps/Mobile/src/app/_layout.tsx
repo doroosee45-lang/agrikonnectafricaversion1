@@ -17,6 +17,7 @@ import { realtime } from '@/services/realtime';
 import { offlineSyncEngine } from '@/services/OfflineSyncEngine';
 import { useAuthStore } from '@/store/auth';
 import { useLocaleSync } from '@/hooks/useLocaleSync';
+import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { CallOverlay } from '@/features/calls/CallOverlay';
 import { RolePersistentNav } from '@/components/app/RolePersistentNav';
 
@@ -74,6 +75,7 @@ export default function RootLayout() {
         <QueryClientProvider client={queryClient}>
           <StatusBar style="dark" />
           <SessionGate />
+          <PushNotificationsGate />
           <Stack
             screenOptions={{
               headerShown: false,
@@ -144,6 +146,12 @@ function SessionGate() {
     }
   }, [segments, status, router]);
 
+  return null;
+}
+
+/** Notifications push FCM : monté dans l'arbre du routeur (navigation au clic). */
+function PushNotificationsGate() {
+  usePushNotifications();
   return null;
 }
 

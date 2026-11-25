@@ -25,7 +25,7 @@ interface AppareilServeur {
   installationId: string;
 }
 
-async function identifiantInstallation(): Promise<string> {
+export async function identifiantInstallation(): Promise<string> {
   const existant = await secureStorage.get(CLE_INSTALLATION);
   if (existant) return existant;
   const nouveau = `ak-${ulid()}`;

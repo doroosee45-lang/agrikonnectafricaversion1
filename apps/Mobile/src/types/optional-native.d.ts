@@ -13,7 +13,7 @@ declare module 'react-native-callkeep' {
 }
 declare module '@react-native-firebase/messaging' {
   const firebaseMessaging: any;
-  export const { getMessaging, setBackgroundMessageHandler, onMessage, getToken, requestPermission, AuthorizationStatus, getAPNSToken, deleteToken } = firebaseMessaging;
+  export const { getMessaging, setBackgroundMessageHandler, onMessage, getToken, requestPermission, AuthorizationStatus, getAPNSToken, deleteToken, onTokenRefresh, onNotificationOpenedApp, getInitialNotification } = firebaseMessaging;
   export default firebaseMessaging;
 }
 declare module 'react-native-voip-push-notification' {

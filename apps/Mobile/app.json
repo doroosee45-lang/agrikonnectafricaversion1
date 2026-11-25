@@ -11,7 +11,7 @@
     "primaryColor": "#174D35",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "africa.agrikonnect.mobile",
+      "bundleIdentifier": "com.agrikonnect.africa",
       "infoPlist": {
         "NSCameraUsageDescription": "AgriKonnect utilise la caméra pour photographier vos parcelles et vos lots (traçabilité).",
         "NSPhotoLibraryUsageDescription": "AgriKonnect accède à vos photos pour joindre des preuves aux lots et aux diagnostics.",
@@ -19,7 +19,7 @@
       }
     },
     "android": {
-      "package": "africa.agrikonnect.mobile",
+      "package": "com.agrikonnect.africa",
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "backgroundColor": "#174D35",
