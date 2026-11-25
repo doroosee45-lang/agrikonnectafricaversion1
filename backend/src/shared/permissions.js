@@ -140,7 +140,13 @@ export const PERMISSIONS = {
   'media.upload': PRODUCER,
   'media.delete': PRODUCER,
   'verifications.create': PRODUCER,
-  'verifications.read': [...PRODUCER, ...ADMIN_ROLES],
+  /**
+   * Lecture de SON statut de vérification (`GET /verifications/me`, filtré sur
+   * l'organisation active par le service). Réservée auparavant aux producteurs :
+   * un acheteur, fournisseur, transporteur ou investisseur recevait un 403 en
+   * ouvrant son propre profil. La file de revue reste `verifications.review`.
+   */
+  'verifications.read': EVERYONE,
   'verifications.review': ADMIN_ROLES,
   'reports.create': [...PRODUCER, 'BUYER', 'VISITOR'],
   'reports.review': MODERATION,
@@ -242,9 +248,6 @@ export const PERMISSIONS = {
   'apiclients.read': [...ADMIN_ROLES, 'COUNTRY_ADMIN'],
   'apiclients.manage': ADMIN_ROLES,
   'insights.read': [...COUNTRY_SCOPE, ...ADMIN_ROLES],
-  'dataproducts.manage': [...ADMIN_ROLES, 'DATA_STEWARD'],
-  'data.read': EVERYONE,
-
   'dataproducts.manage': [...ADMIN_ROLES, 'DATA_STEWARD'],
   'data.read': EVERYONE,
 

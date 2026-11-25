@@ -18,6 +18,15 @@ import { publicUser } from '../auth/auth.service.js';
  */
 const ROLES_PRODUCTION = ['FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY'];
 
+/**
+ * Rôles auxquels le profil professionnel est réclamé (COMPLETE-05 / COMPLETE-07).
+ * Le critère était ajouté à TOUS les comptes : un producteur, un acheteur ou un
+ * transporteur se voyait réclamer un profil qui ne le concerne pas, et
+ * n'atteignait jamais 100 %. Seul l'agronome est établi par les recettes ;
+ * l'extension à d'autres rôles (LAB_PARTNER…) reste à confirmer.
+ */
+const ROLES_PROFIL_PROFESSIONNEL = ['AGRONOMIST'];
+
 const completenessCriteria = ({ profile, farms, plots, productions, roles = [] }) => {
   const criteres = [
   { key: 'identity', label: 'Nom et prénom renseignés', done: Boolean(profile.firstName && profile.lastName) },
@@ -38,9 +47,11 @@ const completenessCriteria = ({ profile, farms, plots, productions, roles = [] }
   { key: 'production', label: 'Au moins une production déclarée', done: productions > 0 },
   ];
   const horsProduction = new Set(['farm', 'plot', 'production']);
-  return roles.some((r) => ROLES_PRODUCTION.includes(r))
-    ? criteres
-    : criteres.filter((c) => !horsProduction.has(c.key));
+  const production = roles.some((r) => ROLES_PRODUCTION.includes(r));
+  const professionnel = roles.some((r) => ROLES_PROFIL_PROFESSIONNEL.includes(r));
+  return criteres.filter(
+    (c) => (production || !horsProduction.has(c.key)) && (professionnel || c.key !== 'professional'),
+  );
 };
 
 export const getMe = async (req) => {
@@ -271,15 +282,18 @@ export const changePassword = async ({ currentPassword, newPassword, mfaCode }, 
 
 /** AUTH-05 / RGPD — suppression logique du compte (anonymisation à traiter en V2). */
 export const deleteMe = async (req) => {
-  await prisma.profile.update({
-    where: { id: req.user.id },
-    data: { status: 'DELETED', deletedAt: new Date(), email: `deleted+${req.user.id}@agrikonnect.local` },
-  });
-
-  await prisma.membership.updateMany({
-    where: { userId: req.user.id },
-    data: { status: 'REMOVED' },
-  });
+  // Profil et adhésions dans une seule transaction : jamais de compte supprimé
+  // qui garderait des adhésions actives (NFR-03).
+  await prisma.$transaction([
+    prisma.profile.update({
+      where: { id: req.user.id },
+      data: { status: 'DELETED', deletedAt: new Date(), email: `deleted+${req.user.id}@agrikonnect.local` },
+    }),
+    prisma.membership.updateMany({
+      where: { userId: req.user.id },
+      data: { status: 'REMOVED' },
+    }),
+  ]);
 
   await audit({
     actorId: req.user.id,

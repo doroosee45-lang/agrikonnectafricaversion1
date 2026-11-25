@@ -20,8 +20,31 @@ import { sendEmail, templates } from '../../integrations/email.js';
  * - Aucun « score global » : on expose des critères cochés
  */
 
+/**
+ * VER-01 — sujet par défaut et sujets autorisés.
+ *
+ * Un dossier ne peut porter que sur SOI (`PROFILE`), sur l'organisation ACTIVE
+ * (`ORGANIZATION` / `COOPERATIVE`) ou sur une exploitation de celle-ci (`FARM`,
+ * contrôlé plus bas). Auparavant, seul `FARM` était contrôlé : n'importe qui
+ * pouvait déposer un dossier au nom d'un autre profil ou d'une autre
+ * organisation, et — la recherche « demande en attente » ne filtrant pas par
+ * organisation — bloquer la vraie personne avec un 409.
+ */
+export const sujetAutorise = (subjectType, subjectId, req) => {
+  if (subjectType === 'PROFILE') return (subjectId ?? req.user.id) === req.user.id ? req.user.id : null;
+  if (subjectType === 'ORGANIZATION' || subjectType === 'COOPERATIVE') {
+    const active = req.tenant.organizationId;
+    return (subjectId ?? active) === active ? active : null;
+  }
+  return subjectId ?? null;
+};
+
 export const submit = async (payload, req) => {
-  const subjectId = payload.subjectId ?? req.user.id;
+  const subjectId = sujetAutorise(payload.subjectType, payload.subjectId, req);
+  if (!subjectId) {
+    // 404 et non 403 : on ne confirme pas l'existence d'un profil ou d'une organisation tiers.
+    throw ApiError.notFound('Sujet de vérification introuvable');
+  }
 
   if (payload.subjectType === 'FARM') {
     const farm = await prisma.farm.findUnique({ where: { id: subjectId } });

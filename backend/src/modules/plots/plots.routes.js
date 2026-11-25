@@ -4,6 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
 import { resolveTenant } from '../../middleware/tenant.js';
 import { authorize } from '../../middleware/authorize.js';
 import { validate } from '../../middleware/validate.js';
+import { idempotency } from '../../middleware/idempotency.js';
 import * as controller from './plots.controller.js';
 import * as schema from './plots.schema.js';
 
@@ -12,7 +13,13 @@ const router = Router();
 router.use(authenticate, resolveTenant);
 
 router.get('/', authorize('plots.read'), validate(schema.listPlotsSchema, 'query'), asyncHandler(controller.list));
-router.post('/', authorize('plots.write'), validate(schema.createPlotSchema), asyncHandler(controller.create));
+router.post(
+  '/',
+  authorize('plots.write'),
+  validate(schema.createPlotSchema),
+  idempotency('plots.create', { facultatif: true }),
+  asyncHandler(controller.create),
+);
 
 router.get('/:id', authorize('plots.read'), validate(schema.plotIdParam, 'params'), asyncHandler(controller.getOne));
 router.patch(
@@ -41,6 +48,7 @@ router.post(
   authorize('history.write'),
   validate(schema.plotIdParam, 'params'),
   validate(schema.cropHistorySchema),
+  idempotency('plots.history.create', { facultatif: true }),
   asyncHandler(controller.addHistory),
 );
 router.patch(

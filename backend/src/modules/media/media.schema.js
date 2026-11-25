@@ -25,7 +25,14 @@ export const uploadUrlSchema = z.object({
   filename: z.string().trim().min(1).max(200),
   mimeType: z.string().refine((m) => Boolean(ALLOWED_MIME[m]), 'Type de fichier non autorisé'),
   sizeBytes: z.coerce.number().int().positive().max(MAX_SIZE_BYTES, 'Fichier trop volumineux (5 Mo max)'),
-  kind: z.enum(['PHOTO', 'VIDEO', 'DOCUMENT', 'AUDIO']).default('PHOTO'),
+  /**
+   * `IMAGE` est accepté comme synonyme de `PHOTO` : c'est la valeur qu'envoient
+   * la messagerie web et le moteur hors ligne mobile. Sans cet alias, toute
+   * image jointe à un message était refusée en 422.
+   */
+  kind: z
+    .preprocess((v) => (v === 'IMAGE' ? 'PHOTO' : v), z.enum(['PHOTO', 'VIDEO', 'DOCUMENT', 'AUDIO']))
+    .default('PHOTO'),
   farmId: z.string().min(10).max(60).optional(),
   plotId: z.string().min(10).max(60).optional(),
   /** V2 — photo rattachée à une annonce marketplace */

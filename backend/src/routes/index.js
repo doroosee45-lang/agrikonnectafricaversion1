@@ -22,8 +22,24 @@ import messagingRoutes from "../modules/messaging/messaging.routes.js";
 import callsRoutes from "../modules/calls/calls.routes.js";
 import livekitWebhookRoutes from "../modules/calls/calls.webhook.js";
 import pushDevicesRoutes from "../modules/push/push.routes.js";
+import { requireVerifiedForWrites } from "../middleware/auth.js";
 
 const router = Router();
+
+/**
+ * H-07 — écritures de communication réservées aux comptes vérifiés (e-mail ou
+ * téléphone). Lectures inchangées. Cette garde existait avant l'isolation V1
+ * (commit e10e28c) et avait disparu lors de la découpe : elle est rétablie sur
+ * les deux modules V1 concernés.
+ *
+ * `POST /messaging/sync` est une LECTURE (delta de messages pour le mode hors
+ * ligne) malgré son verbe : elle reste ouverte comme les GET, sinon un compte
+ * ajouté à un groupe ne pourrait pas lire ses messages depuis le mobile.
+ */
+export const estLectureEnPost = (baseUrl = "", path = "") =>
+  baseUrl.endsWith("/messaging") && path.replace(/\/$/, "") === "/sync";
+const gardeCommunication = (req, res, next) =>
+  estLectureEnPost(req.baseUrl, req.path) ? next() : requireVerifiedForWrites(req, res, next);
 
 router.get("/health", (_req, res) => {
   res.json({
@@ -47,6 +63,7 @@ router.use("/auth", authRoutes);
 router.use("/me/push-devices", pushDevicesRoutes);
 router.use("/me", usersRoutes);
 router.use("/notifications", notificationsRoutes);
+router.use(["/messaging", "/calls"], gardeCommunication);
 router.use("/messaging", messagingRoutes);
 router.use("/calls", callsRoutes);
 router.use("/webhooks/livekit", livekitWebhookRoutes);

@@ -17,6 +17,24 @@ import { audit } from '../../shared/audit.js';
  * confirme via `POST /media/:id/confirm`. Cela évite de saturer le serveur
  * sur les connexions instables de la RDC (CDC §5.4).
  */
+/**
+ * Valeur stockée dans `media.kind` (énumération PostgreSQL `MediaKind` :
+ * `PHOTO` | `VIDEO` uniquement). `AUDIO` et `DOCUMENT` y étaient écrits tels
+ * quels pour l'audio — rejet Prisma, note vocale impossible — ou convertis en
+ * `PHOTO` pour les documents. La nature réelle du fichier reste portée par
+ * `mimeType`, contrôlé à l'entrée ; aucune migration de schéma n'est requise.
+ */
+export const kindEnBase = (kind) => (kind === 'VIDEO' ? 'VIDEO' : 'PHOTO');
+
+/**
+ * Bucket d'un média, déduit de SA clé (`<org>/documents/…` ou `<org>/media/…`).
+ * Le dépôt choisissait le bucket selon `kind`, la confirmation selon le type
+ * MIME : un PDF déposé comme PHOTO, ou une image déposée comme DOCUMENT,
+ * recevait une URL signée sur le mauvais bucket (lien cassé).
+ */
+export const bucketDuMedia = (storageKey) =>
+  String(storageKey ?? '').split('/')[1] === 'documents' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
+
 export const createUploadUrl = async (payload, req) => {
   const { filename, mimeType, sizeBytes, kind, farmId, plotId, listingId, caption } = payload;
 
@@ -53,7 +71,7 @@ export const createUploadUrl = async (payload, req) => {
       farmId: farmId ?? null,
       plotId: plotId ?? null,
       listingId: listingId ?? null,
-      kind: isDocument ? 'PHOTO' : kind,
+      kind: kindEnBase(kind),
       storageKey: key,
       mimeType,
       sizeBytes,
@@ -68,6 +86,7 @@ export const createUploadUrl = async (payload, req) => {
     // que d'échouer silencieusement.
     return {
       mediaId: media.id,
+      media: { id: media.id, storageKey: key },
       bucket,
       storageKey: key,
       uploadUrl: null,
@@ -83,6 +102,13 @@ export const createUploadUrl = async (payload, req) => {
 
   return {
     mediaId: media.id,
+    /*
+     * Forme attendue par la messagerie web et le moteur hors ligne mobile
+     * (`presign.data.media.id`). Ajout au contrat : `mediaId` reste présent.
+     * Pas de `publicUrl` ici : la clé de stockage est l'identité durable du
+     * fichier, l'URL signée expire (`SIGNED_URL_TTL_SECONDS`).
+     */
+    media: { id: media.id, storageKey: key },
     bucket,
     storageKey: key,
     uploadUrl: signed.data.signedUrl,
@@ -101,7 +127,7 @@ export const confirm = async (id, req) => {
 
   let url = null;
   if (supabaseAdmin) {
-    const bucket = media.mimeType === 'application/pdf' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
+    const bucket = bucketDuMedia(media.storageKey);
     // SEC-07 / V4:NFR-02 — URL signée de courte durée : la TTL vient de la
     // configuration (`SIGNED_URL_TTL_SECONDS`, 300 s par défaut), jamais en dur.
     const signed = await supabaseAdmin.storage.from(bucket).createSignedUrl(

@@ -18,8 +18,19 @@ import { logger } from '../shared/http/logger.js';
 /** M-01 — fonction pure (testée) : clé stockée, cloisonnée par utilisateur. */
 export const cleIdempotence = (userId, cleClient) => `${userId ?? 'anonyme'}:${String(cleClient)}`;
 
-export const idempotency = (scope) => async (req, res, next) => {
+/**
+ * @param {string} scope
+ * @param {{ facultatif?: boolean }} [options]
+ *   `facultatif: true` — sans en-tête, la requête passe inchangée ; avec
+ *   en-tête, la règle s'applique entièrement. Utilisé pour les créations V1
+ *   (exploitations, parcelles, productions) : le mobile envoie la clé pour ne
+ *   pas dupliquer une création renvoyée après une coupure réseau, le Web ne
+ *   l'envoie pas et ne doit pas recevoir de 400.
+ */
+export const idempotency = (scope, { facultatif = false } = {}) => async (req, res, next) => {
   const key = req.headers['idempotency-key'];
+
+  if (facultatif && (key === undefined || key === '')) return next();
 
   if (!key || String(key).length < 8) {
     return next(

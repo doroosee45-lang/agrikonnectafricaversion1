@@ -2,7 +2,6 @@ import { prisma } from '../../config/prisma.js';
 import { ApiError } from '../../shared/errors/ApiError.js';
 import { resolveId } from '../../shared/ids.js';
 import { uniqueSlug } from '../../shared/slug.js';
-import { assertOwnership } from '../../middleware/tenant.js';
 import { audit } from '../../shared/audit.js';
 
 const shape = (organization, roles = []) => ({
@@ -104,7 +103,17 @@ export const create = async (payload, req) => {
 
 export const update = async (id, payload, req) => {
   const organization = await prisma.organization.findFirst({ where: { id, deletedAt: null } });
-  assertOwnership(organization, req.tenant.organizationId, 'Organisation');
+  /*
+   * Seule l'organisation ACTIVE est modifiable (les rôles vérifiés par
+   * `authorize('organizations.write')` sont ceux de ce tenant).
+   *
+   * `assertOwnership` compare `resource.organizationId` : une organisation n'a
+   * pas ce champ (son identifiant est `id`), la comparaison échouait toujours
+   * et la route répondait 404 à tout le monde, responsable compris.
+   */
+  if (!organization || organization.id !== req.tenant.organizationId) {
+    throw ApiError.notFound('Organisation introuvable');
+  }
 
   const { legalStatus, foundedYear, province, territory, ...orgFields } = payload;
 

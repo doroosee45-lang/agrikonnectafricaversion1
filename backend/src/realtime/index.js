@@ -5,6 +5,7 @@ import { postMessage } from '../modules/messaging/messaging.service.js';
 import { env } from '../config/env.js';
 import { isOriginAllowed } from '../config/cors.js';
 import { logger } from '../shared/http/logger.js';
+import { contexteEnvoi, sendMessageSchema } from './sendGuard.js';
 import {
   setIo,
   roomForOrganization,
@@ -30,6 +31,34 @@ import {
 /** Durée de validité d'un indicateur de saisie (côté client). */
 export const TYPING_TTL_MS = 5000;
 
+/**
+ * Profil ACTIF et adhésions ACTIVES — même requête que `authenticate` (REST).
+ *
+ * Relue à chaque action sensible (`send_message`, `conversation:join`) et pas
+ * seulement à la connexion : sinon un compte suspendu, une adhésion retirée ou
+ * un rôle révoqué continuait d'agir par WebSocket jusqu'à la reconnexion,
+ * alors que le REST le refusait déjà.
+ */
+export const chargerProfilActif = async (userId) => {
+  if (!userId) return null;
+  const profile = await prisma.profile.findUnique({
+    where: { id: userId },
+    include: {
+      memberships: {
+        where: { status: 'ACTIVE', organization: { deletedAt: null } },
+        include: { organization: { select: { id: true, type: true, name: true, slug: true, countryCode: true } } },
+      },
+    },
+  });
+  if (!profile || profile.status !== 'ACTIVE') return null;
+  return profile;
+};
+
+const adhesionsDe = (profile) =>
+  profile.memberships.map((m) => ({ organizationId: m.organizationId, roles: m.roles ?? [], organization: m.organization }));
+
+const estVerifie = (profile) => Boolean(profile.emailVerifiedAt || profile.phoneVerifiedAt);
+
 /** Charge l'utilisateur applicatif à partir du jeton Supabase. */
 const authenticateSocket = async (token) => {
   if (!token) return null;
@@ -37,18 +66,34 @@ const authenticateSocket = async (token) => {
   const { data, error } = await supabase.auth.getUser(token);
   if (error || !data?.user) return null;
 
-  const profile = await prisma.profile.findUnique({
-    where: { id: data.user.id },
-    include: {
-      memberships: {
-        where: { status: 'ACTIVE', organization: { deletedAt: null } },
-        include: { organization: { select: { id: true, name: true } } },
-      },
-    },
-  });
+  return chargerProfilActif(data.user.id);
+};
 
-  if (!profile || profile.status !== 'ACTIVE') return null;
-  return profile;
+/**
+ * Enregistre un écouteur Socket.IO protégé.
+ *
+ * Socket.IO (4.8) appelle les écouteurs dans un `process.nextTick` SANS
+ * try/catch : une exception synchrone y devient une `uncaughtException`, que
+ * `server.js` traite par un arrêt du serveur. Il suffisait donc qu'un client
+ * authentifié émette `typing` avec `null` (la valeur par défaut `= {}` ne
+ * s'applique pas à `null`), ou `ping:app` avec un argument qui n'est pas une
+ * fonction, pour arrêter l'API de tous les utilisateurs.
+ *
+ * Ici : charge utile ramenée à un objet, accusé de réception ramené à une
+ * fonction, erreurs synchrones et asynchrones capturées et journalisées.
+ */
+export const ecouteurProtege = (evenement, handler) => (...args) => {
+  const dernier = args[args.length - 1];
+  const ack = typeof dernier === 'function' ? dernier : () => {};
+  const premier = args[0];
+  const payload = premier && typeof premier === 'object' && !Array.isArray(premier) ? premier : {};
+  const journaliser = (erreur) => logger.warn(`[realtime] ${evenement} en échec :`, erreur?.message ?? erreur);
+  try {
+    const resultat = handler(payload, ack);
+    if (resultat && typeof resultat.catch === 'function') resultat.catch(journaliser);
+  } catch (erreur) {
+    journaliser(erreur);
+  }
 };
 
 /** Conversations ouvertes de l'utilisateur (par organisation). */
@@ -87,6 +132,8 @@ export const attachRealtime = (httpServer) => {
       if (!profile) return next(new Error('UNAUTHORIZED'));
 
       socket.data.userId = profile.id;
+      // Instantané de connexion : sert UNIQUEMENT à choisir les rooms initiales.
+      // Les actions sensibles relisent le profil (`chargerProfilActif`).
       socket.data.organizationIds = profile.memberships.map((m) => m.organizationId);
       return next();
     } catch (error) {
@@ -101,24 +148,21 @@ export const attachRealtime = (httpServer) => {
     socket.join(roomForUser(userId));
     organizationIds.forEach((organizationId) => socket.join(roomForOrganization(organizationId)));
 
-    const conversationIds = await loadConversationRooms(organizationIds).catch(() => []);
-    conversationIds.forEach((id) => socket.join(roomForConversation(id)));
-    socket.data.conversationIds = new Set(conversationIds);
-
-    socket.emit('ready', {
-      userId,
-      organizations: organizationIds,
-      conversations: conversationIds.length,
-      at: new Date().toISOString(),
-    });
+    /*
+     * Les écouteurs sont enregistrés AVANT toute attente : un événement reçu
+     * pendant le chargement des rooms était perdu sans accusé (Socket.IO ne
+     * met pas en file les événements sans écouteur). C'est précisément le cas
+     * du moteur hors ligne mobile, qui vide sa file d'envoi dès la connexion.
+     */
+    socket.data.conversationIds = new Set();
 
     /**
      * Indicateur de saisie. On vérifie l'appartenance avant diffusion :
      * un socket ne peut pas « typer » dans une conversation qui n'est pas la sienne.
      */
-    socket.on('typing', (payload = {}) => {
+    socket.on('typing', ecouteurProtege('typing', (payload) => {
       const { conversationId, isTyping = true } = payload;
-      if (!conversationId || !socket.data.conversationIds.has(conversationId)) return;
+      if (typeof conversationId !== 'string' || !socket.data.conversationIds.has(conversationId)) return;
 
       socket.to(roomForConversation(conversationId)).emit('typing', {
         conversationId,
@@ -126,63 +170,113 @@ export const attachRealtime = (httpServer) => {
         isTyping: Boolean(isTyping),
         at: new Date().toISOString(),
       });
-    });
+    }));
+
+    /**
+     * Profil relu pour une action sensible. Compte suspendu ou supprimé
+     * depuis la connexion : refus et coupure du socket (le REST répond déjà 403).
+     */
+    const profilCourant = async (ack) => {
+      const profile = await chargerProfilActif(userId);
+      if (!profile) {
+        ack({ ok: false, error: 'UNAUTHORIZED' });
+        socket.disconnect(true);
+      }
+      return profile;
+    };
 
     /** Rejoindre un fil créé après la connexion (nouvelle commande, par ex.). */
-    socket.on('conversation:join', async ({ conversationId } = {}, ack) => {
-      if (!conversationId) return ack?.({ ok: false, error: 'MISSING_ID' });
+    socket.on('conversation:join', ecouteurProtege('conversation:join', async ({ conversationId }, ack) => {
+      if (typeof conversationId !== 'string' || !conversationId) return ack({ ok: false, error: 'MISSING_ID' });
+
+      const profile = await profilCourant(ack);
+      if (!profile) return undefined;
+      const organisationsActuelles = profile.memberships.map((m) => m.organizationId);
 
       const conversation = await prisma.conversation
         .findUnique({ where: { id: conversationId }, select: { participantOrgIds: true } })
         .catch(() => null);
 
       const allowed =
-        conversation && conversation.participantOrgIds.some((id) => organizationIds.includes(id));
+        conversation && conversation.participantOrgIds.some((id) => organisationsActuelles.includes(id));
 
-      if (!allowed) return ack?.({ ok: false, error: 'FORBIDDEN' });
+      if (!allowed) return ack({ ok: false, error: 'FORBIDDEN' });
 
       socket.join(roomForConversation(conversationId));
       socket.data.conversationIds.add(conversationId);
-      return ack?.({ ok: true });
-    });
+      return ack({ ok: true });
+    }));
 
-    socket.on('conversation:leave', ({ conversationId } = {}) => {
-      if (!conversationId) return;
+    socket.on('conversation:leave', ecouteurProtege('conversation:leave', ({ conversationId }) => {
+      if (typeof conversationId !== 'string' || !conversationId) return;
       socket.leave(roomForConversation(conversationId));
       socket.data.conversationIds.delete(conversationId);
-    });
+    }));
 
-    /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
-    
     /** Envoi temps réel idempotent via localTempId avec accusé de réception immédiat (Offline-First). */
-    socket.on('send_message', async (payload = {}, ack) => {
+    socket.on('send_message', ecouteurProtege('send_message', async (payload, ack) => {
       try {
-        const { roomId, content, attachments = [], localTempId } = payload;
-        if (!roomId || !content) return ack?.({ ok: false, error: 'INVALID_PAYLOAD' });
-        const orgId = organizationIds[0];
-        if (!orgId) return ack?.({ ok: false, error: 'NO_ACTIVE_ORG' });
+        const parsed = sendMessageSchema.safeParse(payload);
+        if (!parsed.success) return ack({ ok: false, error: 'INVALID_PAYLOAD' });
+        const { roomId, content, attachments, localTempId, organizationId: demandee } = parsed.data;
+
+        const profile = await profilCourant(ack);
+        if (!profile) return undefined;
+
+        const conversation = await prisma.conversation.findUnique({
+          where: { id: roomId },
+          select: { participantOrgIds: true },
+        });
+        const contexte = contexteEnvoi({
+          userId,
+          verified: estVerifie(profile),
+          memberships: adhesionsDe(profile),
+          participantOrgIds: conversation?.participantOrgIds ?? [],
+          organisationDemandee: demandee,
+        });
+        if (!contexte.ok) return ack({ ok: false, error: contexte.error });
 
         const created = await postMessage(
           roomId,
-          { body: String(content), attachments, localTempId },
-          { user: { id: userId }, tenant: { organizationId: orgId }, headers: {}, ip: 'socket' },
+          { body: content, attachments, localTempId },
+          contexte.req,
         );
         socket.join(roomForConversation(roomId));
         socket.data.conversationIds.add(roomId);
-        return ack?.({
+        return ack({
           ok: true,
           serverId: created.id,
           serverTimestamp: new Date(created.createdAt).getTime(),
         });
       } catch (err) {
-        return ack?.({ ok: false, error: err?.message ?? 'SEND_FAILED' });
+        // Seules les erreurs métier (ApiError) sont renvoyées telles quelles :
+        // un message Prisma ou système ne doit pas fuiter vers le client.
+        if (err?.name === 'ApiError' || Number.isInteger(err?.status)) {
+          return ack({ ok: false, error: err.code ?? 'SEND_FAILED', message: err.message });
+        }
+        logger.warn('[realtime] send_message en échec :', err?.message);
+        return ack({ ok: false, error: 'SEND_FAILED' });
       }
-    });
+    }));
 
-    socket.on('ping:app', (ack) => ack?.({ at: new Date().toISOString() }));
+    /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
+    socket.on('ping:app', ecouteurProtege('ping:app', (_payload, ack) => ack({ at: new Date().toISOString() })));
 
     socket.on('disconnect', (reason) => {
       logger.debug?.(`[realtime] déconnexion ${userId} (${reason})`);
+    });
+
+    const conversationIds = await loadConversationRooms(organizationIds).catch(() => []);
+    conversationIds.forEach((id) => {
+      socket.join(roomForConversation(id));
+      socket.data.conversationIds.add(id);
+    });
+
+    socket.emit('ready', {
+      userId,
+      organizations: organizationIds,
+      conversations: conversationIds.length,
+      at: new Date().toISOString(),
     });
   });
 

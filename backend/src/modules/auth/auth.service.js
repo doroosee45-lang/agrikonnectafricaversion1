@@ -686,7 +686,8 @@ export const syncProfile = async (req) => {
         phone: authUser.phone ?? null,
         firstName: metadata.firstName ?? null,
         lastName: metadata.lastName ?? null,
-        locale: metadata.locale ?? 'fr',
+        // Métadonnées Supabase = saisie client : même liste fermée qu'à l'inscription.
+        locale: ['fr', 'en'].includes(metadata.locale) ? metadata.locale : 'fr',
         countryCode,
       },
     });

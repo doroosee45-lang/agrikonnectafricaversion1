@@ -50,6 +50,37 @@ export const emitToOrganizations = (organizationIds, event, payload) => {
   return sent.some(Boolean);
 };
 
+/**
+ * Retire du fil les sessions d'une organisation qui n'en fait plus partie.
+ *
+ * Un socket rejoint la room d'un fil à la connexion ; sans ce retrait, une
+ * organisation exclue d'un groupe continuait de recevoir les nouveaux messages
+ * jusqu'à sa déconnexion. Un socket qui appartient AUSSI à une organisation
+ * encore participante reste dans la room (il y a toujours droit).
+ */
+export const retirerOrganisationDuFil = async (conversationId, organizationId, participantsRestants = []) => {
+  if (!io || !conversationId || !organizationId) return 0;
+  try {
+    const sockets = await io.in(roomForOrganization(organizationId)).fetchSockets();
+    let retires = 0;
+    for (const socket of sockets) {
+      const organisations = socket.data?.organizationIds ?? [];
+      if (organisations.some((id) => participantsRestants.includes(id))) continue;
+      socket.leave(roomForConversation(conversationId));
+      socket.data?.conversationIds?.delete?.(conversationId);
+      retires += 1;
+    }
+    io.to(roomForOrganization(organizationId)).emit('conversation:removed', {
+      conversationId,
+      at: new Date().toISOString(),
+    });
+    return retires;
+  } catch (error) {
+    logger.warn(`[realtime] retrait du fil ${conversationId} impossible :`, error.message);
+    return 0;
+  }
+};
+
 export const realtimeStats = () => ({
   enabled: Boolean(io),
   connections: io?.engine?.clientsCount ?? 0,

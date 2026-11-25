@@ -4,13 +4,22 @@
  * Chaque identifiant renvoie à la règle appliquée dans ce fichier ; la preuve
  * exécutable correspondante est référencée dans `tests/` (voir docs/TRACEABILITY.md).
  */
+import { Prisma } from '@prisma/client';
 import { prisma } from '../../config/prisma.js';
+import { supabaseAdmin } from '../../config/supabase.js';
+import { env } from '../../config/env.js';
 import { ApiError } from '../../shared/errors/ApiError.js';
-import { resolveId } from '../../shared/ids.js';
+import { isClientId, resolveId } from '../../shared/ids.js';
+import { storageKey as cleStockage } from '../../shared/crypto.js';
+import { logger } from '../../shared/http/logger.js';
 import { audit } from '../../shared/audit.js';
 import { notifyMany } from '../../shared/events.js';
 import { ensureBusinessConversation, SUBJECT_TYPES } from '../../shared/conversations.js';
-import { emitToConversation, emitToOrganizations } from '../../realtime/bus.js';
+import {
+  emitToConversation,
+  emitToOrganizations,
+  retirerOrganisationDuFil,
+} from '../../realtime/bus.js';
 
 /**
  * MSG-01 → MSG-04 — Messagerie rattachée à un objet métier.
@@ -124,6 +133,17 @@ const loadSubject = async (subjectType, subjectId, organizationId, participantOr
   if (!SUBJECT_TYPES.includes(subjectType)) {
     throw ApiError.badRequest(`Objet métier invalide. Valeurs acceptées : ${SUBJECT_TYPES.join(', ')}`);
   }
+  /*
+   * `ORGANIZATION`, `COOPERATIVE` et `FARM` sont acceptés par le schéma mais
+   * n'ont aucun modèle associé : `prisma[undefined]` levait une TypeError et la
+   * route répondait 500. Refus explicite tant qu'aucune règle de parties n'est
+   * spécifiée pour ces objets.
+   */
+  if (!SUBJECT_MODEL[subjectType]) {
+    throw ApiError.badRequest(`Conversation sur un objet « ${subjectType} » non prise en charge`, [
+      { field: 'subjectType', code: 'unsupported' },
+    ]);
+  }
 
   const subject = await prisma[SUBJECT_MODEL[subjectType]].findUnique({ where: { id: subjectId } });
   if (!subject) throw ApiError.notFound('Objet métier introuvable');
@@ -134,18 +154,92 @@ const loadSubject = async (subjectType, subjectId, organizationId, participantOr
   return { subject, parties: [...new Set(parties)] };
 };
 
-/** Validation des pièces jointes : URL http(s) ou clé de stockage interne. */
-const assertAttachments = (attachments = []) => {
+const estUrl = (valeur) => /^https?:\/\//i.test(valeur);
+
+/**
+ * Préfixe des clés de stockage d'une organisation : même assainissement que
+ * `media.service.js` (`storageKey(organizationId, 'media'|'documents', …)`).
+ */
+export const prefixeStockage = (organizationId) => `${cleStockage(organizationId)}/`;
+
+/**
+ * Validation des pièces jointes : URL http(s) ou clé de stockage interne.
+ *
+ * Une clé de stockage doit appartenir à l'organisation de l'EXPÉDITEUR : la
+ * lecture du fil signe ces clés pour les destinataires (`attachmentUrls`). Sans
+ * cette règle, joindre la clé d'un document privé d'une autre organisation
+ * suffirait à en obtenir une URL signée.
+ */
+export const assertAttachments = (attachments = [], senderOrgId = null) => {
+  if (!Array.isArray(attachments)) {
+    throw ApiError.badRequest('Pièces jointes invalides (liste attendue)', [{ field: 'attachments', code: 'invalid' }]);
+  }
   for (const attachment of attachments) {
-    const ok = /^https?:\/\//i.test(attachment) || /^[A-Za-z0-9._\-/]+$/.test(attachment);
+    const ok =
+      typeof attachment === 'string' &&
+      attachment.length <= 500 &&
+      (estUrl(attachment) || /^[A-Za-z0-9._\-/]+$/.test(attachment));
     if (!ok) {
       throw ApiError.badRequest(
         `Pièce jointe invalide : ${String(attachment).slice(0, 40)}… (URL http(s) ou clé de stockage attendue)`,
         [{ field: 'attachments', code: 'invalid' }],
       );
     }
+    if (!estUrl(attachment) && senderOrgId && !attachment.startsWith(prefixeStockage(senderOrgId))) {
+      throw ApiError.badRequest(
+        'Pièce jointe refusée : ce fichier n\'appartient pas à ton organisation',
+        [{ field: 'attachments', code: 'foreign_storage_key' }],
+      );
+    }
   }
   return attachments;
+};
+
+/** Bucket d'une clé : `<org>/documents/…` → privé, `<org>/media/…` → médias. */
+const bucketDeCle = (cle) =>
+  cle.split('/')[1] === 'documents' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
+
+/**
+ * Ajoute `attachmentUrls` (aligné sur `attachments`) : URL signée fraîche pour
+ * chaque clé de stockage appartenant à une organisation PARTICIPANTE, URL
+ * inchangée pour un lien http(s), `null` sinon (clé étrangère ou stockage non
+ * configuré). Ne fait jamais échouer la lecture du fil.
+ */
+export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
+  const prefixes = participantOrgIds.map(prefixeStockage);
+  const parBucket = new Map();
+  for (const message of messages) {
+    for (const piece of message.attachments ?? []) {
+      if (estUrl(piece) || !prefixes.some((p) => piece.startsWith(p))) continue;
+      const bucket = bucketDeCle(piece);
+      if (!parBucket.has(bucket)) parBucket.set(bucket, new Set());
+      parBucket.get(bucket).add(piece);
+    }
+  }
+
+  const signees = new Map();
+  if (supabaseAdmin && parBucket.size > 0) {
+    for (const [bucket, cles] of parBucket) {
+      try {
+        const { data, error } = await supabaseAdmin.storage
+          .from(bucket)
+          .createSignedUrls([...cles], env.SIGNED_URL_TTL_SECONDS);
+        if (error) throw error;
+        for (const entree of data ?? []) {
+          if (entree?.signedUrl && entree.path) signees.set(entree.path, entree.signedUrl);
+        }
+      } catch (erreur) {
+        logger.warn('[messaging] signature des pièces jointes impossible :', erreur?.message ?? erreur);
+      }
+    }
+  }
+
+  return messages.map((message) => ({
+    ...message,
+    attachmentUrls: (message.attachments ?? []).map((piece) =>
+      estUrl(piece) ? piece : signees.get(piece) ?? null,
+    ),
+  }));
 };
 
 export const startConversation = async ({ subjectType, subjectId, participantOrgIds = [], firstMessage }, req) => {
@@ -222,12 +316,48 @@ export const createGroup = async ({ name, description, participantOrgIds = [] },
   if (allowed.length === 0) throw ApiError.forbidden("Aucun membre autorisé sélectionné");
   const participants = [...new Set([req.tenant.organizationId, ...allowed.map((o) => o.id)])];
   const intro = description?.trim() ? `Groupe « ${name.trim()} » créé — ${description.trim()}` : `Groupe « ${name.trim()} » créé`;
-  const conversation = await ensureBusinessConversation({
-    subjectType: "GROUP",
-    subjectId: `GRP:${name.trim()}`,
-    participantOrgIds: participants,
-    firstMessage: intro,
-    actorUserId: req.user.id,
+  const subjectId = `GRP:${name.trim()}`;
+
+  /*
+   * Rejeu (double envoi) : on ne renvoie un groupe existant que s'il est
+   * IDENTIQUE — même nom, même administrateur (premier participant), mêmes
+   * membres. `ensureBusinessConversation` cherche un sur-ensemble
+   * (`hasEvery`) : créer « Famille » avec A et B renvoyait le « Famille »
+   * d'un autre administrateur contenant aussi C, et les messages partaient à
+   * un membre que le créateur n'avait pas choisi.
+   */
+  const candidats = await prisma.conversation.findMany({
+    where: { subjectType: "GROUP", subjectId, status: "OPEN", participantOrgIds: { hasEvery: participants } },
+  });
+  const identique = candidats.find(
+    (c) => c.participantOrgIds[0] === req.tenant.organizationId && c.participantOrgIds.length === participants.length,
+  );
+  if (identique) return identique;
+
+  const conversation = await prisma.$transaction(async (tx) => {
+    const cree = await tx.conversation.create({
+      data: { id: resolveId(), subjectType: "GROUP", subjectId, participantOrgIds: participants, status: "OPEN" },
+    });
+    await tx.message.create({
+      data: {
+        id: resolveId(),
+        conversationId: cree.id,
+        senderId: req.user.id,
+        senderOrgId: req.tenant.organizationId,
+        body: intro,
+        attachments: [],
+        readBy: [req.user.id],
+      },
+    });
+    return cree;
+  });
+  await audit({
+    actorId: req.user.id,
+    action: "conversation.create",
+    resource: "conversations",
+    resourceId: conversation.id,
+    req,
+    newValue: { subjectType: "GROUP", subjectId, participants },
   });
   emitToOrganizations(participants.filter((id) => id !== req.tenant.organizationId), "conversation:new", { conversationId: conversation.id, subjectType: "GROUP", title: name.trim() });
   return conversation;
@@ -242,6 +372,11 @@ export const addGroupMember = async (conversationId, orgId, req) => {
   if (allowed.length === 0) throw ApiError.forbidden("Organisation non autorisée");
   const updated = await prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: [...new Set([...conv.participantOrgIds, orgId])] } });
   await postMessage(conversationId, { body: `+ ${allowed[0].name} a rejoint le groupe`, attachments: [] }, req);
+  // Le nouveau membre n'est dans aucune room de ce fil : on le prévient pour
+  // qu'il la rejoigne (`conversation:join`, qui revérifie l'appartenance).
+  if (!conv.participantOrgIds.includes(orgId)) {
+    emitToOrganizations([orgId], 'conversation:new', { conversationId, subjectType: 'GROUP', title: conv.subjectId?.startsWith('GRP:') ? conv.subjectId.slice(4) : null });
+  }
   return updated;
 };
 
@@ -251,7 +386,23 @@ export const removeGroupMember = async (conversationId, orgId, req) => {
   const isAdmin = conv.participantOrgIds[0] === req.tenant.organizationId || (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
   if (!isAdmin && orgId !== req.tenant.organizationId) throw ApiError.forbidden("Seul l'administrateur du groupe peut retirer un membre");
   if (orgId === conv.participantOrgIds[0]) throw ApiError.badRequest("L'administrateur principal ne peut pas être retiré");
-  return prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: conv.participantOrgIds.filter((id) => id !== orgId) } });
+  const restants = conv.participantOrgIds.filter((id) => id !== orgId);
+  const updated = await prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: restants } });
+  /*
+   * Le retrait doit aussi valoir en temps réel : sans cela, les sockets de
+   * l'organisation retirée restaient dans la room et continuaient de recevoir
+   * le contenu des nouveaux messages jusqu'à leur déconnexion.
+   */
+  await retirerOrganisationDuFil(conversationId, orgId, restants);
+  await audit({
+    actorId: req.user.id,
+    action: 'conversation.member.remove',
+    resource: 'conversations',
+    resourceId: conversationId,
+    req,
+    newValue: { removedOrganizationId: orgId },
+  });
+  return updated;
 };
 
 export const listConversations = async (query, req) => {
@@ -355,10 +506,13 @@ export const listMessages = async (conversationId, query, req) => {
   }
 
   // Les messages renvoyés reflètent l'accusé de lecture que l'on vient d'écrire
-  const withReadReceipt = items.map((message) =>
-    message.readBy?.includes(req.user.id) || message.senderOrgId === req.tenant.organizationId
-      ? message
-      : { ...message, readBy: [...(message.readBy ?? []), req.user.id] },
+  const withReadReceipt = await signerPiecesJointes(
+    items.map((message) =>
+      message.readBy?.includes(req.user.id) || message.senderOrgId === req.tenant.organizationId
+        ? message
+        : { ...message, readBy: [...(message.readBy ?? []), req.user.id] },
+    ),
+    conversation.participantOrgIds,
   );
 
   return {
@@ -375,36 +529,65 @@ export const listMessages = async (conversationId, query, req) => {
   };
 };
 
+/**
+ * Réémission idempotente (`localTempId`, envoi hors ligne) : on ne renvoie un
+ * message existant QUE s'il appartient à ce fil et à cet expéditeur. Un même
+ * identifiant déjà pris ailleurs est un conflit (409), jamais un 500 ni une
+ * fuite du message d'autrui.
+ */
+const rejouerSiDejaRecu = async (localTempId, conversationId, req) => {
+  if (!localTempId) return null;
+  const existing = await prisma.message.findUnique({ where: { id: localTempId } });
+  if (!existing) return null;
+  if (existing.conversationId === conversationId && existing.senderId === req.user.id) return existing;
+  throw ApiError.conflict('Identifiant de message déjà utilisé');
+};
+
 export const postMessage = async (conversationId, { body, attachments, localTempId }, req) => {
-  if (localTempId) {
-    const existing = await prisma.message.findUnique({ where: { id: localTempId } });
-    if (existing && existing.conversationId === conversationId) {
-      return existing;
-    }
+  if (localTempId !== undefined && localTempId !== null && !isClientId(localTempId)) {
+    throw ApiError.badRequest('Identifiant local de message invalide', [{ field: 'localTempId', code: 'invalid' }]);
   }
+
+  // Contrôle d'accès AVANT toute lecture de message, réémission comprise.
   const conversation = await prisma.conversation.findUnique({ where: { id: conversationId } });
   if (!conversation || !conversation.participantOrgIds.includes(req.tenant.organizationId)) {
     throw ApiError.notFound('Conversation introuvable');
   }
+
+  const deja = await rejouerSiDejaRecu(localTempId, conversationId, req);
+  if (deja) return deja;
+
   if (conversation.status !== 'OPEN') throw ApiError.conflict(`Conversation ${conversation.status.toLowerCase()}`);
 
-  const safeAttachments = assertAttachments(attachments ?? []);
+  const safeAttachments = assertAttachments(attachments ?? [], req.tenant.organizationId);
 
-  const message = await prisma.$transaction(async (tx) => {
-    const created = await tx.message.create({
-      data: {
-        id: localTempId || resolveId(),
-        conversationId,
-        senderId: req.user.id,
-        senderOrgId: req.tenant.organizationId,
-        body,
-        attachments: safeAttachments,
-        readBy: [req.user.id],
-      },
+  let message;
+  try {
+    message = await prisma.$transaction(async (tx) => {
+      const created = await tx.message.create({
+        data: {
+          id: localTempId || resolveId(),
+          conversationId,
+          senderId: req.user.id,
+          senderOrgId: req.tenant.organizationId,
+          body,
+          attachments: safeAttachments,
+          readBy: [req.user.id],
+        },
+      });
+      await tx.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
+      return created;
     });
-    await tx.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
-    return created;
-  });
+  } catch (erreur) {
+    // Deux envois simultanés du même `localTempId` : le second rejoue le premier.
+    if (localTempId && erreur instanceof Prisma.PrismaClientKnownRequestError && erreur.code === 'P2002') {
+      const gagnant = await rejouerSiDejaRecu(localTempId, conversationId, req);
+      if (gagnant) return gagnant;
+    }
+    throw erreur;
+  }
+
+  const [signe] = await signerPiecesJointes([message], conversation.participantOrgIds);
 
   const recipients = await prisma.membership.findMany({
     where: {
@@ -429,13 +612,14 @@ export const postMessage = async (conversationId, { body, attachments, localTemp
       id: message.id,
       body: message.body,
       attachments: message.attachments,
+      attachmentUrls: signe.attachmentUrls,
       senderId: message.senderId,
       senderOrgId: message.senderOrgId,
       createdAt: message.createdAt,
     },
   });
 
-  return message;
+  return signe;
 };
 
 /** MSG-03 — signalement d'un message (conservé pour la modération). */
@@ -501,8 +685,11 @@ export const blockConversation = async (conversationId, { reason }, req) => {
 };
 
 
+/** Taille maximale d'une page de synchronisation différée. */
+export const DELTA_SYNC_PAGE = 500;
+
 export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
-  const serverTimestamp = Date.now();
+  const now = Date.now();
   const since = new Date(Number(lastPulledAt) || 0);
 
   const allowedConvs = await prisma.conversation.findMany({
@@ -510,21 +697,58 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
       participantOrgIds: { has: req.tenant.organizationId },
       ...(roomIds.length > 0 ? { id: { in: roomIds } } : {}),
     },
-    select: { id: true },
+    select: { id: true, participantOrgIds: true },
   });
   const allowedIds = allowedConvs.map((c) => c.id);
   if (allowedIds.length === 0) {
-    return { created: [], updated: [], deleted: [], serverTimestamp };
+    return { created: [], updated: [], deleted: [], serverTimestamp: now, hasMore: false };
   }
 
-  const rows = await prisma.message.findMany({
+  const fetched = await prisma.message.findMany({
     where: {
       conversationId: { in: allowedIds },
       createdAt: { gt: since },
     },
-    orderBy: { createdAt: 'asc' },
-    take: 500,
+    orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+    take: DELTA_SYNC_PAGE + 1,
   });
+
+  /*
+   * Page pleine : le curseur renvoyé est la date du DERNIER message livré, pas
+   * « maintenant ». Renvoyer `Date.now()` faisait sauter définitivement tous
+   * les messages au-delà de la page à un client resté longtemps hors ligne.
+   *
+   * On ne coupe jamais au milieu d'un groupe de messages de même milliseconde :
+   * le curseur est strict (`gt`), un message laissé de l'autre côté de la
+   * coupure ne reviendrait pas.
+   */
+  let rows = fetched;
+  let hasMore = false;
+  if (fetched.length > DELTA_SYNC_PAGE) {
+    hasMore = true;
+    rows = fetched.slice(0, DELTA_SYNC_PAGE);
+    const borne = rows[rows.length - 1].createdAt.getTime();
+    const premierApres = fetched[DELTA_SYNC_PAGE].createdAt.getTime();
+    if (premierApres === borne) {
+      rows = rows.filter((m) => m.createdAt.getTime() < borne);
+      // Cas extrême : toute la page partage la même milliseconde.
+      if (rows.length === 0) {
+        rows = await prisma.message.findMany({
+          where: { conversationId: { in: allowedIds }, createdAt: new Date(borne) },
+          orderBy: { id: 'asc' },
+        });
+      }
+    }
+  }
+  const serverTimestamp = hasMore ? rows[rows.length - 1].createdAt.getTime() : now;
+
+  const participantsParFil = new Map(allowedConvs.map((c) => [c.id, c.participantOrgIds]));
+  const signes = [];
+  for (const [filId, participants] of participantsParFil) {
+    const duFil = rows.filter((m) => m.conversationId === filId);
+    if (duFil.length) signes.push(...(await signerPiecesJointes(duFil, participants)));
+  }
+  const urlsParMessage = new Map(signes.map((m) => [m.id, m.attachmentUrls]));
 
   const mapped = rows.map((m) => ({
     id: m.id,
@@ -537,6 +761,9 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
     content: m.body,
     remote_media_url: m.attachments?.[0] ?? null,
     attachments: m.attachments ?? [],
+    // URL signées de courte durée, pour l'affichage uniquement : ne pas les
+    // stocker comme identité du média (`remote_media_url` reste la clé stable).
+    attachment_urls: urlsParMessage.get(m.id) ?? [],
     read_by: m.readBy ?? [],
     created_at: new Date(m.createdAt).getTime(),
     updated_at: new Date(m.createdAt).getTime(),
@@ -548,5 +775,6 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
     updated: [],
     deleted: [],
     serverTimestamp,
+    hasMore,
   };
 };

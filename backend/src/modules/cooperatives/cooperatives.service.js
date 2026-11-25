@@ -314,6 +314,26 @@ export const importMembers = async (cooperativeId, { csv, dryRun }, req) => {
  * COOP-04 — vue consolidée : nombre de membres, superficie, cultures,
  * production agrégée des membres AYANT AUTORISÉ les portées correspondantes.
  */
+/**
+ * Adhésions ACTIVES des membres à leur organisation INDIVIDUELLE (non supprimée).
+ * Deux requêtes simples plutôt qu'un filtre relationnel : même résultat, et
+ * vérifiable aussi bien sur PostgreSQL que sur le Prisma simulé des tests.
+ */
+export const adhesionsIndividuelles = async (userIds) => {
+  if (!userIds.length) return [];
+  const memberships = await prisma.membership.findMany({
+    where: { userId: { in: userIds }, status: 'ACTIVE' },
+    select: { userId: true, organizationId: true },
+  });
+  if (!memberships.length) return [];
+  const individuelles = await prisma.organization.findMany({
+    where: { id: { in: [...new Set(memberships.map((m) => m.organizationId))] }, type: 'INDIVIDUAL', deletedAt: null },
+    select: { id: true },
+  });
+  const ids = new Set(individuelles.map((o) => o.id));
+  return memberships.filter((m) => ids.has(m.organizationId));
+};
+
 export const overview = async (cooperativeId, req) => {
   await assertCooperative(cooperativeId, req.tenant.organizationId);
 
@@ -324,10 +344,14 @@ export const overview = async (cooperativeId, req) => {
 
   const userIds = members.map((m) => m.memberUserId);
 
-  const memberships = await prisma.membership.findMany({
-    where: { userId: { in: userIds }, status: 'ACTIVE' },
-    select: { userId: true, organizationId: true },
-  });
+  /*
+   * Le consentement d'un membre porte sur SES données de producteur, rangées
+   * dans son organisation individuelle (CDC D2). Sans ce filtre, la carte
+   * `userId → organisation` retenait une adhésion arbitraire : une entreprise
+   * où le membre est salarié, voire la coopérative elle-même, dont les
+   * parcelles se retrouvaient agrégées sans aucun consentement.
+   */
+  const memberships = await adhesionsIndividuelles(userIds);
 
   const orgByUser = new Map(memberships.map((m) => [m.userId, m.organizationId]));
 
