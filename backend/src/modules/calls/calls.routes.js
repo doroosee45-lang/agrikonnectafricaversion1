@@ -45,6 +45,10 @@ router.get('/eligible', authorize('calls.start'), validate(eligibleQuery, 'query
 router.post('/', writeLimiter, authorize('calls.start'), validate(createCallSchema), asyncHandler(async (req, res) =>
   created(res, await service.creerAppel(req.body, req), { message: 'Appel lancé' })));
 
+// Historique d'une conversation (cartes d'appel dans le fil). Avant '/:id'.
+router.get('/history', authorize('messages.read'), validate(eligibleQuery, 'query'), asyncHandler(async (req, res) =>
+  success(res, await service.historiqueConversation(req.query.conversationId, req))));
+
 router.get('/:id', authorize('calls.join'), validate(idParam, 'params'), asyncHandler(async (req, res) =>
   success(res, await service.obtenir(req.params.id, req))));
 

@@ -793,3 +793,59 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
     hasMore,
   };
 };
+
+/* ───────── Fiche contact d'une conversation (en-tête de l'écran de discussion) ───────── */
+
+/** Rôles professionnels affichables publiquement (jamais les rôles d'administration). */
+export const ROLES_PROFESSIONNELS = ['FARMER', 'AGRONOMIST', 'RESEARCHER', 'STUDENT', 'PROFESSOR', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY', 'BUYER', 'SUPPLIER', 'TRANSPORTER', 'LAB_PARTNER'];
+
+/**
+ * Interlocuteurs d'une conversation : nom, type, pays, métiers. Réservé aux
+ * participants ; aucune donnée de contact (e-mail, téléphone) n'est exposée.
+ * L'organisation d'un tiers n'est pas lisible par `GET /organizations/:id`
+ * (réservé à ses membres) : c'est la seule vue autorisée sur un interlocuteur.
+ */
+export const getConversationPeers = async (conversationId, req) => {
+  const conversation = await prisma.conversation.findUnique({
+    where: { id: conversationId },
+    select: { id: true, participantOrgIds: true, subjectType: true },
+  });
+  if (!conversation || !conversation.participantOrgIds.includes(req.tenant.organizationId)) {
+    throw ApiError.notFound('Conversation introuvable');
+  }
+  const idsPairs = conversation.participantOrgIds.filter((id) => id !== req.tenant.organizationId);
+  const organisations = await prisma.organization.findMany({
+    where: { id: { in: idsPairs }, deletedAt: null },
+    select: {
+      id: true, type: true, name: true, slug: true, countryCode: true, createdAt: true,
+      memberships: {
+        where: { status: 'ACTIVE' },
+        orderBy: { joinedAt: 'asc' },
+        take: 20,
+        select: { roles: true, user: { select: { firstName: true, lastName: true, avatarUrl: true } } },
+      },
+    },
+  });
+  const parId = new Map(organisations.map((o) => [o.id, o]));
+  return {
+    conversationId: conversation.id,
+    isGroup: conversation.subjectType === 'GROUP',
+    peers: idsPairs.map((id) => {
+      const o = parId.get(id);
+      if (!o) return { organizationId: id, name: 'Membre', type: 'INDIVIDUAL', countryCode: null, slug: null, roles: [], avatarUrl: null, memberSince: null };
+      const premier = o.memberships[0]?.user ?? null;
+      const roles = [...new Set(o.memberships.flatMap((m) => m.roles))].filter((r) => ROLES_PROFESSIONNELS.includes(r));
+      return {
+        organizationId: o.id,
+        name: o.name,
+        type: o.type,
+        countryCode: o.countryCode,
+        slug: o.slug,
+        roles,
+        // Compte individuel : la photo de la personne ; organisation : aucune (pas de logo en V1).
+        avatarUrl: o.type === 'INDIVIDUAL' ? (premier?.avatarUrl ?? null) : null,
+        memberSince: o.createdAt,
+      };
+    }),
+  };
+};

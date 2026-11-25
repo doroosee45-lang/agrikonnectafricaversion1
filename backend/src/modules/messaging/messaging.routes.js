@@ -88,6 +88,10 @@ router.get('/conversations', authorize('messages.read'), validate(listSchema, 'q
   });
 }));
 
+// Fiche des interlocuteurs (en-tête de l'écran de discussion, fiche contact).
+router.get('/conversations/:id/peers', authorize('messages.read'), validate(idParam, 'params'), asyncHandler(async (req, res) =>
+  success(res, await service.getConversationPeers(req.params.id, req))));
+
 router.get('/conversations/:id/messages', authorize('messages.read'), validate(idParam, 'params'),
   validate(threadSchema, 'query'), asyncHandler(async (req, res) => {
     const { conversation, items, hasMore, nextCursor } = await service.listMessages(req.params.id, req.query, req);

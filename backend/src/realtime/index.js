@@ -99,6 +99,14 @@ export const ecouteurProtege = (evenement, handler) => (...args) => {
   }
 };
 
+/**
+ * Présence « Vu récemment » : dernière déconnexion connue par organisation,
+ * en mémoire de CETTE instance (aucune migration ; perdue au redémarrage, et
+ * limitée à l'instance sans adaptateur partagé).
+ */
+const derniereVueOrganisation = new Map();
+export const presenceDerniereVue = (organizationId) => derniereVueOrganisation.get(organizationId) ?? null;
+
 /** Conversations ouvertes de l'utilisateur (par organisation). */
 const loadConversationRooms = async (organizationIds) => {
   if (organizationIds.length === 0) return [];
@@ -287,8 +295,59 @@ export const attachRealtime = (httpServer, { intervalleFiletMs = env.REALTIME_RE
       }
     }));
 
+    /**
+     * Présence des interlocuteurs d'une conversation (en-tête « En ligne » /
+     * « Vu récemment »). Réservé aux membres du fil ; un interlocuteur est en
+     * ligne si au moins un socket de son organisation est connecté.
+     */
+    socket.on('presence:query', ecouteurProtege('presence:query', async ({ conversationId }, ack) => {
+      if (typeof conversationId !== 'string' || !socket.data.conversationIds.has(conversationId)) {
+        return ack({ ok: false, error: 'FORBIDDEN' });
+      }
+      const conversation = await prisma.conversation
+        .findUnique({ where: { id: conversationId }, select: { participantOrgIds: true } })
+        .catch(() => null);
+      if (!conversation) return ack({ ok: false, error: 'NOT_FOUND' });
+      const pairs = conversation.participantOrgIds.filter((id) => !socket.data.organizationIds.includes(id));
+      const presence = [];
+      for (const organizationId of pairs) {
+        // eslint-disable-next-line no-await-in-loop
+        const sockets = await io.in(roomForOrganization(organizationId)).fetchSockets();
+        const online = sockets.some((s) => s.data?.userId && s.data.userId !== userId);
+        presence.push({ organizationId, online, lastSeenAt: online ? null : presenceDerniereVue(organizationId) });
+      }
+      return ack({ ok: true, presence });
+    }));
+
+    /**
+     * Accusé de RÉCEPTION (coches ✓✓ grises) : l'application du destinataire
+     * signale les messages arrivés sur l'appareil. Relayé aux membres du fil,
+     * non persisté (aucune migration) ; la lecture reste portée par `readBy`.
+     */
+    socket.on('message:delivered', ecouteurProtege('message:delivered', ({ conversationId, messageIds }) => {
+      if (typeof conversationId !== 'string' || !socket.data.conversationIds.has(conversationId)) return;
+      if (!Array.isArray(messageIds)) return;
+      const ids = messageIds.filter((id) => typeof id === 'string' && id.length >= 10 && id.length <= 60).slice(0, 100);
+      if (ids.length === 0) return;
+      socket.to(roomForConversation(conversationId)).emit('message:delivered', {
+        conversationId,
+        messageIds: ids,
+        userId,
+        at: new Date().toISOString(),
+      });
+    }));
+
     /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
     socket.on('ping:app', ecouteurProtege('ping:app', (_payload, ack) => ack({ at: new Date().toISOString() })));
+
+    // Présence : prévenir les fils encore joints AVANT que le socket ne les quitte.
+    socket.on('disconnecting', () => {
+      const maintenant = new Date().toISOString();
+      socket.data.organizationIds.forEach((id) => derniereVueOrganisation.set(id, maintenant));
+      for (const id of socket.data.conversationIds) {
+        socket.to(roomForConversation(id)).emit('presence:update', { conversationId: id, organizationIds: socket.data.organizationIds });
+      }
+    });
 
     socket.on('disconnect', (reason) => {
       logger.debug?.(`[realtime] déconnexion ${userId} (${reason})`);
@@ -298,6 +357,11 @@ export const attachRealtime = (httpServer, { intervalleFiletMs = env.REALTIME_RE
     conversationIds.forEach((id) => {
       socket.join(roomForConversation(id));
       socket.data.conversationIds.add(id);
+    });
+
+    // Présence : les interlocuteurs déjà connectés voient « En ligne ».
+    conversationIds.forEach((id) => {
+      socket.to(roomForConversation(id)).emit('presence:update', { conversationId: id, organizationIds });
     });
 
     socket.emit('ready', {

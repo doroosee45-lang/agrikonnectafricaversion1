@@ -32,6 +32,7 @@ import { apnsConfigure, envoyerAuxAppareils, fcmConfigure } from '../../integrat
 import { etatAppels } from './callsConfig.js';
 import {
   ETATS_EN_COURS_APPEL,
+  ETATS_TERMINAUX_APPEL,
   appelTermine,
   doitSeTerminerApresDepart,
   etatsAppelVers,
@@ -736,4 +737,49 @@ export const diffuserApresWebhook = async (callId) => {
   if (!callId) return;
   const appel = await chargerAppel(callId);
   if (appel) diffuser(appel);
+};
+
+/* ───────── Historique d'une conversation : cartes d'appel dans le fil ───────── */
+
+/** Durée effective (s) : de la prise d'appel à la fin ; 0 si jamais décroché. */
+export const dureeAppelSecondes = (appel) =>
+  appel.startedAt && appel.endedAt
+    ? Math.max(0, Math.round((new Date(appel.endedAt).getTime() - new Date(appel.startedAt).getTime()) / 1000))
+    : 0;
+
+/**
+ * Appels TERMINÉS d'une conversation (cartes « Appel vocal · 3 min 12 » /
+ * « Appel manqué »). Réservé aux organisations participantes ; aucune
+ * migration : lu depuis `call_sessions`. Appels désactivés → liste vide
+ * (l'historique reste lisible même si le service d'appel est coupé).
+ */
+export const historiqueConversation = async (conversationId, req, { limite = 50 } = {}) => {
+  const conversation = await prisma.conversation.findUnique({
+    where: { id: conversationId },
+    select: { participantOrgIds: true },
+  });
+  if (!conversation || !conversation.participantOrgIds.includes(req.tenant.organizationId)) {
+    throw ApiError.notFound('Conversation introuvable');
+  }
+  const appels = await prisma.callSession.findMany({
+    where: { conversationId, status: { in: ETATS_TERMINAUX_APPEL } },
+    orderBy: { createdAt: 'desc' },
+    take: Math.min(Math.max(1, limite), 100),
+    include: { participants: { select: { userId: true, status: true } } },
+  });
+  return appels.map((a) => {
+    const moi = a.participants.find((p) => p.userId === req.user.id) ?? null;
+    return {
+      id: a.id,
+      conversationId: a.conversationId,
+      kind: a.kind,
+      status: a.status,
+      outgoing: a.createdBy === req.user.id,
+      createdAt: a.createdAt,
+      startedAt: a.startedAt,
+      endedAt: a.endedAt,
+      durationSec: dureeAppelSecondes(a),
+      myStatus: moi?.status ?? null,
+    };
+  });
 };
