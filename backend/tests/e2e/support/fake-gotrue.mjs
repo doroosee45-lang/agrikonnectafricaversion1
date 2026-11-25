@@ -160,6 +160,14 @@ export const startFakeGoTrue = async ({ port = 0 } = {}) => {
     const body = ['POST', 'PUT', 'PATCH'].includes(req.method) ? await readBody(req) : {};
 
     // ── Administration (service role) ──────────────────────────────
+    // Liste paginée (admin.listUsers) : utilisée par l'outil de réconciliation des comptes.
+    if (req.method === 'GET' && pathname === '/admin/users') {
+      const page = Math.max(1, Number(url.searchParams.get('page') ?? 1));
+      const parPage = Math.max(1, Number(url.searchParams.get('per_page') ?? 50));
+      const tous = [...users.values()];
+      res.setHeader('x-total-count', String(tous.length));
+      return json(res, 200, { users: tous.slice((page - 1) * parPage, page * parPage).map(publicUser), aud: 'authenticated' });
+    }
     if (req.method === 'POST' && pathname === '/admin/users') {
       const email = body.email ? String(body.email).toLowerCase() : null;
       const phone = body.phone ? String(body.phone) : null;

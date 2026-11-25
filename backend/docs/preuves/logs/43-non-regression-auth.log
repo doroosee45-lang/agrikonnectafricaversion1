@@ -1,0 +1,299 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:54126/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 822.264 ms - 1094[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 651.954 ms - 6317[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 141.723 ms - 468[0m
+[0mPOST /api/v1/auth/login [32m200[0m 33.289 ms - 1108[0m
+[0mPOST /api/v1/auth/register [32m201[0m 33.931 ms - 1088[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.122 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.397 ms - 1090[0m
+[0mPOST /api/v1/auth/register [32m201[0m 13.197 ms - 1097[0m
+[0mGET /api/v1/admin/users [33m401[0m 1.036 ms - 136[0m
+[0mGET /api/v1/admin/users [33m403[0m 5.016 ms - 132[0m
+✔ M2 sécurité : 401 sans jeton, 403 sans permission (FARMER) (35624.7031ms)
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [33m403[0m 3.720 ms - 150[0m
+[0mDELETE /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3 [33m403[0m 4.588 ms - 150[0m
+✔ M2 sécurité : le palier 2 est réservé au SUPER_ADMIN (un ADMIN est refusé) (16.8638ms)
+[0mPOST /api/v1/auth/login [32m200[0m 9.133 ms - 941[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [33m403[0m 5.684 ms - 249[0m
+✔ M2 sécurité : SUPER_ADMIN sans second facteur → 403 `mfa_required` (21.8471ms)
+[0mGET /api/v1/admin/users?q=victime-m2%40agrikonnect.test [32m200[0m 703.264 ms - 535[0m
+[0mGET /api/v1/admin/users?role=FARMER&country=CD [32m200[0m 67.583 ms - 535[0m
+[0mGET /api/v1/admin/users?mfa=true [32m200[0m 7.286 ms - 560[0m
+✔ U-M2-1 : liste filtrée (terme, rôle, pays, statut) sur base réelle (788.712ms)
+[0mGET /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3 [32m200[0m 20.543 ms - 1449[0m
+✔ U-M2-2 : fiche complète (profil, rôles, sécurité, activité) (26.1702ms)
+[0mPATCH /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/status [33m422[0m 9.294 ms - 201[0m
+[0mPATCH /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/status [32m200[0m 14.995 ms - 171[0m
+[0mPOST /api/v1/auth/login [33m403[0m 1.944 ms - 137[0m
+[0mGET /api/v1/admin/users [33m403[0m 9.281 ms - 137[0m
+[0mPATCH /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/status [32m200[0m 11.316 ms - 168[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.746 ms - 929[0m
+✔ AC-M2 : suspension avec motif → déconnexion impossible, puis réactivation (81.2505ms)
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/unlock [32m200[0m 9.906 ms - 146[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/verify-email [32m200[0m 22.663 ms - 130[0m
+✔ U-M2-4 : déverrouillage anti brute-force et marquage vérifié (49.0848ms)
+[0mPOST /api/v1/auth/login [32m200[0m 11.583 ms - 929[0m
+[0mGET /api/v1/admin/users [33m403[0m 5.843 ms - 132[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/force-logout [32m200[0m 19.527 ms - 125[0m
+[0mGET /api/v1/admin/users [33m401[0m 3.496 ms - 128[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.137 ms - 929[0m
+✔ U-M2-4 : force-logout révoque réellement les sessions du compte (81.32ms)
+[0mGET /api/v1/admin/roles [32m200[0m 7.502 ms - 21048[0m
+✔ U-M2-6 : la liste des rôles expose la matrice de permissions effective (14.673ms)
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [33m401[0m 11.585 ms - 143[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [32m200[0m 21.908 ms - 178[0m
+[0mGET /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3 [32m200[0m 9.355 ms - 2044[0m
+[0mDELETE /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles/MODERATOR [32m200[0m 10.994 ms - 203[0m
+[0mGET /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3 [32m200[0m 9.325 ms - 2032[0m
+✔ AC-M2 : attribution MODERATOR (MFA exigée) → visible dans la fiche, puis révocation (79.8947ms)
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [33m422[0m 8.997 ms - 334[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [33m401[0m 11.177 ms - 141[0m
+[0mPOST /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles [32m200[0m 20.761 ms - 180[0m
+✔ RG-G3 : nomination d'un SUPER_ADMIN — mot de passe courant exigé puis vérifié (56.8243ms)
+[0mDELETE /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/roles/SUPER_ADMIN [32m200[0m 7.199 ms - 205[0m
+[0mDELETE /api/v1/admin/users/41ec3940-a2eb-4482-b54b-bfb6eea84ae6/roles/SUPER_ADMIN [33m409[0m 7.165 ms - 167[0m
+✔ RG-G2 : le dernier SUPER_ADMIN actif ne peut pas être révoqué (19.5221ms)
+[0mGET /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3/export [32m200[0m 63.078 ms - 2048[0m
+✔ U-M2-5 : export de portabilité — complet, audité, sans aucun secret (66.0147ms)
+[0mDELETE /api/v1/admin/users/2f77e7cb-e5db-4220-8a82-31d079b147b3 [32m200[0m 20.684 ms - 216[0m
+[0mGET /api/v1/admin/users [33m401[0m 2.324 ms - 128[0m
+[0mPOST /api/v1/auth/login [33m403[0m 2.172 ms - 137[0m
+✔ U-M2-5/RG-G5 : suppression logique — sessions révoquées, aucune ligne effacée (38.0009ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:62798/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 420.590 ms - 1095[0m
+[0mPOST /api/v1/auth/login [32m200[0m 98.715 ms - 934[0m
+[0mGET /api/v1/me [32m200[0m 91.351 ms - 1182[0m
+✔ E2E COMPLETE-01 : FARMER → 7 critères dont exploitation, parcelle et production (20575.3909ms)
+[0mPOST /api/v1/auth/register [32m201[0m 24.940 ms - 1087[0m
+[0mPOST /api/v1/auth/login [32m200[0m 16.753 ms - 929[0m
+[0mGET /api/v1/me [32m200[0m 14.793 ms - 928[0m
+✔ E2E COMPLETE-02 : BUYER → critères universels seuls, jamais de demande agricole (63.3356ms)
+[0mPOST /api/v1/auth/register [32m201[0m 20.979 ms - 1106[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.290 ms - 944[0m
+[0mGET /api/v1/me [32m200[0m 15.151 ms - 1192[0m
+✔ E2E COMPLETE-03 : COOPERATIVE_ADMIN → trio de production conservé (58.667ms)
+[0mPOST /api/v1/auth/register [32m201[0m 15.700 ms - 1093[0m
+[0mPOST /api/v1/auth/login [32m200[0m 11.554 ms - 935[0m
+[0mGET /api/v1/me [32m200[0m 9.596 ms - 934[0m
+✔ E2E COMPLETE-04 : INVESTOR → critères universels, complétude non bloquante (43.5485ms)
+[0mPOST /api/v1/auth/register [32m201[0m 23.599 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 16.427 ms - 932[0m
+[0mGET /api/v1/me [32m200[0m 8.225 ms - 1029[0m
+[0mPATCH /api/v1/me [32m200[0m 8.718 ms - 652[0m
+[0mGET /api/v1/me [32m200[0m 7.180 ms - 1154[0m
+✔ E2E COMPLETE-05 : AGRONOMIST → profil professionnel exigé, coché une fois renseigné (82.1918ms)
+[0mPOST /api/v1/auth/register [32m201[0m 10.329 ms - 1097[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.025 ms - 939[0m
+[0mGET /api/v1/me [32m200[0m 6.968 ms - 938[0m
+✔ E2E COMPLETE-06 : TRANSPORTER → aucun profil professionnel réclamé (30.2327ms)
+[0mPOST /api/v1/auth/register [32m201[0m 9.734 ms - 1104[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.256 ms - 943[0m
+[0mGET /api/v1/me [32m200[0m 10.876 ms - 1297[0m
+✔ E2E COMPLETE-07 : producteur ET agronome → trio de production + profil professionnel (35.7872ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:55087/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 87.171 ms - 1099[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 515.677 ms - 6424[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 35.143 ms - 468[0m
+[0mPOST /api/v1/auth/login [33m401[0m 10.743 ms - 188[0m
+✔ connexion — sans code, 401 et `details.mfaRequired` à true (11804.8993ms)
+[0mPOST /api/v1/auth/login [32m200[0m 22.041 ms - 1106[0m
+✔ connexion — avec un code valide, la session est délivrée (27.1213ms)
+[0mPOST /api/v1/auth/login [33m401[0m 9.859 ms - 143[0m
+✔ connexion — un code faux est refusé, sans session (13.3467ms)
+[0mPOST /api/v1/auth/login [33m401[0m 9.912 ms - 126[0m
+✔ connexion — un mauvais mot de passe ne révèle pas que la MFA est active (15.9493ms)
+[0mPOST /api/v1/auth/register [32m201[0m 10.655 ms - 1097[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 18.830 ms - 6250[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 16.335 ms - 468[0m
+[0mGET /api/v1/auth/mfa/status [32m200[0m 3.942 ms - 258[0m
+✔ codes de secours — renvoyés une seule fois, à l’activation (59.8027ms)
+[0mPOST /api/v1/auth/register [32m201[0m 18.068 ms - 1093[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 18.479 ms - 6388[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 9.526 ms - 468[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.491 ms - 1102[0m
+✔ codes de secours — un code de secours ouvre une session (68.0499ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:62829/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 123.711 ms - 1108[0m
+[0mPOST /api/v1/auth/login [32m200[0m 29.063 ms - 945[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 63.610 ms - 111[0m
+[0mPOST /api/v1/auth/verify-phone [32m200[0m 13.518 ms - 75[0m
+✔ E2E OTP : un code vérifié confirme le numéro sur le profil (10318.6547ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 13.613 ms - 111[0m
+[0mPOST /api/v1/auth/verify-phone [32m200[0m 11.925 ms - 75[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 6.431 ms - 160[0m
+✔ E2E OTP : le code consommé ne peut pas être rejoué (39.6565ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 12.820 ms - 111[0m
+✔ E2E OTP : le code n’apparaît pas dans la réponse de production (17.2829ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 13.206 ms - 111[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 17.672 ms - 120[0m
+✔ E2E OTP : un code erroné est refusé et compte comme un essai (38.7326ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 16.268 ms - 111[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 8.151 ms - 120[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 6.770 ms - 120[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 8.707 ms - 120[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 6.175 ms - 120[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 9.174 ms - 120[0m
+[0mPOST /api/v1/auth/verify-phone [33m429[0m 5.622 ms - 147[0m
+✔ E2E OTP : cinq essais erronés verrouillent le code (73.266ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 13.046 ms - 139[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 4.555 ms - 160[0m
+✔ E2E OTP : un code expiré est refusé (26.1084ms)
+[0mPOST /api/v1/auth/send-otp [33m422[0m 3.462 ms - 313[0m
+[0mPOST /api/v1/auth/send-otp [33m422[0m 4.270 ms - 313[0m
+[0mPOST /api/v1/auth/send-otp [33m422[0m 3.028 ms - 313[0m
+[0mPOST /api/v1/auth/send-otp [33m422[0m 2.936 ms - 313[0m
+✔ E2E OTP : un numéro mal formé est refusé avant tout envoi (20.6821ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 13.373 ms - 139[0m
+[0mPOST /api/v1/auth/verify-phone [33m422[0m 3.473 ms - 202[0m
+✔ E2E OTP : confirmer un autre numéro que celui du profil est refusé (21.5768ms)
+[0mPOST /api/v1/auth/register [32m201[0m 10.300 ms - 1113[0m
+[0mPOST /api/v1/auth/register [32m201[0m 10.082 ms - 1095[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.727 ms - 934[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 12.916 ms - 111[0m
+[0mPOST /api/v1/auth/verify-phone [33m409[0m 4.885 ms - 150[0m
+✔ E2E OTP : un numéro déjà rattaché à un autre compte est un conflit lisible (62.6612ms)
+[0mPOST /api/v1/auth/send-otp [32m200[0m 8.292 ms - 139[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 5.869 ms - 139[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 7.629 ms - 139[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 5.796 ms - 139[0m
+[0mPOST /api/v1/auth/send-otp [32m200[0m 7.108 ms - 139[0m
+[0mPOST /api/v1/auth/send-otp [33m429[0m 3.813 ms - 174[0m
+✔ E2E OTP : le plafond horaire par utilisateur borne aussi les numéros variés (51.2791ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:58302/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 187.985 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 16.671 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 12.129 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.858 ms - 919[0m
+[2026-11-25T16:34:11.331Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne injectée avant validation',
+  code: null,
+  stack: 'Error: panne injectée avant validation\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:51:65\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:14)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[2026-11-25T16:34:11.333Z] [ERROR] [961dc135-113b-44b9-824f-ec6d44d4c541] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:200:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 55.577 ms - 154[0m
+[0mPOST /api/v1/auth/login [33m401[0m 4.597 ms - 126[0m
+[0mPOST /api/v1/auth/register [32m201[0m 15.305 ms - 1075[0m
+✔ TX-1a — panne DANS la transaction d’inscription : rien n’est validé, Supabase compensé, réinscription possible (9878.139ms)
+ℹ TX-1a : inscription 500 ; profils 0 ; jetons 0 ; connexion après échec 401 ; réinscription 201
+[0mPOST /api/v1/auth/register [32m201[0m 14.036 ms - 1075[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.932 ms - 917[0m
+✔ TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes (31.9026ms)
+ℹ TX-1b : inscription 201 ; profils 1 ; jetons 1 ; connexion 200
+[0mPOST /api/v1/messaging/conversations [32m200[0m 191.044 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 192.638 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 183.743 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 189.711 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 195.024 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 191.516 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 192.678 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 195.017 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 198.602 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 196.265 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 202.404 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 198.228 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 215.010 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 198.398 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 201.931 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 220.760 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 207.019 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 230.601 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 219.970 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 223.808 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 227.481 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 223.075 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 210.150 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 226.730 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 214.932 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 216.123 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 216.869 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 224.297 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 218.650 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 219.128 ms - 343[0m
+✔ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (268.8341ms)
+ℹ TX-2 : statuts 201,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200 ; fils créés 1
+[0mPOST /api/v1/messaging/groups [32m201[0m 51.991 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 54.886 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 57.469 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 58.188 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 58.925 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 60.982 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 62.022 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 63.489 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 65.455 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 66.787 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 68.289 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 69.599 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 70.747 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 72.074 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 73.340 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 74.799 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 75.932 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 78.136 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 79.803 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 81.734 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 83.323 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 91.941 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 86.053 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 86.875 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 88.729 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 89.289 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 91.211 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 92.392 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 93.852 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 95.057 ms - 331[0m
+✔ TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe (111.8186ms)
+ℹ TX-3 : statuts 201 ; groupes créés 1 ; identifiants renvoyés distincts 1
+[0mPOST /api/v1/messaging/conversations [32m201[0m 16.133 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 16.814 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.584 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.531 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 19.182 ms - 332[0m
+✔ TX-2/TX-3 — sujets différents : pas de sérialisation abusive (fils distincts créés en parallèle) (25.3576ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:54136/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 192.179 ms - 1104[0m
+[0mPOST /api/v1/auth/resend-verification [32m200[0m 7.523 ms - 37[0m
+✔ e-mail — l’URL de redirection transmise à GoTrue atteint une route web réelle (10106.4951ms)
+✔ e-mail — l’URL ne porte pas de double barre oblique (0.2961ms)
+[0mPOST /api/v1/auth/verify-email [32m200[0m 6.151 ms - 69[0m
+✔ vérification — le jeton de l’e-mail est accepté et pose `emailVerifiedAt` (11.4995ms)
+[0mPOST /api/v1/auth/verify-email [33m422[0m 2.441 ms - 148[0m
+✔ vérification — le jeton est à usage unique (4.933ms)
+[0mPOST /api/v1/auth/verify-email [33m422[0m 1.396 ms - 148[0m
+✔ vérification — un jeton inventé est refusé sans révéler l’état du compte (3.2855ms)
+[0mPOST /api/v1/auth/resend-verification [32m200[0m 1.067 ms - 37[0m
+[0mPOST /api/v1/auth/resend-verification [32m200[0m 1.353 ms - 37[0m
+✔ renvoi — une adresse inconnue renvoie la même réponse, sans jeton (5.8929ms)
+[0mPOST /api/v1/auth/resend-verification [33m422[0m 1.197 ms - 200[0m
+✔ renvoi sans adresse — refus explicite (422) qui nomme le champ (3.5999ms)
+[0mPOST /api/v1/auth/register [32m201[0m 8.873 ms - 1090[0m
+[0mPOST /api/v1/auth/login [33m403[0m 3.472 ms - 226[0m
+[0mPOST /api/v1/auth/login [33m401[0m 4.996 ms - 126[0m
+✔ connexion — adresse non confirmée : message dédié, aucune tentative décomptée (25.3766ms)
+[0mPOST /api/v1/auth/register [32m201[0m 9.411 ms - 1099[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.695 ms - 939[0m
+✔ connexion — une adresse confirmée côté Supabase est reportée sur le profil (27.5925ms)
+[0mPOST /api/v1/auth/register [32m201[0m 9.278 ms - 1106[0m
+[0mPOST /api/v1/auth/verify-email [32m200[0m 3.704 ms - 69[0m
+✔ inscription — le lien de vérification part tout de suite, vers le site d’origine (16.6452ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 116031.1235

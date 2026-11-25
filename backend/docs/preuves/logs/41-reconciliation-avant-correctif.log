@@ -1,0 +1,81 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:62662/email : injoignable hors de cette machine.
+[2026-11-25T16:29:52.179Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne base',
+  code: null,
+  stack: 'Error: panne base\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/reconciliationComptesV1.e2e.test.mjs:25:98\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:14)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[2026-11-25T16:29:52.186Z] [ERROR] [dddfb50b-1b6c-4759-903f-6f3c572f6b27] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:186:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 411.956 ms - 154[0m
+[0mPOST /api/v1/auth/register [32m201[0m 124.012 ms - 1067[0m
+✔ RC-1 — panne après création Auth, pendant la transaction : compensation réussie, aucun orphelin (22753.3207ms)
+[2026-11-25T16:29:52.572Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne base',
+  code: null,
+  stack: 'Error: panne base\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/reconciliationComptesV1.e2e.test.mjs:25:98\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:14)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[2026-11-25T16:29:52.573Z] [ERROR] [b9d02568-f073-4b12-9be0-49dc90378a0b] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:186:20)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:6:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 18.750 ms - 154[0m
+[0mPOST /api/v1/auth/register [33m409[0m 3.273 ms - 155[0m
+prisma:error 
+Invalid `prisma.profile.update()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to update not found.
+[0mPOST /api/v1/auth/login [33m404[0m 325.138 ms - 121[0m
+[0mPOST /api/v1/auth/sync-profile [33m401[0m 0.976 ms - 136[0m
+✖ RC-2 — ÉCHEC DE LA COMPENSATION (Supabase renvoie une erreur) : journalisé, orphelin identifié, puis récupéré (388.1821ms)
+ℹ RC-2 : inscription 500 ; orphelin Auth identifié=true ; échec de compensation journalisé=false ; réinscription 409 (CONFLICT) ; connexion 404 ; sync-profile 401 ; rôle après récupération undefined (demandé : BUYER) ; orphelin après=true
+✔ RC-3 — arrêt du serveur entre la création Auth et la transaction (simulé : utilisateur Auth seul) : identifié par la réconciliation (10.4498ms)
+[0mPOST /api/v1/auth/register [32m201[0m 18.499 ms - 1067[0m
+✔ RC-4 — profil sans utilisateur Auth (ancien défaut TX-1, ou suppression dans la console) : identifié (42.9018ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26280.5967
+
+✖ failing tests:
+
+test at tests\e2e\reconciliationComptesV1.e2e.test.mjs:48:1
+✖ RC-2 — ÉCHEC DE LA COMPENSATION (Supabase renvoie une erreur) : journalisé, orphelin identifié, puis récupéré (388.1821ms)
+  AssertionError [ERR_ASSERTION]: échec de compensation journalisé dans l’audit
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/reconciliationComptesV1.e2e.test.mjs:70:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

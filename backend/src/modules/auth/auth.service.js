@@ -171,16 +171,30 @@ export const register = async (payload, req) => {
      * transaction PostgreSQL est ANNULÉE (rien n'a été validé) : on supprime
      * l'utilisateur Supabase pour ne pas laisser de compte sans profil.
      *
-     * Si la compensation échoue (réseau), il reste un utilisateur Supabase sans
-     * profil : état récupérable (connexion → `syncProfile` crée le profil ;
-     * nouvelle inscription → 409). Il est journalisé pour reprise manuelle.
+     * Si la compensation échoue, il reste un utilisateur Supabase sans profil :
+     * l'échec est journalisé (audit `auth.register.compensation_failed`) ; le
+     * compte est récupéré à la connexion (profil recréé, rôle FARMER par défaut)
+     * et identifié par `scripts/reconcilier-comptes.mjs`.
      */
-    await supabaseAdmin.auth.admin.deleteUser(authUser.id).catch((erreurCompensation) => {
+    // supabase-js ne lève PAS d'exception sur une erreur HTTP : il renvoie { error }.
+    const compensation = await supabaseAdmin.auth.admin
+      .deleteUser(authUser.id)
+      .then((r) => r, (erreur) => ({ error: erreur }));
+    if (compensation?.error) {
       logger.error(
         `[inscription] compensation échouée : utilisateur Supabase ${authUser.id} sans profil applicatif`,
-        erreurCompensation?.message ?? erreurCompensation,
+        compensation.error?.message ?? compensation.error,
       );
-    });
+      // Trace exploitable par la réconciliation (scripts/reconcilier-comptes.mjs).
+      await audit({
+        actorId: null,
+        action: 'auth.register.compensation_failed',
+        resource: 'auth_users',
+        resourceId: authUser.id,
+        req,
+        newValue: { message: String(compensation.error?.message ?? compensation.error).slice(0, 300) },
+      });
+    }
     if (error instanceof ApiError) throw error;
     logger.error('Échec de création du profil après inscription :', error);
     throw ApiError.internal('Inscription impossible, réessaie dans un instant');
@@ -373,6 +387,19 @@ export const login = async ({ identifier, password, mfaCode }, req) => {
       where: { id: userId, emailVerifiedAt: null },
       data: { emailVerifiedAt: new Date(data.user.email_confirmed_at) },
     });
+  }
+
+  /*
+   * TX-1 — compte orphelin (utilisateur Supabase sans profil : compensation
+   * échouée ou arrêt du serveur pendant l'inscription). La connexion répondait
+   * 404 (P2025) et le compte était inutilisable. Le profil est recréé.
+   */
+  if (!existing && !(await prisma.profile.findUnique({ where: { id: userId }, select: { id: true } }))) {
+    await creerProfilDepuisAuth(
+      { id: userId, email: data.user?.email ?? null, phone: data.user?.phone ?? null },
+      data.user?.user_metadata ?? {},
+    );
+    await audit({ actorId: userId, action: 'auth.profile.recovered', resource: 'profiles', resourceId: userId, req });
   }
 
   const profile = await prisma.profile.update({
@@ -705,13 +732,13 @@ export const resetPassword = async ({ tokenHash, password }, req) => {
  * Crée le profil applicatif d'un utilisateur Supabase existant mais inconnu
  * de la base (ex. inscription faite directement depuis le client Supabase).
  */
-export const syncProfile = async (req) => {
-  const authUser = req.user;
-  if (!authUser?.needsSync) throw ApiError.conflict('Profil déjà synchronisé');
-
-  const { data } = await supabase.auth.getUser(req.token);
-  const metadata = data?.user?.user_metadata ?? {};
-
+/**
+ * Crée profil + organisation individuelle + adhésion FARMER pour un utilisateur
+ * Supabase sans profil applicatif (une transaction). Utilisé par
+ * `/auth/sync-profile` et par la récupération à la connexion (TX-1).
+ * Le rôle n'est JAMAIS lu dans les métadonnées (modifiables par l'utilisateur).
+ */
+const creerProfilDepuisAuth = async (authUser, metadata = {}) => {
   const countryCode = String(metadata.countryCode ?? 'CD').toUpperCase().slice(0, 2);
 
   const created = await prisma.$transaction(async (tx) => {
@@ -750,6 +777,15 @@ export const syncProfile = async (req) => {
 
     return { profile, organization };
   });
+  return created;
+};
+
+export const syncProfile = async (req) => {
+  const authUser = req.user;
+  if (!authUser?.needsSync) throw ApiError.conflict('Profil déjà synchronisé');
+
+  const { data } = await supabase.auth.getUser(req.token);
+  const created = await creerProfilDepuisAuth(authUser, data?.user?.user_metadata ?? {});
 
   return {
     user: publicUser(created.profile, []),
