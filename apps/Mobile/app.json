@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AgriKonnect Africa",
-    "slug": "agrikonnect-africa",
+    "slug": "omedev",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "agrikonnect",
@@ -81,9 +81,9 @@
         }
       },
       "eas": {
-        "projectId": "0fd4bfa9-3539-4cbd-a8d1-788fa4eb40f2"
+        "projectId": "d5509c7c-8489-4b60-95b1-33daf6625587"
       }
     },
-    "owner": "omedev"
+    "owner": "omedevs-team"
   }
 }
