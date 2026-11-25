@@ -3,13 +3,14 @@ import assert from 'node:assert/strict';
 import { startHarness } from './support/harness.mjs';
 
 /**
- * Transactions et intégrité — démonstrations SANS modification du code applicatif.
- * TESTÉ sur PostgreSQL embarqué et faux GoTrue ; rien de VALIDÉ sur Supabase réel.
+ * Transactions et intégrité. TESTÉ sur PostgreSQL embarqué et faux GoTrue ;
+ * rien de VALIDÉ sur Supabase réel.
  *
- *  TX-1 : inscription — une écriture APRÈS la transaction échoue : le `catch`
- *         supprime l'utilisateur Supabase, mais le profil validé reste.
- *  TX-2 : `ensureBusinessConversation` — lecture puis création, sans contrainte
- *         d'unicité : deux demandes simultanées créent-elles deux fils ?
+ *  TX-1 : inscription = saga Supabase Auth → transaction PostgreSQL → étapes
+ *         non bloquantes. TX-1a : panne dans la transaction (compensation) ;
+ *         TX-1b : exception après validation (aucune compensation).
+ *  TX-2 : `ensureBusinessConversation` — 30 ouvertures simultanées d'un fil : 1 fil.
+ *  TX-3 : `createGroup` — 30 créations simultanées du même groupe : 1 groupe.
  *
  * Convention : test normal = conforme ; `todo` = anomalie confirmée.
  */
@@ -39,34 +40,56 @@ after(async () => {
   await h?.stop?.();
 });
 
-test(
-  'TX-1 — échec après la transaction d’inscription : aucune trace, et la même adresse peut se réinscrire',
-  { todo: 'ANOMALIE TX-1 — profil orphelin validé ; utilisateur Supabase supprimé ; adresse bloquée' },
-  async (t) => {
-    const email = 'orphelin-tx@agrikonnect.test';
-    const panne = () => Promise.reject(new Error('panne injectée après la transaction'));
-    const origines = { updateMany: h.prisma.profile.updateMany, tokenCreate: h.prisma.token.create };
-    h.prisma.profile.updateMany = panne;
-    h.prisma.token.create = panne;
-    let premier;
-    try {
-      premier = await inscrire(email, { consentReference: 'CONSENT-TX1-0001' });
-    } finally {
-      h.prisma.profile.updateMany = origines.updateMany;
-      h.prisma.token.create = origines.tokenCreate;
-    }
-    const profils = await h.prisma.profile.count({ where: { email } });
-    const second = await inscrire(email);
-    t.diagnostic(`TX-1 : 1re inscription ${premier.status} (${premier.body?.code ?? ''}) ; profils en base après échec : ${profils} ; réinscription ${second.status} (${second.body?.code ?? ''} ${second.body?.message ?? ''})`);
-    assert.notEqual(premier.status, 201, 'la panne doit atteindre le chemin d’erreur (sinon le test ne démontre rien)');
-    assert.equal(profils, 0, `observé : ${profils} profil(s) orphelin(s) après l’échec`);
-    assert.equal(second.status, 201, `observé : réinscription ${second.status}`);
-  },
-);
+const connexion = (email) => h.request('POST', '/auth/login', { body: { identifier: email, password: PASSWORD } });
+
+test('TX-1a — panne DANS la transaction d’inscription : rien n’est validé, Supabase compensé, réinscription possible', async (t) => {
+  const email = 'tx1a@agrikonnect.test';
+  const original = h.prisma.$transaction;
+  // La transaction exécute réellement ses écritures (profil, organisation,
+  // adhésion, jeton de consentement), puis échoue avant validation.
+  h.prisma.$transaction = (fn, options) =>
+    original.call(h.prisma, async (tx) => { await fn(tx); throw new Error('panne injectée avant validation'); }, options);
+  let premier;
+  try {
+    premier = await inscrire(email, { consentReference: 'CONSENT-TX1A-0001' });
+  } finally {
+    h.prisma.$transaction = original;
+  }
+  const profils = await h.prisma.profile.count({ where: { email } });
+  const jetons = await h.prisma.token.count({ where: { identifier: 'CONSENT-TX1A-0001' } });
+  const connexionApres = await connexion(email);
+  const second = await inscrire(email);
+  t.diagnostic(`TX-1a : inscription ${premier.status} ; profils ${profils} ; jetons ${jetons} ; connexion après échec ${connexionApres.status} ; réinscription ${second.status}`);
+  assert.equal(premier.status, 500);
+  assert.equal(profils, 0, 'aucun profil validé');
+  assert.equal(jetons, 0, 'aucun jeton de consentement validé');
+  assert.notEqual(connexionApres.status, 200, 'utilisateur Supabase supprimé par compensation');
+  assert.equal(second.status, 201, JSON.stringify(second.body));
+});
+
+test('TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes', async (t) => {
+  const email = 'tx1b@agrikonnect.test';
+  const { supabase } = await import('../../src/config/supabase.js');
+  const original = supabase.auth.resend;
+  supabase.auth.resend = () => { throw new Error('panne réseau injectée après validation'); };
+  let reponse;
+  try {
+    reponse = await inscrire(email, { consentReference: 'CONSENT-TX1B-0001' });
+  } finally {
+    supabase.auth.resend = original;
+  }
+  const profils = await h.prisma.profile.count({ where: { email } });
+  const jetons = await h.prisma.token.count({ where: { identifier: 'CONSENT-TX1B-0001' } });
+  const connexionApres = await connexion(email);
+  t.diagnostic(`TX-1b : inscription ${reponse.status} ; profils ${profils} ; jetons ${jetons} ; connexion ${connexionApres.status}`);
+  assert.equal(reponse.status, 201, JSON.stringify(reponse.body));
+  assert.equal(profils, 1);
+  assert.equal(jetons, 1);
+  assert.equal(connexionApres.status, 200, 'utilisateur Supabase conservé : comptes cohérents');
+});
 
 test(
   'TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil',
-  { todo: 'ANOMALIE TX-2 — lecture puis création sans contrainte d’unicité : fils en double' },
   async (t) => {
     const corps = { subjectType: 'DIRECT', subjectId: `DM-${Date.now()}-0000000`, participantOrgIds: [comptes.ben.organizationId] };
     const reponses = await Promise.all(
@@ -78,3 +101,25 @@ test(
     assert.equal(fils, 1, `observé : ${fils} fils`);
   },
 );
+
+test('TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe', async (t) => {
+  const corps = { name: `Groupe concurrent ${Date.now()}`, participantOrgIds: [comptes.ben.organizationId] };
+  const reponses = await Promise.all(
+    Array.from({ length: 30 }, () => h.request('POST', '/messaging/groups', { token: comptes.awa.token, body: corps })),
+  );
+  const groupes = await h.prisma.conversation.count({ where: { subjectType: 'GROUP', subjectId: `GRP:${corps.name}` } });
+  const ids = new Set(reponses.map((r) => r.body?.data?.id));
+  t.diagnostic(`TX-3 : statuts ${[...new Set(reponses.map((r) => r.status))].join(',')} ; groupes créés ${groupes} ; identifiants renvoyés distincts ${ids.size}`);
+  assert.ok(reponses.every((r) => r.status === 201), reponses.map((r) => r.status).join(','));
+  assert.equal(groupes, 1, `observé : ${groupes} groupes`);
+  assert.equal(ids.size, 1, 'toutes les réponses désignent le même groupe');
+});
+
+test('TX-2/TX-3 — sujets différents : pas de sérialisation abusive (fils distincts créés en parallèle)', async () => {
+  const sujets = Array.from({ length: 5 }, (_, i) => `DM-${Date.now()}-${i}-parallele`);
+  await Promise.all(sujets.map((subjectId) => h.request('POST', '/messaging/conversations', {
+    token: comptes.awa.token,
+    body: { subjectType: 'DIRECT', subjectId, participantOrgIds: [comptes.ben.organizationId] },
+  })));
+  for (const subjectId of sujets) assert.equal(await h.prisma.conversation.count({ where: { subjectId } }), 1);
+});

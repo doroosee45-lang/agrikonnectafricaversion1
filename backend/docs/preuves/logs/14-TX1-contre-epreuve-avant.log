@@ -1,0 +1,81 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:62937/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 718.180 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 136.585 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 36.092 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 36.139 ms - 919[0m
+[2026-11-25T15:13:07.826Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne injectée avant validation',
+  code: null,
+  stack: 'Error: panne injectée avant validation\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:51:65\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:101:20)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[2026-11-25T15:13:07.830Z] [ERROR] [f322b839-1238-400d-bc94-9aeb6ed9ca32] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:229:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 54.021 ms - 154[0m
+[0mPOST /api/v1/auth/login [33m401[0m 10.337 ms - 126[0m
+[0mPOST /api/v1/auth/register [32m201[0m 20.859 ms - 1075[0m
+✔ TX-1a — panne DANS la transaction d’inscription : rien n’est validé, Supabase compensé, réinscription possible (20603.6787ms)
+ℹ TX-1a : inscription 500 ; profils 0 ; jetons 0 ; connexion après échec 401 ; réinscription 201
+[2026-11-25T15:13:07.969Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne réseau injectée après validation',
+  code: null,
+  stack: 'Error: panne réseau injectée après validation\n' +
+    '    at supabase.auth.resend (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:74:40)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:184:41)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[2026-11-25T15:13:07.970Z] [ERROR] [b5957cfa-c443-41bb-ae55-b4852ffb8620] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:229:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 17.146 ms - 154[0m
+[0mPOST /api/v1/auth/login [33m401[0m 11.431 ms - 126[0m
+✖ TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes (42.7472ms)
+ℹ TX-1b : inscription 500 ; profils 1 ; jetons 1 ; connexion 401
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23222.9909
+
+✖ failing tests:
+
+test at tests\e2e\transactionsV1.e2e.test.mjs:70:1
+✖ TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes (42.7472ms)
+  AssertionError [ERR_ASSERTION]: {"success":false,"code":"INTERNAL_ERROR","message":"Inscription impossible, réessaie dans un instant","requestId":"b5957cfa-c443-41bb-ae55-b4852ffb8620"}
+  
+  500 !== 201
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:85:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 500,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

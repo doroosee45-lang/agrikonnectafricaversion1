@@ -1,0 +1,112 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:63836/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 179.744 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 45.282 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 22.966 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 20.659 ms - 919[0m
+[2026-11-25T15:14:37.438Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne injectée avant validation',
+  code: null,
+  stack: 'Error: panne injectée avant validation\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:51:65\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:14)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[2026-11-25T15:14:37.442Z] [ERROR] [87bd3c93-6229-4917-be8a-61cc914d5570] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:186:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 28.599 ms - 154[0m
+[0mPOST /api/v1/auth/login [33m401[0m 7.921 ms - 126[0m
+[0mPOST /api/v1/auth/register [32m201[0m 19.199 ms - 1075[0m
+✔ TX-1a — panne DANS la transaction d’inscription : rien n’est validé, Supabase compensé, réinscription possible (23989.44ms)
+ℹ TX-1a : inscription 500 ; profils 0 ; jetons 0 ; connexion après échec 401 ; réinscription 201
+[0mPOST /api/v1/auth/register [32m201[0m 17.512 ms - 1075[0m
+[0mPOST /api/v1/auth/login [32m200[0m 13.467 ms - 917[0m
+✔ TX-1b — exception APRÈS validation (envoi d’e-mail) : inscription réussie, compte présent dans les deux systèmes (42.636ms)
+ℹ TX-1b : inscription 201 ; profils 1 ; jetons 1 ; connexion 200
+[0mPOST /api/v1/messaging/conversations [32m200[0m 276.210 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 261.704 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 267.278 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 284.914 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 288.380 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 289.169 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 275.488 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 277.198 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 296.175 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 287.281 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 309.800 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 288.257 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 297.805 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 315.592 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 337.041 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 310.541 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 339.897 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 317.302 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 319.453 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 345.565 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 343.258 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 362.392 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 324.819 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 350.098 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 337.538 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 342.444 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 344.197 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 347.784 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 348.525 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 350.113 ms - 343[0m
+✔ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (441.2794ms)
+ℹ TX-2 : statuts 201,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200 ; fils créés 1
+[0mPOST /api/v1/messaging/groups [32m201[0m 156.139 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 163.982 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 167.297 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 172.105 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 176.614 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 184.341 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 184.081 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 186.112 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 188.295 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 194.376 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 197.160 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 199.872 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 203.338 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 208.056 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 211.175 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 214.682 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 219.339 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 222.046 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 224.428 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 226.654 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 231.050 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 234.616 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 256.322 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 237.005 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 237.996 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 239.958 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 242.365 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 244.704 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 245.798 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 248.482 ms - 331[0m
+✔ TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe (292.2582ms)
+ℹ TX-3 : statuts 201 ; groupes créés 1 ; identifiants renvoyés distincts 1
+[0mPOST /api/v1/messaging/conversations [32m201[0m 27.864 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 26.673 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 29.158 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 31.364 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 30.992 ms - 332[0m
+✔ TX-2/TX-3 — sujets différents : pas de sérialisation abusive (fils distincts créés en parallèle) (47.4578ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27821.9605

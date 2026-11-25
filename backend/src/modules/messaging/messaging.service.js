@@ -14,7 +14,7 @@ import { storageKey as cleStockage } from '../../shared/crypto.js';
 import { logger } from '../../shared/http/logger.js';
 import { audit } from '../../shared/audit.js';
 import { notifyMany } from '../../shared/events.js';
-import { ensureBusinessConversation, SUBJECT_TYPES } from '../../shared/conversations.js';
+import { ensureBusinessConversationDetaille, cleVerrouSujet, SUBJECT_TYPES } from '../../shared/conversations.js';
 import {
   emitToConversation,
   emitToOrganizations,
@@ -258,13 +258,16 @@ export const startConversation = async ({ subjectType, subjectId, participantOrg
   });
   if (existing) return { conversation: existing, replayed: true };
 
-  const conversation = await ensureBusinessConversation({
+  // TX-2 : création sérialisée par sujet ; `created` faux si une requête
+  // concurrente l'a créé entre-temps (alors : rejeu, ni audit ni émission).
+  const { conversation, created } = await ensureBusinessConversationDetaille({
     subjectType,
     subjectId,
     participantOrgIds: participants,
     firstMessage: firstMessage ? String(firstMessage).trim() : null,
     actorUserId: req.user.id,
   });
+  if (!created) return { conversation, replayed: true };
 
   await audit({
     actorId: req.user.id,
@@ -326,15 +329,19 @@ export const createGroup = async ({ name, description, participantOrgIds = [] },
    * d'un autre administrateur contenant aussi C, et les messages partaient à
    * un membre que le créateur n'avait pas choisi.
    */
-  const candidats = await prisma.conversation.findMany({
-    where: { subjectType: "GROUP", subjectId, status: "OPEN", participantOrgIds: { hasEvery: participants } },
-  });
-  const identique = candidats.find(
-    (c) => c.participantOrgIds[0] === req.tenant.organizationId && c.participantOrgIds.length === participants.length,
-  );
-  if (identique) return identique;
+  // TX-2 (étude createGroup) : recherche du groupe identique et création dans
+  // UNE transaction, sérialisée par le verrou du sujet `GROUP:<nom>`. Sans cela,
+  // deux envois simultanés créaient deux groupes identiques.
+  const { conversation, created } = await prisma.$transaction(async (tx) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtextextended(${cleVerrouSujet("GROUP", subjectId)}, 0))`;
+    const candidats = await tx.conversation.findMany({
+      where: { subjectType: "GROUP", subjectId, status: "OPEN", participantOrgIds: { hasEvery: participants } },
+    });
+    const identique = candidats.find(
+      (c) => c.participantOrgIds[0] === req.tenant.organizationId && c.participantOrgIds.length === participants.length,
+    );
+    if (identique) return { conversation: identique, created: false };
 
-  const conversation = await prisma.$transaction(async (tx) => {
     const cree = await tx.conversation.create({
       data: { id: resolveId(), subjectType: "GROUP", subjectId, participantOrgIds: participants, status: "OPEN" },
     });
@@ -349,8 +356,10 @@ export const createGroup = async ({ name, description, participantOrgIds = [] },
         readBy: [req.user.id],
       },
     });
-    return cree;
+    return { conversation: cree, created: true };
   });
+  if (!created) return conversation;
+
   await audit({
     actorId: req.user.id,
     action: "conversation.create",

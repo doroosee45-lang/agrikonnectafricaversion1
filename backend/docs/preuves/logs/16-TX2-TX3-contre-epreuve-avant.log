@@ -1,0 +1,119 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:50312/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 220.310 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.680 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 21.282 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.759 ms - 919[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 300.337 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 260.896 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 297.685 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 284.979 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 289.909 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 292.582 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 297.546 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 300.971 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 281.721 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 283.282 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 285.183 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 265.875 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 270.298 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 279.646 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 273.346 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 276.505 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 275.328 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 278.571 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 298.083 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 269.414 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 271.028 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 265.255 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 276.293 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 266.365 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 262.976 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 265.337 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 309.945 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 288.449 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 265.631 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 300.798 ms - 343[0m
+✖ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (12395.7435ms)
+ℹ TX-2 : statuts 201,201,201,201,201,201,201,201,200,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201 ; fils créés 22
+[0mPOST /api/v1/messaging/groups [32m201[0m 147.574 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.421 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 147.838 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.129 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 156.433 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 155.310 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 153.016 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.124 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 150.549 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 159.064 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 150.225 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 153.554 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 148.904 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 150.781 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 144.947 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 136.869 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 141.641 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 149.746 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.032 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 162.260 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 148.721 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 142.258 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 146.726 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 143.138 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 152.285 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.088 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 163.473 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 150.782 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 154.615 ms - 331[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 153.157 ms - 331[0m
+✖ TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe (199.2742ms)
+ℹ TX-3 : statuts 201 ; groupes créés 30 ; identifiants renvoyés distincts 30
+[0mPOST /api/v1/messaging/conversations [32m201[0m 15.727 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 15.478 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 14.979 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 15.659 ms - 332[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 17.934 ms - 332[0m
+✔ TX-2/TX-3 — sujets différents : pas de sérialisation abusive (fils distincts créés en parallèle) (31.6135ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15008.4799
+
+✖ failing tests:
+
+test at tests\e2e\transactionsV1.e2e.test.mjs:91:1
+✖ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (12395.7435ms)
+  AssertionError [ERR_ASSERTION]: observé : 22 fils
+  
+  22 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:101:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 22,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\transactionsV1.e2e.test.mjs:105:1
+✖ TX-3 — trente créations simultanées du même groupe (même nom, mêmes membres) : un seul groupe (199.2742ms)
+  AssertionError [ERR_ASSERTION]: observé : 30 groupes
+  
+  30 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:114:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 30,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -516,6 +516,12 @@ export const createFakePrisma = (initial = {}) => {
     if (sql.includes('pg_advisory_unlock')) return [{ unlocked: true }];
     return [];
   };
+  /*
+   * Verrous consultatifs transactionnels (`pg_advisory_xact_lock`, TX-2) :
+   * sans objet dans ce double monoprocessus, exécuté sans concurrence réelle.
+   * La sérialisation elle-même est prouvée sur PostgreSQL (e2e TX-2, TX-3).
+   */
+  fake.$executeRaw = async () => 0;
   fake.$disconnect = async () => {};
   fake.$connect = async () => {};
 

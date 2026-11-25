@@ -96,9 +96,10 @@ export const register = async (payload, req) => {
 
   const authUser = created.data.user;
 
+  let result;
   try {
-    // 2. Profil + organisation + appartenance (transaction atomique)
-    const result = await prisma.$transaction(async (tx) => {
+    // 2. Phase B — profil + organisation + appartenance (transaction atomique)
+    result = await prisma.$transaction(async (tx) => {
       const profile = await tx.profile.create({
         data: {
           id: authUser.id,
@@ -146,88 +147,123 @@ export const register = async (payload, req) => {
         });
       }
 
-      return { profile, organization, membership };
-    });
-
-    // 3. Traçabilité du consentement pour l'inscription assistée (AUTH-07)
-    if (consentReference) {
-      await prisma.token.create({
-        data: {
-          userId: authUser.id,
-          identifier: consentReference,
-          tokenHash: sha256(generateToken()),
-          purpose: 'AGENT_CONSENT',
-          expiresAt: new Date(Date.now() + 365 * 24 * 3600 * 1000),
-          metadata: { agentId: req?.user?.id ?? null },
-        },
-      });
-    }
-
-    await audit({
-      actorId: authUser.id,
-      action: 'auth.register',
-      resource: 'profiles',
-      resourceId: authUser.id,
-      req,
-      newValue: { accountType, countryCode, organizationId: result.organization.id },
-    });
-
-    /*
-     * 4. Lien de vérification d'adresse. `admin.createUser` n'envoie aucun
-     * e-mail : sans cet appel, le lien ne partait que si l'utilisateur pensait
-     * à cliquer « Renvoyer ». L'adresse de retour est celle du site qui a fait
-     * la demande (`PUBLIC_WEB_URL`). Un échec d'envoi (quota du fournisseur)
-     * ne fait pas échouer l'inscription : l'écran de vérification propose le
-     * renvoi.
-     */
-    if (email) {
-      const envoi = await supabase.auth.resend({
-        type: 'signup',
-        email,
-        options: { emailRedirectTo: lienVerificationEmail() },
-      });
-      if (envoi.error) logger.warn('Envoi du lien de vérification après inscription :', envoi.error.message);
-    }
-
-    // 5. Session immédiate si l'email est fourni (sinon vérification requise)
-    let session = null;
-    if (email) {
-      const signIn = await supabase.auth.signInWithPassword({ email, password });
-      session = signIn.data?.session ?? null;
-      // Même report qu'à la connexion : une adresse déjà confirmée côté Supabase
-      // (projet sans « Confirm email ») est vérifiée pour l'application (H-07).
-      const confirmeeLe = signIn.data?.user?.email_confirmed_at;
-      if (confirmeeLe) {
-        await prisma.profile.updateMany({
-          where: { id: result.profile.id, emailVerifiedAt: null },
-          data: { emailVerifiedAt: new Date(confirmeeLe) },
+      // 3. Traçabilité du consentement pour l'inscription assistée (AUTH-07) :
+      // écriture métier, donc dans la même transaction (TX-1).
+      if (consentReference) {
+        await tx.token.create({
+          data: {
+            userId: authUser.id,
+            identifier: consentReference,
+            tokenHash: sha256(generateToken()),
+            purpose: 'AGENT_CONSENT',
+            expiresAt: new Date(Date.now() + 365 * 24 * 3600 * 1000),
+            metadata: { agentId: req?.user?.id ?? null },
+          },
         });
       }
-    }
 
-    return {
-      user: publicUser(result.profile, [{ ...result.membership, organization: result.organization }]),
-      organization: {
-        id: result.organization.id,
-        type: result.organization.type,
-        name: result.organization.name,
-      },
-      session: session
-        ? {
-            accessToken: session.access_token,
-            refreshToken: session.refresh_token,
-            expiresIn: session.expires_in,
-          }
-        : null,
-      nextSteps: email ? ['verify-email', 'verify-phone'] : ['verify-phone'],
-    };
+      return { profile, organization, membership };
+    });
   } catch (error) {
-    // Compensation : on ne laisse pas un utilisateur Supabase sans profil.
-    await supabaseAdmin.auth.admin.deleteUser(authUser.id).catch(() => {});
+    /*
+     * Compensation de la phase B (TX-1). Supabase Auth et PostgreSQL sont deux
+     * systèmes distincts : aucune transaction ne les couvre ensemble. Ici, la
+     * transaction PostgreSQL est ANNULÉE (rien n'a été validé) : on supprime
+     * l'utilisateur Supabase pour ne pas laisser de compte sans profil.
+     *
+     * Si la compensation échoue (réseau), il reste un utilisateur Supabase sans
+     * profil : état récupérable (connexion → `syncProfile` crée le profil ;
+     * nouvelle inscription → 409). Il est journalisé pour reprise manuelle.
+     */
+    await supabaseAdmin.auth.admin.deleteUser(authUser.id).catch((erreurCompensation) => {
+      logger.error(
+        `[inscription] compensation échouée : utilisateur Supabase ${authUser.id} sans profil applicatif`,
+        erreurCompensation?.message ?? erreurCompensation,
+      );
+    });
     if (error instanceof ApiError) throw error;
     logger.error('Échec de création du profil après inscription :', error);
     throw ApiError.internal('Inscription impossible, réessaie dans un instant');
   }
+
+  /*
+   * Phase C — après validation de la transaction. Le compte existe dans les
+   * DEUX systèmes : aucune étape ci-dessous ne doit déclencher la compensation
+   * (sinon profil validé + utilisateur Supabase supprimé = adresse bloquée,
+   * TX-1). Chaque étape est donc non bloquante et journalisée en cas d'échec.
+   */
+  const nonBloquant = async (etape, fn) => {
+    try {
+      return await fn();
+    } catch (erreur) {
+      logger.warn(`[inscription] étape « ${etape} » en échec (compte créé, non bloquant) :`, erreur?.message ?? erreur);
+      return null;
+    }
+  };
+
+  await nonBloquant('audit', () => audit({
+    actorId: authUser.id,
+    action: 'auth.register',
+    resource: 'profiles',
+    resourceId: authUser.id,
+    req,
+    newValue: { accountType, countryCode, organizationId: result.organization.id },
+  }));
+
+  /*
+   * 4. Lien de vérification d'adresse. `admin.createUser` n'envoie aucun
+   * e-mail : sans cet appel, le lien ne partait que si l'utilisateur pensait
+   * à cliquer « Renvoyer ». L'adresse de retour est celle du site qui a fait
+   * la demande (`PUBLIC_WEB_URL`). Un échec d'envoi (quota du fournisseur)
+   * ne fait pas échouer l'inscription : l'écran de vérification propose le
+   * renvoi.
+   */
+  if (email) {
+    const envoi = await nonBloquant('lien de vérification', () =>
+      supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: { emailRedirectTo: lienVerificationEmail() },
+      }),
+    );
+    if (envoi?.error) logger.warn('Envoi du lien de vérification après inscription :', envoi.error.message);
+  }
+
+  // 5. Session immédiate si l'email est fourni (sinon vérification requise)
+  let session = null;
+  if (email) {
+    const signIn = await nonBloquant('ouverture de session', () => supabase.auth.signInWithPassword({ email, password }));
+    session = signIn?.data?.session ?? null;
+    // Même report qu'à la connexion : une adresse déjà confirmée côté Supabase
+    // (projet sans « Confirm email ») est vérifiée pour l'application (H-07).
+    // Non bloquant : reportée à la prochaine connexion si elle échoue ici.
+    const confirmeeLe = signIn?.data?.user?.email_confirmed_at;
+    if (confirmeeLe) {
+      await nonBloquant('report de la confirmation d’adresse', () =>
+        prisma.profile.updateMany({
+          where: { id: result.profile.id, emailVerifiedAt: null },
+          data: { emailVerifiedAt: new Date(confirmeeLe) },
+        }),
+      );
+    }
+  }
+
+  return {
+    user: publicUser(result.profile, [{ ...result.membership, organization: result.organization }]),
+    organization: {
+      id: result.organization.id,
+      type: result.organization.type,
+      name: result.organization.name,
+    },
+    session: session
+      ? {
+          accessToken: session.access_token,
+          refreshToken: session.refresh_token,
+          expiresIn: session.expires_in,
+        }
+      : null,
+    nextSteps: email ? ['verify-email', 'verify-phone'] : ['verify-phone'],
+  };
 };
 
 /** AUTH-02 — Connexion par email ou téléphone + mot de passe. */

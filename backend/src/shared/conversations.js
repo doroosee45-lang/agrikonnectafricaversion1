@@ -14,10 +14,23 @@ import { logger } from './http/logger.js';
 export const SUBJECT_TYPES = ['LISTING', 'ORDER', 'TRANSPORT', 'DISPUTE', 'PROJECT', 'DIRECT', 'GROUP', 'ORGANIZATION', 'COOPERATIVE', 'FARM'];
 
 /**
- * Retourne la conversation ouverte du dossier, ou la crée.
- * Idempotent : deux appels simultanés ne créent pas deux fils.
+ * Clé du verrou consultatif d'un sujet de conversation. Toutes les ouvertures
+ * d'un même sujet sont sérialisées ; des sujets différents restent parallèles.
  */
-export const ensureBusinessConversation = async ({
+export const cleVerrouSujet = (subjectType, subjectId) => `conversation:${subjectType}:${subjectId}`;
+
+/**
+ * Retourne la conversation ouverte du dossier, ou la crée — `{ conversation, created }`.
+ *
+ * TX-2 : la lecture (`findFirst`) et la création se faisaient sans protection :
+ * 30 ouvertures simultanées créaient jusqu'à 21 fils identiques (aucune
+ * contrainte d'unicité sur `conversations`). Elles sont désormais dans UNE
+ * transaction, précédée d'un verrou consultatif TRANSACTIONNEL
+ * (`pg_advisory_xact_lock`) : libéré à la validation, compatible avec
+ * PgBouncer en mode transaction, sans migration. Le premier message est créé
+ * dans la même transaction (plus de fil sans message après une panne).
+ */
+export const ensureBusinessConversationDetaille = async ({
   subjectType,
   subjectId,
   participantOrgIds,
@@ -25,38 +38,46 @@ export const ensureBusinessConversation = async ({
   actorUserId = null,
 }) => {
   const participants = [...new Set(participantOrgIds.filter(Boolean))];
-  if (participants.length < 2) return null;
+  if (participants.length < 2) return { conversation: null, created: false };
 
-  const existing = await prisma.conversation.findFirst({
-    where: {
-      subjectType,
-      subjectId,
-      status: 'OPEN',
-      participantOrgIds: { hasEvery: participants },
-    },
-  });
-  if (existing) return existing;
+  return prisma.$transaction(async (tx) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtextextended(${cleVerrouSujet(subjectType, subjectId)}, 0))`;
 
-  const conversation = await prisma.conversation.create({
-    data: { id: resolveId(), subjectType, subjectId, participantOrgIds: participants, status: 'OPEN' },
-  });
-
-  if (firstMessage) {
-    await prisma.message.create({
-      data: {
-        id: resolveId(),
-        conversationId: conversation.id,
-        senderId: actorUserId,
-        senderOrgId: participants[0],
-        body: firstMessage,
-        attachments: [],
-        readBy: actorUserId ? [actorUserId] : [],
+    const existing = await tx.conversation.findFirst({
+      where: {
+        subjectType,
+        subjectId,
+        status: 'OPEN',
+        participantOrgIds: { hasEvery: participants },
       },
     });
-  }
+    if (existing) return { conversation: existing, created: false };
 
-  return conversation;
+    const conversation = await tx.conversation.create({
+      data: { id: resolveId(), subjectType, subjectId, participantOrgIds: participants, status: 'OPEN' },
+    });
+
+    if (firstMessage) {
+      await tx.message.create({
+        data: {
+          id: resolveId(),
+          conversationId: conversation.id,
+          senderId: actorUserId,
+          senderOrgId: participants[0],
+          body: firstMessage,
+          attachments: [],
+          readBy: actorUserId ? [actorUserId] : [],
+        },
+      });
+    }
+
+    return { conversation, created: true };
+  });
 };
+
+/** Contrat historique : la conversation seule (ou `null` à moins de deux parties). */
+export const ensureBusinessConversation = async (params) =>
+  (await ensureBusinessConversationDetaille(params)).conversation;
 
 /**
  * Ouverture « best effort » : un échec de création de conversation ne doit
