@@ -1,0 +1,56 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:63130/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 92.695 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 20.580 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.282 ms - 1075[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.592 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.276 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.337 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 10.519 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.543 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 12.975 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.847 ms - 937[0m
+[0mPOST /api/v1/messaging/groups [33m403[0m 4.965 ms - 194[0m
+[0mPOST /api/v1/calls [33m403[0m 3.307 ms - 194[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 7.319 ms - 112[0m
+✔ H-07 — un compte non vérifié ne crée pas de groupe ; la synchronisation reste lisible (12821.2324ms)
+[0mPATCH /api/v1/organizations/01M894CFZV5HA6C10X9ZAKVQS6 [32m200[0m 8.486 ms - 320[0m
+[0mPATCH /api/v1/organizations/01M894CG2QS7F2SS7Q9R6TPMZT [33m404[0m 5.644 ms - 124[0m
+✔ Organisation — le responsable modifie SON organisation, jamais celle d’un autre (20.1858ms)
+[0mGET /api/v1/verifications/me [32m200[0m 20.708 ms - 600[0m
+[0mPOST /api/v1/verifications [33m404[0m 3.895 ms - 134[0m
+[0mPOST /api/v1/verifications [32m201[0m 9.217 ms - 459[0m
+✔ Vérification — un acheteur lit son statut ; personne ne dépose au nom d’autrui (39.7718ms)
+[2026-11-25T10:35:23.774Z] [ERROR] [fa989fdd-0765-4317-98cf-5d165f491e10] POST /api/v1/media/upload-url — {
+  name: 'ApiError',
+  message: "Impossible de générer l'URL d'upload",
+  code: 'INTERNAL_ERROR',
+  stack: "ApiError: Impossible de générer l'URL d'upload\n" +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.createUploadUrl (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/media/media.service.js:101:36)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async createUploadUrl (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/media/media.controller.js:5:16)'
+}
+[0mPOST /api/v1/media/upload-url [31m500[0m 12.541 ms - 143[0m
+✔ Médias — un acheteur peut demander une URL d’envoi avec `kind: IMAGE` (17.0979ms)
+[0mPOST /api/v1/messaging/conversations [32m201[0m 9.926 ms - 323[0m
+[0mPOST /api/v1/messaging/conversations/01M894CG8A77SHTP3H4H0QVHF0/messages [33m422[0m 13.586 ms - 275[0m
+[0mPOST /api/v1/messaging/conversations/01M894CG8A77SHTP3H4H0QVHF0/messages [32m201[0m 21.379 ms - 419[0m
+[0mGET /api/v1/messaging/conversations/01M894CG8A77SHTP3H4H0QVHF0/messages [32m200[0m 8.488 ms - 697[0m
+✔ Pièces jointes — clé étrangère refusée, clé de l’expéditeur acceptée avec `attachmentUrls` (60.9762ms)
+[0mPOST /api/v1/farms [32m201[0m 13.298 ms - 824[0m
+[0mPOST /api/v1/plots [32m201[0m 18.804 ms - 626[0m
+[0mPOST /api/v1/farms [32m201[0m 8.977 ms - 827[0m
+[0mPOST /api/v1/plots [32m201[0m 7.159 ms - 624[0m
+[0mPOST /api/v1/organizations [32m201[0m 11.044 ms - 595[0m
+[0mPOST /api/v1/cooperatives/01M894CGBZA5KBHF6HPSW42V42/members [32m201[0m 14.421 ms - 480[0m
+[0mPATCH /api/v1/cooperatives/01M894CGBZA5KBHF6HPSW42V42/members/cmwvzmb9t001nd7pdvssw6p1k [32m200[0m 8.717 ms - 474[0m
+[0mGET /api/v1/cooperatives/01M894CGBZA5KBHF6HPSW42V42/overview [32m200[0m 57.911 ms - 310[0m
+✔ Coopérative — l’agrégation ne lit que l’exploitation individuelle du membre consentant (154.761ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15214.0976

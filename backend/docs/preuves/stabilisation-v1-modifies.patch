@@ -1,0 +1,2824 @@
+diff --git a/backend/package.json b/backend/package.json
+index 88506dc..0e209bd 100644
+--- a/backend/package.json
++++ b/backend/package.json
+@@ -22,18 +22,18 @@
+     "check:fields": "node scripts/check-fields.mjs",
+     "check:env": "node scripts/check-env.mjs",
+     "check:perms": "node scripts/check-perms.mjs",
+-    "test": "node --test --test-concurrency=2 --test-force-exit --test-timeout=240000 tests/profileSettings.test.mjs tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
+-    "test:dbless": "node --test --test-concurrency=2 --test-force-exit --test-name-pattern=\"^(?!.*\\[db\\]).*\" tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
++    "test": "node --test --test-concurrency=2 --test-force-exit --test-timeout=240000 tests/profileSettings.test.mjs tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/stabilisationV1.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
++    "test:dbless": "node --test --test-concurrency=2 --test-force-exit --test-name-pattern=\"^(?!.*\\[db\\]).*\" tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/stabilisationV1.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
+     "check:trace": "node scripts/check-traceability.mjs",
+     "docs:traceability": "node scripts/check-traceability.mjs --md",
+     "docs:requirements": "node scripts/check-requirements.mjs --md docs/REQUIREMENTS.md",
+     "check:req": "node scripts/check-requirements.mjs",
+     "check:cdc": "node scripts/check-cdc.mjs",
+-    "test:unit": "node --test --test-concurrency=2 tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
++    "test:unit": "node --test --test-concurrency=2 tests/adminDashboard.test.mjs tests/adminGovernance.test.mjs tests/adminSettings.test.mjs tests/adminMonitoring.test.mjs tests/adminNotifications.test.mjs tests/adminOperations.test.mjs tests/adminSecurity.test.mjs tests/adminUsers.test.mjs tests/agronomicRangesCsv.test.mjs tests/alertLabels.test.mjs tests/alertMessageGsm.test.mjs tests/alerts.test.mjs tests/anomalies.integration.test.mjs tests/anomalies.test.mjs tests/apiQuota.test.mjs tests/apiUsageWrite.test.mjs tests/authShortcut.test.mjs tests/dataMode.test.mjs tests/errorCodeContract.test.mjs tests/families-v1.integration.test.mjs tests/families.integration.test.mjs tests/fileMagic.test.mjs tests/fileParsers.test.mjs tests/forecast.integration.test.mjs tests/forecastAdjustment.test.mjs tests/geospatial.integration.test.mjs tests/geospatialImport.test.mjs tests/hardware.test.mjs tests/i18n.test.mjs tests/intelligence.integration.test.mjs tests/interpolation.integration.test.mjs tests/jobs.integration.test.mjs tests/listings.integration.test.mjs tests/logic.test.mjs tests/messaging.integration.test.mjs tests/messagingConfig.test.mjs tests/mfaBackupCodes.test.mjs tests/mfaSecretExposure.test.mjs tests/multipartS3.test.mjs tests/openapiNotes.test.mjs tests/orderStateMachine.test.mjs tests/orders.integration.test.mjs tests/phoneE164Alignment.test.mjs tests/publicWebUrl.test.mjs tests/databaseUrl.test.mjs tests/auditLot1.test.mjs tests/auditLot2.test.mjs tests/auditLot3.test.mjs tests/calls.test.mjs tests/push.test.mjs tests/policies.integration.test.mjs tests/quietHours.test.mjs tests/rateLimitDeposit.test.mjs tests/recommendation.test.mjs tests/recommendationLabels.test.mjs tests/recommendationScoring.test.mjs tests/req-extra.integration.test.mjs tests/req-v1.integration.test.mjs tests/stabilisationV1.test.mjs tests/req-v2.integration.test.mjs tests/req-v3.integration.test.mjs tests/req-v4.integration.test.mjs tests/req-v5.integration.test.mjs tests/reviews.integration.test.mjs tests/satellite.test.mjs tests/seasons.test.mjs tests/startupReport.test.mjs tests/twilioErrors.test.mjs tests/twilioFallback.test.mjs tests/twilioSms.test.mjs tests/webLinks.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs",
+     "check:migrations": "node scripts/check-migrations.mjs",
+     "sms:verifier-config": "node scripts/sms-verifier-config.mjs",
+     "email:verifier-config": "node scripts/email-verifier-config.mjs",
+-    "test:e2e": "node --test --test-concurrency=1 tests/e2e/auditLot3.e2e.test.mjs tests/e2e/calls.e2e.test.mjs tests/e2e/push.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs",
++    "test:e2e": "node --test --test-concurrency=1 tests/e2e/stabilisationV1.e2e.test.mjs tests/e2e/realtimeStabilisation.e2e.test.mjs tests/e2e/auditLot3.e2e.test.mjs tests/e2e/calls.e2e.test.mjs tests/e2e/push.e2e.test.mjs tests/e2e/journeys.e2e.test.mjs tests/e2e/completenessByRole.e2e.test.mjs tests/e2e/intelligence.e2e.test.mjs tests/e2e/channels.e2e.test.mjs tests/e2e/adminSettings.e2e.test.mjs tests/e2e/adminMonitoring.e2e.test.mjs tests/e2e/adminNotifications.e2e.test.mjs tests/e2e/adminOperations.e2e.test.mjs tests/e2e/adminSecurity.e2e.test.mjs tests/e2e/adminUsers.e2e.test.mjs tests/e2e/agronomicRanges.e2e.test.mjs tests/e2e/alerts.e2e.test.mjs tests/e2e/forecastPipeline.e2e.test.mjs tests/e2e/interpolation.e2e.test.mjs tests/e2e/satellite.e2e.test.mjs tests/e2e/anomalies.e2e.test.mjs tests/e2e/scoringEngine.e2e.test.mjs tests/e2e/smsTwilio.e2e.test.mjs tests/e2e/alertSmsJob.e2e.test.mjs tests/e2e/seasons.e2e.test.mjs tests/e2e/geospatialImport.e2e.test.mjs tests/e2e/mfaLogin.e2e.test.mjs tests/e2e/verifyEmail.e2e.test.mjs tests/e2e/seedDemo.e2e.test.mjs tests/e2e/smsVerification.e2e.test.mjs tests/e2e/geospatialQuota.e2e.test.mjs tests/e2e/geospatialUpload.e2e.test.mjs tests/e2e/alertEscalation.e2e.test.mjs tests/e2e/otpVerification.e2e.test.mjs tests/e2e/surfacePublique.e2e.test.mjs tests/e2e/twilioWebhookUrl.e2e.test.mjs tests/e2e/twilioErrors.e2e.test.mjs",
+     "smoke": "node scripts/smoke-http.mjs",
+     "contre-epreuves": "node scripts/contre-epreuves.mjs",
+     "verify": "npm run check && npm run check:fields && npm run check:env && npm run check:perms && npm run check:trace && npm run check:req && npm run check:cdc && npm run test:geoai && npm test && npm run test:e2e && npm run check:migrations && npm run check:mounts && npm run check:models && npm run smoke",
+diff --git a/backend/src/middleware/idempotency.js b/backend/src/middleware/idempotency.js
+index 7b89cc7..600b218 100644
+--- a/backend/src/middleware/idempotency.js
++++ b/backend/src/middleware/idempotency.js
+@@ -18,9 +18,20 @@ import { logger } from '../shared/http/logger.js';
+ /** M-01 — fonction pure (testée) : clé stockée, cloisonnée par utilisateur. */
+ export const cleIdempotence = (userId, cleClient) => `${userId ?? 'anonyme'}:${String(cleClient)}`;
+ 
+-export const idempotency = (scope) => async (req, res, next) => {
++/**
++ * @param {string} scope
++ * @param {{ facultatif?: boolean }} [options]
++ *   `facultatif: true` — sans en-tête, la requête passe inchangée ; avec
++ *   en-tête, la règle s'applique entièrement. Utilisé pour les créations V1
++ *   (exploitations, parcelles, productions) : le mobile envoie la clé pour ne
++ *   pas dupliquer une création renvoyée après une coupure réseau, le Web ne
++ *   l'envoie pas et ne doit pas recevoir de 400.
++ */
++export const idempotency = (scope, { facultatif = false } = {}) => async (req, res, next) => {
+   const key = req.headers['idempotency-key'];
+ 
++  if (facultatif && (key === undefined || key === '')) return next();
++
+   if (!key || String(key).length < 8) {
+     return next(
+       ApiError.badRequest('En-tête Idempotency-Key requis pour cette opération sensible'),
+diff --git a/backend/src/modules/auth/auth.service.js b/backend/src/modules/auth/auth.service.js
+index 725a2b0..0ccf3ab 100644
+--- a/backend/src/modules/auth/auth.service.js
++++ b/backend/src/modules/auth/auth.service.js
+@@ -686,7 +686,8 @@ export const syncProfile = async (req) => {
+         phone: authUser.phone ?? null,
+         firstName: metadata.firstName ?? null,
+         lastName: metadata.lastName ?? null,
+-        locale: metadata.locale ?? 'fr',
++        // Métadonnées Supabase = saisie client : même liste fermée qu'à l'inscription.
++        locale: ['fr', 'en'].includes(metadata.locale) ? metadata.locale : 'fr',
+         countryCode,
+       },
+     });
+diff --git a/backend/src/modules/cooperatives/cooperatives.service.js b/backend/src/modules/cooperatives/cooperatives.service.js
+index 3a9b912..9d3c932 100644
+--- a/backend/src/modules/cooperatives/cooperatives.service.js
++++ b/backend/src/modules/cooperatives/cooperatives.service.js
+@@ -314,6 +314,26 @@ export const importMembers = async (cooperativeId, { csv, dryRun }, req) => {
+  * COOP-04 — vue consolidée : nombre de membres, superficie, cultures,
+  * production agrégée des membres AYANT AUTORISÉ les portées correspondantes.
+  */
++/**
++ * Adhésions ACTIVES des membres à leur organisation INDIVIDUELLE (non supprimée).
++ * Deux requêtes simples plutôt qu'un filtre relationnel : même résultat, et
++ * vérifiable aussi bien sur PostgreSQL que sur le Prisma simulé des tests.
++ */
++export const adhesionsIndividuelles = async (userIds) => {
++  if (!userIds.length) return [];
++  const memberships = await prisma.membership.findMany({
++    where: { userId: { in: userIds }, status: 'ACTIVE' },
++    select: { userId: true, organizationId: true },
++  });
++  if (!memberships.length) return [];
++  const individuelles = await prisma.organization.findMany({
++    where: { id: { in: [...new Set(memberships.map((m) => m.organizationId))] }, type: 'INDIVIDUAL', deletedAt: null },
++    select: { id: true },
++  });
++  const ids = new Set(individuelles.map((o) => o.id));
++  return memberships.filter((m) => ids.has(m.organizationId));
++};
++
+ export const overview = async (cooperativeId, req) => {
+   await assertCooperative(cooperativeId, req.tenant.organizationId);
+ 
+@@ -324,10 +344,14 @@ export const overview = async (cooperativeId, req) => {
+ 
+   const userIds = members.map((m) => m.memberUserId);
+ 
+-  const memberships = await prisma.membership.findMany({
+-    where: { userId: { in: userIds }, status: 'ACTIVE' },
+-    select: { userId: true, organizationId: true },
+-  });
++  /*
++   * Le consentement d'un membre porte sur SES données de producteur, rangées
++   * dans son organisation individuelle (CDC D2). Sans ce filtre, la carte
++   * `userId → organisation` retenait une adhésion arbitraire : une entreprise
++   * où le membre est salarié, voire la coopérative elle-même, dont les
++   * parcelles se retrouvaient agrégées sans aucun consentement.
++   */
++  const memberships = await adhesionsIndividuelles(userIds);
+ 
+   const orgByUser = new Map(memberships.map((m) => [m.userId, m.organizationId]));
+ 
+diff --git a/backend/src/modules/farms/farms.routes.js b/backend/src/modules/farms/farms.routes.js
+index df6c9f3..8df6941 100644
+--- a/backend/src/modules/farms/farms.routes.js
++++ b/backend/src/modules/farms/farms.routes.js
+@@ -4,6 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
+ import { resolveTenant } from '../../middleware/tenant.js';
+ import { authorize } from '../../middleware/authorize.js';
+ import { validate } from '../../middleware/validate.js';
++import { idempotency } from '../../middleware/idempotency.js';
+ import * as controller from './farms.controller.js';
+ import * as schema from './farms.schema.js';
+ 
+@@ -12,7 +13,13 @@ const router = Router();
+ router.use(authenticate, resolveTenant);
+ 
+ router.get('/', authorize('farms.read'), validate(schema.listFarmsSchema, 'query'), asyncHandler(controller.list));
+-router.post('/', authorize('farms.write'), validate(schema.createFarmSchema), asyncHandler(controller.create));
++router.post(
++  '/',
++  authorize('farms.write'),
++  validate(schema.createFarmSchema),
++  idempotency('farms.create', { facultatif: true }),
++  asyncHandler(controller.create),
++);
+ router.get('/:id', authorize('farms.read'), validate(schema.farmIdParam, 'params'), asyncHandler(controller.getOne));
+ router.patch(
+   '/:id',
+diff --git a/backend/src/modules/media/media.routes.js b/backend/src/modules/media/media.routes.js
+index 823c2b6..1b7e338 100644
+--- a/backend/src/modules/media/media.routes.js
++++ b/backend/src/modules/media/media.routes.js
+@@ -11,15 +11,23 @@ const router = Router();
+ 
+ router.use(authenticate, resolveTenant);
+ 
++/*
++ * Téléversement : producteur (`media.upload`) OU acteur de la messagerie
++ * (`messages.write`) pour les pièces jointes de conversation. Sans cette
++ * alternative, acheteurs, fournisseurs, transporteurs, agronomes et
++ * modérateurs — autorisés à écrire — recevaient un 403 dès qu'ils joignaient
++ * un fichier. Le fichier reste rangé sous l'organisation ACTIVE et tout
++ * rattachement (exploitation, parcelle, annonce) passe par `assertOwnership`.
++ */
+ router.post(
+   '/upload-url',
+-  authorize('media.upload'),
++  authorize('media.upload', 'messages.write'),
+   validate(schema.uploadUrlSchema),
+   asyncHandler(controller.createUploadUrl),
+ );
+ router.post(
+   '/:id/confirm',
+-  authorize('media.upload'),
++  authorize('media.upload', 'messages.write'),
+   validate(schema.mediaIdParam, 'params'),
+   asyncHandler(controller.confirm),
+ );
+diff --git a/backend/src/modules/media/media.schema.js b/backend/src/modules/media/media.schema.js
+index c3e9dbb..cfcbec4 100644
+--- a/backend/src/modules/media/media.schema.js
++++ b/backend/src/modules/media/media.schema.js
+@@ -25,7 +25,14 @@ export const uploadUrlSchema = z.object({
+   filename: z.string().trim().min(1).max(200),
+   mimeType: z.string().refine((m) => Boolean(ALLOWED_MIME[m]), 'Type de fichier non autorisé'),
+   sizeBytes: z.coerce.number().int().positive().max(MAX_SIZE_BYTES, 'Fichier trop volumineux (5 Mo max)'),
+-  kind: z.enum(['PHOTO', 'VIDEO', 'DOCUMENT', 'AUDIO']).default('PHOTO'),
++  /**
++   * `IMAGE` est accepté comme synonyme de `PHOTO` : c'est la valeur qu'envoient
++   * la messagerie web et le moteur hors ligne mobile. Sans cet alias, toute
++   * image jointe à un message était refusée en 422.
++   */
++  kind: z
++    .preprocess((v) => (v === 'IMAGE' ? 'PHOTO' : v), z.enum(['PHOTO', 'VIDEO', 'DOCUMENT', 'AUDIO']))
++    .default('PHOTO'),
+   farmId: z.string().min(10).max(60).optional(),
+   plotId: z.string().min(10).max(60).optional(),
+   /** V2 — photo rattachée à une annonce marketplace */
+diff --git a/backend/src/modules/media/media.service.js b/backend/src/modules/media/media.service.js
+index fb77f3f..0cec700 100644
+--- a/backend/src/modules/media/media.service.js
++++ b/backend/src/modules/media/media.service.js
+@@ -17,6 +17,24 @@ import { audit } from '../../shared/audit.js';
+  * confirme via `POST /media/:id/confirm`. Cela évite de saturer le serveur
+  * sur les connexions instables de la RDC (CDC §5.4).
+  */
++/**
++ * Valeur stockée dans `media.kind` (énumération PostgreSQL `MediaKind` :
++ * `PHOTO` | `VIDEO` uniquement). `AUDIO` et `DOCUMENT` y étaient écrits tels
++ * quels pour l'audio — rejet Prisma, note vocale impossible — ou convertis en
++ * `PHOTO` pour les documents. La nature réelle du fichier reste portée par
++ * `mimeType`, contrôlé à l'entrée ; aucune migration de schéma n'est requise.
++ */
++export const kindEnBase = (kind) => (kind === 'VIDEO' ? 'VIDEO' : 'PHOTO');
++
++/**
++ * Bucket d'un média, déduit de SA clé (`<org>/documents/…` ou `<org>/media/…`).
++ * Le dépôt choisissait le bucket selon `kind`, la confirmation selon le type
++ * MIME : un PDF déposé comme PHOTO, ou une image déposée comme DOCUMENT,
++ * recevait une URL signée sur le mauvais bucket (lien cassé).
++ */
++export const bucketDuMedia = (storageKey) =>
++  String(storageKey ?? '').split('/')[1] === 'documents' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
++
+ export const createUploadUrl = async (payload, req) => {
+   const { filename, mimeType, sizeBytes, kind, farmId, plotId, listingId, caption } = payload;
+ 
+@@ -53,7 +71,7 @@ export const createUploadUrl = async (payload, req) => {
+       farmId: farmId ?? null,
+       plotId: plotId ?? null,
+       listingId: listingId ?? null,
+-      kind: isDocument ? 'PHOTO' : kind,
++      kind: kindEnBase(kind),
+       storageKey: key,
+       mimeType,
+       sizeBytes,
+@@ -68,6 +86,7 @@ export const createUploadUrl = async (payload, req) => {
+     // que d'échouer silencieusement.
+     return {
+       mediaId: media.id,
++      media: { id: media.id, storageKey: key },
+       bucket,
+       storageKey: key,
+       uploadUrl: null,
+@@ -83,6 +102,13 @@ export const createUploadUrl = async (payload, req) => {
+ 
+   return {
+     mediaId: media.id,
++    /*
++     * Forme attendue par la messagerie web et le moteur hors ligne mobile
++     * (`presign.data.media.id`). Ajout au contrat : `mediaId` reste présent.
++     * Pas de `publicUrl` ici : la clé de stockage est l'identité durable du
++     * fichier, l'URL signée expire (`SIGNED_URL_TTL_SECONDS`).
++     */
++    media: { id: media.id, storageKey: key },
+     bucket,
+     storageKey: key,
+     uploadUrl: signed.data.signedUrl,
+@@ -101,7 +127,7 @@ export const confirm = async (id, req) => {
+ 
+   let url = null;
+   if (supabaseAdmin) {
+-    const bucket = media.mimeType === 'application/pdf' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
++    const bucket = bucketDuMedia(media.storageKey);
+     // SEC-07 / V4:NFR-02 — URL signée de courte durée : la TTL vient de la
+     // configuration (`SIGNED_URL_TTL_SECONDS`, 300 s par défaut), jamais en dur.
+     const signed = await supabaseAdmin.storage.from(bucket).createSignedUrl(
+diff --git a/backend/src/modules/messaging/messaging.service.js b/backend/src/modules/messaging/messaging.service.js
+index 7077c56..6765ba5 100644
+--- a/backend/src/modules/messaging/messaging.service.js
++++ b/backend/src/modules/messaging/messaging.service.js
+@@ -4,13 +4,22 @@
+  * Chaque identifiant renvoie à la règle appliquée dans ce fichier ; la preuve
+  * exécutable correspondante est référencée dans `tests/` (voir docs/TRACEABILITY.md).
+  */
++import { Prisma } from '@prisma/client';
+ import { prisma } from '../../config/prisma.js';
++import { supabaseAdmin } from '../../config/supabase.js';
++import { env } from '../../config/env.js';
+ import { ApiError } from '../../shared/errors/ApiError.js';
+-import { resolveId } from '../../shared/ids.js';
++import { isClientId, resolveId } from '../../shared/ids.js';
++import { storageKey as cleStockage } from '../../shared/crypto.js';
++import { logger } from '../../shared/http/logger.js';
+ import { audit } from '../../shared/audit.js';
+ import { notifyMany } from '../../shared/events.js';
+ import { ensureBusinessConversation, SUBJECT_TYPES } from '../../shared/conversations.js';
+-import { emitToConversation, emitToOrganizations } from '../../realtime/bus.js';
++import {
++  emitToConversation,
++  emitToOrganizations,
++  retirerOrganisationDuFil,
++} from '../../realtime/bus.js';
+ 
+ /**
+  * MSG-01 → MSG-04 — Messagerie rattachée à un objet métier.
+@@ -124,6 +133,17 @@ const loadSubject = async (subjectType, subjectId, organizationId, participantOr
+   if (!SUBJECT_TYPES.includes(subjectType)) {
+     throw ApiError.badRequest(`Objet métier invalide. Valeurs acceptées : ${SUBJECT_TYPES.join(', ')}`);
+   }
++  /*
++   * `ORGANIZATION`, `COOPERATIVE` et `FARM` sont acceptés par le schéma mais
++   * n'ont aucun modèle associé : `prisma[undefined]` levait une TypeError et la
++   * route répondait 500. Refus explicite tant qu'aucune règle de parties n'est
++   * spécifiée pour ces objets.
++   */
++  if (!SUBJECT_MODEL[subjectType]) {
++    throw ApiError.badRequest(`Conversation sur un objet « ${subjectType} » non prise en charge`, [
++      { field: 'subjectType', code: 'unsupported' },
++    ]);
++  }
+ 
+   const subject = await prisma[SUBJECT_MODEL[subjectType]].findUnique({ where: { id: subjectId } });
+   if (!subject) throw ApiError.notFound('Objet métier introuvable');
+@@ -134,20 +154,94 @@ const loadSubject = async (subjectType, subjectId, organizationId, participantOr
+   return { subject, parties: [...new Set(parties)] };
+ };
+ 
+-/** Validation des pièces jointes : URL http(s) ou clé de stockage interne. */
+-const assertAttachments = (attachments = []) => {
++const estUrl = (valeur) => /^https?:\/\//i.test(valeur);
++
++/**
++ * Préfixe des clés de stockage d'une organisation : même assainissement que
++ * `media.service.js` (`storageKey(organizationId, 'media'|'documents', …)`).
++ */
++export const prefixeStockage = (organizationId) => `${cleStockage(organizationId)}/`;
++
++/**
++ * Validation des pièces jointes : URL http(s) ou clé de stockage interne.
++ *
++ * Une clé de stockage doit appartenir à l'organisation de l'EXPÉDITEUR : la
++ * lecture du fil signe ces clés pour les destinataires (`attachmentUrls`). Sans
++ * cette règle, joindre la clé d'un document privé d'une autre organisation
++ * suffirait à en obtenir une URL signée.
++ */
++export const assertAttachments = (attachments = [], senderOrgId = null) => {
++  if (!Array.isArray(attachments)) {
++    throw ApiError.badRequest('Pièces jointes invalides (liste attendue)', [{ field: 'attachments', code: 'invalid' }]);
++  }
+   for (const attachment of attachments) {
+-    const ok = /^https?:\/\//i.test(attachment) || /^[A-Za-z0-9._\-/]+$/.test(attachment);
++    const ok =
++      typeof attachment === 'string' &&
++      attachment.length <= 500 &&
++      (estUrl(attachment) || /^[A-Za-z0-9._\-/]+$/.test(attachment));
+     if (!ok) {
+       throw ApiError.badRequest(
+         `Pièce jointe invalide : ${String(attachment).slice(0, 40)}… (URL http(s) ou clé de stockage attendue)`,
+         [{ field: 'attachments', code: 'invalid' }],
+       );
+     }
++    if (!estUrl(attachment) && senderOrgId && !attachment.startsWith(prefixeStockage(senderOrgId))) {
++      throw ApiError.badRequest(
++        'Pièce jointe refusée : ce fichier n\'appartient pas à ton organisation',
++        [{ field: 'attachments', code: 'foreign_storage_key' }],
++      );
++    }
+   }
+   return attachments;
+ };
+ 
++/** Bucket d'une clé : `<org>/documents/…` → privé, `<org>/media/…` → médias. */
++const bucketDeCle = (cle) =>
++  cle.split('/')[1] === 'documents' ? env.SUPABASE_BUCKET_PRIVATE : env.SUPABASE_BUCKET_MEDIA;
++
++/**
++ * Ajoute `attachmentUrls` (aligné sur `attachments`) : URL signée fraîche pour
++ * chaque clé de stockage appartenant à une organisation PARTICIPANTE, URL
++ * inchangée pour un lien http(s), `null` sinon (clé étrangère ou stockage non
++ * configuré). Ne fait jamais échouer la lecture du fil.
++ */
++export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
++  const prefixes = participantOrgIds.map(prefixeStockage);
++  const parBucket = new Map();
++  for (const message of messages) {
++    for (const piece of message.attachments ?? []) {
++      if (estUrl(piece) || !prefixes.some((p) => piece.startsWith(p))) continue;
++      const bucket = bucketDeCle(piece);
++      if (!parBucket.has(bucket)) parBucket.set(bucket, new Set());
++      parBucket.get(bucket).add(piece);
++    }
++  }
++
++  const signees = new Map();
++  if (supabaseAdmin && parBucket.size > 0) {
++    for (const [bucket, cles] of parBucket) {
++      try {
++        const { data, error } = await supabaseAdmin.storage
++          .from(bucket)
++          .createSignedUrls([...cles], env.SIGNED_URL_TTL_SECONDS);
++        if (error) throw error;
++        for (const entree of data ?? []) {
++          if (entree?.signedUrl && entree.path) signees.set(entree.path, entree.signedUrl);
++        }
++      } catch (erreur) {
++        logger.warn('[messaging] signature des pièces jointes impossible :', erreur?.message ?? erreur);
++      }
++    }
++  }
++
++  return messages.map((message) => ({
++    ...message,
++    attachmentUrls: (message.attachments ?? []).map((piece) =>
++      estUrl(piece) ? piece : signees.get(piece) ?? null,
++    ),
++  }));
++};
++
+ export const startConversation = async ({ subjectType, subjectId, participantOrgIds = [], firstMessage }, req) => {
+   const { parties } = await loadSubject(subjectType, subjectId, req.tenant.organizationId, participantOrgIds, req);
+ 
+@@ -222,12 +316,48 @@ export const createGroup = async ({ name, description, participantOrgIds = [] },
+   if (allowed.length === 0) throw ApiError.forbidden("Aucun membre autorisé sélectionné");
+   const participants = [...new Set([req.tenant.organizationId, ...allowed.map((o) => o.id)])];
+   const intro = description?.trim() ? `Groupe « ${name.trim()} » créé — ${description.trim()}` : `Groupe « ${name.trim()} » créé`;
+-  const conversation = await ensureBusinessConversation({
+-    subjectType: "GROUP",
+-    subjectId: `GRP:${name.trim()}`,
+-    participantOrgIds: participants,
+-    firstMessage: intro,
+-    actorUserId: req.user.id,
++  const subjectId = `GRP:${name.trim()}`;
++
++  /*
++   * Rejeu (double envoi) : on ne renvoie un groupe existant que s'il est
++   * IDENTIQUE — même nom, même administrateur (premier participant), mêmes
++   * membres. `ensureBusinessConversation` cherche un sur-ensemble
++   * (`hasEvery`) : créer « Famille » avec A et B renvoyait le « Famille »
++   * d'un autre administrateur contenant aussi C, et les messages partaient à
++   * un membre que le créateur n'avait pas choisi.
++   */
++  const candidats = await prisma.conversation.findMany({
++    where: { subjectType: "GROUP", subjectId, status: "OPEN", participantOrgIds: { hasEvery: participants } },
++  });
++  const identique = candidats.find(
++    (c) => c.participantOrgIds[0] === req.tenant.organizationId && c.participantOrgIds.length === participants.length,
++  );
++  if (identique) return identique;
++
++  const conversation = await prisma.$transaction(async (tx) => {
++    const cree = await tx.conversation.create({
++      data: { id: resolveId(), subjectType: "GROUP", subjectId, participantOrgIds: participants, status: "OPEN" },
++    });
++    await tx.message.create({
++      data: {
++        id: resolveId(),
++        conversationId: cree.id,
++        senderId: req.user.id,
++        senderOrgId: req.tenant.organizationId,
++        body: intro,
++        attachments: [],
++        readBy: [req.user.id],
++      },
++    });
++    return cree;
++  });
++  await audit({
++    actorId: req.user.id,
++    action: "conversation.create",
++    resource: "conversations",
++    resourceId: conversation.id,
++    req,
++    newValue: { subjectType: "GROUP", subjectId, participants },
+   });
+   emitToOrganizations(participants.filter((id) => id !== req.tenant.organizationId), "conversation:new", { conversationId: conversation.id, subjectType: "GROUP", title: name.trim() });
+   return conversation;
+@@ -242,6 +372,11 @@ export const addGroupMember = async (conversationId, orgId, req) => {
+   if (allowed.length === 0) throw ApiError.forbidden("Organisation non autorisée");
+   const updated = await prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: [...new Set([...conv.participantOrgIds, orgId])] } });
+   await postMessage(conversationId, { body: `+ ${allowed[0].name} a rejoint le groupe`, attachments: [] }, req);
++  // Le nouveau membre n'est dans aucune room de ce fil : on le prévient pour
++  // qu'il la rejoigne (`conversation:join`, qui revérifie l'appartenance).
++  if (!conv.participantOrgIds.includes(orgId)) {
++    emitToOrganizations([orgId], 'conversation:new', { conversationId, subjectType: 'GROUP', title: conv.subjectId?.startsWith('GRP:') ? conv.subjectId.slice(4) : null });
++  }
+   return updated;
+ };
+ 
+@@ -251,7 +386,23 @@ export const removeGroupMember = async (conversationId, orgId, req) => {
+   const isAdmin = conv.participantOrgIds[0] === req.tenant.organizationId || (req.tenant.effectiveRoles ?? []).some((r) => ["SUPER_ADMIN", "ADMIN", "MODERATOR"].includes(r));
+   if (!isAdmin && orgId !== req.tenant.organizationId) throw ApiError.forbidden("Seul l'administrateur du groupe peut retirer un membre");
+   if (orgId === conv.participantOrgIds[0]) throw ApiError.badRequest("L'administrateur principal ne peut pas être retiré");
+-  return prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: conv.participantOrgIds.filter((id) => id !== orgId) } });
++  const restants = conv.participantOrgIds.filter((id) => id !== orgId);
++  const updated = await prisma.conversation.update({ where: { id: conversationId }, data: { participantOrgIds: restants } });
++  /*
++   * Le retrait doit aussi valoir en temps réel : sans cela, les sockets de
++   * l'organisation retirée restaient dans la room et continuaient de recevoir
++   * le contenu des nouveaux messages jusqu'à leur déconnexion.
++   */
++  await retirerOrganisationDuFil(conversationId, orgId, restants);
++  await audit({
++    actorId: req.user.id,
++    action: 'conversation.member.remove',
++    resource: 'conversations',
++    resourceId: conversationId,
++    req,
++    newValue: { removedOrganizationId: orgId },
++  });
++  return updated;
+ };
+ 
+ export const listConversations = async (query, req) => {
+@@ -355,10 +506,13 @@ export const listMessages = async (conversationId, query, req) => {
+   }
+ 
+   // Les messages renvoyés reflètent l'accusé de lecture que l'on vient d'écrire
+-  const withReadReceipt = items.map((message) =>
+-    message.readBy?.includes(req.user.id) || message.senderOrgId === req.tenant.organizationId
+-      ? message
+-      : { ...message, readBy: [...(message.readBy ?? []), req.user.id] },
++  const withReadReceipt = await signerPiecesJointes(
++    items.map((message) =>
++      message.readBy?.includes(req.user.id) || message.senderOrgId === req.tenant.organizationId
++        ? message
++        : { ...message, readBy: [...(message.readBy ?? []), req.user.id] },
++    ),
++    conversation.participantOrgIds,
+   );
+ 
+   return {
+@@ -375,36 +529,65 @@ export const listMessages = async (conversationId, query, req) => {
+   };
+ };
+ 
++/**
++ * Réémission idempotente (`localTempId`, envoi hors ligne) : on ne renvoie un
++ * message existant QUE s'il appartient à ce fil et à cet expéditeur. Un même
++ * identifiant déjà pris ailleurs est un conflit (409), jamais un 500 ni une
++ * fuite du message d'autrui.
++ */
++const rejouerSiDejaRecu = async (localTempId, conversationId, req) => {
++  if (!localTempId) return null;
++  const existing = await prisma.message.findUnique({ where: { id: localTempId } });
++  if (!existing) return null;
++  if (existing.conversationId === conversationId && existing.senderId === req.user.id) return existing;
++  throw ApiError.conflict('Identifiant de message déjà utilisé');
++};
++
+ export const postMessage = async (conversationId, { body, attachments, localTempId }, req) => {
+-  if (localTempId) {
+-    const existing = await prisma.message.findUnique({ where: { id: localTempId } });
+-    if (existing && existing.conversationId === conversationId) {
+-      return existing;
+-    }
++  if (localTempId !== undefined && localTempId !== null && !isClientId(localTempId)) {
++    throw ApiError.badRequest('Identifiant local de message invalide', [{ field: 'localTempId', code: 'invalid' }]);
+   }
++
++  // Contrôle d'accès AVANT toute lecture de message, réémission comprise.
+   const conversation = await prisma.conversation.findUnique({ where: { id: conversationId } });
+   if (!conversation || !conversation.participantOrgIds.includes(req.tenant.organizationId)) {
+     throw ApiError.notFound('Conversation introuvable');
+   }
+-  if (conversation.status !== 'OPEN') throw ApiError.conflict(`Conversation ${conversation.status.toLowerCase()}`);
+ 
+-  const safeAttachments = assertAttachments(attachments ?? []);
++  const deja = await rejouerSiDejaRecu(localTempId, conversationId, req);
++  if (deja) return deja;
+ 
+-  const message = await prisma.$transaction(async (tx) => {
+-    const created = await tx.message.create({
+-      data: {
+-        id: localTempId || resolveId(),
+-        conversationId,
+-        senderId: req.user.id,
+-        senderOrgId: req.tenant.organizationId,
+-        body,
+-        attachments: safeAttachments,
+-        readBy: [req.user.id],
+-      },
++  if (conversation.status !== 'OPEN') throw ApiError.conflict(`Conversation ${conversation.status.toLowerCase()}`);
++
++  const safeAttachments = assertAttachments(attachments ?? [], req.tenant.organizationId);
++
++  let message;
++  try {
++    message = await prisma.$transaction(async (tx) => {
++      const created = await tx.message.create({
++        data: {
++          id: localTempId || resolveId(),
++          conversationId,
++          senderId: req.user.id,
++          senderOrgId: req.tenant.organizationId,
++          body,
++          attachments: safeAttachments,
++          readBy: [req.user.id],
++        },
++      });
++      await tx.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
++      return created;
+     });
+-    await tx.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
+-    return created;
+-  });
++  } catch (erreur) {
++    // Deux envois simultanés du même `localTempId` : le second rejoue le premier.
++    if (localTempId && erreur instanceof Prisma.PrismaClientKnownRequestError && erreur.code === 'P2002') {
++      const gagnant = await rejouerSiDejaRecu(localTempId, conversationId, req);
++      if (gagnant) return gagnant;
++    }
++    throw erreur;
++  }
++
++  const [signe] = await signerPiecesJointes([message], conversation.participantOrgIds);
+ 
+   const recipients = await prisma.membership.findMany({
+     where: {
+@@ -429,13 +612,14 @@ export const postMessage = async (conversationId, { body, attachments, localTemp
+       id: message.id,
+       body: message.body,
+       attachments: message.attachments,
++      attachmentUrls: signe.attachmentUrls,
+       senderId: message.senderId,
+       senderOrgId: message.senderOrgId,
+       createdAt: message.createdAt,
+     },
+   });
+ 
+-  return message;
++  return signe;
+ };
+ 
+ /** MSG-03 — signalement d'un message (conservé pour la modération). */
+@@ -501,8 +685,11 @@ export const blockConversation = async (conversationId, { reason }, req) => {
+ };
+ 
+ 
++/** Taille maximale d'une page de synchronisation différée. */
++export const DELTA_SYNC_PAGE = 500;
++
+ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
+-  const serverTimestamp = Date.now();
++  const now = Date.now();
+   const since = new Date(Number(lastPulledAt) || 0);
+ 
+   const allowedConvs = await prisma.conversation.findMany({
+@@ -510,22 +697,59 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
+       participantOrgIds: { has: req.tenant.organizationId },
+       ...(roomIds.length > 0 ? { id: { in: roomIds } } : {}),
+     },
+-    select: { id: true },
++    select: { id: true, participantOrgIds: true },
+   });
+   const allowedIds = allowedConvs.map((c) => c.id);
+   if (allowedIds.length === 0) {
+-    return { created: [], updated: [], deleted: [], serverTimestamp };
++    return { created: [], updated: [], deleted: [], serverTimestamp: now, hasMore: false };
+   }
+ 
+-  const rows = await prisma.message.findMany({
++  const fetched = await prisma.message.findMany({
+     where: {
+       conversationId: { in: allowedIds },
+       createdAt: { gt: since },
+     },
+-    orderBy: { createdAt: 'asc' },
+-    take: 500,
++    orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
++    take: DELTA_SYNC_PAGE + 1,
+   });
+ 
++  /*
++   * Page pleine : le curseur renvoyé est la date du DERNIER message livré, pas
++   * « maintenant ». Renvoyer `Date.now()` faisait sauter définitivement tous
++   * les messages au-delà de la page à un client resté longtemps hors ligne.
++   *
++   * On ne coupe jamais au milieu d'un groupe de messages de même milliseconde :
++   * le curseur est strict (`gt`), un message laissé de l'autre côté de la
++   * coupure ne reviendrait pas.
++   */
++  let rows = fetched;
++  let hasMore = false;
++  if (fetched.length > DELTA_SYNC_PAGE) {
++    hasMore = true;
++    rows = fetched.slice(0, DELTA_SYNC_PAGE);
++    const borne = rows[rows.length - 1].createdAt.getTime();
++    const premierApres = fetched[DELTA_SYNC_PAGE].createdAt.getTime();
++    if (premierApres === borne) {
++      rows = rows.filter((m) => m.createdAt.getTime() < borne);
++      // Cas extrême : toute la page partage la même milliseconde.
++      if (rows.length === 0) {
++        rows = await prisma.message.findMany({
++          where: { conversationId: { in: allowedIds }, createdAt: new Date(borne) },
++          orderBy: { id: 'asc' },
++        });
++      }
++    }
++  }
++  const serverTimestamp = hasMore ? rows[rows.length - 1].createdAt.getTime() : now;
++
++  const participantsParFil = new Map(allowedConvs.map((c) => [c.id, c.participantOrgIds]));
++  const signes = [];
++  for (const [filId, participants] of participantsParFil) {
++    const duFil = rows.filter((m) => m.conversationId === filId);
++    if (duFil.length) signes.push(...(await signerPiecesJointes(duFil, participants)));
++  }
++  const urlsParMessage = new Map(signes.map((m) => [m.id, m.attachmentUrls]));
++
+   const mapped = rows.map((m) => ({
+     id: m.id,
+     server_id: m.id,
+@@ -537,6 +761,9 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
+     content: m.body,
+     remote_media_url: m.attachments?.[0] ?? null,
+     attachments: m.attachments ?? [],
++    // URL signées de courte durée, pour l'affichage uniquement : ne pas les
++    // stocker comme identité du média (`remote_media_url` reste la clé stable).
++    attachment_urls: urlsParMessage.get(m.id) ?? [],
+     read_by: m.readBy ?? [],
+     created_at: new Date(m.createdAt).getTime(),
+     updated_at: new Date(m.createdAt).getTime(),
+@@ -548,5 +775,6 @@ export const deltaSync = async ({ lastPulledAt = 0, roomIds = [] }, req) => {
+     updated: [],
+     deleted: [],
+     serverTimestamp,
++    hasMore,
+   };
+ };
+diff --git a/backend/src/modules/organizations/organizations.service.js b/backend/src/modules/organizations/organizations.service.js
+index eede5fc..ce317f8 100644
+--- a/backend/src/modules/organizations/organizations.service.js
++++ b/backend/src/modules/organizations/organizations.service.js
+@@ -2,7 +2,6 @@ import { prisma } from '../../config/prisma.js';
+ import { ApiError } from '../../shared/errors/ApiError.js';
+ import { resolveId } from '../../shared/ids.js';
+ import { uniqueSlug } from '../../shared/slug.js';
+-import { assertOwnership } from '../../middleware/tenant.js';
+ import { audit } from '../../shared/audit.js';
+ 
+ const shape = (organization, roles = []) => ({
+@@ -104,7 +103,17 @@ export const create = async (payload, req) => {
+ 
+ export const update = async (id, payload, req) => {
+   const organization = await prisma.organization.findFirst({ where: { id, deletedAt: null } });
+-  assertOwnership(organization, req.tenant.organizationId, 'Organisation');
++  /*
++   * Seule l'organisation ACTIVE est modifiable (les rôles vérifiés par
++   * `authorize('organizations.write')` sont ceux de ce tenant).
++   *
++   * `assertOwnership` compare `resource.organizationId` : une organisation n'a
++   * pas ce champ (son identifiant est `id`), la comparaison échouait toujours
++   * et la route répondait 404 à tout le monde, responsable compris.
++   */
++  if (!organization || organization.id !== req.tenant.organizationId) {
++    throw ApiError.notFound('Organisation introuvable');
++  }
+ 
+   const { legalStatus, foundedYear, province, territory, ...orgFields } = payload;
+ 
+diff --git a/backend/src/modules/plots/plots.routes.js b/backend/src/modules/plots/plots.routes.js
+index 57a89f9..4fa3293 100644
+--- a/backend/src/modules/plots/plots.routes.js
++++ b/backend/src/modules/plots/plots.routes.js
+@@ -4,6 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
+ import { resolveTenant } from '../../middleware/tenant.js';
+ import { authorize } from '../../middleware/authorize.js';
+ import { validate } from '../../middleware/validate.js';
++import { idempotency } from '../../middleware/idempotency.js';
+ import * as controller from './plots.controller.js';
+ import * as schema from './plots.schema.js';
+ 
+@@ -12,7 +13,13 @@ const router = Router();
+ router.use(authenticate, resolveTenant);
+ 
+ router.get('/', authorize('plots.read'), validate(schema.listPlotsSchema, 'query'), asyncHandler(controller.list));
+-router.post('/', authorize('plots.write'), validate(schema.createPlotSchema), asyncHandler(controller.create));
++router.post(
++  '/',
++  authorize('plots.write'),
++  validate(schema.createPlotSchema),
++  idempotency('plots.create', { facultatif: true }),
++  asyncHandler(controller.create),
++);
+ 
+ router.get('/:id', authorize('plots.read'), validate(schema.plotIdParam, 'params'), asyncHandler(controller.getOne));
+ router.patch(
+@@ -41,6 +48,7 @@ router.post(
+   authorize('history.write'),
+   validate(schema.plotIdParam, 'params'),
+   validate(schema.cropHistorySchema),
++  idempotency('plots.history.create', { facultatif: true }),
+   asyncHandler(controller.addHistory),
+ );
+ router.patch(
+diff --git a/backend/src/modules/productions/productions.routes.js b/backend/src/modules/productions/productions.routes.js
+index 84f1ae9..83a5127 100644
+--- a/backend/src/modules/productions/productions.routes.js
++++ b/backend/src/modules/productions/productions.routes.js
+@@ -4,6 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
+ import { resolveTenant } from '../../middleware/tenant.js';
+ import { authorize } from '../../middleware/authorize.js';
+ import { validate } from '../../middleware/validate.js';
++import { idempotency } from '../../middleware/idempotency.js';
+ import * as controller from './productions.controller.js';
+ import * as schema from './productions.schema.js';
+ 
+@@ -22,6 +23,7 @@ router.post(
+   '/',
+   authorize('productions.write'),
+   validate(schema.createProductionSchema),
++  idempotency('productions.create', { facultatif: true }),
+   asyncHandler(controller.create),
+ );
+ router.get(
+diff --git a/backend/src/modules/users/users.service.js b/backend/src/modules/users/users.service.js
+index 7c90b44..2adecca 100644
+--- a/backend/src/modules/users/users.service.js
++++ b/backend/src/modules/users/users.service.js
+@@ -18,6 +18,15 @@ import { publicUser } from '../auth/auth.service.js';
+  */
+ const ROLES_PRODUCTION = ['FARMER', 'COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY'];
+ 
++/**
++ * Rôles auxquels le profil professionnel est réclamé (COMPLETE-05 / COMPLETE-07).
++ * Le critère était ajouté à TOUS les comptes : un producteur, un acheteur ou un
++ * transporteur se voyait réclamer un profil qui ne le concerne pas, et
++ * n'atteignait jamais 100 %. Seul l'agronome est établi par les recettes ;
++ * l'extension à d'autres rôles (LAB_PARTNER…) reste à confirmer.
++ */
++const ROLES_PROFIL_PROFESSIONNEL = ['AGRONOMIST'];
++
+ const completenessCriteria = ({ profile, farms, plots, productions, roles = [] }) => {
+   const criteres = [
+   { key: 'identity', label: 'Nom et prénom renseignés', done: Boolean(profile.firstName && profile.lastName) },
+@@ -38,9 +47,11 @@ const completenessCriteria = ({ profile, farms, plots, productions, roles = [] }
+   { key: 'production', label: 'Au moins une production déclarée', done: productions > 0 },
+   ];
+   const horsProduction = new Set(['farm', 'plot', 'production']);
+-  return roles.some((r) => ROLES_PRODUCTION.includes(r))
+-    ? criteres
+-    : criteres.filter((c) => !horsProduction.has(c.key));
++  const production = roles.some((r) => ROLES_PRODUCTION.includes(r));
++  const professionnel = roles.some((r) => ROLES_PROFIL_PROFESSIONNEL.includes(r));
++  return criteres.filter(
++    (c) => (production || !horsProduction.has(c.key)) && (professionnel || c.key !== 'professional'),
++  );
+ };
+ 
+ export const getMe = async (req) => {
+@@ -271,15 +282,18 @@ export const changePassword = async ({ currentPassword, newPassword, mfaCode },
+ 
+ /** AUTH-05 / RGPD — suppression logique du compte (anonymisation à traiter en V2). */
+ export const deleteMe = async (req) => {
+-  await prisma.profile.update({
+-    where: { id: req.user.id },
+-    data: { status: 'DELETED', deletedAt: new Date(), email: `deleted+${req.user.id}@agrikonnect.local` },
+-  });
+-
+-  await prisma.membership.updateMany({
+-    where: { userId: req.user.id },
+-    data: { status: 'REMOVED' },
+-  });
++  // Profil et adhésions dans une seule transaction : jamais de compte supprimé
++  // qui garderait des adhésions actives (NFR-03).
++  await prisma.$transaction([
++    prisma.profile.update({
++      where: { id: req.user.id },
++      data: { status: 'DELETED', deletedAt: new Date(), email: `deleted+${req.user.id}@agrikonnect.local` },
++    }),
++    prisma.membership.updateMany({
++      where: { userId: req.user.id },
++      data: { status: 'REMOVED' },
++    }),
++  ]);
+ 
+   await audit({
+     actorId: req.user.id,
+diff --git a/backend/src/modules/verification/verification.service.js b/backend/src/modules/verification/verification.service.js
+index f4527c7..add5e83 100644
+--- a/backend/src/modules/verification/verification.service.js
++++ b/backend/src/modules/verification/verification.service.js
+@@ -20,8 +20,31 @@ import { sendEmail, templates } from '../../integrations/email.js';
+  * - Aucun « score global » : on expose des critères cochés
+  */
+ 
++/**
++ * VER-01 — sujet par défaut et sujets autorisés.
++ *
++ * Un dossier ne peut porter que sur SOI (`PROFILE`), sur l'organisation ACTIVE
++ * (`ORGANIZATION` / `COOPERATIVE`) ou sur une exploitation de celle-ci (`FARM`,
++ * contrôlé plus bas). Auparavant, seul `FARM` était contrôlé : n'importe qui
++ * pouvait déposer un dossier au nom d'un autre profil ou d'une autre
++ * organisation, et — la recherche « demande en attente » ne filtrant pas par
++ * organisation — bloquer la vraie personne avec un 409.
++ */
++export const sujetAutorise = (subjectType, subjectId, req) => {
++  if (subjectType === 'PROFILE') return (subjectId ?? req.user.id) === req.user.id ? req.user.id : null;
++  if (subjectType === 'ORGANIZATION' || subjectType === 'COOPERATIVE') {
++    const active = req.tenant.organizationId;
++    return (subjectId ?? active) === active ? active : null;
++  }
++  return subjectId ?? null;
++};
++
+ export const submit = async (payload, req) => {
+-  const subjectId = payload.subjectId ?? req.user.id;
++  const subjectId = sujetAutorise(payload.subjectType, payload.subjectId, req);
++  if (!subjectId) {
++    // 404 et non 403 : on ne confirme pas l'existence d'un profil ou d'une organisation tiers.
++    throw ApiError.notFound('Sujet de vérification introuvable');
++  }
+ 
+   if (payload.subjectType === 'FARM') {
+     const farm = await prisma.farm.findUnique({ where: { id: subjectId } });
+diff --git a/backend/src/realtime/bus.js b/backend/src/realtime/bus.js
+index ef76c02..45291ca 100644
+--- a/backend/src/realtime/bus.js
++++ b/backend/src/realtime/bus.js
+@@ -50,6 +50,37 @@ export const emitToOrganizations = (organizationIds, event, payload) => {
+   return sent.some(Boolean);
+ };
+ 
++/**
++ * Retire du fil les sessions d'une organisation qui n'en fait plus partie.
++ *
++ * Un socket rejoint la room d'un fil à la connexion ; sans ce retrait, une
++ * organisation exclue d'un groupe continuait de recevoir les nouveaux messages
++ * jusqu'à sa déconnexion. Un socket qui appartient AUSSI à une organisation
++ * encore participante reste dans la room (il y a toujours droit).
++ */
++export const retirerOrganisationDuFil = async (conversationId, organizationId, participantsRestants = []) => {
++  if (!io || !conversationId || !organizationId) return 0;
++  try {
++    const sockets = await io.in(roomForOrganization(organizationId)).fetchSockets();
++    let retires = 0;
++    for (const socket of sockets) {
++      const organisations = socket.data?.organizationIds ?? [];
++      if (organisations.some((id) => participantsRestants.includes(id))) continue;
++      socket.leave(roomForConversation(conversationId));
++      socket.data?.conversationIds?.delete?.(conversationId);
++      retires += 1;
++    }
++    io.to(roomForOrganization(organizationId)).emit('conversation:removed', {
++      conversationId,
++      at: new Date().toISOString(),
++    });
++    return retires;
++  } catch (error) {
++    logger.warn(`[realtime] retrait du fil ${conversationId} impossible :`, error.message);
++    return 0;
++  }
++};
++
+ export const realtimeStats = () => ({
+   enabled: Boolean(io),
+   connections: io?.engine?.clientsCount ?? 0,
+diff --git a/backend/src/realtime/index.js b/backend/src/realtime/index.js
+index 12107f1..bc3774f 100644
+--- a/backend/src/realtime/index.js
++++ b/backend/src/realtime/index.js
+@@ -5,6 +5,7 @@ import { postMessage } from '../modules/messaging/messaging.service.js';
+ import { env } from '../config/env.js';
+ import { isOriginAllowed } from '../config/cors.js';
+ import { logger } from '../shared/http/logger.js';
++import { contexteEnvoi, sendMessageSchema } from './sendGuard.js';
+ import {
+   setIo,
+   roomForOrganization,
+@@ -30,27 +31,71 @@ import {
+ /** Durée de validité d'un indicateur de saisie (côté client). */
+ export const TYPING_TTL_MS = 5000;
+ 
+-/** Charge l'utilisateur applicatif à partir du jeton Supabase. */
+-const authenticateSocket = async (token) => {
+-  if (!token) return null;
+-
+-  const { data, error } = await supabase.auth.getUser(token);
+-  if (error || !data?.user) return null;
+-
++/**
++ * Profil ACTIF et adhésions ACTIVES — même requête que `authenticate` (REST).
++ *
++ * Relue à chaque action sensible (`send_message`, `conversation:join`) et pas
++ * seulement à la connexion : sinon un compte suspendu, une adhésion retirée ou
++ * un rôle révoqué continuait d'agir par WebSocket jusqu'à la reconnexion,
++ * alors que le REST le refusait déjà.
++ */
++export const chargerProfilActif = async (userId) => {
++  if (!userId) return null;
+   const profile = await prisma.profile.findUnique({
+-    where: { id: data.user.id },
++    where: { id: userId },
+     include: {
+       memberships: {
+         where: { status: 'ACTIVE', organization: { deletedAt: null } },
+-        include: { organization: { select: { id: true, name: true } } },
++        include: { organization: { select: { id: true, type: true, name: true, slug: true, countryCode: true } } },
+       },
+     },
+   });
+-
+   if (!profile || profile.status !== 'ACTIVE') return null;
+   return profile;
+ };
+ 
++const adhesionsDe = (profile) =>
++  profile.memberships.map((m) => ({ organizationId: m.organizationId, roles: m.roles ?? [], organization: m.organization }));
++
++const estVerifie = (profile) => Boolean(profile.emailVerifiedAt || profile.phoneVerifiedAt);
++
++/** Charge l'utilisateur applicatif à partir du jeton Supabase. */
++const authenticateSocket = async (token) => {
++  if (!token) return null;
++
++  const { data, error } = await supabase.auth.getUser(token);
++  if (error || !data?.user) return null;
++
++  return chargerProfilActif(data.user.id);
++};
++
++/**
++ * Enregistre un écouteur Socket.IO protégé.
++ *
++ * Socket.IO (4.8) appelle les écouteurs dans un `process.nextTick` SANS
++ * try/catch : une exception synchrone y devient une `uncaughtException`, que
++ * `server.js` traite par un arrêt du serveur. Il suffisait donc qu'un client
++ * authentifié émette `typing` avec `null` (la valeur par défaut `= {}` ne
++ * s'applique pas à `null`), ou `ping:app` avec un argument qui n'est pas une
++ * fonction, pour arrêter l'API de tous les utilisateurs.
++ *
++ * Ici : charge utile ramenée à un objet, accusé de réception ramené à une
++ * fonction, erreurs synchrones et asynchrones capturées et journalisées.
++ */
++export const ecouteurProtege = (evenement, handler) => (...args) => {
++  const dernier = args[args.length - 1];
++  const ack = typeof dernier === 'function' ? dernier : () => {};
++  const premier = args[0];
++  const payload = premier && typeof premier === 'object' && !Array.isArray(premier) ? premier : {};
++  const journaliser = (erreur) => logger.warn(`[realtime] ${evenement} en échec :`, erreur?.message ?? erreur);
++  try {
++    const resultat = handler(payload, ack);
++    if (resultat && typeof resultat.catch === 'function') resultat.catch(journaliser);
++  } catch (erreur) {
++    journaliser(erreur);
++  }
++};
++
+ /** Conversations ouvertes de l'utilisateur (par organisation). */
+ const loadConversationRooms = async (organizationIds) => {
+   if (organizationIds.length === 0) return [];
+@@ -87,6 +132,8 @@ export const attachRealtime = (httpServer) => {
+       if (!profile) return next(new Error('UNAUTHORIZED'));
+ 
+       socket.data.userId = profile.id;
++      // Instantané de connexion : sert UNIQUEMENT à choisir les rooms initiales.
++      // Les actions sensibles relisent le profil (`chargerProfilActif`).
+       socket.data.organizationIds = profile.memberships.map((m) => m.organizationId);
+       return next();
+     } catch (error) {
+@@ -101,24 +148,21 @@ export const attachRealtime = (httpServer) => {
+     socket.join(roomForUser(userId));
+     organizationIds.forEach((organizationId) => socket.join(roomForOrganization(organizationId)));
+ 
+-    const conversationIds = await loadConversationRooms(organizationIds).catch(() => []);
+-    conversationIds.forEach((id) => socket.join(roomForConversation(id)));
+-    socket.data.conversationIds = new Set(conversationIds);
+-
+-    socket.emit('ready', {
+-      userId,
+-      organizations: organizationIds,
+-      conversations: conversationIds.length,
+-      at: new Date().toISOString(),
+-    });
++    /*
++     * Les écouteurs sont enregistrés AVANT toute attente : un événement reçu
++     * pendant le chargement des rooms était perdu sans accusé (Socket.IO ne
++     * met pas en file les événements sans écouteur). C'est précisément le cas
++     * du moteur hors ligne mobile, qui vide sa file d'envoi dès la connexion.
++     */
++    socket.data.conversationIds = new Set();
+ 
+     /**
+      * Indicateur de saisie. On vérifie l'appartenance avant diffusion :
+      * un socket ne peut pas « typer » dans une conversation qui n'est pas la sienne.
+      */
+-    socket.on('typing', (payload = {}) => {
++    socket.on('typing', ecouteurProtege('typing', (payload) => {
+       const { conversationId, isTyping = true } = payload;
+-      if (!conversationId || !socket.data.conversationIds.has(conversationId)) return;
++      if (typeof conversationId !== 'string' || !socket.data.conversationIds.has(conversationId)) return;
+ 
+       socket.to(roomForConversation(conversationId)).emit('typing', {
+         conversationId,
+@@ -126,64 +170,114 @@ export const attachRealtime = (httpServer) => {
+         isTyping: Boolean(isTyping),
+         at: new Date().toISOString(),
+       });
+-    });
++    }));
++
++    /**
++     * Profil relu pour une action sensible. Compte suspendu ou supprimé
++     * depuis la connexion : refus et coupure du socket (le REST répond déjà 403).
++     */
++    const profilCourant = async (ack) => {
++      const profile = await chargerProfilActif(userId);
++      if (!profile) {
++        ack({ ok: false, error: 'UNAUTHORIZED' });
++        socket.disconnect(true);
++      }
++      return profile;
++    };
+ 
+     /** Rejoindre un fil créé après la connexion (nouvelle commande, par ex.). */
+-    socket.on('conversation:join', async ({ conversationId } = {}, ack) => {
+-      if (!conversationId) return ack?.({ ok: false, error: 'MISSING_ID' });
++    socket.on('conversation:join', ecouteurProtege('conversation:join', async ({ conversationId }, ack) => {
++      if (typeof conversationId !== 'string' || !conversationId) return ack({ ok: false, error: 'MISSING_ID' });
++
++      const profile = await profilCourant(ack);
++      if (!profile) return undefined;
++      const organisationsActuelles = profile.memberships.map((m) => m.organizationId);
+ 
+       const conversation = await prisma.conversation
+         .findUnique({ where: { id: conversationId }, select: { participantOrgIds: true } })
+         .catch(() => null);
+ 
+       const allowed =
+-        conversation && conversation.participantOrgIds.some((id) => organizationIds.includes(id));
++        conversation && conversation.participantOrgIds.some((id) => organisationsActuelles.includes(id));
+ 
+-      if (!allowed) return ack?.({ ok: false, error: 'FORBIDDEN' });
++      if (!allowed) return ack({ ok: false, error: 'FORBIDDEN' });
+ 
+       socket.join(roomForConversation(conversationId));
+       socket.data.conversationIds.add(conversationId);
+-      return ack?.({ ok: true });
+-    });
++      return ack({ ok: true });
++    }));
+ 
+-    socket.on('conversation:leave', ({ conversationId } = {}) => {
+-      if (!conversationId) return;
++    socket.on('conversation:leave', ecouteurProtege('conversation:leave', ({ conversationId }) => {
++      if (typeof conversationId !== 'string' || !conversationId) return;
+       socket.leave(roomForConversation(conversationId));
+       socket.data.conversationIds.delete(conversationId);
+-    });
++    }));
+ 
+-    /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
+-    
+     /** Envoi temps réel idempotent via localTempId avec accusé de réception immédiat (Offline-First). */
+-    socket.on('send_message', async (payload = {}, ack) => {
++    socket.on('send_message', ecouteurProtege('send_message', async (payload, ack) => {
+       try {
+-        const { roomId, content, attachments = [], localTempId } = payload;
+-        if (!roomId || !content) return ack?.({ ok: false, error: 'INVALID_PAYLOAD' });
+-        const orgId = organizationIds[0];
+-        if (!orgId) return ack?.({ ok: false, error: 'NO_ACTIVE_ORG' });
++        const parsed = sendMessageSchema.safeParse(payload);
++        if (!parsed.success) return ack({ ok: false, error: 'INVALID_PAYLOAD' });
++        const { roomId, content, attachments, localTempId, organizationId: demandee } = parsed.data;
++
++        const profile = await profilCourant(ack);
++        if (!profile) return undefined;
++
++        const conversation = await prisma.conversation.findUnique({
++          where: { id: roomId },
++          select: { participantOrgIds: true },
++        });
++        const contexte = contexteEnvoi({
++          userId,
++          verified: estVerifie(profile),
++          memberships: adhesionsDe(profile),
++          participantOrgIds: conversation?.participantOrgIds ?? [],
++          organisationDemandee: demandee,
++        });
++        if (!contexte.ok) return ack({ ok: false, error: contexte.error });
+ 
+         const created = await postMessage(
+           roomId,
+-          { body: String(content), attachments, localTempId },
+-          { user: { id: userId }, tenant: { organizationId: orgId }, headers: {}, ip: 'socket' },
++          { body: content, attachments, localTempId },
++          contexte.req,
+         );
+         socket.join(roomForConversation(roomId));
+         socket.data.conversationIds.add(roomId);
+-        return ack?.({
++        return ack({
+           ok: true,
+           serverId: created.id,
+           serverTimestamp: new Date(created.createdAt).getTime(),
+         });
+       } catch (err) {
+-        return ack?.({ ok: false, error: err?.message ?? 'SEND_FAILED' });
++        // Seules les erreurs métier (ApiError) sont renvoyées telles quelles :
++        // un message Prisma ou système ne doit pas fuiter vers le client.
++        if (err?.name === 'ApiError' || Number.isInteger(err?.status)) {
++          return ack({ ok: false, error: err.code ?? 'SEND_FAILED', message: err.message });
++        }
++        logger.warn('[realtime] send_message en échec :', err?.message);
++        return ack({ ok: false, error: 'SEND_FAILED' });
+       }
+-    });
++    }));
+ 
+-    socket.on('ping:app', (ack) => ack?.({ at: new Date().toISOString() }));
++    /** Battement de cœur applicatif : utile derrière un proxy mobile instable. */
++    socket.on('ping:app', ecouteurProtege('ping:app', (_payload, ack) => ack({ at: new Date().toISOString() })));
+ 
+     socket.on('disconnect', (reason) => {
+       logger.debug?.(`[realtime] déconnexion ${userId} (${reason})`);
+     });
++
++    const conversationIds = await loadConversationRooms(organizationIds).catch(() => []);
++    conversationIds.forEach((id) => {
++      socket.join(roomForConversation(id));
++      socket.data.conversationIds.add(id);
++    });
++
++    socket.emit('ready', {
++      userId,
++      organizations: organizationIds,
++      conversations: conversationIds.length,
++      at: new Date().toISOString(),
++    });
+   });
+ 
+   setIo(io);
+diff --git a/backend/src/routes/index.js b/backend/src/routes/index.js
+index c65b21f..173be72 100644
+--- a/backend/src/routes/index.js
++++ b/backend/src/routes/index.js
+@@ -22,9 +22,25 @@ import messagingRoutes from "../modules/messaging/messaging.routes.js";
+ import callsRoutes from "../modules/calls/calls.routes.js";
+ import livekitWebhookRoutes from "../modules/calls/calls.webhook.js";
+ import pushDevicesRoutes from "../modules/push/push.routes.js";
++import { requireVerifiedForWrites } from "../middleware/auth.js";
+ 
+ const router = Router();
+ 
++/**
++ * H-07 — écritures de communication réservées aux comptes vérifiés (e-mail ou
++ * téléphone). Lectures inchangées. Cette garde existait avant l'isolation V1
++ * (commit e10e28c) et avait disparu lors de la découpe : elle est rétablie sur
++ * les deux modules V1 concernés.
++ *
++ * `POST /messaging/sync` est une LECTURE (delta de messages pour le mode hors
++ * ligne) malgré son verbe : elle reste ouverte comme les GET, sinon un compte
++ * ajouté à un groupe ne pourrait pas lire ses messages depuis le mobile.
++ */
++export const estLectureEnPost = (baseUrl = "", path = "") =>
++  baseUrl.endsWith("/messaging") && path.replace(/\/$/, "") === "/sync";
++const gardeCommunication = (req, res, next) =>
++  estLectureEnPost(req.baseUrl, req.path) ? next() : requireVerifiedForWrites(req, res, next);
++
+ router.get("/health", (_req, res) => {
+   res.json({
+     success: true,
+@@ -47,6 +63,7 @@ router.use("/auth", authRoutes);
+ router.use("/me/push-devices", pushDevicesRoutes);
+ router.use("/me", usersRoutes);
+ router.use("/notifications", notificationsRoutes);
++router.use(["/messaging", "/calls"], gardeCommunication);
+ router.use("/messaging", messagingRoutes);
+ router.use("/calls", callsRoutes);
+ router.use("/webhooks/livekit", livekitWebhookRoutes);
+diff --git a/backend/src/shared/permissions.js b/backend/src/shared/permissions.js
+index 0bf9247..d4650cf 100644
+--- a/backend/src/shared/permissions.js
++++ b/backend/src/shared/permissions.js
+@@ -140,7 +140,13 @@ export const PERMISSIONS = {
+   'media.upload': PRODUCER,
+   'media.delete': PRODUCER,
+   'verifications.create': PRODUCER,
+-  'verifications.read': [...PRODUCER, ...ADMIN_ROLES],
++  /**
++   * Lecture de SON statut de vérification (`GET /verifications/me`, filtré sur
++   * l'organisation active par le service). Réservée auparavant aux producteurs :
++   * un acheteur, fournisseur, transporteur ou investisseur recevait un 403 en
++   * ouvrant son propre profil. La file de revue reste `verifications.review`.
++   */
++  'verifications.read': EVERYONE,
+   'verifications.review': ADMIN_ROLES,
+   'reports.create': [...PRODUCER, 'BUYER', 'VISITOR'],
+   'reports.review': MODERATION,
+@@ -245,9 +251,6 @@ export const PERMISSIONS = {
+   'dataproducts.manage': [...ADMIN_ROLES, 'DATA_STEWARD'],
+   'data.read': EVERYONE,
+ 
+-  'dataproducts.manage': [...ADMIN_ROLES, 'DATA_STEWARD'],
+-  'data.read': EVERYONE,
+-
+   // ─── V6 — GOUVERNANCE (SPEC-SUPER-ADMIN) — palier 2 : SUPER_ADMIN seul ──
+   // Nomination/révocation des rôles de gouvernance (SEC-03).
+   'admin.roles': ['SUPER_ADMIN'],
+diff --git a/backend/tests/jobs.integration.test.mjs b/backend/tests/jobs.integration.test.mjs
+index 701e2d6..a858952 100644
+--- a/backend/tests/jobs.integration.test.mjs
++++ b/backend/tests/jobs.integration.test.mjs
+@@ -4,6 +4,14 @@ import assert from 'node:assert/strict';
+ import { prisma } from '../src/config/prisma.js';
+ import { withFakePrisma } from './helpers/fakePrisma.mjs';
+ import { JOBS, listJobs, runJob, runAll, schedulerStatus, startScheduler, stopScheduler } from '../src/jobs/index.js';
++import { env } from '../src/config/env.js';
++
++/** Stabilisation V1 : le module IoT n'est pas déployé dans cette version. */
++const HORS_V1_IOT = 'Hors périmètre V1 : module IoT non déployé (iot.markSilent est inactif)';
++/** Le planificateur respecte `JOBS_ENABLED` : sans lui, rien à démarrer. */
++const PLANIFICATEUR_DESACTIVE = String(env.JOBS_ENABLED ?? 'true') === 'false'
++  ? 'JOBS_ENABLED=false dans cet environnement : relancer avec JOBS_ENABLED=true'
++  : false;
+ 
+ /**
+  * Preuves d'acceptation des tâches planifiées (expirations, SLA, purges).
+@@ -204,7 +212,7 @@ test('NOTIF-02 : seules les notifications lues et anciennes sont purgées', asyn
+   }
+ });
+ 
+-test('IOT-03 : un capteur silencieux est signalé à son organisation', async () => {
++test('IOT-03 : un capteur silencieux est signalé à son organisation', { skip: HORS_V1_IOT }, async () => {
+   const { fake, restore } = await withFakePrisma(
+     prisma,
+     baseStore({
+@@ -334,7 +342,7 @@ test('Verrou scheduler : un verrou détenu par un autre processus saute le job',
+   }
+ });
+ 
+-test('Planificateur : démarrage et arrêt sans laisser de minuteur actif', async () => {
++test('Planificateur : démarrage et arrêt sans laisser de minuteur actif', { skip: PLANIFICATEUR_DESACTIVE }, async () => {
+   const { restore } = await withFakePrisma(prisma, baseStore());
+   try {
+     const started = startScheduler({ initialDelayMs: 3_600_000 });
+diff --git a/backend/tests/messaging.integration.test.mjs b/backend/tests/messaging.integration.test.mjs
+index 0ae3fa4..1ad6fa2 100644
+--- a/backend/tests/messaging.integration.test.mjs
++++ b/backend/tests/messaging.integration.test.mjs
+@@ -185,10 +185,16 @@ test('MSG-02 : pièce jointe invalide refusée (URL http(s) ou clé de stockage)
+ 
+     const accepted = await messaging.postMessage(
+       conversation.id,
+-      { body: 'Photo du lot', attachments: ['https://storage.example/lot.jpg', 'org/media/2026-10/photo.jpg'] },
++      { body: 'Photo du lot', attachments: ['https://storage.example/lot.jpg', `${BUYER}/media/2026-10/photo.jpg`] },
+       reqAs(BUYER),
+     );
+     assert.equal(accepted.attachments.length, 2);
++
++    // Stabilisation V1 : une clé de stockage doit appartenir à l'organisation de l'expéditeur.
++    await assert.rejects(
++      () => messaging.postMessage(conversation.id, { body: 'Pièce d’autrui', attachments: [`${SELLER}/documents/2026-10/kyc.pdf`] }, reqAs(BUYER)),
++      (error) => error.status === 422 && error.errors?.[0]?.code === 'foreign_storage_key',
++    );
+   } finally {
+     restore();
+   }
+diff --git a/backend/tests/req-v1.integration.test.mjs b/backend/tests/req-v1.integration.test.mjs
+index 20c0a14..2a7a51f 100644
+--- a/backend/tests/req-v1.integration.test.mjs
++++ b/backend/tests/req-v1.integration.test.mjs
+@@ -546,6 +546,8 @@ test('COOP-05 : la vue d’ensemble n’agrège que les membres consentants', as
+       cooperative: [{ id: 'coop_1', organizationId: ORG, deletedAt: null }],
+       cooperativeMember: [{ id: 'm1', cooperativeId: 'coop_1', memberUserId: 'user_a', status: 'ACTIVE', consentScopes: ['profile', 'productions'] }],
+       membership: [{ id: 'ms1', userId: 'user_a', organizationId: 'org_member', status: 'ACTIVE' }],
++      // Données du membre = son organisation INDIVIDUELLE (CDC D2) — stabilisation V1.
++      organization: [{ id: 'org_member', type: 'INDIVIDUAL', deletedAt: null }],
+       farm: [{ id: 'farm_m', organizationId: 'org_member', deletedAt: null }],
+       plot: [{ id: 'plot_m', organizationId: 'org_member', farmId: 'farm_m', deletedAt: null }],
+     }),
+@@ -1165,9 +1167,15 @@ test('SEC-12 : l’idempotence est appliquée par un middleware dédié', async
+   const app = createApp();
+   const { base, close } = await listen(app);
+   try {
+-    // La route de commande est protégée : sans jeton, elle refuse avant tout effet.
++    /*
++     * Stabilisation V1 : ce middleware protège les commandes, le stock et les
++     * analyses IA — tous V2 et au-delà. Aucune route V1 ne le monte ; les
++     * créations hors ligne V1 sont idempotentes par identifiant client
++     * (`resolveId`). Le test vérifiait `POST /orders`, qui n'est pas monté en V1 :
++     * on fige désormais ce fait au lieu de le masquer.
++     */
+     const response = await fetch(`${base}/api/v1/orders`, { method: 'POST' });
+-    assert.ok([401, 403].includes(response.status));
++    assert.equal(response.status, 404, 'module commandes (V2) non monté en V1');
+   } finally {
+     await close();
+   }
+@@ -1246,7 +1254,8 @@ test('NFR-06 : les tâches planifiées exposent leur état de supervision', asyn
+   }
+ 
+   const started = startScheduler({ initialDelayMs: 60_000 });
+-  assert.equal(started.jobs.length, before.jobs.length);
++  // `jobs` n'est renvoyé que si le planificateur démarre (JOBS_ENABLED ≠ false).
++  if (started.started) assert.equal(started.jobs.length, before.jobs.length);
+   const after = schedulerStatus();
+   if (started.started) assert.equal(after.scheduled, before.jobs.length);
+   else assert.equal(started.reason, 'JOBS_ENABLED=false');
+diff --git a/backend/src/realtime/sendGuard.js b/backend/src/realtime/sendGuard.js
+new file mode 100644
+index 0000000..b47089e
+--- /dev/null
++++ b/backend/src/realtime/sendGuard.js
+@@ -0,0 +1,71 @@
++import { z } from 'zod';
++import { can } from '../shared/permissions.js';
++import { rolesEffectifs } from '../middleware/tenant.js';
++
++/**
++ * Envoi de message par WebSocket (`send_message`) — mêmes règles que le REST.
++ *
++ * Avant ce garde, l'événement appelait `postMessage` sans permission, sans
++ * validation et au nom de la PREMIÈRE organisation de l'utilisateur, quelle
++ * que soit la conversation. Il contournait ainsi `authorize('messages.write')`,
++ * la garde « compte vérifié » (H-07) et le schéma Zod de la route
++ * `POST /messaging/conversations/:id/messages`.
++ *
++ * Fonction pure : elle ne lit rien en base, ce qui la rend testable sans
++ * serveur Socket.IO ni PostgreSQL.
++ */
++
++/** Même contrat que `messageSchema` (routes REST), plus le routage socket. */
++export const sendMessageSchema = z.object({
++  roomId: z.string().min(10).max(60),
++  content: z.string().trim().min(1, 'Message vide').max(3000),
++  attachments: z.array(z.string().max(500)).max(5).default([]),
++  localTempId: z
++    .string()
++    .min(20)
++    .max(40)
++    .regex(/^[A-Za-z0-9_-]+$/)
++    .optional(),
++  /** Organisation active choisie par le client (équivalent de `X-Organization-Id`). */
++  organizationId: z.string().min(10).max(60).optional(),
++});
++
++/**
++ * Construit le contexte d'appel de `postMessage`, ou un refus explicite.
++ *
++ * @param {object} p
++ * @param {string} p.userId
++ * @param {boolean} p.verified e-mail ou téléphone vérifié
++ * @param {{organizationId: string, roles: string[], organization?: object}[]} p.memberships adhésions ACTIVES
++ * @param {string[]} p.participantOrgIds organisations du fil
++ * @param {string} [p.organisationDemandee]
++ */
++export const contexteEnvoi = ({ userId, verified, memberships = [], participantOrgIds = [], organisationDemandee }) => {
++  if (!verified) return { ok: false, error: 'ACCOUNT_NOT_VERIFIED' };
++
++  let candidates = memberships.filter((m) => participantOrgIds.includes(m.organizationId));
++  if (organisationDemandee) candidates = candidates.filter((m) => m.organizationId === organisationDemandee);
++  // Même réponse qu'en REST : on ne révèle pas l'existence d'un fil tiers.
++  if (candidates.length === 0) return { ok: false, error: 'NOT_FOUND' };
++
++  const tousRoles = [...new Set(memberships.flatMap((m) => m.roles ?? []))];
++  for (const membership of candidates) {
++    const effectiveRoles = rolesEffectifs(membership.roles ?? [], tousRoles);
++    if (!can(effectiveRoles, 'messages.write')) continue;
++    return {
++      ok: true,
++      req: {
++        user: { id: userId, roles: tousRoles },
++        tenant: {
++          organizationId: membership.organizationId,
++          organization: membership.organization ?? null,
++          roles: membership.roles ?? [],
++          effectiveRoles,
++        },
++        headers: {},
++        ip: 'socket',
++      },
++    };
++  }
++  return { ok: false, error: 'PERMISSION_DENIED' };
++};
+diff --git a/backend/tests/stabilisationV1.test.mjs b/backend/tests/stabilisationV1.test.mjs
+new file mode 100644
+index 0000000..fbeff1c
+--- /dev/null
++++ b/backend/tests/stabilisationV1.test.mjs
+@@ -0,0 +1,267 @@
++import './helpers/pinTestEnv.mjs';
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { readFileSync } from 'node:fs';
++
++import { prisma } from '../src/config/prisma.js';
++import { withFakePrisma } from './helpers/fakePrisma.mjs';
++import * as messaging from '../src/modules/messaging/messaging.service.js';
++import { contexteEnvoi, sendMessageSchema } from '../src/realtime/sendGuard.js';
++import { estLectureEnPost } from '../src/routes/index.js';
++import { sujetAutorise } from '../src/modules/verification/verification.service.js';
++import { uploadUrlSchema } from '../src/modules/media/media.schema.js';
++import { kindEnBase, bucketDuMedia } from '../src/modules/media/media.service.js';
++import { can, PERMISSIONS } from '../src/shared/permissions.js';
++import { env } from '../src/config/env.js';
++
++/**
++ * Stabilisation backend V1 — preuves des correctifs du lot d'audit.
++ * Chaque test nomme le défaut qu'il verrouille ; voir docs/RAPPORT-STABILISATION-BACKEND-V1.md.
++ */
++
++const A = 'org_aaaaaaaaaa';
++const B = 'org_bbbbbbbbbb';
++const C = 'org_cccccccccc';
++const D = 'org_dddddddddd';
++const req = (organizationId, userId) => ({
++  tenant: { organizationId, effectiveRoles: ['FARMER'] },
++  user: { id: userId, roles: ['FARMER'] },
++  headers: {},
++  ip: '127.0.0.1',
++});
++
++// ─── R1 : envoi par WebSocket ─────────────────────────────────────────────
++
++test('R1 — socket : un compte non vérifié ne peut pas envoyer', () => {
++  const r = contexteEnvoi({ userId: 'u', verified: false, memberships: [{ organizationId: A, roles: ['FARMER'] }], participantOrgIds: [A, B] });
++  assert.deepEqual(r, { ok: false, error: 'ACCOUNT_NOT_VERIFIED' });
++});
++
++test('R1 — socket : hors du fil, réponse NOT_FOUND (comme le REST)', () => {
++  const r = contexteEnvoi({ userId: 'u', verified: true, memberships: [{ organizationId: C, roles: ['FARMER'] }], participantOrgIds: [A, B] });
++  assert.equal(r.error, 'NOT_FOUND');
++});
++
++test('R1 — socket : l’organisation retenue est celle qui participe au fil, pas la première', () => {
++  const r = contexteEnvoi({
++    userId: 'u',
++    verified: true,
++    memberships: [
++      { organizationId: C, roles: ['FARMER'] },
++      { organizationId: B, roles: ['BUYER'] },
++    ],
++    participantOrgIds: [A, B],
++  });
++  assert.equal(r.ok, true);
++  assert.equal(r.req.tenant.organizationId, B);
++});
++
++test('R1 — socket : sans `messages.write` dans l’organisation du fil, refus', () => {
++  // INVESTOR n'a pas la messagerie ; FARMER dans une AUTRE organisation ne compte pas (H-03).
++  const r = contexteEnvoi({
++    userId: 'u',
++    verified: true,
++    memberships: [
++      { organizationId: B, roles: ['INVESTOR'] },
++      { organizationId: C, roles: ['FARMER'] },
++    ],
++    participantOrgIds: [A, B],
++  });
++  assert.deepEqual(r, { ok: false, error: 'PERMISSION_DENIED' });
++});
++
++test('R1 — socket : charge utile validée comme en REST', () => {
++  assert.equal(sendMessageSchema.safeParse({ roomId: 'conv_0000000001', content: '   ' }).success, false);
++  assert.equal(sendMessageSchema.safeParse({ roomId: 'conv_0000000001', content: 'x'.repeat(3001) }).success, false);
++  assert.equal(sendMessageSchema.safeParse({ roomId: 'conv_0000000001', content: 'ok', attachments: 'chaine' }).success, false);
++  assert.equal(sendMessageSchema.safeParse({ roomId: 'conv_0000000001', content: 'ok' }).success, true);
++});
++
++// ─── H-07 : garde « compte vérifié » ─────────────────────────────────────
++
++test('H-07 — seule la synchronisation (lecture en POST) est exemptée', () => {
++  assert.equal(estLectureEnPost('/api/v1/messaging', '/sync'), true);
++  assert.equal(estLectureEnPost('/api/v1/messaging', '/sync/'), true);
++  assert.equal(estLectureEnPost('/api/v1/messaging', '/groups'), false);
++  assert.equal(estLectureEnPost('/api/v1/calls', '/sync'), false);
++});
++
++// ─── M1 : réémission idempotente d'un message ────────────────────────────
++
++const ID_EXISTANT = '01JB0000000000000000000001';
++const storeMessagerie = () => ({
++  conversation: [
++    { id: 'conv_ab_000001', subjectType: 'DIRECT', subjectId: 'd1', participantOrgIds: [A, B], status: 'OPEN', updatedAt: new Date() },
++    { id: 'conv_cd_000001', subjectType: 'DIRECT', subjectId: 'd2', participantOrgIds: [C, D], status: 'OPEN', updatedAt: new Date() },
++  ],
++  message: [
++    { id: ID_EXISTANT, conversationId: 'conv_ab_000001', senderId: 'user_a', senderOrgId: A, body: 'secret', attachments: [], readBy: ['user_a'], createdAt: new Date() },
++  ],
++  membership: [],
++  notification: [],
++  notificationPreference: [],
++  auditLog: [],
++});
++
++test('M1 — un tiers ne récupère jamais un message existant via `localTempId`', async () => {
++  const { restore } = await withFakePrisma(prisma, storeMessagerie());
++  try {
++    await assert.rejects(
++      messaging.postMessage('conv_ab_000001', { body: 'x', attachments: [], localTempId: ID_EXISTANT }, req(C, 'user_c')),
++      (e) => e.status === 404,
++    );
++  } finally {
++    restore();
++  }
++});
++
++test('M1 — identifiant déjà pris dans un autre fil : 409, pas 500', async () => {
++  const { restore } = await withFakePrisma(prisma, storeMessagerie());
++  try {
++    await assert.rejects(
++      messaging.postMessage('conv_cd_000001', { body: 'x', attachments: [], localTempId: ID_EXISTANT }, req(C, 'user_c')),
++      (e) => e.status === 409,
++    );
++  } finally {
++    restore();
++  }
++});
++
++test('M1 — même expéditeur, même fil : la réémission renvoie le message d’origine', async () => {
++  const { fake, restore } = await withFakePrisma(prisma, storeMessagerie());
++  try {
++    const rejoue = await messaging.postMessage('conv_ab_000001', { body: 'autre', attachments: [], localTempId: ID_EXISTANT }, req(A, 'user_a'));
++    assert.equal(rejoue.id, ID_EXISTANT);
++    assert.equal(rejoue.body, 'secret');
++    assert.equal(fake._store.message.length, 1, 'aucun doublon créé');
++  } finally {
++    restore();
++  }
++});
++
++test('M1 — `localTempId` mal formé : 422', async () => {
++  const { restore } = await withFakePrisma(prisma, storeMessagerie());
++  try {
++    await assert.rejects(
++      messaging.postMessage('conv_ab_000001', { body: 'x', attachments: [], localTempId: 'x;drop' }, req(A, 'user_a')),
++      (e) => e.status === 422,
++    );
++  } finally {
++    restore();
++  }
++});
++
++// ─── Pièces jointes ──────────────────────────────────────────────────────
++
++test('Pièces jointes — une clé de stockage d’une autre organisation est refusée', () => {
++  assert.throws(
++    () => messaging.assertAttachments([`${B}/documents/2026-11/id.pdf`], A),
++    (e) => e.status === 422 && e.errors?.[0]?.code === 'foreign_storage_key',
++  );
++  assert.deepEqual(messaging.assertAttachments([`${A}/media/2026-11/p.jpg`, 'https://exemple.cd/a.png'], A).length, 2);
++  assert.throws(() => messaging.assertAttachments('pas-une-liste', A), (e) => e.status === 422);
++});
++
++test('Pièces jointes — `attachmentUrls` aligné ; jamais de signature pour une clé étrangère', async () => {
++  const [m] = await messaging.signerPiecesJointes(
++    [{ id: 'm', attachments: ['https://exemple.cd/a.png', `${C}/media/2026-11/x.jpg`] }],
++    [A, B],
++  );
++  assert.deepEqual(m.attachmentUrls, ['https://exemple.cd/a.png', null]);
++});
++
++// ─── M2 : synchronisation différée ───────────────────────────────────────
++
++const messagesDatés = (horodatages) =>
++  horodatages.map((t, i) => ({
++    id: `01JB${String(i).padStart(22, '0')}`,
++    conversationId: 'conv_ab_000001',
++    senderId: 'user_b',
++    senderOrgId: B,
++    body: `m${i}`,
++    attachments: [],
++    readBy: [],
++    createdAt: new Date(t),
++  }));
++
++test('M2 — au-delà d’une page, aucun message n’est perdu', async () => {
++  const base = Date.parse('2026-11-01T00:00:00Z');
++  const store = storeMessagerie();
++  store.message = messagesDatés(Array.from({ length: messaging.DELTA_SYNC_PAGE + 5 }, (_, i) => base + i * 1000));
++  const { restore } = await withFakePrisma(prisma, store);
++  try {
++    const p1 = await messaging.deltaSync({ lastPulledAt: 0 }, req(A, 'user_a'));
++    assert.equal(p1.created.length, messaging.DELTA_SYNC_PAGE);
++    assert.equal(p1.hasMore, true);
++    assert.equal(p1.serverTimestamp, base + (messaging.DELTA_SYNC_PAGE - 1) * 1000, 'curseur = dernier message livré');
++    const p2 = await messaging.deltaSync({ lastPulledAt: p1.serverTimestamp }, req(A, 'user_a'));
++    assert.equal(p2.created.length, 5);
++    assert.equal(p2.hasMore, false);
++    const ids = new Set([...p1.created, ...p2.created].map((m) => m.id));
++    assert.equal(ids.size, messaging.DELTA_SYNC_PAGE + 5, 'tous les messages, sans doublon');
++  } finally {
++    restore();
++  }
++});
++
++test('M2 — la coupure ne sépare jamais deux messages de la même milliseconde', async () => {
++  const base = Date.parse('2026-11-01T00:00:00Z');
++  const n = messaging.DELTA_SYNC_PAGE;
++  // Les messages n-2, n-1 et n partagent le même horodatage, à cheval sur la coupure.
++  const horodatages = Array.from({ length: n + 1 }, (_, i) => base + Math.min(i, n - 2) * 1000);
++  const store = storeMessagerie();
++  store.message = messagesDatés(horodatages);
++  const { restore } = await withFakePrisma(prisma, store);
++  try {
++    const p1 = await messaging.deltaSync({ lastPulledAt: 0 }, req(A, 'user_a'));
++    assert.equal(p1.hasMore, true);
++    assert.equal(p1.created.length, n - 2);
++    const p2 = await messaging.deltaSync({ lastPulledAt: p1.serverTimestamp }, req(A, 'user_a'));
++    assert.equal(p2.created.length, 3, 'le groupe de même milliseconde arrive entier');
++  } finally {
++    restore();
++  }
++});
++
++// ─── Vérification, médias, matrice ───────────────────────────────────────
++
++test('VER-01 — le sujet d’une demande est borné à soi ou à l’organisation active', () => {
++  const r = { user: { id: 'moi' }, tenant: { organizationId: A } };
++  assert.equal(sujetAutorise('PROFILE', undefined, r), 'moi');
++  assert.equal(sujetAutorise('PROFILE', 'autrui', r), null);
++  assert.equal(sujetAutorise('ORGANIZATION', undefined, r), A);
++  assert.equal(sujetAutorise('COOPERATIVE', B, r), null);
++  assert.equal(sujetAutorise('FARM', 'farm_1', r), 'farm_1', 'exploitation : contrôlée ensuite par le service');
++});
++
++test('Médias — `IMAGE` accepté comme `PHOTO` ; AUDIO/DOCUMENT stockés dans l’énumération existante', () => {
++  const parse = (kind) => uploadUrlSchema.parse({ filename: 'f', mimeType: 'image/jpeg', sizeBytes: 10, kind }).kind;
++  assert.equal(parse('IMAGE'), 'PHOTO');
++  assert.equal(parse(undefined), 'PHOTO');
++  assert.equal(kindEnBase('AUDIO'), 'PHOTO');
++  assert.equal(kindEnBase('DOCUMENT'), 'PHOTO');
++  assert.equal(kindEnBase('VIDEO'), 'VIDEO');
++});
++
++test('Médias — le bucket se déduit de la clé, au dépôt comme à la confirmation', () => {
++  assert.equal(bucketDuMedia(`${A}/documents/2026-11/x.jpg`), env.SUPABASE_BUCKET_PRIVATE);
++  assert.equal(bucketDuMedia(`${A}/media/2026-11/x.pdf`), env.SUPABASE_BUCKET_MEDIA);
++});
++
++test('RBAC — statut de vérification lisible par tous ; pièce jointe sans droit producteur', () => {
++  for (const role of ['BUYER', 'SUPPLIER', 'TRANSPORTER', 'INVESTOR', 'FARMER']) {
++    assert.equal(can([role], 'verifications.read'), true, role);
++  }
++  assert.equal(can(['BUYER'], 'media.upload'), false, 'le droit producteur n’est pas élargi');
++  assert.equal(can(['BUYER'], 'messages.write'), true, 'alternative retenue sur /media/upload-url');
++  assert.equal(can(['INVESTOR'], 'messages.write'), false);
++  assert.equal(can(['BUYER'], 'verifications.review'), false);
++});
++
++test('RBAC — plus aucune clé de permission déclarée deux fois', () => {
++  const source = readFileSync(new URL('../src/shared/permissions.js', import.meta.url), 'utf8');
++  for (const cle of Object.keys(PERMISSIONS)) {
++    const n = source.split(`'${cle}':`).length - 1;
++    assert.equal(n, 1, `${cle} déclarée ${n} fois`);
++  }
++});
+diff --git a/backend/tests/e2e/stabilisationV1.e2e.test.mjs b/backend/tests/e2e/stabilisationV1.e2e.test.mjs
+new file mode 100644
+index 0000000..d88b64e
+--- /dev/null
++++ b/backend/tests/e2e/stabilisationV1.e2e.test.mjs
+@@ -0,0 +1,171 @@
++import test, { before, after } from 'node:test';
++import assert from 'node:assert/strict';
++import { startHarness } from './support/harness.mjs';
++
++/**
++ * Stabilisation backend V1 — recette de bout en bout, base PostgreSQL réelle.
++ *
++ * Verrouille les correctifs du lot d'audit sur le chemin HTTP complet
++ * (authentification réelle, tenant, permissions, contraintes SQL) :
++ *   - H-07 rétabli sur /messaging et /calls (compte vérifié pour écrire) ;
++ *   - PATCH /organizations/:id utilisable par le responsable (404 systématique avant) ;
++ *   - GET /verifications/me ouvert aux acteurs non producteurs (403 avant) ;
++ *   - dossier de vérification impossible au nom d'autrui ;
++ *   - pièces jointes : clé de stockage étrangère refusée, `attachmentUrls` exposé ;
++ *   - /media/upload-url : plus de 403 pour un acheteur ni de 422 pour `kind: IMAGE` ;
++ *   - vue coopérative : agrégation limitée à l'exploitation INDIVIDUELLE du membre.
++ */
++
++let h;
++const PASSWORD = 'MotDePasse!2026';
++const comptes = {};
++
++const inscrire = async (cle, accountType = 'FARMER', { verifie = true } = {}) => {
++  const email = `${cle}-stab@agrikonnect.test`;
++  const r = await h.request('POST', '/auth/register', {
++    body: { accountType, firstName: cle, lastName: 'Stab', email, password: PASSWORD, countryCode: 'CD', locale: 'fr' },
++  });
++  assert.equal(r.status, 201, JSON.stringify(r.body));
++  const c = await h.request('POST', '/auth/login', { body: { identifier: email, password: PASSWORD } });
++  assert.equal(c.status, 200, JSON.stringify(c.body));
++  const id = r.body.data.user.id;
++  // État de vérification posé explicitement : la recette ne dépend pas du
++  // comportement du stub GoTrue à l'inscription.
++  await h.prisma.profile.update({ where: { id }, data: { emailVerifiedAt: verifie ? new Date() : null, phoneVerifiedAt: null } });
++  comptes[cle] = { id, email, organizationId: r.body.data.organization.id, token: c.body.data.session.accessToken };
++  return comptes[cle];
++};
++
++const as = (cle, method, path, opts = {}) =>
++  h.request(method, path, { token: comptes[cle].token, ...opts });
++
++before(async () => {
++  h = await startHarness();
++  await inscrire('awa');
++  await inscrire('ben', 'BUYER');
++  await inscrire('cleo');
++  await inscrire('dan', 'FARMER', { verifie: false });
++  await inscrire('corp', 'AGRICULTURAL_COMPANY');
++}, { timeout: 240_000 });
++
++after(async () => {
++  await h?.stop?.();
++});
++
++test('H-07 — un compte non vérifié ne crée pas de groupe ; la synchronisation reste lisible', async () => {
++  const groupe = await as('dan', 'POST', '/messaging/groups', {
++    body: { name: 'Groupe test', participantOrgIds: [comptes.awa.organizationId] },
++  });
++  assert.equal(groupe.status, 403, JSON.stringify(groupe.body));
++  assert.equal(groupe.body.details?.accountNotVerified, true);
++
++  const appel = await as('dan', 'POST', '/calls', { body: { conversationId: 'conv_0000000000', inviteeUserIds: [comptes.awa.id] } });
++  assert.equal(appel.status, 403, 'appel refusé avant tout traitement');
++
++  const sync = await as('dan', 'POST', '/messaging/sync', { body: { lastPulledAt: 0 } });
++  assert.equal(sync.status, 200, JSON.stringify(sync.body));
++  assert.equal(sync.body.data.hasMore, false);
++});
++
++test('Organisation — le responsable modifie SON organisation, jamais celle d’un autre', async () => {
++  const mienne = await as('awa', 'PATCH', `/organizations/${comptes.awa.organizationId}`, { body: { description: 'Exploitation familiale' } });
++  assert.equal(mienne.status, 200, JSON.stringify(mienne.body));
++  assert.equal(mienne.body.data.description, 'Exploitation familiale');
++
++  const autre = await as('awa', 'PATCH', `/organizations/${comptes.cleo.organizationId}`, { body: { description: 'piratage' } });
++  assert.equal(autre.status, 404);
++  const intacte = await h.prisma.organization.findUnique({ where: { id: comptes.cleo.organizationId } });
++  assert.notEqual(intacte.description, 'piratage');
++});
++
++test('Vérification — un acheteur lit son statut ; personne ne dépose au nom d’autrui', async () => {
++  const statut = await as('ben', 'GET', '/verifications/me');
++  assert.equal(statut.status, 200, JSON.stringify(statut.body));
++  assert.ok(Array.isArray(statut.body.data.criteria));
++
++  const usurpation = await as('awa', 'POST', '/verifications', {
++    body: { subjectType: 'PROFILE', subjectId: comptes.cleo.id, level: 'PROFILE_VERIFIED' },
++  });
++  assert.equal(usurpation.status, 404, JSON.stringify(usurpation.body));
++
++  // La vraie personne n'est pas bloquée par un dossier fantôme.
++  const legitime = await as('cleo', 'POST', '/verifications', { body: { level: 'PROFILE_VERIFIED' } });
++  assert.equal(legitime.status, 201, JSON.stringify(legitime.body));
++  assert.equal(legitime.body.data.subjectId, comptes.cleo.id);
++});
++
++test('Médias — un acheteur peut demander une URL d’envoi avec `kind: IMAGE`', async () => {
++  const r = await as('ben', 'POST', '/media/upload-url', {
++    body: { filename: 'photo.jpg', mimeType: 'image/jpeg', sizeBytes: 1024, kind: 'IMAGE' },
++  });
++  // Le banc n'a pas de stockage objet : l'URL signée elle-même ne peut pas être
++  // obtenue ici (500 attendu du stub). Ce test prouve que la permission (403)
++  // et la validation (422) ne bloquent plus.
++  assert.notEqual(r.status, 403, JSON.stringify(r.body));
++  assert.notEqual(r.status, 422, JSON.stringify(r.body));
++  const media = await h.prisma.media.findFirst({ where: { organizationId: comptes.ben.organizationId } });
++  assert.ok(media, 'média enregistré sous l’organisation active');
++  assert.equal(media.kind, 'PHOTO');
++});
++
++test('Pièces jointes — clé étrangère refusée, clé de l’expéditeur acceptée avec `attachmentUrls`', async () => {
++  const conv = await as('ben', 'POST', '/messaging/conversations', {
++    body: { subjectType: 'DIRECT', subjectId: 'direct-ben-awa-stab', participantOrgIds: [comptes.awa.organizationId] },
++  });
++  assert.ok([200, 201].includes(conv.status), JSON.stringify(conv.body));
++  const id = conv.body.data.id;
++
++  const etrangere = await as('ben', 'POST', `/messaging/conversations/${id}/messages`, {
++    body: { body: 'doc', attachments: [`${comptes.awa.organizationId}/documents/2026-11/piece.pdf`] },
++  });
++  assert.equal(etrangere.status, 422, JSON.stringify(etrangere.body));
++
++  const propre = await as('ben', 'POST', `/messaging/conversations/${id}/messages`, {
++    body: { body: 'photo', attachments: [`${comptes.ben.organizationId}/media/2026-11/p.jpg`] },
++  });
++  assert.equal(propre.status, 201, JSON.stringify(propre.body));
++  assert.equal(propre.body.data.attachmentUrls.length, 1);
++
++  const fil = await as('awa', 'GET', `/messaging/conversations/${id}/messages`);
++  assert.equal(fil.status, 200);
++  const recu = fil.body.data.messages.find((m) => m.body === 'photo');
++  assert.ok(recu, 'le destinataire voit le message');
++  assert.ok(Array.isArray(recu.attachmentUrls));
++});
++
++test('Coopérative — l’agrégation ne lit que l’exploitation individuelle du membre consentant', async () => {
++  const point = { type: 'Point', coordinates: [15.3, -4.3] };
++
++  // Parcelle de Cléo dans SON organisation individuelle : 2 ha.
++  const fermeCleo = await as('cleo', 'POST', '/farms', { body: { name: 'Ferme Cléo', countryCode: 'CD' } });
++  assert.equal(fermeCleo.status, 201, JSON.stringify(fermeCleo.body));
++  const pCleo = await as('cleo', 'POST', '/plots', { body: { farmId: fermeCleo.body.data.farm.id, name: 'Parcelle C', areaHa: 2, geometry: point } });
++  assert.equal(pCleo.status, 201, JSON.stringify(pCleo.body));
++
++  // Parcelle d'une entreprise où Cléo est aussi membre : 50 ha, hors consentement.
++  const fermeCorp = await as('corp', 'POST', '/farms', { body: { name: 'Domaine Corp', countryCode: 'CD' } });
++  assert.equal(fermeCorp.status, 201, JSON.stringify(fermeCorp.body));
++  const pCorp = await as('corp', 'POST', '/plots', { body: { farmId: fermeCorp.body.data.farm.id, name: 'Bloc 1', areaHa: 50, geometry: point } });
++  assert.equal(pCorp.status, 201, JSON.stringify(pCorp.body));
++  await h.prisma.membership.create({
++    data: { userId: comptes.cleo.id, organizationId: comptes.corp.organizationId, roles: ['FARMER'], status: 'ACTIVE' },
++  });
++
++  const coop = await as('awa', 'POST', '/organizations', { body: { type: 'COOPERATIVE', name: 'Coop Stabilisation', countryCode: 'CD' } });
++  assert.equal(coop.status, 201, JSON.stringify(coop.body));
++  const enCoop = { headers: { 'X-Organization-Id': coop.body.data.id } };
++  const coopId = coop.body.data.cooperative.id;
++
++  const membre = await as('awa', 'POST', `/cooperatives/${coopId}/members`, {
++    ...enCoop,
++    body: { identifier: comptes.cleo.email, consentScopes: ['plots'] },
++  });
++  assert.equal(membre.status, 201, JSON.stringify(membre.body));
++  const actif = await as('awa', 'PATCH', `/cooperatives/${coopId}/members/${membre.body.data.id}`, { ...enCoop, body: { status: 'ACTIVE' } });
++  assert.equal(actif.status, 200, JSON.stringify(actif.body));
++
++  const vue = await as('awa', 'GET', `/cooperatives/${coopId}/overview`, enCoop);
++  assert.equal(vue.status, 200, JSON.stringify(vue.body));
++  assert.equal(vue.body.data.plots.count, 1);
++  assert.equal(vue.body.data.plots.totalAreaHa, 2, 'les 50 ha de l’entreprise ne sont jamais agrégés');
++});
+diff --git a/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs b/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs
+new file mode 100644
+index 0000000..66a457e
+--- /dev/null
++++ b/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs
+@@ -0,0 +1,269 @@
++import test, { before, after } from 'node:test';
++import assert from 'node:assert/strict';
++import http from 'node:http';
++import { WebSocket } from 'ws';
++import { startHarness } from './support/harness.mjs';
++
++/**
++ * Stabilisation backend V1 — couche temps réel et messagerie, de bout en bout.
++ *
++ * Vrais WebSockets (protocole Socket.IO v4 parlé directement sur `ws`, sans
++ * dépendance ajoutée) contre `attachRealtime`, base PostgreSQL réelle, jetons
++ * délivrés par le faux GoTrue du banc. Verrouille :
++ *   - R2 : une charge utile `null` ou un accusé qui n'est pas une fonction ne
++ *     lève plus d'exception non capturée (arrêt du serveur en production) ;
++ *   - R4 : un événement émis dès la connexion n'est plus perdu ;
++ *   - R3 : compte suspendu ou adhésion retirée APRÈS la connexion → refus ;
++ *   - D4 : organisation retirée d'un groupe → plus aucun message reçu ;
++ *   - M3 : un groupe homonyme d'un autre administrateur n'est pas réutilisé ;
++ *   - M4 : objet de conversation sans modèle → 422 et non 500 ;
++ *   - I1 : idempotence facultative des créations V1 (exploitations, parcelles, productions).
++ */
++
++let h;
++let rt;
++let port;
++const PASSWORD = 'MotDePasse!2026';
++const comptes = {};
++const exceptions = [];
++const capturer = (erreur) => exceptions.push(erreur);
++
++const inscrire = async (cle) => {
++  const email = `${cle}-rt@agrikonnect.test`;
++  const r = await h.request('POST', '/auth/register', {
++    body: { accountType: 'FARMER', firstName: cle, lastName: 'Rt', email, password: PASSWORD, countryCode: 'CD', locale: 'fr' },
++  });
++  assert.equal(r.status, 201, JSON.stringify(r.body));
++  const c = await h.request('POST', '/auth/login', { body: { identifier: email, password: PASSWORD } });
++  assert.equal(c.status, 200, JSON.stringify(c.body));
++  const id = r.body.data.user.id;
++  await h.prisma.profile.update({ where: { id }, data: { emailVerifiedAt: new Date() } });
++  comptes[cle] = { id, organizationId: r.body.data.organization.id, token: c.body.data.session.accessToken };
++};
++
++const as = (cle, method, path, opts = {}) => h.request(method, path, { token: comptes[cle].token, ...opts });
++
++/**
++ * Client Socket.IO minimal (Engine.IO v4, transport WebSocket).
++ * Par défaut, résout à l'événement `ready` (rooms chargées) ; `immediat: true`
++ * résout dès l'acceptation de la connexion, comme un client qui émet aussitôt.
++ */
++const connecter = (token, { immediat = false } = {}) =>
++  new Promise((resolve, reject) => {
++    const ws = new WebSocket(`ws://127.0.0.1:${port}/realtime/?EIO=4&transport=websocket`);
++    const attentes = new Map();
++    const evenements = [];
++    let prochainAck = 0;
++    const client = {
++      ferme: false,
++      evenements,
++      emit: (...args) => ws.send(`42${JSON.stringify(args)}`),
++      emitAck: (...args) =>
++        new Promise((res, rej) => {
++          const id = ++prochainAck;
++          const delai = setTimeout(() => rej(new Error(`pas d'accusé pour ${args[0]}`)), 5000);
++          attentes.set(id, (valeur) => {
++            clearTimeout(delai);
++            res(valeur);
++          });
++          ws.send(`42${id}${JSON.stringify(args)}`);
++        }),
++      recus: (nom) => evenements.filter(([e]) => e === nom).map(([, p]) => p),
++      fermer: () => ws.close(),
++    };
++    ws.on('message', (data) => {
++      const t = data.toString();
++      if (t === '2') return ws.send('3');
++      if (t[0] === '0') return ws.send(`40${JSON.stringify({ token })}`);
++      if (t.startsWith('40')) return immediat ? resolve(client) : undefined;
++      if (t.startsWith('44')) return reject(new Error(t));
++      if (t.startsWith('41')) {
++        client.ferme = true;
++        return undefined;
++      }
++      if (t.startsWith('43')) {
++        const [, id, corps] = /^43(\d+)([\s\S]*)$/.exec(t);
++        attentes.get(Number(id))?.(JSON.parse(corps)[0]);
++        return undefined;
++      }
++      if (t.startsWith('42')) {
++        const evenement = JSON.parse(t.slice(2));
++        evenements.push(evenement);
++        if (evenement[0] === 'ready' && !immediat) resolve(client);
++      }
++      return undefined;
++    });
++    ws.on('close', () => {
++      client.ferme = true;
++    });
++    ws.on('error', reject);
++  });
++
++const pause = (ms) => new Promise((r) => setTimeout(r, ms));
++
++before(async () => {
++  h = await startHarness();
++  for (const cle of ['awa', 'ben', 'cleo', 'dina']) await inscrire(cle);
++
++  const { attachRealtime } = await import('../../src/realtime/index.js');
++  const serveur = http.createServer();
++  await new Promise((r) => serveur.listen(0, '127.0.0.1', r));
++  port = serveur.address().port;
++  rt = { serveur, io: attachRealtime(serveur) };
++
++  process.on('uncaughtException', capturer);
++  process.on('unhandledRejection', capturer);
++}, { timeout: 240_000 });
++
++after(async () => {
++  process.off('uncaughtException', capturer);
++  process.off('unhandledRejection', capturer);
++  rt?.io?.close();
++  await new Promise((r) => (rt?.serveur ? rt.serveur.close(() => r()) : r()));
++  await h?.stop?.();
++});
++
++test('R2 — charges utiles malformées : aucune exception non capturée, le serveur répond toujours', async () => {
++  const awa = await connecter(comptes.awa.token);
++
++  awa.emit('typing', null);
++  awa.emit('typing', 'texte');
++  awa.emit('conversation:leave', null);
++  awa.emit('conversation:join', null);
++  awa.emit('conversation:join', [1, 2]);
++  awa.emit('ping:app', 'pas-une-fonction');
++  awa.emit('send_message', null, 'pas-une-fonction');
++  const refus = await awa.emitAck('send_message', null);
++  assert.deepEqual(refus, { ok: false, error: 'INVALID_PAYLOAD' });
++  const joinVide = await awa.emitAck('conversation:join', null);
++  assert.deepEqual(joinVide, { ok: false, error: 'MISSING_ID' });
++
++  await pause(300);
++  assert.deepEqual(exceptions.map((e) => e?.message ?? String(e)), [], 'aucune exception non capturée');
++
++  const pong = await awa.emitAck('ping:app');
++  assert.ok(pong?.at, 'le serveur répond encore après les charges malformées');
++  awa.fermer();
++});
++
++test('R3 — compte suspendu après la connexion : envoi refusé et socket coupé', async () => {
++  const g = await as('awa', 'POST', '/messaging/groups', {
++    body: { name: 'Suspension', participantOrgIds: [comptes.ben.organizationId] },
++  });
++  assert.equal(g.status, 201, JSON.stringify(g.body));
++  const roomId = g.body.data.id;
++
++  const ben = await connecter(comptes.ben.token);
++  const ok = await ben.emitAck('send_message', { roomId, content: 'Avant suspension' });
++  assert.equal(ok.ok, true, JSON.stringify(ok));
++
++  await h.prisma.profile.update({ where: { id: comptes.ben.id }, data: { status: 'SUSPENDED' } });
++  try {
++    const refus = await ben.emitAck('send_message', { roomId, content: 'Après suspension' });
++    assert.deepEqual(refus, { ok: false, error: 'UNAUTHORIZED' });
++    await pause(200);
++    assert.equal(ben.ferme, true, 'socket coupé');
++    const persistes = await h.prisma.message.count({ where: { conversationId: roomId, body: 'Après suspension' } });
++    assert.equal(persistes, 0, 'aucun message persisté');
++  } finally {
++    await h.prisma.profile.update({ where: { id: comptes.ben.id }, data: { status: 'ACTIVE' } });
++  }
++});
++
++test('R3 + D4 — organisation retirée du groupe : plus de messages reçus, ni de réadhésion à la room', async () => {
++  const g = await as('awa', 'POST', '/messaging/groups', {
++    body: { name: 'Retrait', participantOrgIds: [comptes.cleo.organizationId] },
++  });
++  assert.equal(g.status, 201, JSON.stringify(g.body));
++  const roomId = g.body.data.id;
++
++  const cleo = await connecter(comptes.cleo.token);
++  const rejoint = await cleo.emitAck('conversation:join', { conversationId: roomId });
++  assert.deepEqual(rejoint, { ok: true });
++
++  const avant = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'Visible' } });
++  assert.equal(avant.status, 201, JSON.stringify(avant.body));
++  await pause(200);
++  assert.ok(cleo.recus('message:new').some((p) => p.conversationId === roomId), 'reçu avant retrait');
++
++  const retrait = await as('awa', 'DELETE', `/messaging/conversations/${roomId}/members/${comptes.cleo.organizationId}`);
++  assert.equal(retrait.status, 200, JSON.stringify(retrait.body));
++  await pause(200);
++  assert.ok(cleo.recus('conversation:removed').some((p) => p.conversationId === roomId), 'retrait notifié');
++
++  const nombreAvant = cleo.recus('message:new').length;
++  const apres = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'Confidentiel' } });
++  assert.equal(apres.status, 201);
++  await pause(300);
++  assert.equal(cleo.recus('message:new').length, nombreAvant, 'aucun message reçu après retrait');
++
++  const reessai = await cleo.emitAck('conversation:join', { conversationId: roomId });
++  assert.deepEqual(reessai, { ok: false, error: 'FORBIDDEN' });
++  const envoi = await cleo.emitAck('send_message', { roomId, content: 'Intrusion' });
++  assert.deepEqual(envoi, { ok: false, error: 'NOT_FOUND' });
++  cleo.fermer();
++});
++
++test('R4 — événement émis dès la connexion : traité, avec accusé (file hors ligne mobile)', async () => {
++  const g = await as('awa', 'POST', '/messaging/groups', {
++    body: { name: 'Reconnexion', participantOrgIds: [comptes.dina.organizationId] },
++  });
++  assert.equal(g.status, 201, JSON.stringify(g.body));
++  const dina = await connecter(comptes.dina.token, { immediat: true });
++  const ack = await dina.emitAck('send_message', { roomId: g.body.data.id, content: 'Envoyé dès la reconnexion' });
++  assert.equal(ack.ok, true, JSON.stringify(ack));
++  dina.fermer();
++});
++
++test('M3 — groupe homonyme : jamais réutilisé pour un autre administrateur ou d’autres membres', async () => {
++  const a = await as('awa', 'POST', '/messaging/groups', {
++    body: { name: 'Famille', participantOrgIds: [comptes.ben.organizationId, comptes.dina.organizationId] },
++  });
++  assert.equal(a.status, 201);
++
++  const b = await as('ben', 'POST', '/messaging/groups', {
++    body: { name: 'Famille', participantOrgIds: [comptes.awa.organizationId] },
++  });
++  assert.equal(b.status, 201);
++  assert.notEqual(b.body.data.id, a.body.data.id, 'nouveau groupe, et non celui d’Awa qui contient Dina');
++  assert.deepEqual(new Set(b.body.data.participantOrgIds), new Set([comptes.ben.organizationId, comptes.awa.organizationId]));
++  assert.equal(b.body.data.participantOrgIds[0], comptes.ben.organizationId, 'Ben administre son groupe');
++
++  const rejeu = await as('awa', 'POST', '/messaging/groups', {
++    body: { name: 'Famille', participantOrgIds: [comptes.dina.organizationId, comptes.ben.organizationId] },
++  });
++  assert.equal(rejeu.body.data.id, a.body.data.id, 'double envoi identique : même groupe');
++});
++
++test('M4 — conversation sur un objet sans modèle : 422 (VALIDATION_ERROR) et non 500', async () => {
++  for (const subjectType of ['FARM', 'ORGANIZATION', 'COOPERATIVE']) {
++    const r = await as('awa', 'POST', '/messaging/conversations', {
++      body: { subjectType, subjectId: comptes.awa.organizationId, participantOrgIds: [comptes.ben.organizationId] },
++    });
++    assert.equal(r.status, 422, `${subjectType} : ${JSON.stringify(r.body)}`);
++  }
++});
++
++test('I1 — création renvoyée après coupure (même Idempotency-Key) : rejouée, aucun doublon ; sans clé, inchangé', async () => {
++  const cle = 'mobile-01KXYZABCDEFGHJKMNPQRSTVW';
++  const corps = { name: 'Ferme Idempotente', countryCode: 'CD' };
++  const premier = await as('dina', 'POST', '/farms', { body: corps, headers: { 'idempotency-key': cle } });
++  assert.equal(premier.status, 201, JSON.stringify(premier.body));
++  const rejeu = await as('dina', 'POST', '/farms', { body: corps, headers: { 'idempotency-key': cle } });
++  assert.equal(rejeu.status, 201);
++  assert.equal(rejeu.body.data.farm.id, premier.body.data.farm.id, 'même exploitation renvoyée');
++  const nombre = await h.prisma.farm.count({ where: { organizationId: comptes.dina.organizationId, name: corps.name } });
++  assert.equal(nombre, 1, 'aucun doublon en base');
++
++  // Une clé ne rejoue jamais la réponse d'un autre utilisateur (M-01).
++  const autre = await as('awa', 'POST', '/farms', { body: corps, headers: { 'idempotency-key': cle } });
++  assert.equal(autre.status, 201);
++  assert.notEqual(autre.body.data.farm.id, premier.body.data.farm.id);
++
++  // Web : sans en-tête, deux créations distinctes, aucun 400.
++  const w1 = await as('dina', 'POST', '/farms', { body: { name: 'Ferme Web', countryCode: 'CD' } });
++  const w2 = await as('dina', 'POST', '/farms', { body: { name: 'Ferme Web', countryCode: 'CD' } });
++  assert.equal(w1.status, 201);
++  assert.equal(w2.status, 201);
++  assert.notEqual(w1.body.data.farm.id, w2.body.data.farm.id);
++});
+diff --git a/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs b/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs
+new file mode 100644
+index 0000000..5a65183
+--- /dev/null
++++ b/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs
+@@ -0,0 +1,565 @@
++import test, { before, after } from 'node:test';
++import assert from 'node:assert/strict';
++import http from 'node:http';
++import { startHarness } from './support/harness.mjs';
++import { connecterSocket } from './support/socketClient.mjs';
++
++/**
++ * Revue contradictoire backend V1 — lots R2 (sécurité) et R3 (intégrité, synchronisation).
++ *
++ * Banc : PostgreSQL EMBARQUÉ jetable (et non Supabase réel), faux GoTrue, vrais
++ * WebSockets contre `attachRealtime`. Aucun code métier n'est modifié par ce fichier.
++ *
++ * Convention :
++ *  - test normal  → scénario conforme, comportement attendu vérifié ;
++ *  - test `todo`  → ANOMALIE non corrigée (arbitrage requis). Le test affirme le
++ *    comportement ATTENDU ; son échec, visible dans le journal, montre le
++ *    comportement OBSERVÉ. `todo` ne fait pas échouer la suite mais n'est jamais
++ *    compté comme réussi.
++ *
++ * Identifiants : W* WebSocket, A* pièces jointes, I* idempotence, S* synchronisation.
++ * Voir docs/PREUVES_SECURITE_WEBSOCKET.md et docs/PREUVES_IDEMPOTENCE_SYNC.md.
++ */
++
++let h;
++let port;
++let rt;
++let supabaseAdmin;
++let env;
++const PASSWORD = 'MotDePasse!2026';
++const comptes = {};
++const point = { type: 'Point', coordinates: [15.3, -4.3] };
++const pause = (ms) => new Promise((r) => setTimeout(r, ms));
++
++const inscrire = async (cle, accountType = 'FARMER') => {
++  const email = `${cle}-revue@agrikonnect.test`;
++  const r = await h.request('POST', '/auth/register', {
++    body: { accountType, firstName: cle, lastName: 'Revue', email, password: PASSWORD, countryCode: 'CD', locale: 'fr' },
++  });
++  assert.equal(r.status, 201, JSON.stringify(r.body));
++  const c = await h.request('POST', '/auth/login', { body: { identifier: email, password: PASSWORD } });
++  assert.equal(c.status, 200, JSON.stringify(c.body));
++  const id = r.body.data.user.id;
++  await h.prisma.profile.update({ where: { id }, data: { emailVerifiedAt: new Date() } });
++  comptes[cle] = { id, organizationId: r.body.data.organization.id, token: c.body.data.session.accessToken };
++};
++
++const as = (cle, method, path, opts = {}) => h.request(method, path, { token: comptes[cle].token, ...opts });
++
++/** Requête avec en-têtes de réponse (pour `Idempotent-Replayed`). */
++const brut = async (cle, method, path, { body, headers = {} } = {}) => {
++  const r = await h.request(method, path, { token: comptes[cle].token, body, headers, raw: true });
++  const texte = r.buffer.toString('utf8');
++  return { status: r.status, rejoue: r.headers.get('idempotent-replayed') === 'true', body: texte ? JSON.parse(texte) : null };
++};
++
++const groupe = async (cle, nom, autres, headers = {}) => {
++  const g = await as(cle, 'POST', '/messaging/groups', {
++    body: { name: nom, participantOrgIds: autres.map((k) => comptes[k].organizationId) },
++    headers,
++  });
++  assert.equal(g.status, 201, JSON.stringify(g.body));
++  return g.body.data.id;
++};
++
++const socket = (cle) => connecterSocket(port, comptes[cle].token);
++
++before(async () => {
++  h = await startHarness();
++  for (const cle of ['awa', 'ben', 'cleo', 'dan', 'dina']) await inscrire(cle);
++  await inscrire('ivan', 'INVESTOR');
++
++  const { attachRealtime } = await import('../../src/realtime/index.js');
++  ({ supabaseAdmin } = await import('../../src/config/supabase.js'));
++  ({ env } = await import('../../src/config/env.js'));
++  const serveur = http.createServer();
++  await new Promise((r) => serveur.listen(0, '127.0.0.1', r));
++  port = serveur.address().port;
++  rt = { serveur, io: attachRealtime(serveur) };
++}, { timeout: 240_000 });
++
++after(async () => {
++  rt?.io?.close();
++  await new Promise((r) => (rt?.serveur ? rt.serveur.close(() => r()) : r()));
++  await h?.stop?.();
++});
++
++// ═══ R2 — WebSocket ══════════════════════════════════════════════════════
++// W1-W4 (payload null, accusé non fonctionnel, exception synchrone, rejet
++// asynchrone) et W5 (compte suspendu) : tests R2 et R3 de
++// realtimeStabilisation.e2e.test.mjs, journalisés dans docs/preuves/logs.
++
++test('W6 — adhésion révoquée après la connexion : envoi et adhésion à la room refusés', async () => {
++  const roomId = await groupe('awa', 'W6', ['ben']);
++  const ben = await socket('ben');
++  assert.equal((await ben.emitAck('send_message', { roomId, content: 'avant' })).ok, true);
++
++  await h.prisma.membership.updateMany({ where: { userId: comptes.ben.id }, data: { status: 'REMOVED' } });
++  try {
++    assert.deepEqual(await ben.emitAck('send_message', { roomId, content: 'après révocation' }), { ok: false, error: 'NOT_FOUND' });
++    assert.deepEqual(await ben.emitAck('conversation:join', { conversationId: roomId }), { ok: false, error: 'FORBIDDEN' });
++    assert.equal(await h.prisma.message.count({ where: { conversationId: roomId, body: 'après révocation' } }), 0);
++  } finally {
++    await h.prisma.membership.updateMany({ where: { userId: comptes.ben.id }, data: { status: 'ACTIVE' } });
++    ben.fermer();
++  }
++});
++
++test('W7 — conversation d’un autre tenant : invisible en socket comme en REST', async () => {
++  const roomId = await groupe('awa', 'W7', ['cleo']);
++  const dan = await socket('dan');
++  assert.deepEqual(await dan.emitAck('send_message', { roomId, content: 'intrusion' }), { ok: false, error: 'NOT_FOUND' });
++  assert.deepEqual(await dan.emitAck('conversation:join', { conversationId: roomId }), { ok: false, error: 'FORBIDDEN' });
++  dan.emit('typing', { conversationId: roomId });
++  const lecture = await as('dan', 'GET', `/messaging/conversations/${roomId}/messages`);
++  assert.equal(lecture.status, 404);
++  assert.equal(await h.prisma.message.count({ where: { conversationId: roomId, senderId: comptes.dan.id } }), 0);
++  dan.fermer();
++});
++
++test('W8 + W9 — organisation active : choisie parmi les participantes, jamais une organisation étrangère', async () => {
++  const coop = await as('awa', 'POST', '/organizations', { body: { type: 'COOPERATIVE', name: 'Coop W8', countryCode: 'CD' } });
++  assert.equal(coop.status, 201, JSON.stringify(coop.body));
++  const coopId = coop.body.data.id;
++  const roomId = await groupe('awa', 'W8', ['ben'], { 'X-Organization-Id': coopId });
++
++  const awa = await socket('awa');
++  const sansChoix = await awa.emitAck('send_message', { roomId, content: 'sans choix' });
++  assert.equal(sansChoix.ok, true, JSON.stringify(sansChoix));
++  const m = await h.prisma.message.findUnique({ where: { id: sansChoix.serverId } });
++  assert.equal(m.senderOrgId, coopId, 'seule organisation participante retenue');
++
++  assert.deepEqual(
++    await awa.emitAck('send_message', { roomId, content: 'org individuelle non participante', organizationId: comptes.awa.organizationId }),
++    { ok: false, error: 'NOT_FOUND' },
++  );
++  assert.equal((await awa.emitAck('send_message', { roomId, content: 'coop explicite', organizationId: coopId })).ok, true);
++  // W9 — organisation d'un tiers
++  assert.deepEqual(
++    await awa.emitAck('send_message', { roomId, content: 'usurpation', organizationId: comptes.ben.organizationId }),
++    { ok: false, error: 'NOT_FOUND' },
++  );
++  assert.equal(await h.prisma.message.count({ where: { conversationId: roomId, body: 'usurpation' } }), 0);
++  awa.fermer();
++});
++
++test('W10 — rôle sans `messages.write` (INVESTOR) : refus socket et REST', async () => {
++  const roomId = await groupe('awa', 'W10', ['ivan']);
++  const ivan = await socket('ivan');
++  assert.deepEqual(await ivan.emitAck('send_message', { roomId, content: 'x' }), { ok: false, error: 'PERMISSION_DENIED' });
++  const rest = await as('ivan', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'x' } });
++  assert.equal(rest.status, 403);
++  ivan.fermer();
++});
++
++/** Le socket de `cle` reçoit-il le contenu d'un message posté après `action` ? */
++const recoitApres = async (cle, nom, action, annuler) => {
++  const roomId = await groupe('awa', nom, [cle]);
++  const client = await socket(cle);
++  await action();
++  try {
++    const corps = `contenu confidentiel ${nom}`;
++    assert.equal((await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: corps } })).status, 201);
++    await pause(400);
++    return client.recus('message:new').filter((p) => p.conversationId === roomId && JSON.stringify(p).includes(corps)).length;
++  } finally {
++    await annuler();
++    client.fermer();
++  }
++};
++
++test(
++  'W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel',
++  { todo: 'ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver' },
++  async () => {
++    const recus = await recoitApres(
++      'cleo',
++      'W11',
++      () => h.prisma.membership.updateMany({ where: { userId: comptes.cleo.id }, data: { status: 'REMOVED' } }),
++      () => h.prisma.membership.updateMany({ where: { userId: comptes.cleo.id }, data: { status: 'ACTIVE' } }),
++    );
++    assert.equal(recus, 0, `observé : ${recus} message(s) reçu(s) avec leur contenu après révocation`);
++  },
++);
++
++test(
++  'W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel',
++  { todo: 'ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages' },
++  async () => {
++    const recus = await recoitApres(
++      'dan',
++      'W12',
++      () => h.prisma.profile.update({ where: { id: comptes.dan.id }, data: { status: 'SUSPENDED' } }),
++      () => h.prisma.profile.update({ where: { id: comptes.dan.id }, data: { status: 'ACTIVE' } }),
++    );
++    assert.equal(recus, 0, `observé : ${recus} message(s) reçu(s) avec leur contenu après suspension`);
++  },
++);
++
++// ═══ R2 — Pièces jointes ═════════════════════════════════════════════════
++
++test('A1 — clé d’une autre organisation : refusée en REST et en socket', async () => {
++  const roomId = await groupe('awa', 'A1', ['ben']);
++  const cle = `${comptes.ben.organizationId}/documents/2026-11/secret.pdf`;
++  const rest = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'x', attachments: [cle] } });
++  assert.equal(rest.status, 422);
++  assert.equal(rest.body.errors?.[0]?.code, 'foreign_storage_key');
++  const awa = await socket('awa');
++  const ack = await awa.emitAck('send_message', { roomId, content: 'x', attachments: [cle] });
++  assert.equal(ack.ok, false);
++  assert.equal(ack.error, 'VALIDATION_ERROR');
++  awa.fermer();
++});
++
++test('A2 — clés malformées : toutes refusées (422)', async () => {
++  const roomId = await groupe('awa', 'A2', ['ben']);
++  const org = comptes.awa.organizationId;
++  for (const piece of ['a b', '<script>', '', `${org}/media/${'x'.repeat(500)}`, 123, `${org}/media/é.jpg`]) {
++    const r = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'x', attachments: [piece] } });
++    assert.equal(r.status, 422, `${JSON.stringify(piece).slice(0, 40)} → ${r.status}`);
++  }
++});
++
++test(
++  'A3 — traversée de chemin (`<org>/../<autre>/…`) refusée',
++  { todo: 'ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)' },
++  async () => {
++    const roomId = await groupe('awa', 'A3', ['ben']);
++    const org = comptes.awa.organizationId;
++    const signees = [];
++    Object.defineProperty(supabaseAdmin, 'storage', {
++      configurable: true,
++      value: { from: () => ({ createSignedUrls: async (paths) => { signees.push(...paths); return { data: [], error: null }; } }) },
++    });
++    try {
++      for (const piece of [`${org}/../${comptes.ben.organizationId}/documents/2026-11/secret.pdf`, `${org}/media/../../${comptes.ben.organizationId}/documents/x.pdf`]) {
++        const r = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'x', attachments: [piece] } });
++        assert.equal(r.status, 422, `observé ${r.status} pour ${piece} ; clés transmises à la signature : ${JSON.stringify(signees)}`);
++      }
++    } finally {
++      delete supabaseAdmin.storage;
++    }
++  },
++);
++
++test('A4 — participant retiré : plus aucun accès au fil ni à ses pièces jointes', async () => {
++  const roomId = await groupe('awa', 'A4', ['cleo']);
++  const post = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, {
++    body: { body: 'pièce', attachments: [`${comptes.awa.organizationId}/media/2026-11/p.jpg`] },
++  });
++  assert.equal(post.status, 201);
++  assert.equal((await as('cleo', 'GET', `/messaging/conversations/${roomId}/messages`)).status, 200);
++
++  const retrait = await as('awa', 'DELETE', `/messaging/conversations/${roomId}/members/${comptes.cleo.organizationId}`);
++  assert.equal(retrait.status, 200);
++  assert.equal((await as('cleo', 'GET', `/messaging/conversations/${roomId}/messages`)).status, 404);
++  const sync = await as('cleo', 'POST', '/messaging/sync', { body: { lastPulledAt: 0, roomIds: [roomId] } });
++  assert.equal(sync.status, 200);
++  assert.equal(sync.body.data.created.length, 0, 'la synchronisation ne livre plus rien de ce fil');
++});
++
++test('A5 — URL signées : TTL de configuration, nouvelle signature à chaque lecture', async () => {
++  const roomId = await groupe('awa', 'A5', ['ben']);
++  const cle = `${comptes.awa.organizationId}/media/2026-11/photo.jpg`;
++  const appels = [];
++  let n = 0;
++  Object.defineProperty(supabaseAdmin, 'storage', {
++    configurable: true,
++    value: {
++      from: (bucket) => ({
++        createSignedUrls: async (paths, ttl) => {
++          appels.push({ bucket, paths, ttl });
++          n += 1;
++          return { data: paths.map((p) => ({ path: p, signedUrl: `https://stub.storage/${p}?token=${n}` })), error: null };
++        },
++      }),
++    },
++  });
++  try {
++    assert.equal((await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'p', attachments: [cle] } })).status, 201);
++    const l1 = await as('ben', 'GET', `/messaging/conversations/${roomId}/messages`);
++    const l2 = await as('ben', 'GET', `/messaging/conversations/${roomId}/messages`);
++    const url = (l) => l.body.data.messages.find((m) => m.attachments.includes(cle)).attachmentUrls[0];
++    assert.ok(url(l1) && url(l2));
++    assert.notEqual(url(l1), url(l2), 'URL renouvelée à chaque lecture');
++    assert.ok(appels.every((a) => a.ttl === env.SIGNED_URL_TTL_SECONDS), `TTL ${env.SIGNED_URL_TTL_SECONDS} s`);
++    assert.ok(appels.every((a) => a.bucket === env.SUPABASE_BUCKET_MEDIA));
++    const sync = await as('ben', 'POST', '/messaging/sync', { body: { lastPulledAt: 0, roomIds: [roomId] } });
++    const s = sync.body.data.created.find((m) => m.attachments.includes(cle));
++    assert.equal(s.remote_media_url, cle, 'identité stable = clé');
++    assert.match(s.attachment_urls[0], /^https:\/\/stub\.storage\//);
++  } finally {
++    delete supabaseAdmin.storage;
++  }
++});
++
++// ═══ R3 — Idempotence ════════════════════════════════════════════════════
++
++const nbFermes = (nom) => h.prisma.farm.count({ where: { organizationId: comptes.dina.organizationId, name: nom } });
++const cleStockee = (cle) => `${comptes.dina.id}:${cle}`;
++
++test('I1 — requêtes simultanées avec la même clé : une seule création', async (t) => {
++  const cle = 'simul-01KXYZABCDEFGHJKMNPQRSTV';
++  const reponses = await Promise.all(
++    Array.from({ length: 6 }, () => brut('dina', 'POST', '/farms', { body: { name: 'I1 Simultanée', countryCode: 'CD' }, headers: { 'idempotency-key': cle } })),
++  );
++  t.diagnostic(`I1 : statuts ${reponses.map((r) => `${r.status}${r.rejoue ? '(rejoué)' : ''}`).join(', ')} ; exploitations ${await nbFermes('I1 Simultanée')}`);
++  assert.equal(await nbFermes('I1 Simultanée'), 1, `statuts : ${reponses.map((r) => r.status).join(',')}`);
++  assert.ok(reponses.every((r) => [201, 409].includes(r.status)), reponses.map((r) => r.status).join(','));
++  assert.ok(reponses.some((r) => r.status === 201 && !r.rejoue), 'une exécution réelle');
++});
++
++test('I2 — rejeu après succès : même réponse, en-tête `Idempotent-Replayed`', async () => {
++  const cle = 'succes-01KXYZABCDEFGHJKMNPQRS';
++  const a = await brut('dina', 'POST', '/farms', { body: { name: 'I2', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  const b = await brut('dina', 'POST', '/farms', { body: { name: 'I2', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  assert.equal(a.status, 201);
++  assert.equal(b.status, 201);
++  assert.equal(b.rejoue, true);
++  assert.deepEqual(b.body, a.body);
++  assert.equal(await nbFermes('I2'), 1);
++});
++
++test('I3 — rejeu après erreur métier : l’erreur est rejouée, aucune écriture', async () => {
++  const fermeAwa = await as('awa', 'POST', '/farms', { body: { name: 'Ferme Awa I3', countryCode: 'CD' } });
++  const cle = 'erreur-01KXYZABCDEFGHJKMNPQRS';
++  const corps = { farmId: fermeAwa.body.data.farm.id, name: 'Parcelle volée', areaHa: 1, geometry: point };
++  const a = await brut('dina', 'POST', '/plots', { body: corps, headers: { 'idempotency-key': cle } });
++  const b = await brut('dina', 'POST', '/plots', { body: corps, headers: { 'idempotency-key': cle } });
++  assert.equal(a.status, 404, JSON.stringify(a.body));
++  assert.equal(b.status, 404);
++  assert.equal(b.rejoue, true);
++  assert.equal(await h.prisma.plot.count({ where: { name: 'Parcelle volée' } }), 0);
++});
++
++test('I4a — arrêt après réservation de la clé, avant la réponse : aucun doublon (409)', async () => {
++  const cle = 'crash-01KXYZABCDEFGHJKMNPQRSTV';
++  await h.prisma.idempotencyKey.create({
++    data: { key: cleStockee(cle), scope: 'farms.create', userId: comptes.dina.id, responseStatus: null, responseBody: null, expiresAt: new Date(Date.now() + 3600_000) },
++  });
++  const r = await brut('dina', 'POST', '/farms', { body: { name: 'I4a', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  assert.equal(r.status, 409, JSON.stringify(r.body));
++  assert.equal(await nbFermes('I4a'), 0);
++});
++
++test(
++  'I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable',
++  { todo: 'ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur' },
++  async () => {
++    const cle = 'orphe-01KXYZABCDEFGHJKMNPQRSTV';
++    await h.prisma.idempotencyKey.create({
++      data: { key: cleStockee(cle), scope: 'farms.create', userId: comptes.dina.id, responseStatus: null, responseBody: null, expiresAt: new Date(Date.now() - 3600_000) },
++    });
++    const r = await brut('dina', 'POST', '/farms', { body: { name: 'I4b', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    assert.equal(r.status, 201, `observé ${r.status} ${JSON.stringify(r.body)}`);
++  },
++);
++
++test(
++  'I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas',
++  { todo: 'ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon' },
++  async () => {
++    const cle = 'persi-01KXYZABCDEFGHJKMNPQRSTV';
++    const original = h.prisma.idempotencyKey.update;
++    h.prisma.idempotencyKey.update = async () => { throw new Error('panne simulée de persistance'); };
++    let premier;
++    try {
++      premier = await brut('dina', 'POST', '/farms', { body: { name: 'I4c', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    } finally {
++      h.prisma.idempotencyKey.update = original;
++    }
++    const apresPanne = await nbFermes('I4c');
++    const renvoi = await brut('dina', 'POST', '/farms', { body: { name: 'I4c', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    const final = await nbFermes('I4c');
++    assert.equal(final, 1, `1er appel ${premier.status} (fermes : ${apresPanne}) ; renvoi ${renvoi.status} ; fermes finales : ${final}`);
++  },
++);
++
++test('I5 — même clé, deux utilisateurs : jamais de rejeu croisé', async () => {
++  const cle = 'partage-01KXYZABCDEFGHJKMNPQR';
++  const d = await brut('dina', 'POST', '/farms', { body: { name: 'I5', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  const a = await brut('awa', 'POST', '/farms', { body: { name: 'I5', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  assert.equal(a.status, 201);
++  assert.equal(a.rejoue, false);
++  assert.notEqual(a.body.data.farm.id, d.body.data.farm.id);
++});
++
++test('I6 — même clé, deux opérations différentes : portées indépendantes', async () => {
++  const cle = 'deuxop-01KXYZABCDEFGHJKMNPQRS';
++  const f = await brut('dina', 'POST', '/farms', { body: { name: 'I6', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++  assert.equal(f.status, 201);
++  const p = await brut('dina', 'POST', '/plots', {
++    body: { farmId: f.body.data.farm.id, name: 'Parcelle I6', areaHa: 1, geometry: point },
++    headers: { 'idempotency-key': cle },
++  });
++  assert.equal(p.status, 201, JSON.stringify(p.body));
++  assert.equal(p.rejoue, false, 'la création de parcelle n’est pas le rejeu de l’exploitation');
++});
++
++test(
++  'I6b — même clé, même opération, corps différent : refus explicite',
++  { todo: 'ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée' },
++  async () => {
++    const cle = 'corps-01KXYZABCDEFGHJKMNPQRST';
++    await brut('dina', 'POST', '/farms', { body: { name: 'I6b-A', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    const b = await brut('dina', 'POST', '/farms', { body: { name: 'I6b-B', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    assert.equal(b.status, 422, `observé ${b.status}, rejoué=${b.rejoue}, exploitation renvoyée « ${b.body?.data?.farm?.name} »`);
++  },
++);
++
++test(
++  'I7 — clé expirée après succès : traitée comme une nouvelle requête',
++  { todo: 'ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance' },
++  async () => {
++    const cle = 'expire-01KXYZABCDEFGHJKMNPQRS';
++    await brut('dina', 'POST', '/farms', { body: { name: 'I7', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    await h.prisma.idempotencyKey.updateMany({ where: { key: cleStockee(cle) }, data: { expiresAt: new Date(Date.now() - 1000) } });
++    const r = await brut('dina', 'POST', '/farms', { body: { name: 'I7', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
++    assert.equal(r.rejoue, false, `observé : rejoué=${r.rejoue}, statut ${r.status}`);
++  },
++);
++
++// ═══ R3 — Synchronisation ════════════════════════════════════════════════
++
++const tirer = (cle, roomId, lastPulledAt) =>
++  as(cle, 'POST', '/messaging/sync', { body: { lastPulledAt, roomIds: [roomId] } });
++
++/** Pagine jusqu'à `hasMore: false` ; renvoie les ids reçus (dans l'ordre) et le dernier curseur. */
++const toutTirer = async (cle, roomId, depuis = 0) => {
++  const recus = [];
++  const pages = [];
++  let curseur = depuis;
++  for (let i = 0; i < 50; i += 1) {
++    const r = await tirer(cle, roomId, curseur);
++    assert.equal(r.status, 200, JSON.stringify(r.body));
++    pages.push(r.body.data.created.length);
++    recus.push(...r.body.data.created.map((m) => m.id));
++    curseur = r.body.data.serverTimestamp;
++    if (!r.body.data.hasMore) return { recus, curseur, pages };
++  }
++  throw new Error('pagination sans fin');
++};
++
++const idMessage = (i) => `01SYNC${String(i).padStart(20, '0')}`;
++
++let filSync;
++let curseurSync;
++
++test('S1 + S3 + S5 — long hors ligne, > 500 messages, 650 à la même milliseconde : tout reçu une fois', async (t) => {
++  filSync = await groupe('awa', 'S-sync', ['ben']);
++  const base = Date.now() - 10 * 24 * 3600_000;
++  const donnees = [];
++  let i = 0;
++  for (let k = 0; k < 400; k += 1) donnees.push(new Date(base + k));
++  const meme = base + 1000;
++  for (let k = 0; k < 650; k += 1) donnees.push(new Date(meme));
++  for (let k = 0; k < 250; k += 1) donnees.push(new Date(base + 2000 + k));
++  await h.prisma.message.createMany({
++    data: donnees.map((createdAt) => ({
++      id: idMessage(i++),
++      conversationId: filSync,
++      senderId: comptes.awa.id,
++      senderOrgId: comptes.awa.organizationId,
++      body: `s${i}`,
++      attachments: [],
++      readBy: [],
++      createdAt,
++    })),
++  });
++
++  const attendus = (await h.prisma.message.findMany({ where: { conversationId: filSync }, select: { id: true } })).map((m) => m.id);
++  const { recus, curseur, pages } = await toutTirer('ben', filSync);
++  curseurSync = curseur;
++  t.diagnostic(`S1 : ${recus.length} reçus / ${attendus.length} attendus ; pages ${pages.join(', ')} ; ids distincts ${new Set(recus).size}`);
++  assert.equal(new Set(recus).size, recus.length, `aucun doublon (pages : ${pages.join(', ')})`);
++  assert.deepEqual(new Set(recus), new Set(attendus), `${recus.length} reçus sur ${attendus.length}`);
++  assert.ok(pages.length >= 3, `pagination effective : ${pages.join(', ')}`);
++});
++
++test('S6 — interruption entre deux pages : la même page est relivrée à l’identique', async () => {
++  const p1 = await tirer('ben', filSync, 0);
++  const curseur = p1.body.data.serverTimestamp;
++  const p2a = await tirer('ben', filSync, curseur);
++  const p2b = await tirer('ben', filSync, curseur); // réponse « perdue » puis redemandée
++  assert.deepEqual(p2a.body.data.created.map((m) => m.id), p2b.body.data.created.map((m) => m.id));
++  assert.equal(p2a.body.data.serverTimestamp, p2b.body.data.serverTimestamp);
++});
++
++test(
++  'S2 — transaction concurrente non validée pendant la lecture : message livré au tirage suivant',
++  { todo: 'ANOMALIE S2 — curseur `Date.now()` : un message validé après la lecture mais horodaté avant est perdu définitivement' },
++  async () => {
++    let liberer;
++    const verrou = new Promise((r) => { liberer = r; });
++    const tardif = idMessage(999_999);
++    const transaction = h.prisma.$transaction(
++      async (tx) => {
++        await tx.message.create({
++          data: { id: tardif, conversationId: filSync, senderId: comptes.awa.id, senderOrgId: comptes.awa.organizationId, body: 'tardif', attachments: [], readBy: [] },
++        });
++        await verrou;
++      },
++      { timeout: 30_000 },
++    );
++    await pause(300); // INSERT fait, non validé
++    const pendant = await tirer('ben', filSync, curseurSync);
++    liberer();
++    await transaction;
++    const apres = await tirer('ben', filSync, pendant.body.data.serverTimestamp);
++    const vu = [...pendant.body.data.created, ...apres.body.data.created].some((m) => m.id === tardif);
++    const m = await h.prisma.message.findUnique({ where: { id: tardif } });
++    assert.ok(
++      vu,
++      `perdu : créé à ${m.createdAt.getTime()}, curseur rendu pendant la transaction ${pendant.body.data.serverTimestamp}`,
++    );
++  },
++);
++
++/**
++ * S-modèle — stratégie de curseur proposée, vérifiée sur un MODÈLE (pas sur le
++ * code de production, qui n'est pas modifié sans décision d'architecture).
++ *
++ * Proposition : curseur rendu = min(dernier message livré, maintenant − L),
++ * requête `createdAt > curseur − L` (recouvrement), déduplication par `id`
++ * côté client (déjà en place : upsert sur `server_id`). Avec L ≥ durée maximale
++ * d'une transaction d'écriture, aucun message n'est perdu et aucun n'est
++ * appliqué deux fois.
++ */
++test('S-modèle — curseur à recouvrement L : 0 perte, 0 doublon appliqué, sur 2 000 scénarios aléatoires', () => {
++  const L = 50;
++  let graine = 7;
++  const alea = () => {
++    graine = (graine * 1103515245 + 12345) % 2 ** 31;
++    return graine / 2 ** 31;
++  };
++  const simuler = (strategie) => {
++    // messages : horodatés à t, visibles (validés) à t + d, d < L
++    const messages = Array.from({ length: 200 }, (_, i) => {
++      const t = Math.floor(alea() * 2000);
++      return { id: i, t, visible: t + Math.floor(alea() * (L - 1)) };
++    });
++    const appliques = new Map();
++    let curseur = 0;
++    let doublons = 0;
++    for (let maintenant = 0; maintenant <= 2100 + L; maintenant += 1 + Math.floor(alea() * 40)) {
++      const visibles = messages.filter((m) => m.visible <= maintenant);
++      const page = strategie === 'actuelle'
++        ? visibles.filter((m) => m.t > curseur)
++        : visibles.filter((m) => m.t > curseur - L);
++      for (const m of page) {
++        if (appliques.has(m.id)) doublons += 1; // relivré, absorbé par l'upsert client
++        appliques.set(m.id, m);
++      }
++      curseur = strategie === 'actuelle' ? maintenant : Math.min(maintenant - L, Math.max(curseur, ...page.map((m) => m.t)));
++    }
++    return { perdus: messages.length - appliques.size, appliquesUneFois: appliques.size, doublons };
++  };
++  let pertesActuelle = 0;
++  let pertesProposee = 0;
++  for (let s = 0; s < 2000; s += 1) {
++    pertesActuelle += simuler('actuelle').perdus;
++    pertesProposee += simuler('proposee').perdus;
++  }
++  assert.equal(pertesProposee, 0, 'stratégie proposée : aucune perte');
++  assert.ok(pertesActuelle > 0, `stratégie actuelle : ${pertesActuelle} pertes sur le modèle (reproduit S2)`);
++});
+diff --git a/backend/tests/e2e/support/socketClient.mjs b/backend/tests/e2e/support/socketClient.mjs
+new file mode 100644
+index 0000000..4b915c3
+--- /dev/null
++++ b/backend/tests/e2e/support/socketClient.mjs
+@@ -0,0 +1,59 @@
++import { WebSocket } from 'ws';
++
++/**
++ * Client Socket.IO v4 minimal pour les recettes (Engine.IO v4, transport
++ * WebSocket), parlé directement sur `ws` : aucune dépendance ajoutée.
++ *
++ * Par défaut, la promesse se résout à l'événement `ready` (rooms chargées).
++ * `immediat: true` la résout dès l'acceptation de la connexion.
++ */
++export const connecterSocket = (port, token, { immediat = false, delaiAck = 5000 } = {}) =>
++  new Promise((resolve, reject) => {
++    const ws = new WebSocket(`ws://127.0.0.1:${port}/realtime/?EIO=4&transport=websocket`);
++    const attentes = new Map();
++    const evenements = [];
++    let prochainAck = 0;
++    const client = {
++      ferme: false,
++      evenements,
++      emit: (...args) => ws.send(`42${JSON.stringify(args)}`),
++      emitAck: (...args) =>
++        new Promise((res, rej) => {
++          const id = ++prochainAck;
++          const delai = setTimeout(() => rej(new Error(`pas d'accusé pour ${args[0]}`)), delaiAck);
++          attentes.set(id, (valeur) => {
++            clearTimeout(delai);
++            res(valeur);
++          });
++          ws.send(`42${id}${JSON.stringify(args)}`);
++        }),
++      recus: (nom) => evenements.filter(([e]) => e === nom).map(([, p]) => p),
++      fermer: () => ws.close(),
++    };
++    ws.on('message', (data) => {
++      const t = data.toString();
++      if (t === '2') return ws.send('3');
++      if (t[0] === '0') return ws.send(`40${JSON.stringify({ token })}`);
++      if (t.startsWith('40')) return immediat ? resolve(client) : undefined;
++      if (t.startsWith('44')) return reject(new Error(t));
++      if (t.startsWith('41')) {
++        client.ferme = true;
++        return undefined;
++      }
++      if (t.startsWith('43')) {
++        const [, id, corps] = /^43(\d+)([\s\S]*)$/.exec(t);
++        attentes.get(Number(id))?.(JSON.parse(corps)[0]);
++        return undefined;
++      }
++      if (t.startsWith('42')) {
++        const evenement = JSON.parse(t.slice(2));
++        evenements.push(evenement);
++        if (evenement[0] === 'ready' && !immediat) resolve(client);
++      }
++      return undefined;
++    });
++    ws.on('close', () => {
++      client.ferme = true;
++    });
++    ws.on('error', reject);
++  });

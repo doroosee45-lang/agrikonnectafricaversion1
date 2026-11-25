@@ -8,6 +8,8 @@ coverage/
 dist/
 .DS_Store
 *.log
+# Exception : journaux de preuve de la V1, conservés pour la traçabilité.
+!docs/preuves/**/*.log
 
 # Fichiers géospatiaux déposés (GEOSPATIAL_STORAGE_DIR par défaut).
 # Contenu d'utilisateurs : jamais versionné, jamais livré dans une archive.

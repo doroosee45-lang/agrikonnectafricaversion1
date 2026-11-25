@@ -1,0 +1,316 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:57862/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 297.555 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 92.990 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.725 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.463 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 16.395 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.152 ms - 929[0m
+[0mPOST /api/v1/auth/register [32m201[0m 17.687 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.832 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 19.386 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 16.299 ms - 929[0m
+[0mPOST /api/v1/auth/register [32m201[0m 15.112 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 13.715 ms - 928[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 36.079 ms - 302[0m
+✔ W6 — adhésion révoquée après la connexion : envoi et adhésion à la room refusés (38017.564ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.726 ms - 302[0m
+[0mGET /api/v1/messaging/conversations/01M894X0MTS6YKJPSCC9EADMJY/messages [33m404[0m 6.106 ms - 124[0m
+✔ W7 — conversation d’un autre tenant : invisible en socket comme en REST (50.7391ms)
+[0mPOST /api/v1/organizations [32m201[0m 18.236 ms - 573[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.506 ms - 302[0m
+✔ W8 + W9 — organisation active : choisie parmi les participantes, jamais une organisation étrangère (82.304ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 18.493 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M894X0S0PPFZBMSEF8KDKXK9/messages [33m403[0m 7.438 ms - 135[0m
+✔ W10 — rôle sans `messages.write` (INVESTOR) : refus socket et REST (58.6655ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.325 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M894X0TRECJSRBEKBSYHHT08/messages [32m201[0m 16.088 ms - 386[0m
+⚠ W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel (459.695ms) # ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver
+[0mPOST /api/v1/messaging/groups [32m201[0m 18.282 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1990XYJP459P946S4CF/messages [32m201[0m 22.001 ms - 386[0m
+⚠ W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel (471.0987ms) # ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages
+[0mPOST /api/v1/messaging/groups [32m201[0m 17.565 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1QZTYR6C11W09PZFQXE/messages [33m422[0m 5.958 ms - 275[0m
+✔ A1 — clé d’une autre organisation : refusée en REST et en socket (66.1295ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.192 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 6.378 ms - 253[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 4.490 ms - 258[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 4.228 ms - 250[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 3.968 ms - 252[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 6.277 ms - 245[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1T5GAVG58CXMKQEP4X5/messages [33m422[0m 4.417 ms - 289[0m
+✔ A2 — clés malformées : toutes refusées (422) (63.7774ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.141 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1VSHWKB0X63DKFATXET/messages [32m201[0m 17.580 ms - 454[0m
+⚠ A3 — traversée de chemin (`<org>/../<autre>/…`) refusée (34.7774ms) # ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.117 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1X2S78C5CFF0BHH4WEQ/messages [32m201[0m 14.347 ms - 420[0m
+[0mGET /api/v1/messaging/conversations/01M894X1X2S78C5CFF0BHH4WEQ/messages [32m200[0m 9.513 ms - 1056[0m
+[0mDELETE /api/v1/messaging/conversations/01M894X1X2S78C5CFF0BHH4WEQ/members/01M894WZWT1NXRH98QH23NZG2Y [32m200[0m 10.942 ms - 274[0m
+[0mGET /api/v1/messaging/conversations/01M894X1X2S78C5CFF0BHH4WEQ/messages [33m404[0m 6.947 ms - 124[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 6.854 ms - 112[0m
+✔ A4 — participant retiré : plus aucun accès au fil ni à ses pièces jointes (80.1789ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.323 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M894X1ZDAXB84C72BVS2AQ10/messages [32m201[0m 9.967 ms - 496[0m
+[0mGET /api/v1/messaging/conversations/01M894X1ZDAXB84C72BVS2AQ10/messages [32m200[0m 8.939 ms - 1132[0m
+[0mGET /api/v1/messaging/conversations/01M894X1ZDAXB84C72BVS2AQ10/messages [32m200[0m 6.678 ms - 1132[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 7.901 ms - 1335[0m
+✔ A5 — URL signées : TTL de configuration, nouvelle signature à chaque lecture (55.2247ms)
+[0mPOST /api/v1/farms [32m201[0m 46.809 ms - 830[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 152.077 ms - 830[0m
+[0mPOST /api/v1/farms [32m201[0m 155.401 ms - 830[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 160.886 ms - 830[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 192.750 ms - 830[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 200.456 ms - 830[0m
+✔ I1 — requêtes simultanées avec la même clé : une seule création (221.2142ms)
+ℹ I1 : statuts 201, 201(rejoué), 201(rejoué), 201(rejoué), 201(rejoué), 201(rejoué) ; exploitations 1
+[0mPOST /api/v1/farms [32m201[0m 28.149 ms - 807[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 15.871 ms - 807[0m
+✔ I2 — rejeu après succès : même réponse, en-tête `Idempotent-Replayed` (55.0017ms)
+[0mPOST /api/v1/farms [32m201[0m 25.495 ms - 827[0m
+[0mPOST /api/v1/plots [33m404[0m 18.526 ms - 124[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/plots [33m404[0m 24.706 ms - 124[0m
+✔ I3 — rejeu après erreur métier : l’erreur est rejouée, aucune écriture (100.9956ms)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 11.250 ms - 159[0m
+✔ I4a — arrêt après réservation de la clé, avant la réponse : aucun doublon (409) (25.2774ms)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 15.567 ms - 159[0m
+⚠ I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable (22.6215ms) # ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur
+[2026-11-25T10:44:26.723Z] [ERROR] IDEMPOTENCY_RESPONSE_PERSIST_FAILED panne simulée de persistance
+[2026-11-25T10:44:26.727Z] [ERROR] [77e3dd63-5ea2-4671-beea-78be20a2fdb3] POST /api/v1/farms — {
+  name: 'ApiError',
+  message: 'Impossible de conserver la réponse idempotente',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Impossible de conserver la réponse idempotente\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/idempotency.js:102:30'
+}
+[0mPOST /api/v1/farms [31m500[0m 28.808 ms - 152[0m
+[0mPOST /api/v1/farms [32m201[0m 24.616 ms - 811[0m
+⚠ I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas (66.7562ms) # ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon
+[0mPOST /api/v1/farms [32m201[0m 23.022 ms - 807[0m
+[0mPOST /api/v1/farms [32m201[0m 15.917 ms - 809[0m
+✔ I5 — même clé, deux utilisateurs : jamais de rejeu croisé (44.3404ms)
+[0mPOST /api/v1/farms [32m201[0m 15.077 ms - 807[0m
+[0mPOST /api/v1/plots [32m201[0m 38.442 ms - 627[0m
+✔ I6 — même clé, deux opérations différentes : portées indépendantes (61.3369ms)
+[0mPOST /api/v1/farms [32m201[0m 21.063 ms - 813[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 10.483 ms - 813[0m
+⚠ I6b — même clé, même opération, corps différent : refus explicite (39.1546ms) # ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée
+[0mPOST /api/v1/farms [32m201[0m 15.748 ms - 807[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 7.681 ms - 807[0m
+⚠ I7 — clé expirée après succès : traitée comme une nouvelle requête (32.5074ms) # ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.910 ms - 306[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 19.888 ms - 174002[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 30.914 ms - 282911[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 15.963 ms - 109606[0m
+✔ S1 + S3 + S5 — long hors ligne, > 500 messages, 650 à la même milliseconde : tout reçu une fois (262.1864ms)
+ℹ S1 : 1301 reçus / 1301 attendus ; pages 400, 650, 251 ; ids distincts 1301
+[0mPOST /api/v1/messaging/sync [32m200[0m 18.548 ms - 174002[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 35.670 ms - 282911[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 40.528 ms - 282911[0m
+✔ S6 — interruption entre deux pages : la même page est relivrée à l’identique (117.9674ms)
+[0mPOST /api/v1/messaging/sync [32m200[0m 16.745 ms - 112[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 7.444 ms - 112[0m
+⚠ S2 — transaction concurrente non validée pendant la lecture : message livré au tirage suivant (345.4427ms) # ANOMALIE S2 — curseur `Date.now()` : un message validé après la lecture mais horodaté avant est perdu définitivement
+✔ S-modèle — curseur à recouvrement L : 0 perte, 0 doublon appliqué, sur 2 000 scénarios aléatoires (1227.9611ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 8
+ℹ duration_ms 45989.3695
+
+✖ failing tests:
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:171:1
+⚠ W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel (459.695ms) # ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver
+  AssertionError [ERR_ASSERTION]: observé : 1 message(s) reçu(s) avec leur contenu après révocation
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:181:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:185:1
+⚠ W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel (471.0987ms) # ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages
+  AssertionError [ERR_ASSERTION]: observé : 1 message(s) reçu(s) avec leur contenu après suspension
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:195:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:223:1
+⚠ A3 — traversée de chemin (`<org>/../<autre>/…`) refusée (34.7774ms) # ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)
+  AssertionError [ERR_ASSERTION]: observé 201 pour 01M894WZMK0223Z4J6YRVB0H12/../01M894WZVDA5VT60J5KGJY9618/documents/2026-11/secret.pdf ; clés transmises à la signature : ["01M894WZMK0223Z4J6YRVB0H12/../01M894WZVDA5VT60J5KGJY9618/documents/2026-11/secret.pdf"]
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:237:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:345:1
+⚠ I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable (22.6215ms) # ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur
+  AssertionError [ERR_ASSERTION]: observé 409 {"success":false,"code":"CONFLICT","message":"Une requête avec cette clé idempotente est déjà en cours","requestId":"7dd39906-0e5f-41a9-b2c3-509949070af7"}
+  
+  409 !== 201
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:354:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 409,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:358:1
+⚠ I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas (66.7562ms) # ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon
+  AssertionError [ERR_ASSERTION]: 1er appel 500 (fermes : 1) ; renvoi 201 ; fermes finales : 2
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:374:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:399:1
+⚠ I6b — même clé, même opération, corps différent : refus explicite (39.1546ms) # ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée
+  AssertionError [ERR_ASSERTION]: observé 201, rejoué=true, exploitation renvoyée « I6b-A »
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:406:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:410:1
+⚠ I7 — clé expirée après succès : traitée comme une nouvelle requête (32.5074ms) # ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance
+  AssertionError [ERR_ASSERTION]: observé : rejoué=true, statut 201
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:418:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:488:1
+⚠ S2 — transaction concurrente non validée pendant la lecture : message livré au tirage suivant (345.4427ms) # ANOMALIE S2 — curseur `Date.now()` : un message validé après la lecture mais horodaté avant est perdu définitivement
+  AssertionError [ERR_ASSERTION]: perdu : créé à 1795603467323, curseur rendu pendant la transaction 1795603467643
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:511:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

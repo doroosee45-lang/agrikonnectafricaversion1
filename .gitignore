@@ -35,6 +35,9 @@ __pycache__/
 # Journaux de vérification et bases jetables du harnais.
 verify-*.log
 *.log
+# Exception : journaux de preuve de la V1, conservés pour la traçabilité.
+!docs/preuves/**/*.log
+!backend/docs/preuves/**/*.log
 npm-debug.log*
 tmp/
 

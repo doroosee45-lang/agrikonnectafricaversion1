@@ -1,0 +1,46 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:60074/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 98.511 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 20.662 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 21.429 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.507 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.703 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.421 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.793 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.890 ms - 920[0m
+✔ R2 — charges utiles malformées : aucune exception non capturée, le serveur répond toujours (11698.9922ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 18.125 ms - 310[0m
+✔ R3 — compte suspendu après la connexion : envoi refusé et socket coupé (266.5871ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.614 ms - 307[0m
+[0mPOST /api/v1/messaging/conversations/01M894C0PSS5BTKKBBJ00RHSBN/messages [32m201[0m 10.853 ms - 369[0m
+[0mDELETE /api/v1/messaging/conversations/01M894C0PSS5BTKKBBJ00RHSBN/members/01M894BZYKEQH6Y9H6WXV4ZJ3V [32m200[0m 10.287 ms - 279[0m
+[0mPOST /api/v1/messaging/conversations/01M894C0PSS5BTKKBBJ00RHSBN/messages [32m201[0m 12.108 ms - 374[0m
+✔ R3 + D4 — organisation retirée du groupe : plus de messages reçus, ni de réadhésion à la room (800.4449ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.185 ms - 311[0m
+✔ R4 — événement émis dès la connexion : traité, avec accusé (file hors ligne mobile) (86.4921ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 20.905 ms - 336[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 14.900 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 4.777 ms - 336[0m
+✔ M3 — groupe homonyme : jamais réutilisé pour un autre administrateur ou d’autres membres (47.2429ms)
+[0mPOST /api/v1/messaging/conversations [33m422[0m 4.301 ms - 243[0m
+[0mPOST /api/v1/messaging/conversations [33m422[0m 3.831 ms - 251[0m
+[0mPOST /api/v1/messaging/conversations [33m422[0m 2.857 ms - 250[0m
+✔ M4 — conversation sur un objet sans modèle : 422 (VALIDATION_ERROR) et non 500 (16.0839ms)
+[0mPOST /api/v1/farms [32m201[0m 22.109 ms - 837[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 7.576 ms - 837[0m
+[0mPOST /api/v1/farms [32m201[0m 13.254 ms - 839[0m
+[0mPOST /api/v1/farms [32m201[0m 9.419 ms - 821[0m
+[0mPOST /api/v1/farms [32m201[0m 7.502 ms - 823[0m
+✔ I1 — création renvoyée après coupure (même Idempotency-Key) : rejouée, aucun doublon ; sans clé, inchangé (69.3548ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14912.2716

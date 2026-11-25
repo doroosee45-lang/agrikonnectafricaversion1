@@ -1,0 +1,1327 @@
+décision	catégorie	chemin	motif
+SUPPRIMER	Cache généré	apps/Mobile/.metro-cache/ (9916 fichiers)	Cache du bundler Metro versionné par erreur
+CONSERVER	V1 / socle	.github/workflows/backend-migrations.yml	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	.gitignore	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	apps/.gitignore	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/.env.example	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/.gitignore	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/LICENSE	Aucune règle V2-V5 ne s’applique
+MODIFIER	Documentation V1→V5 à réécrire	apps/Mobile/README.md	Réécrite dans la documentation V1 unique
+CONSERVER	V1 / socle	apps/Mobile/app.config.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/app.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/android-icon-background.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/android-icon-foreground.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/android-icon-monochrome.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/arachide.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/bananier.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/cacao.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/cafe.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/haricot.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/mais.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/manioc.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/cultures/riz.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/favicon.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/champs-manioc.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/cooperative.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/elevage.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/investissement-projet.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/marche.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/recolte.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/sol-analyse.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/technologie-capteurs.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/terres-aeriennes.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/hero/tracabilite-lot.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/icon.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/carte-parcelle.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/cooperative.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/formation.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/hero.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/identite.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/marche.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/partenaires/sol-sonde.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/assets/splash-icon.png	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/babel.config.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	apps/Mobile/fiche.md	Script de correction ponctuel déjà appliqué (historique Git conservé)
+CONSERVER	V1 / socle	apps/Mobile/index.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/metro.config.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/package-lock.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/package.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/patches/@expo+metro-file-map+58.0.6.patch	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/patches/expo+58.0.26.patch	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/patches/expo-asset+58.0.21.patch	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/patches/expo-constants+58.0.16.patch	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/scripts/redirects.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/+not-found.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/_layout.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/a-propos.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/accueil.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/Mobile/src/app/actualites.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+EXAMINER	À confirmer	apps/Mobile/src/app/actualites/[id].tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/agronomic-ranges.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/ai-usage.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/api-clients.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/audit.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/Mobile/src/app/admin/compliance.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/cooperatives.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/countries/[code].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/countries/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/crops.tsx	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	apps/Mobile/src/app/admin/dashboard.tsx	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/data-products.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/devices.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/farmers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/farms.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/index.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/investors.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/jobs.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/lots.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/marketplace.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/admin/messages.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+EXAMINER	À confirmer	apps/Mobile/src/app/admin/moderation.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/monitoring.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/notifications.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/operations.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/orders.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/partners.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/plots.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/prices.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/producers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/productions.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/projects.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/reports.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/roles.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/admin/rules.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/security.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/settings.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER-MSG	Exception messagerie/hors ligne	apps/Mobile/src/app/admin/sync.tsx	Hors ligne : écran coquille sans appel d’API
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/users.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/users/[id].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/admin/verifications.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/_layout.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/forgot-password.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/login.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/mfa.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/register.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/reset-password.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/verify-email.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/auth/verify-phone.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/contact.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/cooperatives/[slug].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/cooperatives/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/explore.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/faq.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/(tabs)/_layout.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/(tabs)/farms.tsx	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	apps/Mobile/src/app/farmer/(tabs)/index.tsx	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/(tabs)/plots.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/(tabs)/productions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/(tabs)/soil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/_layout.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/alerts.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/farms/[id].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/farms/create.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/notifications.tsx	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	apps/Mobile/src/app/farmer/plots/[id].tsx	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/plan.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/precision-report.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/recommendations.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/rotation.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/satellite.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/sensors.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/plots/[id]/soil.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/farmer/plots/[id]/zones.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/plots/create.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/public-profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmer/verification.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/farmers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/messages/[conversationId].tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/messages/index.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/messages/new.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/notifications/index.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/notifications/preferences.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/app/notifications/sms-consent.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/[id].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/[id]/profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/[id]/settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/create.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/farms.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/invitations.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/member-import.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/members.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/overview.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/production-summary.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/organization/verification.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/producteurs/[slug].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/producteurs/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/professional/profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/professional/settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/profil.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile écrans V2-V5	apps/Mobile/src/app/projets.tsx	Écran V2-V5 : appelle des routes absentes en V1, ou coquille vide
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/a-propos.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/Mobile/src/app/public-site/actualites.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+EXAMINER	À confirmer	apps/Mobile/src/app/public-site/actualites/[id].tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/agriculture/[country].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/conditions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/confidentialite.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/contact.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/cooperatives/[slug].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/cooperatives/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/country-language.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/creer-profil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/faq.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/farm/[slug].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/farmers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/mentions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/producteurs/[slug].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/producteurs/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/profil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/public-site/services.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/Mobile/src/app/public-site/sols.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/Mobile/src/app/services/[serviceId].tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/services/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/app/settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/app/AppHeader.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/app/RolePersistentNav.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/auth/AuthShell.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/farmer/FarmerHeader.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/farmer/FarmerTabBar.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/farmer/PlotScreenHeader.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Mobile composant V3	apps/Mobile/src/components/farmer/RecommendationMethod.tsx	Méthode de recommandation V3
+CONSERVER	V1 / socle	apps/Mobile/src/components/farmer/SoilModule.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/farmer/farmerTabs.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/FarmCard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/Logo.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/Navbar.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/PublicFooter.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/PublicShell.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/ClosingSections.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/DataSections.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/Hero.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/HeroCarousel.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/MapAndFarmers.tsx	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/Mobile/src/components/public-site/home/ServicesSection.tsx	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/TrustAndStats.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/home/WebHomeSections.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/public-site/navbar-layout.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/settings/PersonalSettings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Accordion.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/AppErrorBoundary.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/AppImage.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Button.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Card.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Chip.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Divider.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/HeroBackground.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/HorizonMobile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Input.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/MapPreview.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Marquee.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/PressableScale.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Progress.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/ProvenanceTag.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Reveal.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Screen.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Section.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Skeleton.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/StatCard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/StatCounter.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/States.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/Text.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/components/ui/revealDecision.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/db/database.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/db/models.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/db/schema.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/CallButton.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/CallOverlay.tsx	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/background.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/callMachine.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/callsApi.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/native.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/native.web.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/pushDevices.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/pushPlan.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/systemCall.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/types.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/features/calls/useCalls.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER	V1 / socle	apps/Mobile/src/hooks/useLocaleSync.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/hooks/useMouvementReducit.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/hooks/usePublicData.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/en.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/fr.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/ui.en.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/ui.fr.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/i18n/ui.types.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/config.ts	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/Mobile/src/lib/faq.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/Mobile/src/lib/farmer-navigation.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/format.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/phone.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/platform.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/redirects.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/lib/secure-storage.ts	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/Mobile/src/lib/service-catalog.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/Mobile/src/lib/ulid.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/services/OfflineSyncEngine.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+MODIFIER	Code mixte	apps/Mobile/src/services/api/endpoints.ts	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	apps/Mobile/src/services/api/http.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/services/api/session.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/services/api/types.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/services/query.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/src/services/realtime.ts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER	V1 / socle	apps/Mobile/src/store/auth.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/agrikonnect.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/colors.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/motion.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/shadows.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/space.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/typography.native.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/theme/typography.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/src/types/optional-native.d.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/tests/calls-machine.test.mts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER	V1 / socle	apps/Mobile/tests/farmer-navigation.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tests/farmer-routes.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tests/farmer-tabs.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tests/navigation-links.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tests/public-navigation.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/Mobile/tests/push-plan.test.mts	Mobile : base locale, moteur hors ligne, temps réel, messages, appels, notifications
+CONSERVER	V1 / socle	apps/Mobile/tests/reanimated-render.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tests/reveal-decision.test.mts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/Mobile/tsconfig.json	Aucune règle V2-V5 ne s’applique
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/+not-found.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/_layout.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/a-propos.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/accueil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/actualites.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/actualites/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/agronomic-ranges.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/ai-usage.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/api-clients.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/audit.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/compliance.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/cooperatives.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/countries/[code].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/countries/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/crops.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/data-products.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/devices.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/farmers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/farms.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/investors.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/lots.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/marketplace.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/messages.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/moderation.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/monitoring.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/orders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/partners.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/plots.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/prices.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/producers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/productions.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/projects.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/reports.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/rules.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/settings.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/sync.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/users.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/admin/verifications.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/agent/consent.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/agent/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/agent/registration.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ai/analyses/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ai/analyses/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ai/documents.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ai/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/annonces/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/annonces/creer.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/annonces/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/_layout.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/forgot-password.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/login.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/mfa.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/register.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/reset-password.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/verify-email.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/auth/verify-phone.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/contact.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/cooperatives/[slug].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/cooperatives/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/developers/docs.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/developers/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/developers/keys.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/developers/usage.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/explore.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/faq.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/_layout.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/alerts.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/certifications.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/devices.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/export/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/export/[id]/documents.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/export/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/farms/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/farms/create.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/farms/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/gallery.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/inventory.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/lots/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/lots/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/notifications.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/orders/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/orders/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/orders/invoices.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/plan.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/precision-report.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/recommendations.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/rotation.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/satellite.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/sensors.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/soil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/[id]/zones.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/create.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/plots/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/productions.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/profile.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/[id]/access-log.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/[id]/dataroom.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/[id]/reports.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/projects/new.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/public-profile.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/reviews.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/season-feedback.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/settings.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/soil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/surveys.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/sync.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/sync/conflicts.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/transport.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmer/verification.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/farmers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/insights/[country]/[region].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/insights/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/international/documents.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/international/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/international/orders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/international/tenders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/investment/followed.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/investment/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/investment/profile.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/investment/projects/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/investment/requests.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/marches.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/marketplace/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/marketplace/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/marketplace/inventory.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/marketplace/new.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/messages/[conversationId].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/messages/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/notifications/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/notifications/preferences.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/notifications/sms-consent.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/create.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/farms.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/invitations.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/member-import.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/members.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/offers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/orders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/overview.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/production-summary.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/profile.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/transport.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/organization/verification.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/prices/[crop].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/prices/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/producteurs/[slug].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/producteurs/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/profil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/projets.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/projets/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/projets/proposer.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/a-propos.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/actualites.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/actualites/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/agriculture/[country].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/annonces/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/annonces/creer.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/annonces/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/conditions.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/confidentialite.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/contact.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/cooperatives/[slug].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/cooperatives/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/country-language.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/creer-profil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/data.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/faq.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/farm/[slug].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/farmers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/lot.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/lot/[code].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/map.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/marches.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/mentions.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/producteurs/[slug].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/producteurs/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/profil.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/projects/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/projects/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/projets.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/projets/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/projets/proposer.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/services.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/sols.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/tenders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/transporters.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/ventes/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/public-site/ventes/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/requests/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/requests/[id]/matches.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/requests/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/requests/new.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/reviewer/checklists/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/reviewer/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/reviewer/missions.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/service-catalog.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/services.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/services/[serviceId].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/tenders.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ventes/[id].tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/ventes/index.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/app/weather.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/app/AppHeader.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/auth/AuthShell.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/farmer/FarmerHeader.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/farmer/FarmerTabBar.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/farmer/PlotScreenHeader.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/farmer/RecommendationMethod.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/farmer/SoilModule.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/FarmCard.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/Logo.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/Navbar.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/PublicFooter.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/PublicShell.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/ClosingSections.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/DataSections.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/Hero.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/HeroCarousel.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/MapAndFarmers.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/ServicesSection.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/TrustAndStats.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/public-site/home/WebHomeSections.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Accordion.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/AppImage.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Button.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Card.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Chip.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Divider.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/HeroBackground.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Input.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/MapPreview.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Marquee.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/PressableScale.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Progress.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/ProvenanceTag.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Reveal.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Screen.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Section.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Skeleton.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/StatCounter.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/States.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/Text.tsx	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/components/ui/index.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/hooks/useMouvementReducit.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/hooks/usePublicData.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/i18n/en.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/i18n/fr.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/i18n/index.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/config.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/faq.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/format.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/phone.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/platform.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/secure-storage.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/service-catalog.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/lib/ulid.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/api/endpoints.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/api/http.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/api/session.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/api/types.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/query.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/services/realtime.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/store/auth.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/agrikonnect.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/colors.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/index.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/motion.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/shadows.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/space.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+EXAMINER	Sauvegarde	apps/Mobile_src_backup_20261031_1901/theme/typography.ts	CDC V1 §17 : « les sauvegardes existantes doivent être préservées »
+CONSERVER	V1 / socle	apps/package-lock.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/.env.example	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/.gitignore	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Docs V1→V5 remplacées	apps/web/AGRIKONNECT AFRICA — Spécification fonctionnelle et technique.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+EXAMINER	À confirmer	apps/web/HARMONISATION-CONVERSION.md	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER	À confirmer	apps/web/HARMONISATION-PALIER-P1.md	Rapport ou consigne historique : archiver ou supprimer ?
+MODIFIER	Documentation V1→V5 à réécrire	apps/web/README.md	Réécrite dans la documentation V1 unique
+CONSERVER	V1 / socle	apps/web/index.html	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/package-lock.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/package.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/scripts/redirects.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/App.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/arachide-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/arachide.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/bananier-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/bananier.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/cacao-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/cacao.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/cafe-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/cafe.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/haricot-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/haricot.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/mais-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/mais.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/manioc-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/manioc.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/palmier-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/palmier.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/riz-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/cultures/riz.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/champs-manioc.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/cooperative.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/elevage.jpg	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/web/src/assets/hero/investissement-projet.jpg	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/web/src/assets/hero/marche.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/recolte.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/sol-analyse.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/technologie-capteurs.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/hero/terres-aeriennes.jpg	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/web/src/assets/hero/tracabilite-lot.jpg	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/carte-parcelle-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/carte-parcelle.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/cooperative-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/cooperative.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/equipe-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/equipe.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/formation-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/formation.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/hero-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/hero.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/identite-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/identite.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/marche-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/marche.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/sol-sonde-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/partenaires/sol-sonde.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/sections/sonde-sol-480.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/assets/sections/sonde-sol.jpg	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/Icons.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/hero/HeroCarousel.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/kit.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/layout/AppLayout.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/layout/Footer.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/layout/Header.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/AdminShared.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/DetailPage.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/NotFound.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/PlotModule.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/ResourcePage.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/pages/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/settings/AccountSettingsPanel.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/AppErrorBoundary.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/AuthGate.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Button.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Card.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Chip.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Field.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/LanguageSwitcher.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/ProvenanceTag.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Reveal.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Section.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/States.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/Text.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/components/ui/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/components/ChartCard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/components/HorizonDashboard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/components/Sidebar.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/components/StatCard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/hooks/useBreakpoint.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/index.css	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/design-system/lib/utils.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/CallButton.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/CallOverlay.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/callMachine.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/callsApi.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/realtime.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/ringtone.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/types.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/features/calls/useCalls.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/src/hooks/useLocaleSync.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/hooks/useReveal.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/en.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/fr.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/ui.en.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/ui.fr.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/i18n/ui.types.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/lib/config.ts	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/web/src/lib/faq.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/web/src/lib/format.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/lib/phone.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/lib/platform.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/lib/redirects.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/lib/secure-storage.ts	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/web/src/lib/service-catalog.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+MODIFIER	Contenu public et navigation	apps/web/src/lib/space-nav.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+CONSERVER	V1 / socle	apps/web/src/lib/ulid.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/main.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Admin.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/AuditLog.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/web/src/pages/admin/BlogPosts.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Compliance.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Cooperatives.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Countries.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/CountryDetail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Crops.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Dashboard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Farmers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Farms.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Monitoring.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Notifications.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Plots.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Producers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Productions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Reports.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Roles.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Security.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/UserDetail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Users.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/admin/Verifications.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/pages/app/Conversation.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/src/pages/app/Cooperative.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Dashboard.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/FarmDetail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Farms.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/pages/app/Messages.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/pages/app/NotificationPreferences.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/pages/app/Notifications.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/src/pages/app/PlotDetail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Plots.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Productions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/pages/app/SmsConsent.tsx	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/src/pages/app/Soil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/app/Verification.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/Forgot.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/Login.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/Mfa.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/Register.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/Reset.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/VerifyEmail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/auth/VerifyPhone.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Farms/Create.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Farms/Detail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Farms/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Plots/Create.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Plots/Detail.tsx	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Web V3	apps/web/src/pages/farmer/Plots/RecommendationMethod.tsx	Page non routée : méthode de recommandation V3
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Plots/Soil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Plots/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Plots/query.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Productions.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/PublicProfile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Soil.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/Verification.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/farmer/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Farms.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Invitations.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/MemberImport.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Members.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Overview.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/ProductionSummary.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Profile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Settings.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/Verification.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/organization/index.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/About.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/AgricultureCountry.tsx	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	apps/web/src/pages/public/Blog.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+EXAMINER	À confirmer	apps/web/src/pages/public/BlogNewsSection.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+EXAMINER	À confirmer	apps/web/src/pages/public/BlogPost.tsx	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER	V1 / socle	apps/web/src/pages/public/CooperativeProfile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/Cooperatives.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/CountryLanguageSelector.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/FarmProfile.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/Farmers.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/Home.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/Legal.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/ServiceDetail.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/pages/public/Services.tsx	Aucune règle V2-V5 ne s’applique
+MODIFIER	Contenu public et navigation	apps/web/src/pages/public/homeSlides.ts	Présente des services V2-V5 comme disponibles : retirer, ou marquer « à venir » (décision de contenu)
+MODIFIER	Code mixte	apps/web/src/services/endpoints.ts	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	apps/web/src/services/http.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/services/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/services/query.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/src/services/realtime.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/src/services/session.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/services/types.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/store/auth.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/theme/agrikonnect.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/theme/colors.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/theme/index.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/src/theme/tokens.css	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	apps/web/tests/calls-machine.test.ts	Web : messagerie, appels, temps réel, notifications
+CONSERVER	V1 / socle	apps/web/tests/farmer-plots.test.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/tests/hero-carousel.test.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/tests/home.test.tsx	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/tests/setup.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/tsconfig.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/vite.config.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	apps/web/vitest.config.ts	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/.env.example	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/.gitignore	Aucune règle V2-V5 ne s’applique
+MODIFIER	Documentation V1→V5 à réécrire	backend/MANIFEST.md	Réécrite dans la documentation V1 unique
+MODIFIER	Documentation V1→V5 à réécrire	backend/README.md	Réécrite dans la documentation V1 unique
+EXAMINER	Base de données	backend/bootstrap-super-admin.sql	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+SUPPRIMER	Temporaire	backend/check-super-admin.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+EXAMINER	Base de données	backend/complement-indexes.sql	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+SUPPRIMER	Temporaire	backend/debug-delta.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+EXAMINER	Base de données	backend/delta-baseline.sql	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+EXAMINER	À confirmer	backend/docs/ACADEMIA-01-AUDIT-ET-PLAN.md	Rapport ou consigne historique : archiver ou supprimer ?
+SUPPRIMER	Docs V2-V5	backend/docs/ACCEPTANCE.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/AGRONOMIC-RANGES.md	Documentation exclusivement V2-V5
+MODIFIER	Documentation V1→V5 à réécrire	backend/docs/API.md	Réécrite dans la documentation V1 unique
+CONSERVER-MSG	Messagerie/hors ligne	backend/docs/APPELS_AUDIO.md	Documentation messagerie, appels et preuves
+SUPPRIMER	Docs V1→V5 remplacées	backend/docs/CDC-INVENTAIRE.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+SUPPRIMER	Docs V2-V5	backend/docs/COMPTE-RENDU-ECRAN2-LIVRAISON.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/COMPTE-RENDU-ECRAN3-ALERTES.md	Documentation exclusivement V2-V5
+EXAMINER	À confirmer	backend/docs/COMPTE-RENDU-MFA-EMAIL.md	Rapport ou consigne historique : archiver ou supprimer ?
+SUPPRIMER	Docs V2-V5	backend/docs/COMPTE-RENDU-SEASONS-APIUSAGE.md	Documentation exclusivement V2-V5
+MODIFIER	Documentation V1→V5 à réécrire	backend/docs/DEPLOYMENT.md	Réécrite dans la documentation V1 unique
+SUPPRIMER	Docs V1→V5 remplacées	backend/docs/DOC-TECH-1.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+SUPPRIMER	Docs V2-V5	backend/docs/ECOCROP-AUDIT.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/GEOSPATIAL-IMPORT.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/GEOSPATIAL.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/GEOSPATIAL_BACKEND_CONFIGURATION.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/GEOSPATIAL_WRITE_AUDIT.md	Documentation exclusivement V2-V5
+CONSERVER	V1 / socle	backend/docs/I18N.md	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/docs/INVENTAIRE_COMMITS_ET_MODIFICATIONS.md	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Docs V1→V5 remplacées	backend/docs/NFR.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+EXAMINER	Source citée par le CDC V1 §1.2	backend/docs/PERIMETRE-BACKEND.md	Source obligatoire selon le CDC V1, contenu mêlant V1 et V2+
+CONSERVER-MSG	Messagerie/hors ligne	backend/docs/PLAN_MIGRATION_STAGING_APPELS.md	Documentation messagerie, appels et preuves
+CONSERVER	V1 / socle	backend/docs/PLAN_RETRAIT_V2_V5.md	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/docs/PREUVES_IDEMPOTENCE_SYNC.md	Documentation messagerie, appels et preuves
+CONSERVER-MSG	Messagerie/hors ligne	backend/docs/PREUVES_SECURITE_WEBSOCKET.md	Documentation messagerie, appels et preuves
+CONSERVER	V1 / socle	backend/docs/RAPPORT-STABILISATION-BACKEND-V1.md	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Docs V1→V5 remplacées	backend/docs/REQUIREMENTS.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+CONSERVER	V1 / socle	backend/docs/REVUE_CONTRADICTOIRE_BACKEND_V1.md	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Docs V2-V5	backend/docs/ROUTES-SANS-APPELANT.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/ROUTES-SANS-ECRAN.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/SCORING-ENGINE.md	Documentation exclusivement V2-V5
+SUPPRIMER	Docs V2-V5	backend/docs/SEASONS.md	Documentation exclusivement V2-V5
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/docs/SMS-OTP-TEST-REEL.md	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/docs/SMS-TWILIO.md	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER	V1 / socle	backend/docs/SUPABASE_AUTH_EMAILS.md	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/docs/SUPABASE_CONNEXIONS.md	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Docs V1→V5 remplacées	backend/docs/TRACEABILITY.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+CONSERVER	V1 / socle	backend/docs/preuves/stabilisation-v1-modifies.patch	Aucune règle V2-V5 ne s’applique
+EXAMINER	Base de données	backend/fix-baseline.mjs	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+SUPPRIMER	Temporaire	backend/fix-e2e-residus.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	backend/fix-m2-tests.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+EXAMINER	Base de données	backend/fix-schema-doublon.mjs	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+SUPPRIMER	Backend moteur V3	backend/geoai/README.md	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/__init__.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/config.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/engine.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/forecast.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/fusion.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/geometry.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/imagery.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/interpolation.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/requirements.txt	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/sensors.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/server.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/soil.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/spectral.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/subsurface.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/__init__.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_engine_server.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_field.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_forecast.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_imagery_fusion.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_interpolation.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_soil.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+SUPPRIMER	Backend moteur V3	backend/geoai/tests/test_spectral.py	Moteur Python GeoAI (télédétection, interpolation, capteurs)
+EXAMINER	À confirmer	backend/har.md	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/mess.md	Consigne de mission messagerie (source de la phase 1)
+CONSERVER	V1 / socle	backend/package-lock.json	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/package.json	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/prisma/migrations/20260918000000_init/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261020000000_mfa_enabled/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021000000_lot_recall/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021010000_soil_diagnostics/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021020000_country_hosting/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021030000_geospatial_decision/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021040000_data_mode/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261021050000_agronomic_ranges/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261022000000_threshold_alerts/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261022010000_interpolated_maps/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261022020000_sensor_anomaly_episode/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261023000000_agronomic_range_tolerance/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261024000000_sms_delivery/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261025120000_geospatial_import_filename_and_unique_checksum/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261028000000_sms_phone_unverified/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261028000001_resource_usage_counter/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261028000002_sms_quiet_hours/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261028000003_alert_escalation/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261031000000_admin_governance/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261031010000_blog_posts/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261031020000_revoke_anon_authenticated_grants/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261116000000_audio_calls/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261116010000_push_devices/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/20261118100000_profile_settings/migration.sql	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/migrations/migration_lock.toml	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/prisma/schema.prisma	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/prisma/seed.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/scripts/check-cdc.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-env.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-fields.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-frontend-contract.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend scripts V3	backend/scripts/check-hardware-doc.mjs	Documentation du matériel IoT
+CONSERVER	V1 / socle	backend/scripts/check-migrations.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-model-writes.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-mounts.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-perms.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-requirements.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/check-traceability.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/contre-epreuves.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/email-verifier-config.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/generate-openapi.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/measure-phone-verification.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend scripts V3	backend/scripts/recalibrate-hardware-doc.mjs	Documentation du matériel IoT
+CONSERVER	V1 / socle	backend/scripts/seed-demo.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/smoke-http.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/scripts/sms-verifier-config.mjs	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/app.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/config/cors.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/config/databaseUrl.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/config/env.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+SUPPRIMER	Backend code V2-V5	backend/src/config/hardware.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/config/messagingConfig.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/config/prisma.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/config/publicWebUrl.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/config/satellite.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/config/supabase.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/docs/openapi.json	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/integrations/email.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/integrations/geospatial.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/integrations/livekit.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/integrations/push.js	Messagerie, appels, temps réel, push, notifications, idempotence
+SUPPRIMER	Backend code V2-V5	backend/src/integrations/s3.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/integrations/satellite.js	Jamais chargé, ou exclusivement V2-V5
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/integrations/sms.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+SUPPRIMER	Backend code V2-V5	backend/src/integrations/storage.js	Jamais chargé, ou exclusivement V2-V5
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/integrations/twilio.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/integrations/twilioErrors.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/integrations/twilioSignature.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+MODIFIER	Code mixte	backend/src/jobs/index.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+SUPPRIMER	Backend code V2-V5	backend/src/middleware/apiKey.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/middleware/auth.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/middleware/authorize.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/middleware/idempotency.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/middleware/rateLimit.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/middleware/settingsEffects.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/middleware/tenant.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/middleware/validate.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.monitoring.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.monitoring.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.monitoring.schema.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/admin/admin.monitoring.service.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.notifications.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.notifications.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.notifications.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.operations.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.operations.schema.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/admin/admin.operations.service.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.security.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.security.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.security.schema.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/admin/admin.security.service.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+MODIFIER	Code mixte	backend/src/modules/admin/admin.service.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.settings.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.settings.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.settings.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/admin/admin.settings.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/auth.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/auth.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/auth.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/auth.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/mfa.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/auth/mfaProof.js	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	backend/src/modules/blog/blog.routes.js	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+EXAMINER	À confirmer	backend/src/modules/blog/blog.service.js	Aucun CDC ne tranche (blog, actualités, statistiques de sols publiques, coquilles admin)
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/calls/calls.routes.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/calls/calls.service.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/calls/calls.state.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/calls/calls.webhook.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/calls/callsConfig.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/modules/cooperatives/cooperatives.controller.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/cooperatives/cooperatives.routes.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/cooperatives/cooperatives.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/cooperatives/cooperatives.service.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/modules/cooperatives/groupoffers.service.js	Jamais chargé, ou exclusivement V2-V5
+MODIFIER	Code mixte	backend/src/modules/countries/countries.routes.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+SUPPRIMER	Backend code V2-V5	backend/src/modules/countries/fx.service.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/modules/crops/crops.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/crops/crops.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/crops/crops.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/crops/crops.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/dashboard/dashboard.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/dashboard/dashboard.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/dashboard/dashboard.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/farms/farms.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/farms/farms.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/farms/farms.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/farms/farms.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/media/media.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/media/media.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/media/media.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/media/media.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/messaging/messaging.routes.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/messaging/messaging.service.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/notifications/notifications.routes.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/notifications/notifications.service.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/modules/organizations/organizations.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/organizations/organizations.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/organizations/organizations.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/organizations/organizations.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/plots/plots.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/plots/plots.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/plots/plots.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/plots/plots.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/productions/productions.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/productions/productions.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/productions/productions.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/productions/productions.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/public/public.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/public/public.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/public/public.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/public/public.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/push/push.routes.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/modules/push/push.service.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/modules/reports/reports.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/reports/reports.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/reports/reports.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/reports/reports.service.js	Aucune règle V2-V5 ne s’applique
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/modules/smsDelivery/smsDelivery.routes.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/modules/smsDelivery/smsDelivery.service.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+SUPPRIMER	Backend code V2-V5	backend/src/modules/soil/intelligence.schema.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/modules/soil/intelligence.service.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/modules/soil/rulesets.routes.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/modules/soil/soil.controller.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/soil/soil.routes.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/soil/soil.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/soil/soil.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/users/users.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/users/users.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/users/users.schema.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/modules/users/users.service.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/modules/verification/verification.controller.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/verification/verification.routes.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/verification/verification.schema.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/modules/verification/verification.service.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/realtime/bus.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/realtime/index.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/realtime/sendGuard.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/routes/index.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/server.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/shared/audit.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/shared/conversations.js	Messagerie, appels, temps réel, push, notifications, idempotence
+CONSERVER	V1 / socle	backend/src/shared/crypto.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/shared/dataMode.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/shared/errors/ApiError.js	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/src/shared/events.js	Messagerie, appels, temps réel, push, notifications, idempotence
+SUPPRIMER	Backend code V2-V5	backend/src/shared/fileMagic.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/shared/fileParsers.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/shared/geo.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/asyncHandler.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/errorHandler.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/logger.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/notFound.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/requestId.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/http/response.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/i18n/index.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/i18n/messages.en.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/ids.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/links.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/shared/matching.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/shared/money.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/shared/multipart.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/shared/orderStateMachine.js	Jamais chargé, ou exclusivement V2-V5
+CONSERVER	V1 / socle	backend/src/shared/pagination.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Backend code V2-V5	backend/src/shared/pdf.js	Jamais chargé, ou exclusivement V2-V5
+MODIFIER	Code mixte	backend/src/shared/permissions.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/shared/quietHours.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+SUPPRIMER	Backend code V2-V5	backend/src/shared/quota.js	Jamais chargé, ou exclusivement V2-V5
+SUPPRIMER	Backend code V2-V5	backend/src/shared/resource.js	Jamais chargé, ou exclusivement V2-V5
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/src/shared/senderId.js	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER	V1 / socle	backend/src/shared/slug.js	Aucune règle V2-V5 ne s’applique
+MODIFIER	Code mixte	backend/src/shared/startup/degradedServices.js	Sections V2-V5 à retirer (client d’API, navigation, ancrages V2+)
+CONSERVER	V1 / socle	backend/src/shared/transaction.js	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/src/shared/units.js	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	backend/test-baseline-sandbox.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	backend/test-doublon-sandbox.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+CONSERVER	V1 / socle	backend/tests/adminDashboard.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/adminGovernance.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/adminMonitoring.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/adminNotifications.test.mjs	Aucune règle V2-V5 ne s’applique
+MODIFIER	Test mixte	backend/tests/adminOperations.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+CONSERVER	V1 / socle	backend/tests/adminSecurity.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/adminSettings.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/adminUsers.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/agronomicRangesCsv.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/alertLabels.test.mjs	Teste exclusivement des modules V2-V5 retirés
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/alertMessageGsm.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+SUPPRIMER	Temporaire	backend/tests/alerts.e2e.test.mjs.stray.bak	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Tests V2-V5	backend/tests/alerts.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/anomalies.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/anomalies.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/apiQuota.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/apiUsageWrite.test.mjs	Teste exclusivement des modules V2-V5 retirés
+MODIFIER	Test mixte	backend/tests/auditLot1.test.mjs	Tests V1 qui ne tournent plus (import d’un module retiré) : retirer la partie V2+, réparer la partie V1
+CONSERVER	V1 / socle	backend/tests/auditLot2.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/auditLot3.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/authShortcut.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/calls.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+SUPPRIMER	Tests V2-V5	backend/tests/dataMode.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/databaseUrl.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/adminMonitoring.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/adminNotifications.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+MODIFIER	Test mixte	backend/tests/e2e/adminOperations.e2e.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+CONSERVER	V1 / socle	backend/tests/e2e/adminSecurity.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/adminSettings.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/adminUsers.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/agronomicRanges.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/alertEscalation.e2e.test.mjs	Recette e2e exclusivement V2-V5
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/alertSmsJob.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/alerts.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/anomalies.e2e.test.mjs	Recette e2e exclusivement V2-V5
+CONSERVER	V1 / socle	backend/tests/e2e/anonyme.probe.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/auditLot3.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/calls.e2e.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/channels.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER	V1 / socle	backend/tests/e2e/completenessByRole.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+MODIFIER	Test mixte	backend/tests/e2e/fixtures/surface-anonyme.json	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/forecastPipeline.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/geospatialImport.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/geospatialQuota.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/geospatialUpload.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/intelligence.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/interpolation.e2e.test.mjs	Recette e2e exclusivement V2-V5
+MODIFIER	Test mixte	backend/tests/e2e/journeys.e2e.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+CONSERVER	V1 / socle	backend/tests/e2e/mfaLogin.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/otpVerification.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/push.e2e.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/realtimeStabilisation.e2e.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/revueContradictoireV1.e2e.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/satellite.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/scoringEngine.e2e.test.mjs	Recette e2e exclusivement V2-V5
+SUPPRIMER	Tests V2-V5	backend/tests/e2e/seasons.e2e.test.mjs	Recette e2e exclusivement V2-V5
+CONSERVER	V1 / socle	backend/tests/e2e/seedDemo.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/smsTwilio.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/smsVerification.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/stabilisationV1.e2e.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+CONSERVER	V1 / socle	backend/tests/e2e/support/fake-gotrue.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/e2e/support/harness.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/e2e/support/socketClient.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+MODIFIER	Test mixte	backend/tests/e2e/surfacePublique.e2e.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/twilioErrors.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/e2e/twilioWebhookUrl.e2e.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER	V1 / socle	backend/tests/e2e/verifyEmail.e2e.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/ensureLocalSupabaseRoles.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/errorCodeContract.test.mjs	Aucune règle V2-V5 ne s’applique
+MODIFIER	Test mixte	backend/tests/families-v1.integration.test.mjs	Tests V1 qui ne tournent plus (import d’un module retiré) : retirer la partie V2+, réparer la partie V1
+SUPPRIMER	Tests V2-V5	backend/tests/families.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/fileMagic.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/fileParsers.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/fixtures/crop-map-sample.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/fixtures/ecocrop-sample.csv	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/forecast.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/forecastAdjustment.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Temporaire	backend/tests/forecastPipeline.e2e.test.mjs.stray.bak	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Tests V2-V5	backend/tests/geospatial.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/geospatialImport.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/hardware.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/harness.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/helpers/fakePrisma.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/helpers/investisseurPret.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/helpers/pinTestEnv.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/i18n.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/intelligence.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/interpolation.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+MODIFIER	Test mixte	backend/tests/jobs.integration.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+SUPPRIMER	Tests V2-V5	backend/tests/listings.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/logic.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/messaging.integration.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/messagingConfig.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+CONSERVER	V1 / socle	backend/tests/mfaBackupCodes.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/mfaSecretExposure.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/multipartS3.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/openapiNotes.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/orderStateMachine.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/orders.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/phoneE164Alignment.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/policies.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/profileSettings.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	backend/tests/publicWebUrl.test.mjs	Aucune règle V2-V5 ne s’applique
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/push.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/quietHours.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+CONSERVER	V1 / socle	backend/tests/rateLimitDeposit.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/recommendation.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/recommendationLabels.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/recommendationScoring.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/req-extra.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER	V1 / socle	backend/tests/req-v1.integration.test.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Tests V2-V5	backend/tests/req-v2.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/req-v3.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/req-v4.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/req-v5.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/reviews.integration.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/satellite.test.mjs	Teste exclusivement des modules V2-V5 retirés
+SUPPRIMER	Tests V2-V5	backend/tests/seasons.test.mjs	Teste exclusivement des modules V2-V5 retirés
+CONSERVER-MSG	Messagerie/hors ligne	backend/tests/stabilisationV1.test.mjs	Tests messagerie, appels, push, temps réel, idempotence et synchronisation
+MODIFIER	Test mixte	backend/tests/startupReport.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/twilioErrors.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/twilioFallback.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+EXAMINER-MSG	Exception messagerie/hors ligne	backend/tests/twilioSms.test.mjs	SMS, canaux et webhooks de remise : messagerie au sens large, décision explicite requise
+MODIFIER	Test mixte	backend/tests/webLinks.test.mjs	Cas V1 et V2-V5 mêlés : retirer les cas V2-V5 (SYNC-01/02 de journeys : hors ligne, à examiner)
+SUPPRIMER	Temporaire	diag-derive-redirects.txt	Sondes et sorties d’exécution ponctuelles à la racine
+EXAMINER	Source citée par le CDC V1 §1.2	docs/COHERENCE-3-PARTIES.md	Source obligatoire selon le CDC V1, contenu mêlant V1 et V2+
+SUPPRIMER	Docs V1→V5 remplacées	docs/DOC-TECH-1.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+SUPPRIMER	Docs V1→V5 remplacées	docs/DOC-TECH-2.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+SUPPRIMER	Docs V1→V5 remplacées	docs/DOC-TECH-3.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+SUPPRIMER	Docs V1→V5 remplacées	docs/DOCUMENTATION_TECHNIQUE.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+CONSERVER	V1 / socle	docs/NETTOYAGE_V1_LISTE_EXACTE.tsv	Aucune règle V2-V5 ne s’applique
+EXAMINER	Source citée par le CDC V1 §1.2	docs/PAGES-PROJET.md	Source obligatoire selon le CDC V1, contenu mêlant V1 et V2+
+SUPPRIMER	Docs V1→V5 remplacées	docs/docs.md	Inventaire ou matrice V1→V5, ou doublon : remplacé par la documentation V1 unique (après sa création)
+CONSERVER	V1 / socle	docs/nettoyage-v1-classer.mjs	Aucune règle V2-V5 ne s’applique
+EXAMINER	À confirmer	flux/AGRIKONNECT AFRICA — Pages publiques ajoutées (Web + Mobile)	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER	Source citée par le CDC V1 §1.2	flux/LISEZ-MOI.md	Source obligatoire selon le CDC V1, contenu mêlant V1 et V2+
+EXAMINER	À confirmer	flux/LISEZMOI-DEMARRAGE.md	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER	Source citée par le CDC V1 §1.2	flux/RAPPORT-AUDIT-FINAL.md	Source obligatoire selon le CDC V1, contenu mêlant V1 et V2+
+EXAMINER	À confirmer	flux/RAPPORT-CONFORMITE-SUPER-ADMIN.md	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER	À confirmer	flux/RAPPORT-PARCOURS-AUTHENTIFICATION.md	Rapport ou consigne historique : archiver ou supprimer ?
+EXAMINER	À confirmer	flux/design-tokens.json	Rapport ou consigne historique : archiver ou supprimer ?
+SUPPRIMER	Temporaire	flux/fix-anomalies-attente.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-auth-verif.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-baseline.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-datamode-probe.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-doc-i5.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-e2e-encoding.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-e2e-residus.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-email-separation.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-i5-tests.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-i5.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-i6-doc.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-i6.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-i7-doc.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-m2-tests.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-m2-web.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-m3-close.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-m3.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-mobile-verif.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-p1a-couleurs-typo.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-p1b-derivees.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-p2a-design-system.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-schema-doublon.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-surface.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-test-conc.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-tests-parallel.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-tests-windows.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA1.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA3.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA3V2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA3V3.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheA3V4.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheB1.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheB2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheB3.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheB3V2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-trancheC1V2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-ui-api.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-ui-doc.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-ui-nav.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-ui6-api.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-ui6-nav.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-web-verif.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-web-verif2.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	flux/fix-windows-tests.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+CONSERVER	V1 / socle	flux/generer-doc-routes.mjs	Aucune règle V2-V5 ne s’applique
+EXAMINER	Base de données	flux/sql unique.md	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+EXAMINER	Base de données	maj-cle.mjs	Mise sous gestion Prisma de la base existante, index : intégrité de la base
+SUPPRIMER	Temporaire	openapi-sonde.json	Sondes et sorties d’exécution ponctuelles à la racine
+CONSERVER	V1 / socle	package-lock.json	Aucune règle V2-V5 ne s’applique
+CONSERVER	V1 / socle	package.json	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	probe-mounts.mjs	Sondes et sorties d’exécution ponctuelles à la racine
+CONSERVER	V1 / socle	render.yaml	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	repar-fix.mjs	Sondes et sorties d’exécution ponctuelles à la racine
+SUPPRIMER	Temporaire	scripts/captures-p1.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+EXAMINER	À confirmer	scripts/construire-livraison.sh	Rapport ou consigne historique : archiver ou supprimer ?
+CONSERVER	V1 / socle	scripts/demarrer-local.sh	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	scripts/fix-p3-layout.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p3-repair.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p3b-variante.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p4-dashboards.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p5-charts.b64	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p5-charts.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p5b-repair.b64	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p5b-repair.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p6-geo.b64	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p6-geo.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p7-science.b64	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p7-science.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p9-natifs.b64	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/fix-p9-natifs.mjs	Script de correction ponctuel déjà appliqué (historique Git conservé)
+CONSERVER	V1 / socle	scripts/i18n/check-i18n.mjs	Aucune règle V2-V5 ne s’applique
+SUPPRIMER	Temporaire	scripts/p1-avant/components__ui__Button.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__app__Profile.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__developers__Docs.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__farmer__Export__Detail.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__farmer__Projects__DataRoom.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__farmer__Settings.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/pages__public__Home.tsx	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/theme__agrikonnect.ts	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/theme__index.ts	Script de correction ponctuel déjà appliqué (historique Git conservé)
+SUPPRIMER	Temporaire	scripts/p1-avant/theme__tokens.css	Script de correction ponctuel déjà appliqué (historique Git conservé)
+EXAMINER	À confirmer	scripts/verifier-livraison.py	Rapport ou consigne historique : archiver ou supprimer ?
+SUPPRIMER	Temporaire	sonde-env.mjs	Sondes et sorties d’exécution ponctuelles à la racine
+SUPPRIMER	Temporaire	sortie-surface.txt	Sondes et sorties d’exécution ponctuelles à la racine
+SUPPRIMER	Temporaire	tr.md	Sondes et sorties d’exécution ponctuelles à la racine
+SUPPRIMER	Temporaire	user-paste-surface.txt	Sondes et sorties d’exécution ponctuelles à la racine

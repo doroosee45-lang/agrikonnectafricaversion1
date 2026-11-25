@@ -1,0 +1,180 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:64359/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 272.569 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 61.196 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 15.223 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 11.862 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 17.871 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.299 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.281 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.482 ms - 920[0m
+✖ R2 — charges utiles malformées : aucune exception non capturée, le serveur répond toujours (13697.2699ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.316 ms - 310[0m
+✖ R3 — compte suspendu après la connexion : envoi refusé et socket coupé (75.4711ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.293 ms - 307[0m
+[0mPOST /api/v1/messaging/conversations/01M894DC9P33SNQ7AJQSBCNWHS/messages [32m201[0m 17.058 ms - 349[0m
+[0mDELETE /api/v1/messaging/conversations/01M894DC9P33SNQ7AJQSBCNWHS/members/01M894DBW8EHX4B9299WJRC4VV [32m200[0m 10.013 ms - 279[0m
+✖ R3 + D4 — organisation retirée du groupe : plus de messages reçus, ni de réadhésion à la room (468.0916ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 8.853 ms - 311[0m
+✖ R4 — événement émis dès la connexion : traité, avec accusé (file hors ligne mobile) (5025.9576ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 12.979 ms - 336[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 8.045 ms - 336[0m
+✖ M3 — groupe homonyme : jamais réutilisé pour un autre administrateur ou d’autres membres (31.2819ms)
+[2026-11-25T10:35:58.028Z] [ERROR] [77e85400-ac8a-4c12-a43e-9996b7e0a225] POST /api/v1/messaging/conversations — {
+  name: 'TypeError',
+  message: "Cannot read properties of undefined (reading 'findUnique')",
+  code: null,
+  stack: "TypeError: Cannot read properties of undefined (reading 'findUnique')\n" +
+    '    at loadSubject (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/messaging/messaging.service.js:128:60)\n' +
+    '    at Module.startConversation (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/messaging/messaging.service.js:152:29)\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/messaging/messaging.routes.js:39:52\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/http/asyncHandler.js:6:19\n' +
+    '    at Layer.handle [as handle_request] (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+    '    at next (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/validate.js:29:3\n' +
+    '    at Layer.handle [as handle_request] (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+    '    at next (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/authorize.js:27:3'
+}
+[0mPOST /api/v1/messaging/conversations [31m500[0m 7.986 ms - 130[0m
+✖ M4 — conversation sur un objet sans modèle : 422 (VALIDATION_ERROR) et non 500 (12.3525ms)
+[0mPOST /api/v1/farms [32m201[0m 58.919 ms - 837[0m
+[0mPOST /api/v1/farms [32m201[0m 18.223 ms - 839[0m
+✖ I1 — création renvoyée après coupure (même Idempotency-Key) : rejouée, aucun doublon ; sans clé, inchangé (87.4602ms)
+ℹ Error: Test hook "before" at tests\e2e\realtimeStabilisation.e2e.test.mjs:104:1 generated asynchronous activity after the test ended. This activity created the error "TypeError: Cannot destructure property 'conversationId' of 'payload' as it is null." and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ Error: Test hook "before" at tests\e2e\realtimeStabilisation.e2e.test.mjs:104:1 generated asynchronous activity after the test ended. This activity created the error "TypeError: Cannot destructure property 'conversationId' of '(intermediate value)(intermediate value)(intermediate value)' as it is null." and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ Error: Test hook "before" at tests\e2e\realtimeStabilisation.e2e.test.mjs:104:1 generated asynchronous activity after the test ended. This activity created the error "TypeError: ack is not a function" and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ Error: Test hook "before" at tests\e2e\realtimeStabilisation.e2e.test.mjs:104:1 generated asynchronous activity after the test ended. This activity created the error "TypeError: Cannot destructure property 'conversationId' of '(intermediate value)(intermediate value)(intermediate value)' as it is null." and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test hook "before" at tests\e2e\realtimeStabilisation.e2e.test.mjs:104:1 generated asynchronous activity after the test ended. This activity created the error "TypeError: ack is not a function" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ tests 7
+ℹ suites 0
+ℹ pass 0
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21992.6934
+
+✖ failing tests:
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:126:1
+✖ R2 — charges utiles malformées : aucune exception non capturée, le serveur répond toujours (13697.2699ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   error: "Cannot destructure property 'roomId' of 'payload' as it is null.",
+  -   error: 'INVALID_PAYLOAD',
+      ok: false
+    }
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:137:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { ok: false, error: "Cannot destructure property 'roomId' of 'payload' as it is null." },
+    expected: { ok: false, error: 'INVALID_PAYLOAD' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:149:1
+✖ R3 — compte suspendu après la connexion : envoi refusé et socket coupé (75.4711ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   ok: true,
+  +   serverId: '01M894DC91DVBF7NMH43XMWVX7',
+  +   serverTimestamp: 1795602952482
+  -   error: 'UNAUTHORIZED',
+  -   ok: false
+    }
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:163:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { ok: true, serverId: '01M894DC91DVBF7NMH43XMWVX7', serverTimestamp: 1795602952482 },
+    expected: { ok: false, error: 'UNAUTHORIZED' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:173:1
+✖ R3 + D4 — organisation retirée du groupe : plus de messages reçus, ni de réadhésion à la room (468.0916ms)
+  AssertionError [ERR_ASSERTION]: retrait notifié
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:192:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:207:1
+✖ R4 — événement émis dès la connexion : traité, avec accusé (file hors ligne mobile) (5025.9576ms)
+  Error: pas d'accusé pour send_message
+      at Timeout._onTimeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:64:46)
+      at listOnTimeout (node:internal/timers:685:17)
+      at process.processTimers (node:internal/timers:618:7)
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:218:1
+✖ M3 — groupe homonyme : jamais réutilisé pour un autre administrateur ou d’autres membres (31.2819ms)
+  AssertionError [ERR_ASSERTION]: nouveau groupe, et non celui d’Awa qui contient Dina
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:228:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '01M894DHNFC33G19Z1DQKW4BGZ',
+    expected: '01M894DHNFC33G19Z1DQKW4BGZ',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:238:1
+✖ M4 — conversation sur un objet sans modèle : 422 (VALIDATION_ERROR) et non 500 (12.3525ms)
+  AssertionError [ERR_ASSERTION]: FARM : {"success":false,"code":"INTERNAL_ERROR","message":"Erreur interne du serveur","requestId":"77e85400-ac8a-4c12-a43e-9996b7e0a225"}
+  
+  500 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:243:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 500,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\realtimeStabilisation.e2e.test.mjs:247:1
+✖ I1 — création renvoyée après coupure (même Idempotency-Key) : rejouée, aucun doublon ; sans clé, inchangé (87.4602ms)
+  AssertionError [ERR_ASSERTION]: même exploitation renvoyée
+  + actual - expected
+  
+  + '01M894DHRX5VABYZQNVP21W69D'
+  - '01M894DHQ7F9K62HYZCSVR2W7S'
+             ^
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/realtimeStabilisation.e2e.test.mjs:254:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '01M894DHRX5VABYZQNVP21W69D',
+    expected: '01M894DHQ7F9K62HYZCSVR2W7S',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
