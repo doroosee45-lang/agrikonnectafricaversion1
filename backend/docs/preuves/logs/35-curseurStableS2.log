@@ -1,0 +1,13 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:53907/email : injoignable hors de cette machine.
+✔ S2-a — transaction en cours pendant la lecture : PERDUE avec le curseur temporel, LIVRÉE avec le curseur de transaction (19894.1912ms)
+ℹ S2-a : curseur temporel → reçu=false ; curseur de transaction → reçu=true (pendant : false, après : true)
+✔ S2-b — 300 écritures concurrentes (durées aléatoires) pendant des tirages répétés : 0 perte, 0 doublon (1532.632ms)
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23923.4943
