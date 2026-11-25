@@ -4,7 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
 import { resolveTenant } from '../../middleware/tenant.js';
 import { authorize } from '../../middleware/authorize.js';
 import { validate } from '../../middleware/validate.js';
-import { idempotency } from '../../middleware/idempotency.js';
+import { idempotenceTransactionnelle } from '../../middleware/idempotency.js';
 import * as controller from './plots.controller.js';
 import * as schema from './plots.schema.js';
 
@@ -17,7 +17,7 @@ router.post(
   '/',
   authorize('plots.write'),
   validate(schema.createPlotSchema),
-  idempotency('plots.create', { facultatif: true }),
+  idempotenceTransactionnelle('plots.create'),
   asyncHandler(controller.create),
 );
 
@@ -48,7 +48,7 @@ router.post(
   authorize('history.write'),
   validate(schema.plotIdParam, 'params'),
   validate(schema.cropHistorySchema),
-  idempotency('plots.history.create', { facultatif: true }),
+  idempotenceTransactionnelle('plots.history.create'),
   asyncHandler(controller.addHistory),
 );
 router.patch(

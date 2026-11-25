@@ -1,0 +1,520 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:64273/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 100.115 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 28.706 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.120 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.638 ms - 923[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 221.107 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 220.013 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 219.733 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 223.596 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 224.887 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 226.929 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 227.649 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 231.957 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 234.032 ms - 159[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 240.520 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 246.064 ms - 159[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 265.618 ms - 159[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 272.228 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 270.108 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 267.597 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 268.620 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 270.524 ms - 159[0m
+[0mPOST /api/v1/farms [32m201[0m 280.655 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 274.468 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 294.083 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 5.434 ms - 809[0m
+✖ ID-1 — 20 requêtes SIMULTANÉES, même clé : 1 exploitation ; 201 (exécution/rejeu) ou 409 en cours ; le renvoi rejoue (13258.3487ms)
+ℹ ID-1 : exécutée 1 ; rejouées 2 ; 409 en cours 17 ; autres  ; exploitations 1 ; renvoi 201 rejoué=true
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 97.787 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 98.154 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 99.908 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 97.842 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 97.647 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 97.544 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 97.261 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 96.886 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 100.583 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 96.788 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 99.595 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 95.021 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 102.163 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 96.215 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 96.279 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 100.023 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 100.334 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 100.748 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 100.839 ms - 159[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 108.834 ms - 159[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 124.854 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 124.964 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 124.829 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 117.640 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 124.993 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 116.786 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 115.585 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 115.029 ms - 159[0m
+[0mPOST /api/v1/farms [33m409[0m 115.845 ms - 159[0m
+[0mPOST /api/v1/farms [32m201[0m 156.674 ms - 811[0m
+[0mGET /api/v1/me [32m200[0m 110.504 ms - 1171[0m
+✔ ID-1b — rafale de 30 requêtes sur la même clé : le pool de connexions n’est pas épuisé (requête sans rapport servie) (180.55ms)
+ℹ ID-1b : GET /me pendant la rafale 200 en 150 ms ; statuts rafale 409,201 ; exploitations 1
+[0mPOST /api/v1/farms [32m201[0m 29.665 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 9.336 ms - 809[0m
+✖ ID-2 (I4c) — erreur APRÈS l’écriture métier, avant validation : rien n’est validé ; la reprise crée 1 exploitation (63.1337ms)
+ℹ ID-2 : 1er appel 201 ; après panne {"fermes":1,"cles":1,"audits":1} ; reprise 201 rejouée=true ; exploitations finales 1
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 19.085 ms - 159[0m
+✖ ID-3 — ARRÊT RÉEL du serveur (SIGKILL) pendant la transaction : rien de validé ; la reprise crée 1 exploitation (6744.6227ms)
+ℹ ID-3 : requête vers l’instance tuée interrompue (ECONNRESET) ; état après arrêt {"fermes":0,"cles":1} ; reprise 409 rejouée=false ; exploitations finales 0
+[0mPOST /api/v1/farms [32m201[0m 29.368 ms - 813[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 10.681 ms - 813[0m
+✖ ID-4 (I6b) — même clé, corps différent : 422 IDEMPOTENCY_KEY_REUSED, aucune 2e création (48.3833ms)
+[0mPOST /api/v1/farms [32m201[0m 14.152 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 9.463 ms - 809[0m
+✔ ID-5 — rejeu après succès : réponse identique, en-tête Idempotent-Replayed, aucune 2e création ni 2e audit (30.3684ms)
+[0mPOST /api/v1/farms [32m201[0m 14.554 ms - 809[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 8.193 ms - 809[0m
+✖ ID-6 (I7) — clé expirée : nouvelle exécution (pas de rejeu) ; la purge supprime les clés expirées (29.6044ms)
+✖ ID-7 (I4b, transition) — ligne « en cours » héritée de l’ancien mécanisme : 409 tant qu’elle vit, reprise après expiration (0.5492ms)
+[0mPOST /api/v1/farms [32m201[0m 17.793 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 18.109 ms - 811[0m
+[0mPOST /api/v1/organizations [32m201[0m 28.187 ms - 575[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 8.422 ms - 809[0m
+[0mPOST /api/v1/plots [32m201[0m 20.150 ms - 628[0m
+✖ ID-8 — même clé : autre utilisateur, autre organisation active, autre opération → portées indépendantes (103.4306ms)
+[0mPOST /api/v1/farms [32m201[0m 14.057 ms - 809[0m
+[0mPOST /api/v1/plots [32m201[0m 21.503 ms - 621[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/plots [32m201[0m 11.691 ms - 621[0m
+[0mPOST /api/v1/plots/01M89NY1K8P9MTZTM56C9GJ8NY/crop-history [32m201[0m 25.235 ms - 609[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/plots/01M89NY1K8P9MTZTM56C9GJ8NY/crop-history [32m201[0m 5.852 ms - 609[0m
+[0mPOST /api/v1/productions [32m201[0m 27.598 ms - 738[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/productions [32m201[0m 7.671 ms - 738[0m
+✔ ID-9 — les quatre créations idempotentes rejouent (exploitation, parcelle, production, historique cultural) (146.3068ms)
+[0mPOST /api/v1/farms [32m201[0m 7.293 ms - 811[0m
+[0mPOST /api/v1/farms [32m201[0m 11.215 ms - 813[0m
+✔ ID-10 — sans en-tête (Web) : comportement inchangé, deux créations (25.434ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 4
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22551.6656
+
+✖ failing tests:
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:52:1
+✖ ID-1 — 20 requêtes SIMULTANÉES, même clé : 1 exploitation ; 201 (exécution/rejeu) ou 409 en cours ; le renvoi rejoue (13258.3487ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(enCours.every((r) => r.body.code === 'IDEMPOTENCY_REQUEST_IN_PROGRESS'))
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:62:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:83:1
+✖ ID-2 (I4c) — erreur APRÈS l’écriture métier, avant validation : rien n’est validé ; la reprise crée 1 exploitation (63.1337ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  201 !== 500
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:96:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:103:1
+✖ ID-3 — ARRÊT RÉEL du serveur (SIGKILL) pendant la transaction : rien de validé ; la reprise crée 1 exploitation (6744.6227ms)
+  AssertionError [ERR_ASSERTION]: aucune écriture validée par le processus tué
+  + actual - expected
+  
+    {
+  +   cles: 1,
+  -   cles: 0,
+      fermes: 0
+    }
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:151:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { fermes: 0, cles: 1 },
+    expected: { fermes: 0, cles: 0 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:161:1
+✖ ID-4 (I6b) — même clé, corps différent : 422 IDEMPOTENCY_KEY_REUSED, aucune 2e création (48.3833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:166:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:182:1
+✖ ID-6 (I7) — clé expirée : nouvelle exécution (pas de rejeu) ; la purge supprime les clés expirées (29.6044ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:188:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:197:1
+✖ ID-7 (I4b, transition) — ligne « en cours » héritée de l’ancien mécanisme : 409 tant qu’elle vit, reprise après expiration (0.5492ms)
+  TypeError [Error]: idem.cleIdempotenceV1 is not a function
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:199:27)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\e2e\idempotenceV1.e2e.test.mjs:209:1
+✖ ID-8 — même clé : autre utilisateur, autre organisation active, autre opération → portées indépendantes (103.4306ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      false,
+  +   true,
+      false,
+  -   false
+    ]
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:218:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ false, true, false ],
+    expected: [ false, false, false ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

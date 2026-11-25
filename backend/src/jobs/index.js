@@ -9,6 +9,7 @@ import { env } from '../config/env.js';
 import { logger } from '../shared/http/logger.js';
 import { notifyMany } from '../shared/events.js';
 import { audit } from '../shared/audit.js';
+import { purgerClesExpirees } from '../middleware/idempotency.js';
 
 /**
  * Tâches planifiées (jobs) — règles du CDC qui ne peuvent pas dépendre d'un
@@ -198,6 +199,18 @@ export const JOBS = {
   },
 
   /** V2 NOTIF-02 — purge des notifications lues au-delà de la rétention. */
+  /**
+   * I7 — purge des clés d'idempotence expirées (24 h). Sans elle, la table
+   * `idempotency_keys` croissait sans limite. Une clé expirée est déjà ignorée
+   * à l'exécution (middleware/idempotency.js) : la purge ne change aucun
+   * comportement, elle libère l'espace.
+   */
+  'idempotency.purge': {
+    description: 'Supprime les clés d’idempotence expirées',
+    intervalMs: DAY_MS,
+    run: async () => purgerClesExpirees(),
+  },
+
   'notifications.purge': {
     description: 'Supprime les notifications lues au-delà de la durée de rétention',
     intervalMs: DAY_MS,

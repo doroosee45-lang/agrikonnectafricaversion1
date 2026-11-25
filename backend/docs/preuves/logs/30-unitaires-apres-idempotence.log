@@ -1,0 +1,181 @@
+✔ H-03 : un rôle métier d’une AUTRE organisation ne s’applique pas dans l’organisation active (2.683ms)
+✔ H-03 : les rôles de plateforme restent valables quelle que soit l’organisation active (29.1527ms)
+✔ H-03 : resolveTenant n’hérite pas des droits d’administrateur de A dans B (0.9841ms)
+✔ H-01 : agronome et agent d’appui ne s’obtiennent plus par inscription libre (0.9877ms)
+✔ H-01 : un Super Admin peut attribuer agronome et agent d’appui depuis l’administration (0.5463ms)
+✔ H-02 : créer une organisation est réservé aux producteurs (jamais acheteur/investisseur) (0.3203ms)
+✔ H-02 / H-07 : POST et PATCH /organizations portent permission et compte vérifié (0.2898ms)
+✔ H-07 : lecture libre, écriture refusée tant que le compte n’est pas vérifié (0.3788ms)
+✔ H-07 : écriture sans session → 401 (pas de contournement par absence de jeton) (0.3418ms)
+✔ M-01 : la même clé d’idempotence de deux utilisateurs ne se confond jamais (0.3428ms)
+✔ C-03 : la preuve est valable pour SON utilisateur et SA session uniquement (5.7446ms)
+✔ C-03 : une preuve expirée, falsifiée ou absente est refusée (27.2542ms)
+✔ C-03 : le session_id est lu dans le JWT d’accès (0.5271ms)
+✔ C-03 : requireMfa refuse une session sans preuve, même si la MFA est activée sur le compte (1.9701ms)
+✔ C-03 : requireSuperAdmin cumule rôle, MFA activée ET session à second facteur (0.5681ms)
+✔ H-04 : changer de mot de passe exige le mot de passe actuel, différent du nouveau (1.2179ms)
+✔ M-02 : les routes qui vérifient un code portent le limiteur strict (0.5692ms)
+[2026-11-25T15:45:06.921Z] [INFO] [job] listings.expire terminé en 41 ms { expired: 2, at: '2026-11-25T15:45:06.880Z' }
+[2026-11-25T15:45:06.925Z] [INFO] [job] orders.expirePending terminé en 1 ms {
+  cancelled: 1,
+  stockReleased: false,
+  cutoff: '2026-11-18T15:45:06.924Z'
+}
+[2026-11-25T15:45:06.926Z] [INFO] [job] dataroom.expireAccess terminé en 0 ms { expired: 1, at: '2026-11-25T15:45:06.926Z' }
+[2026-11-25T15:45:06.928Z] [INFO] [job] apikeys.expire terminé en 0 ms { revoked: 1, at: '2026-11-25T15:45:06.928Z' }
+[2026-11-25T15:45:06.931Z] [INFO] [job] disputes.sla terminé en 1 ms { disputes: 1, alerted: 1, slaDays: 5 }
+[2026-11-25T15:45:06.933Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 1, alerted: 0, slaDays: 5 }
+[2026-11-25T15:45:06.934Z] [INFO] [job] notifications.purge terminé en 1 ms { deleted: 1, retentionDays: 90, unreadKept: true }
+[2026-11-25T15:45:06.938Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T15:45:06.941Z] [INFO] [job] notifications.purge terminé en 1 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T15:45:06.944Z] [ERROR] [job] notifications.purge en échec : échec de test
+[2026-11-25T15:45:06.948Z] [INFO] [job] listings.expire terminé en 0 ms { expired: 0, at: '2026-11-25T15:45:06.948Z' }
+[2026-11-25T15:45:06.949Z] [INFO] [job] orders.expirePending terminé en 0 ms {
+  cancelled: 0,
+  stockReleased: false,
+  cutoff: '2026-11-18T15:45:06.949Z'
+}
+[2026-11-25T15:45:06.949Z] [INFO] [job] dataroom.expireAccess terminé en 0 ms { expired: 0, at: '2026-11-25T15:45:06.949Z' }
+[2026-11-25T15:45:06.949Z] [INFO] [job] apikeys.expire terminé en 0 ms { revoked: 0, at: '2026-11-25T15:45:06.949Z' }
+✔ MKT-06 : le job d’expiration ne touche que les annonces réellement échues (47.6629ms)
+✔ ORD-02 : une commande PENDING trop ancienne est annulée avec un motif tracé (1.9588ms)
+✔ DR-02 : les accès data room échus sont révoqués et journalisés (1.8166ms)
+✔ API-02 : les clés d’API expirées ne restent jamais ACTIVE (1.6896ms)
+✔ DISP-02 : le SLA notifie les modérateurs une seule fois par jour et par litige (3.6123ms)
+✔ NOTIF-02 : seules les notifications lues et anciennes sont purgées (2.5699ms)
+﹣ IOT-03 : un capteur silencieux est signalé à son organisation (0.2387ms) # Hors périmètre V1 : module IoT non déployé (iot.markSilent est inactif)
+✔ Supervision : chaque tâche est listée avec sa cadence et son dernier résultat (1.0541ms)
+✔ Supervision : le déclenchement manuel est audité, un nom inconnu renvoie null (2.0586ms)
+✔ Verrou scheduler : PostgreSQL acquiert puis libère le verrou en cas de succès (2.604ms)
+✔ Verrou scheduler : libération garantie si le job échoue (2.8923ms)
+✔ Verrou scheduler : un verrou détenu par un autre processus saute le job (0.6698ms)
+﹣ Planificateur : démarrage et arrêt sans laisser de minuteur actif (0.0981ms) # JOBS_ENABLED=false dans cet environnement : relancer avec JOBS_ENABLED=true
+[2026-11-25T15:45:08.512Z] [INFO] [job] calls.expireRinging terminé en 1563 ms { examined: 0, processed: 0 }
+[2026-11-25T15:45:08.512Z] [INFO] [job] disputes.sla terminé en 0 ms { disputes: 0, alerted: 0, slaDays: 5 }
+[2026-11-25T15:45:08.795Z] [INFO] [job] idempotency.purge terminé en 283 ms { deleted: 0 }
+[2026-11-25T15:45:08.795Z] [INFO] [job] notifications.purge terminé en 0 ms { deleted: 0, retentionDays: 90, unreadKept: true }
+[2026-11-25T15:45:08.795Z] [INFO] [job] iot.markSilent terminé en 0 ms { thresholdHours: 24, silent: 0, alerts: 0 }
+[2026-11-25T15:45:08.795Z] [INFO] [job] recommendations.monitor terminé en 0 ms {
+  recommendationsScanned: 0,
+  parametersChecked: 0,
+  alerts: 0,
+  replacements: 0,
+  silentSensors: { thresholdHours: 24, silent: 0, alerts: 0 },
+  renotifyHours: 24,
+  errors: []
+}
+[2026-11-25T15:45:08.795Z] [INFO] [job] satellite.acquire terminé en 0 ms { enabled: false, reason: 'V1' }
+[2026-11-25T15:45:08.796Z] [INFO] [job] sensors.detectAnomalies terminé en 1 ms { enabled: false, reason: 'V1' }
+[2026-11-25T15:45:08.796Z] [INFO] [job] alerts.escalate terminé en 0 ms { escaladees: 0, examinees: 0, details: [] }
+✔ Robustesse : un job en échec n’interrompt pas les autres (1849.7627ms)
+✔ MSG-01 : une conversation doit être rattachée à un dossier dont on est partie (42.9242ms)
+✔ MSG-01 : les participants doivent tous être parties au dossier (1.1703ms)
+✔ MSG-01 : un seul fil par dossier — le second appel réutilise (3.9923ms)
+✔ MSG-02 : message posté, notifié au destinataire, visible des deux parties (3.4586ms)
+✔ MSG-02 : accusés de lecture et compteur de non-lus (3.6591ms)
+✔ MSG-02 : pièce jointe invalide refusée (URL http(s) ou clé de stockage) (343.8666ms)
+✔ MSG-03 : un message signalé est conservé (jamais supprimé) (2.4103ms)
+✔ MSG-02 : un fil archivé ou bloqué refuse les nouveaux messages (1.4833ms)
+✔ MSG-02 : le blocage de modération ferme le fil aux deux parties (1.4535ms)
+✔ MSG-01 : un tiers ne peut pas lire un fil dont il n'est pas partie (0.9866ms)
+✔ MSG-02 : pagination par curseur (before) sans doublon ni perte (40.968ms)
+✔ professional profile accepts optional individual career fields (3.4183ms)
+✔ individual profile update rejects organization legal fields (1.5537ms)
+✔ organization settings are distinct and validated independently (2.2128ms)
+✔ organization update does not accept person-only professional fields (0.803ms)
+✔ account communication preferences remain separate from notification matrix (0.9795ms)
+[2026-11-25T15:45:08.046Z] [INFO] [EMAIL:console] → awa@test.cd | AGRIKONNECT — Ton profil est vérifié
+Ta demande de vérification a été approuvée. Le statut est désormais visible sur ton profil public.
+✔ PROF-01 : le profil se lit et se met à jour, toute modification est auditée (34.3548ms)
+✔ PROF-01 : un changement de numéro invalide la vérification précédente (0.8371ms)
+✔ PROF-02 : la visibilité par champ décide ce qui sort en public (téléphone masqué par défaut) (1.7193ms)
+✔ PROF-04 : aucune donnée personnelle dans une vue publique (2.4235ms)
+✔ AUTH-07 : la vérification d’email est un jeton à usage unique, jamais un simple drapeau (1.4827ms)
+✔ FARM-03 : l’archivage est logique (aucune suppression physique) (0.6537ms)
+✔ FARM-04 : publier un profil exige une identité vérifiée (0.98ms)
+✔ PLOT-02 : l’historique cultural est conservé et borné au tenant (0.7849ms)
+✔ PLOT-03 : la mise à jour est protégée par une version (écriture concurrente refusée) (0.8536ms)
+✔ PLOT-04 : la parcelle est archivée, jamais supprimée (0.8043ms)
+✔ CROP-02 : le référentiel des cultures n’est pas modifiable par un producteur (0.8022ms)
+✔ CROP-03 : les noms sont localisés, la langue demandée est servie quand elle existe (0.4597ms)
+✔ PROD-03 : les statistiques de production sont agrégées par culture, sans invention (0.6119ms)
+✔ PROD-04 : la provenance d’une production est portée par la ligne, pas déduite (0.7418ms)
+✔ COOP-01 : une coopérative est rattachée à une organisation unique (0.5139ms)
+✔ COOP-03 : l’import CSV de membres dispose d’un essai à blanc (1.1694ms)
+✔ COOP-04 : le consentement du membre est porté par périmètre (0.7899ms)
+✔ COOP-05 : la vue d’ensemble n’agrège que les membres consentants (0.9198ms)
+✔ PUB-02 : un ancien slug redirige vers le profil courant (jamais de lien mort) (0.7124ms)
+✔ PUB-04 : le partage social expose des balises Open Graph complètes (0.9529ms)
+✔ PUB-06 : le formulaire de contact n’expose jamais l’adresse du producteur (1.4325ms)
+✔ MAP-02 : la carte publique filtre par bbox et publie des coordonnées arrondies (1.4007ms)
+✔ MAP-03 : la carte filtre aussi par culture et par pays (1.3481ms)
+✔ VER-02 : la vérification est instruite par un tiers, avec motif obligatoire (2.3967ms)
+✔ VER-03 : la décision se répercute sur la ressource vérifiée, avec la provenance (0.5607ms)
+✔ VER-04 : aucune note globale de confiance n’est calculée ni exposée (0.5504ms)
+✔ VER-05 : une demande déjà traitée ne peut pas être rejouée (0.4694ms)
+✔ SOIL-02 : le rapport de laboratoire est rattaché au relevé, jamais recopié en clair (1.2346ms)
+✔ SOIL-03 : S1 ne produit aucun conseil automatique (0.6309ms)
+✔ SEC-01 : la limitation de débit coupe les tentatives d’authentification (466.4278ms)
+[2026-11-25T15:45:09.263Z] [WARN] [b8851b70-11c3-408f-9383-1014bcaa1bf6] GET /api/v1/me — 401 Token d'authentification manquant
+[0mGET /api/v1/me [33m401[0m 733.474 ms - 136[0m
+✔ SEC-02 : un jeton absent est refusé par l’authentification (750.702ms)
+✔ SEC-03 : l’autorisation refuse un rôle sans la permission demandée (0.4121ms)
+✔ SEC-04 : le tenant effectif provient de l’appartenance, jamais d’un en-tête libre (0.6746ms)
+✔ SEC-05 : les opérateurs de requête sont rejetés (anti-injection) (0.1333ms)
+[2026-11-25T15:45:09.273Z] [WARN] [07861c4a-e337-4be5-84dd-e2fa3ee1009c] GET /health — 404 Route introuvable : GET /health
+[0mGET /health [33m404[0m 0.357 ms - 131[0m
+✔ SEC-06 : les en-têtes de sécurité HTTP sont posés par l’application (5.7948ms)
+[2026-11-25T15:45:09.279Z] [WARN] [null] GET /health — 403 Origine non autorisée par CORS : https://evil.example
+[2026-11-25T15:45:09.281Z] [WARN] [578b09cd-fcae-4191-b584-d05122915b27] GET /health — 404 Route introuvable : GET /health
+[0mGET /health [33m404[0m 0.214 ms - 131[0m
+✔ SEC-07 : le CORS n’ouvre que les origines déclarées (6.7441ms)
+[2026-11-25T15:45:09.337Z] [WARN] [4f73461f-ba94-46f7-8c97-b2763736ab9f] POST /api/v1/auth/login — 413 Corps de requête trop volumineux
+✔ SEC-08 : un corps trop volumineux est refusé en 413, pas en 500 (56.6412ms)
+✔ SEC-09 : les secrets sont hachés, jamais stockés en clair (0.3668ms)
+✔ SEC-10 : le journal d’audit est append-only (aucune API de mise à jour) (0.6858ms)
+✔ SEC-11 : aucune donnée sensible dans les journaux (0.2666ms)
+[2026-11-25T15:45:09.346Z] [WARN] [bf74f7ce-e776-4187-86bb-18f16f4970e3] POST /api/v1/orders — 404 Route introuvable : POST /api/v1/orders
+[0mPOST /api/v1/orders [33m404[0m 0.671 ms - 139[0m
+[2026-11-25T15:45:09.350Z] [INFO] [jobs] planificateur désactivé (JOBS_ENABLED=false)
+✔ SEC-12 : l’idempotence est appliquée par un middleware dédié (7.0485ms)
+✔ NFR-02 : la pagination est bornée (page ≥ 1, limite plafonnée) (1.3095ms)
+✔ NFR-03 : les écritures multi-tables passent par une transaction (0.825ms)
+✔ NFR-05 : les journaux portent un horodatage et un niveau exploitables (0.1664ms)
+✔ NFR-06 : les tâches planifiées exposent leur état de supervision (0.4749ms)
+✔ NFR-07 : le temps réel ne fait que diffuser, jamais écrire (0.5686ms)
+[2026-11-25T15:45:09.356Z] [WARN] [req-erreur-1] GET /boom — 404 introuvable
+✔ NFR-11 : chaque requête porte un identifiant de corrélation, repris dans les erreurs (7.7408ms)
+✔ I18N-01 : le français est la langue de référence du produit (0.4192ms)
+✔ I18N-02 : les erreurs sont structurées et lisibles, jamais des traces techniques (0.1944ms)
+✔ I18N-03 : unités et devises sont explicites, jamais implicites (0.2288ms)
+✔ R1 — socket : un compte non vérifié ne peut pas envoyer (2.6666ms)
+✔ R1 — socket : hors du fil, réponse NOT_FOUND (comme le REST) (20.8583ms)
+✔ R1 — socket : l’organisation retenue est celle qui participe au fil, pas la première (0.6848ms)
+✔ R1 — socket : sans `messages.write` dans l’organisation du fil, refus (0.3796ms)
+✔ R1 — socket : charge utile validée comme en REST (1.175ms)
+✔ H-07 — seule la synchronisation (lecture en POST) est exemptée (0.2156ms)
+✔ M1 — un tiers ne récupère jamais un message existant via `localTempId` (3.511ms)
+✔ M1 — identifiant déjà pris dans un autre fil : 409, pas 500 (0.7182ms)
+✔ M1 — même expéditeur, même fil : la réémission renvoie le message d’origine (0.5361ms)
+✔ M1 — `localTempId` mal formé : 422 (0.5531ms)
+✔ Pièces jointes — une clé de stockage d’une autre organisation est refusée (0.7087ms)
+✔ A3 — URL externe refusée pour un nouveau message (décision d’architecture) (0.1163ms)
+✔ Pièces jointes — `attachmentUrls` aligné ; jamais de signature pour une clé étrangère ni une ancienne URL (A3) (0.3423ms)
+✔ M2 — au-delà d’une page, aucun message n’est perdu (6.4162ms)
+✔ M2 — la coupure ne sépare jamais deux messages de la même milliseconde (12.5542ms)
+✔ VER-01 — le sujet d’une demande est borné à soi ou à l’organisation active (0.2269ms)
+✔ Médias — `IMAGE` accepté comme `PHOTO` ; AUDIO/DOCUMENT stockés dans l’énumération existante (0.2424ms)
+✔ Médias — le bucket se déduit de la clé, au dépôt comme à la confirmation (0.0763ms)
+✔ RBAC — statut de vérification lisible par tous ; pièce jointe sans droit producteur (0.0887ms)
+✔ RBAC — plus aucune clé de permission déclarée deux fois (1.5759ms)
+✔ A3 — toute clé générée par le serveur est conforme, pour chaque type MIME autorisé (7.4636ms)
+✔ A3 — variantes malveillantes ou mal formées : toutes refusées (0.4401ms)
+✔ A3 — le préfixe d’organisation garde le même assainissement que `storageKey` (0.2058ms)
+ℹ tests 120
+ℹ suites 0
+ℹ pass 118
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 2885.71

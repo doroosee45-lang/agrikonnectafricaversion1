@@ -114,7 +114,8 @@ const areaWarning = async (farmId, totalAreaHa) => {
   };
 };
 
-export const create = async (payload, req) => {
+/** `db` : client Prisma, transactionnel quand l'opération est idempotente (`middleware/idempotency.js`). */
+export const create = async (payload, req, db = prisma) => {
   const { cropIds = [], visibility = {}, ...data } = payload;
 
   if ((data.latitude && !isValidCoordinate(data.latitude, data.longitude)) ||
@@ -128,7 +129,7 @@ export const create = async (payload, req) => {
 
   const { lat, lng } = publicCoords(data.latitude, data.longitude, visibility);
 
-  const farm = await prisma.farm.create({
+  const farm = await db.farm.create({
     data: {
       id: resolveId(payload.id),
       organizationId: req.tenant.organizationId,
@@ -162,6 +163,7 @@ export const create = async (payload, req) => {
   });
 
   await audit({
+    db,
     actorId: req.user.id,
     action: 'farm.create',
     resource: 'farms',

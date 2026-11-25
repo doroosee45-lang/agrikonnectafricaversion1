@@ -114,7 +114,8 @@ export const getOne = async (id, req) => {
   return assertOwnership(plot, req.tenant.organizationId, 'Parcelle');
 };
 
-export const create = async (payload, req) => {
+/** `db` : client Prisma, transactionnel quand l'opération est idempotente (`middleware/idempotency.js`). */
+export const create = async (payload, req, db = prisma) => {
   const farm = await assertFarm(payload.farmId, req.tenant.organizationId);
 
   const bounds = geometryBounds(payload.geometry);
@@ -130,7 +131,7 @@ export const create = async (payload, req) => {
   // PLOT-02 : superficie calculée depuis le polygone si non fournie
   const areaHa = payload.areaHa ?? bounds.areaHa ?? null;
 
-  const plot = await prisma.plot.create({
+  const plot = await db.plot.create({
     data: {
       id: resolveId(payload.id),
       organizationId: req.tenant.organizationId,
@@ -150,6 +151,7 @@ export const create = async (payload, req) => {
   });
 
   await audit({
+    db,
     actorId: req.user.id,
     action: 'plot.create',
     resource: 'plots',
@@ -286,7 +288,8 @@ export const listHistory = async (plotId, req) => {
   return { items, timeline };
 };
 
-export const addHistory = async (plotId, payload, req) => {
+/** `db` : client Prisma, transactionnel quand l'opération est idempotente (`middleware/idempotency.js`). */
+export const addHistory = async (plotId, payload, req, db = prisma) => {
   assertOwnership(
     await prisma.plot.findUnique({ where: { id: plotId } }),
     req.tenant.organizationId,
@@ -296,7 +299,7 @@ export const addHistory = async (plotId, payload, req) => {
   const crop = await prisma.crop.findFirst({ where: { id: payload.cropId, deletedAt: null } });
   if (!crop) throw ApiError.badRequest('Culture inconnue dans le référentiel');
 
-  const entry = await prisma.plotCropHistory.create({
+  const entry = await db.plotCropHistory.create({
     data: {
       id: resolveId(payload.id),
       organizationId: req.tenant.organizationId,
@@ -315,6 +318,7 @@ export const addHistory = async (plotId, payload, req) => {
   });
 
   await audit({
+    db,
     actorId: req.user.id,
     action: 'plot.history.create',
     resource: 'plot_crop_history',

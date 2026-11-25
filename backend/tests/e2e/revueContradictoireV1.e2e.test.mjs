@@ -319,7 +319,7 @@ test('I2 — rejeu après succès : même réponse, en-tête `Idempotent-Replaye
   assert.equal(await nbFermes('I2'), 1);
 });
 
-test('I3 — rejeu après erreur métier : l’erreur est rejouée, aucune écriture', async () => {
+test('I3 — renvoi après erreur métier : même erreur, aucune écriture', async () => {
   const fermeAwa = await as('awa', 'POST', '/farms', { body: { name: 'Ferme Awa I3', countryCode: 'CD' } });
   const cle = 'erreur-01KXYZABCDEFGHJKMNPQRS';
   const corps = { farmId: fermeAwa.body.data.farm.id, name: 'Parcelle volée', areaHa: 1, geometry: point };
@@ -327,11 +327,15 @@ test('I3 — rejeu après erreur métier : l’erreur est rejouée, aucune écri
   const b = await brut('dina', 'POST', '/plots', { body: corps, headers: { 'idempotency-key': cle } });
   assert.equal(a.status, 404, JSON.stringify(a.body));
   assert.equal(b.status, 404);
-  assert.equal(b.rejoue, true);
+  // Idempotence transactionnelle : une opération en échec n'écrit rien et ne
+  // réserve pas la clé ; le renvoi est RÉEXÉCUTÉ (même erreur), pas rejoué.
+  // Sûr (aucune écriture) et permet de renvoyer après correction de la cause.
+  assert.equal(b.rejoue, false);
+  assert.equal(await h.prisma.idempotencyKey.count({ where: { key: { endsWith: `:${cle}` } } }), 0);
   assert.equal(await h.prisma.plot.count({ where: { name: 'Parcelle volée' } }), 0);
 });
 
-test('I4a — arrêt après réservation de la clé, avant la réponse : aucun doublon (409)', async () => {
+test('I4a — arrêt après réservation de la clé, avant la réponse : aucun doublon (409)', { skip: 'Mécanisme historique (ancien format de clé `<user>:<clé>`) remplacé par l’idempotence transactionnelle — voir idempotenceV1 ID-3 (arrêt réel) et ID-7 (ligne héritée)' }, async () => {
   const cle = 'crash-01KXYZABCDEFGHJKMNPQRSTV';
   await h.prisma.idempotencyKey.create({
     data: { key: cleStockee(cle), scope: 'farms.create', userId: comptes.dina.id, responseStatus: null, responseBody: null, expiresAt: new Date(Date.now() + 3600_000) },
@@ -343,7 +347,7 @@ test('I4a — arrêt après réservation de la clé, avant la réponse : aucun d
 
 test(
   'I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable',
-  { todo: 'ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur' },
+  { skip: 'Mécanisme historique remplacé par l’idempotence transactionnelle (clé orpheline impossible par construction) — voir idempotenceV1 ID-3 et ID-7' },
   async () => {
     const cle = 'orphe-01KXYZABCDEFGHJKMNPQRSTV';
     await h.prisma.idempotencyKey.create({
@@ -356,7 +360,7 @@ test(
 
 test(
   'I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas',
-  { todo: 'ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon' },
+  { skip: 'Injection sur le client global devenue inopérante (écriture dans la transaction) — voir idempotenceV1 ID-2 (panne après écriture métier)' },
   async () => {
     const cle = 'persi-01KXYZABCDEFGHJKMNPQRSTV';
     const original = h.prisma.idempotencyKey.update;
@@ -397,7 +401,6 @@ test('I6 — même clé, deux opérations différentes : portées indépendantes
 
 test(
   'I6b — même clé, même opération, corps différent : refus explicite',
-  { todo: 'ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée' },
   async () => {
     const cle = 'corps-01KXYZABCDEFGHJKMNPQRST';
     await brut('dina', 'POST', '/farms', { body: { name: 'I6b-A', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });
@@ -408,7 +411,7 @@ test(
 
 test(
   'I7 — clé expirée après succès : traitée comme une nouvelle requête',
-  { todo: 'ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance' },
+  { skip: 'Ancien format de clé : la mise à jour d’expiration du test ne vise plus la clé stockée — voir idempotenceV1 ID-6 (expiration et purge)' },
   async () => {
     const cle = 'expire-01KXYZABCDEFGHJKMNPQRS';
     await brut('dina', 'POST', '/farms', { body: { name: 'I7', countryCode: 'CD' }, headers: { 'idempotency-key': cle } });

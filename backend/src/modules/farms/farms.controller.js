@@ -1,5 +1,6 @@
 import * as service from './farms.service.js';
-import { success, created, paginated, noContent } from '../../shared/http/response.js';
+import { success, paginated, noContent } from '../../shared/http/response.js';
+import { executerIdempotent } from '../../middleware/idempotency.js';
 
 export const list = async (req, res) => {
   const { items, total, page, limit } = await service.list(req.query, req);
@@ -8,10 +9,12 @@ export const list = async (req, res) => {
 
 export const getOne = async (req, res) => success(res, await service.getOne(req.params.id, req));
 
-export const create = async (req, res) => {
-  const { farm, warnings } = await service.create(req.body, req);
-  return created(res, { farm, warnings }, { message: 'Exploitation créée' });
-};
+// Idempotente si `Idempotency-Key` est fourni : création, audit et réponse dans une transaction.
+export const create = async (req, res) =>
+  executerIdempotent(req, res, async (db) => {
+    const { farm, warnings } = await service.create(req.body, req, db);
+    return { farm, warnings };
+  }, { message: 'Exploitation créée' });
 
 export const update = async (req, res) => {
   const { farm, warnings } = await service.update(req.params.id, req.body, req);

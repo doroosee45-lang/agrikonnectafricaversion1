@@ -71,7 +71,8 @@ export const getOne = async (id, req) => {
   return assertOwnership(production, req.tenant.organizationId, 'Production');
 };
 
-export const create = async (payload, req) => {
+/** `db` : client Prisma, transactionnel quand l'opération est idempotente (`middleware/idempotency.js`). */
+export const create = async (payload, req, db = prisma) => {
   await assertFarm(payload.farmId, req.tenant.organizationId);
 
   if (payload.plotId) {
@@ -87,7 +88,7 @@ export const create = async (payload, req) => {
 
   const { quantityKg, convertible } = await resolveQuantityKg(payload);
 
-  const production = await prisma.production.create({
+  const production = await db.production.create({
     data: {
       id: resolveId(payload.id),
       organizationId: req.tenant.organizationId,
@@ -108,6 +109,7 @@ export const create = async (payload, req) => {
   });
 
   await audit({
+    db,
     actorId: req.user.id,
     action: 'production.create',
     resource: 'productions',

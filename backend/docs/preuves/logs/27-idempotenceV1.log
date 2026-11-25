@@ -1,0 +1,114 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:50333/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 510.224 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 212.820 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.035 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.567 ms - 923[0m
+[0mPOST /api/v1/farms [33m409[0m 321.008 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 341.545 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 330.733 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 315.868 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 311.975 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 336.603 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 305.488 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 312.914 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 312.102 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 304.645 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 302.484 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 363.350 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 352.793 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 371.273 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 364.100 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 356.414 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 353.200 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 370.822 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 372.561 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 397.337 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 5.283 ms - 809[0m
+✔ ID-1 — 20 requêtes SIMULTANÉES, même clé : 1 exploitation ; 201 (exécution/rejeu) ou 409 en cours ; le renvoi rejoue (22373.7372ms)
+ℹ ID-1 : exécutée 1 ; rejouées 0 ; 409 en cours 19 ; autres  ; exploitations 1 ; renvoi 201 rejoué=true
+[0mPOST /api/v1/farms [33m409[0m 78.460 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 77.083 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 77.601 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 78.162 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.828 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 77.569 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.760 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.549 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.421 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 77.211 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.524 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.319 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 78.374 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 76.379 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 74.721 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 74.819 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 92.298 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 103.972 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 104.510 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 104.545 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 103.119 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 104.976 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 106.737 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 107.850 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 109.801 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 107.849 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 110.460 ms - 220[0m
+[0mGET /api/v1/me [32m200[0m 84.348 ms - 1171[0m
+[0mPOST /api/v1/farms [33m409[0m 107.268 ms - 220[0m
+[0mPOST /api/v1/farms [33m409[0m 106.864 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 136.043 ms - 811[0m
+✔ ID-1b — rafale de 30 requêtes sur la même clé : le pool de connexions n’est pas épuisé (requête sans rapport servie) (221.8429ms)
+ℹ ID-1b : GET /me pendant la rafale 200 en 121 ms ; statuts rafale 409,201 ; exploitations 1
+[2026-11-25T15:41:28.138Z] [ERROR] [30e2ca2d-7460-48ef-ad5c-e9526ba67d86] POST /api/v1/farms — {
+  name: 'Error',
+  message: 'panne après écriture métier',
+  code: null,
+  stack: 'Error: panne après écriture métier\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/idempotenceV1.e2e.test.mjs:86:108\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async executerIdempotent (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/idempotency.js:233:19)'
+}
+[0mPOST /api/v1/farms [31m500[0m 18.821 ms - 130[0m
+[0mPOST /api/v1/farms [32m201[0m 18.711 ms - 809[0m
+✔ ID-2 (I4c) — erreur APRÈS l’écriture métier, avant validation : rien n’est validé ; la reprise crée 1 exploitation (103.0139ms)
+ℹ ID-2 : 1er appel 500 ; après panne {"fermes":0,"cles":0,"audits":0} ; reprise 201 rejouée=false ; exploitations finales 1
+[0mPOST /api/v1/farms [32m201[0m 22.271 ms - 809[0m
+✔ ID-3 — ARRÊT RÉEL du serveur (SIGKILL) pendant la transaction : rien de validé ; la reprise crée 1 exploitation (1185.6411ms)
+ℹ ID-3 : requête vers l’instance tuée interrompue (ECONNRESET) ; état après arrêt {"fermes":0,"cles":0} ; reprise 201 rejouée=false ; exploitations finales 1
+[0mPOST /api/v1/farms [32m201[0m 17.496 ms - 813[0m
+[0mPOST /api/v1/farms [33m422[0m 8.051 ms - 300[0m
+✔ ID-4 (I6b) — même clé, corps différent : 422 IDEMPOTENCY_KEY_REUSED, aucune 2e création (33.3007ms)
+[0mPOST /api/v1/farms [32m201[0m 14.194 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 3.256 ms - 809[0m
+✔ ID-5 — rejeu après succès : réponse identique, en-tête Idempotent-Replayed, aucune 2e création ni 2e audit (22.341ms)
+[0mPOST /api/v1/farms [32m201[0m 12.351 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 13.012 ms - 811[0m
+✔ ID-6 (I7) — clé expirée : nouvelle exécution (pas de rejeu) ; la purge supprime les clés expirées (32.7118ms)
+[0mPOST /api/v1/farms [33m409[0m 5.348 ms - 220[0m
+[0mPOST /api/v1/farms [32m201[0m 9.438 ms - 809[0m
+✔ ID-7 (I4b, transition) — ligne « en cours » héritée de l’ancien mécanisme : 409 tant qu’elle vit, reprise après expiration (21.0327ms)
+[0mPOST /api/v1/farms [32m201[0m 10.678 ms - 809[0m
+[0mPOST /api/v1/farms [32m201[0m 22.900 ms - 811[0m
+[0mPOST /api/v1/organizations [32m201[0m 20.164 ms - 575[0m
+[0mPOST /api/v1/farms [32m201[0m 47.094 ms - 811[0m
+[0mPOST /api/v1/plots [32m201[0m 37.998 ms - 628[0m
+✔ ID-8 — même clé : autre utilisateur, autre organisation active, autre opération → portées indépendantes (149.509ms)
+[0mPOST /api/v1/farms [32m201[0m 10.729 ms - 809[0m
+[0mPOST /api/v1/plots [32m201[0m 13.726 ms - 621[0m
+[0mPOST /api/v1/plots [32m201[0m 5.905 ms - 621[0m
+[0mPOST /api/v1/plots/01M89NWZPXZSBF0E8C7ZEJDA0W/crop-history [32m201[0m 19.866 ms - 609[0m
+[0mPOST /api/v1/plots/01M89NWZPXZSBF0E8C7ZEJDA0W/crop-history [32m201[0m 4.061 ms - 609[0m
+[0mPOST /api/v1/productions [32m201[0m 22.484 ms - 738[0m
+[0mPOST /api/v1/productions [32m201[0m 3.792 ms - 738[0m
+✔ ID-9 — les quatre créations idempotentes rejouent (exploitation, parcelle, production, historique cultural) (103.3009ms)
+[0mPOST /api/v1/farms [32m201[0m 6.966 ms - 811[0m
+[0mPOST /api/v1/farms [32m201[0m 11.203 ms - 813[0m
+✔ ID-10 — sans en-tête (Web) : comportement inchangé, deux créations (22.0557ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26396.5519

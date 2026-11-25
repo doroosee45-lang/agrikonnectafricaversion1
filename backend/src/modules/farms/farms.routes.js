@@ -4,7 +4,7 @@ import { authenticate } from '../../middleware/auth.js';
 import { resolveTenant } from '../../middleware/tenant.js';
 import { authorize } from '../../middleware/authorize.js';
 import { validate } from '../../middleware/validate.js';
-import { idempotency } from '../../middleware/idempotency.js';
+import { idempotenceTransactionnelle } from '../../middleware/idempotency.js';
 import * as controller from './farms.controller.js';
 import * as schema from './farms.schema.js';
 
@@ -17,7 +17,7 @@ router.post(
   '/',
   authorize('farms.write'),
   validate(schema.createFarmSchema),
-  idempotency('farms.create', { facultatif: true }),
+  idempotenceTransactionnelle('farms.create'),
   asyncHandler(controller.create),
 );
 router.get('/:id', authorize('farms.read'), validate(schema.farmIdParam, 'params'), asyncHandler(controller.getOne));

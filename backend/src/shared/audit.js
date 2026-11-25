@@ -23,6 +23,8 @@ export const audit = async ({
   req = null,
   oldValue = null,
   newValue = null,
+  /** Client Prisma : transactionnel pour un audit atomique avec l'opération (idempotence). */
+  db = prisma,
 }) => {
   try {
     const ip =
@@ -30,7 +32,7 @@ export const audit = async ({
       req?.ip ??
       null;
 
-    await prisma.auditLog.create({
+    await db.auditLog.create({
       data: {
         actorId,
         actingFor,
