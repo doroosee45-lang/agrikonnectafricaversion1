@@ -82,7 +82,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       '@react-native-firebase/app',
       '@react-native-firebase/messaging',
       // React Native Firebase exige des frameworks statiques sur iOS.
-      ['expo-build-properties', { ios: { useFrameworks: 'static' } }],
+      // HTTP en clair autorisé UNIQUEMENT si l'API configurée est en http://
+      // (build de test vers un serveur local) ; jamais pour une API https.
+      [
+        'expo-build-properties',
+        {
+          ios: { useFrameworks: 'static' },
+          android: { usesCleartextTraffic: (process.env.EXPO_PUBLIC_API_BASE_URL ?? '').startsWith('http://') },
+        },
+      ],
       ['expo-notifications', { color: '#174D35', icon: './assets/android-icon-monochrome.png' }],
       ...(appels
         ? [

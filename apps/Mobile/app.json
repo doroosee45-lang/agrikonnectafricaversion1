@@ -74,7 +74,16 @@
     ],
     "extra": {
       "apiBaseUrl": "http://localhost:4000/api/v1",
-      "realtimeUrl": "http://localhost:4000"
-    }
+      "realtimeUrl": "http://localhost:4000",
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "0fd4bfa9-3539-4cbd-a8d1-788fa4eb40f2"
+      }
+    },
+    "owner": "omedev"
   }
 }
