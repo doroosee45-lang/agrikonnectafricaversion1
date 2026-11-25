@@ -1,0 +1,793 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:59941/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 644.197 ms - 1094[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 504.042 ms - 6313[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 68.465 ms - 468[0m
+[0mPOST /api/v1/auth/register [32m201[0m 29.690 ms - 1097[0m
+[0mPOST /api/v1/auth/login [32m200[0m 22.396 ms - 941[0m
+[0mPOST /api/v1/auth/register [32m201[0m 19.907 ms - 1088[0m
+[0mPOST /api/v1/auth/login [32m200[0m 21.272 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 20.765 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.215 ms - 929[0m
+[0mPOST /api/v1/auth/login [33m401[0m 12.349 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 18.888 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 10.233 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 9.361 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 10.190 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m429[0m 3.508 ms - 190[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.964 ms - 1108[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 567.642 ms - 4561[0m
+[0mPOST /api/v1/admin/users/460370fa-7259-49a1-a272-7c94964d8b18/unlock [32m200[0m 29.596 ms - 146[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 29.592 ms - 4315[0m
+[0mGET /api/v1/admin/audit?actorId=460370fa-7259-49a1-a272-7c94964d8b18&limit=50 [32m200[0m 25.014 ms - 3050[0m
+[0mGET /api/v1/admin/audit?action=admin.user.unlock&limit=10 [32m200[0m 106.160 ms - 591[0m
+✔ AC-M6 : échecs répétés → verrou visible dans M6 → déverrouillage audité (22881.6725ms)
+[0mPOST /api/v1/admin/users/460370fa-7259-49a1-a272-7c94964d8b18/roles [33m403[0m 31.180 ms - 249[0m
+✔ RG-S1 : mutation de gouvernance refusée sans MFA (`mfaRequired`) (38.8267ms)
+[0mPOST /api/v1/auth/login [32m200[0m 40.197 ms - 1108[0m
+[0mGET /api/v1/admin/audit?severity=haute&limit=20 [32m200[0m 13.474 ms - 492[0m
+[0mGET /api/v1/admin/audit?from=2020-01-01&to=2020-01-02&limit=10 [32m200[0m 14.528 ms - 80[0m
+[0mGET /api/v1/admin/audit/export?format=csv&limit=50 [32m200[0m 24.325 ms - 3790[0m
+[0mGET /api/v1/admin/audit?action=admin.audit.export&limit=5 [32m200[0m 13.220 ms - 600[0m
+✔ U-M6-1 : recherche par gravité et export CSV audité (127.5871ms)
+[0mPOST /api/v1/auth/login [32m200[0m 20.879 ms - 1108[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 31.425 ms - 4673[0m
+✔ U-M6-2 : la vue sécurité alerte sur les comptes de gouvernance sans MFA (63.2145ms)
+[0mGET /api/v1/admin/security/policy [33m401[0m 0.596 ms - 136[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 19.765 ms - 150[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 10.735 ms - 249[0m
+[0mPOST /api/v1/auth/login [32m200[0m 40.167 ms - 1108[0m
+[0mGET /api/v1/admin/security/policy [32m200[0m 5.649 ms - 1165[0m
+[0mPUT /api/v1/admin/security/policy [32m200[0m 41.447 ms - 1250[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 14.261 ms - 359[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 10.657 ms - 204[0m
+[0mGET /api/v1/admin/audit?action=admin.setting.update&limit=20 [32m200[0m 17.436 ms - 540[0m
+✔ U-M6-3 : politique — 401/403/mfa_required, puis lecture et écriture (193.3172ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:59661/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 313.978 ms - 1094[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 318.124 ms - 6317[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 40.957 ms - 468[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.236 ms - 1108[0m
+[0mPOST /api/v1/auth/register [32m201[0m 17.680 ms - 1088[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.873 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 16.284 ms - 1090[0m
+[0mPOST /api/v1/auth/register [32m201[0m 13.122 ms - 1097[0m
+[0mGET /api/v1/admin/users [33m401[0m 3.480 ms - 136[0m
+[0mGET /api/v1/admin/users [33m403[0m 5.359 ms - 132[0m
+✔ M2 sécurité : 401 sans jeton, 403 sans permission (FARMER) (23358.092ms)
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [33m403[0m 6.648 ms - 150[0m
+[0mDELETE /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c [33m403[0m 6.076 ms - 150[0m
+✔ M2 sécurité : le palier 2 est réservé au SUPER_ADMIN (un ADMIN est refusé) (26.0465ms)
+[0mPOST /api/v1/auth/login [32m200[0m 16.477 ms - 941[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [33m403[0m 6.702 ms - 249[0m
+✔ M2 sécurité : SUPER_ADMIN sans second facteur → 403 `mfa_required` (31.7405ms)
+[0mGET /api/v1/admin/users?q=victime-m2%40agrikonnect.test [32m200[0m 88.556 ms - 535[0m
+[0mGET /api/v1/admin/users?role=FARMER&country=CD [32m200[0m 30.181 ms - 535[0m
+[0mGET /api/v1/admin/users?mfa=true [32m200[0m 6.941 ms - 560[0m
+✔ U-M2-1 : liste filtrée (terme, rôle, pays, statut) sur base réelle (140.1844ms)
+[0mGET /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c [32m200[0m 11.364 ms - 1449[0m
+✔ U-M2-2 : fiche complète (profil, rôles, sécurité, activité) (15.8947ms)
+[0mPATCH /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/status [33m422[0m 7.982 ms - 201[0m
+[0mPATCH /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/status [32m200[0m 17.622 ms - 171[0m
+[0mPOST /api/v1/auth/login [33m403[0m 2.771 ms - 137[0m
+[0mGET /api/v1/admin/users [33m403[0m 7.015 ms - 137[0m
+[0mPATCH /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/status [32m200[0m 14.176 ms - 168[0m
+[0mPOST /api/v1/auth/login [32m200[0m 21.430 ms - 929[0m
+✔ AC-M2 : suspension avec motif → déconnexion impossible, puis réactivation (92.4326ms)
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/unlock [32m200[0m 30.324 ms - 146[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/verify-email [32m200[0m 19.807 ms - 130[0m
+✔ U-M2-4 : déverrouillage anti brute-force et marquage vérifié (106.9274ms)
+[0mPOST /api/v1/auth/login [32m200[0m 11.621 ms - 929[0m
+[0mGET /api/v1/admin/users [33m403[0m 3.586 ms - 132[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/force-logout [32m200[0m 10.384 ms - 125[0m
+[0mGET /api/v1/admin/users [33m401[0m 2.115 ms - 128[0m
+[0mPOST /api/v1/auth/login [32m200[0m 16.149 ms - 929[0m
+✔ U-M2-4 : force-logout révoque réellement les sessions du compte (54.741ms)
+[0mGET /api/v1/admin/roles [32m200[0m 7.590 ms - 21048[0m
+✔ U-M2-6 : la liste des rôles expose la matrice de permissions effective (13.5248ms)
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [33m401[0m 15.079 ms - 143[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [32m200[0m 20.010 ms - 178[0m
+[0mGET /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c [32m200[0m 11.991 ms - 2044[0m
+[0mDELETE /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles/MODERATOR [32m200[0m 15.555 ms - 203[0m
+[0mGET /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c [32m200[0m 5.562 ms - 2032[0m
+✔ AC-M2 : attribution MODERATOR (MFA exigée) → visible dans la fiche, puis révocation (85.753ms)
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [33m422[0m 7.153 ms - 334[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [33m401[0m 14.946 ms - 141[0m
+[0mPOST /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles [32m200[0m 28.022 ms - 180[0m
+✔ RG-G3 : nomination d'un SUPER_ADMIN — mot de passe courant exigé puis vérifié (63.8186ms)
+[0mDELETE /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/roles/SUPER_ADMIN [32m200[0m 31.549 ms - 205[0m
+[0mDELETE /api/v1/admin/users/d5c34248-e000-44bd-91bc-7b2c21481e68/roles/SUPER_ADMIN [33m409[0m 15.073 ms - 167[0m
+✔ RG-G2 : le dernier SUPER_ADMIN actif ne peut pas être révoqué (59.914ms)
+[0mGET /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c/export [32m200[0m 101.260 ms - 2048[0m
+✔ U-M2-5 : export de portabilité — complet, audité, sans aucun secret (106.4162ms)
+[0mDELETE /api/v1/admin/users/08865c8e-40b7-4a48-af70-1b5ad1e2e57c [32m200[0m 25.266 ms - 216[0m
+[0mGET /api/v1/admin/users [33m401[0m 1.302 ms - 128[0m
+[0mPOST /api/v1/auth/login [33m403[0m 1.834 ms - 137[0m
+✔ U-M2-5/RG-G5 : suppression logique — sessions révoquées, aucune ligne effacée (37.0571ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:61226/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 240.835 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 31.944 ms - 932[0m
+[0mPOST /api/v1/auth/register [32m201[0m 32.572 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 13.644 ms - 932[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.939 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.735 ms - 932[0m
+[0mPOST /api/v1/chat/sync [33m404[0m 1.585 ms - 142[0m
+⚠ C1 (OFF-1) — le tirage du Mobile (`POST /chat/sync`) atteint une route existante (15245.5364ms) # ANOMALIE OFF-1 — /chat/sync n’existe pas ; le backend expose /messaging/sync
+[0mPOST /api/v1/messaging/groups [32m201[0m 37.760 ms - 302[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 35.539 ms - 602[0m
+✔ C2 — `POST /messaging/sync` avec le corps du Mobile : champs attendus par applyServerDelta présents (86.6717ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 20.124 ms - 302[0m
+✔ C3 — envoi socket avec un UUID v4 (format du Mobile) renvoyé deux fois : un seul message, id = localTempId (125.9313ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 17.819 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0RTS5K443B07C52EHFA2/messages [32m201[0m 23.301 ms - 364[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0RTS5K443B07C52EHFA2/messages [32m201[0m 27.790 ms - 364[0m
+⚠ C4 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : un seul message (84.474ms) # ANOMALIE OFF-4a — `localTempId` retiré par la validation Zod : doublon serveur, id ≠ localTempId
+ℹ C4 : statuts 201/201 ; ids 01M89N0RVC79YGTMRG0GKY8Y34 / 01M89N0RWCWRF93RS948QRDTTV ; localTempId 4c8076c7-e73a-4a68-9e11-266077f20329 ; messages en base 2
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.999 ms - 302[0m
+[0mGET /api/v1/messaging/conversations/01M89N0RXDYXMY0C6HM59DKPFD/messages [32m200[0m 12.809 ms - 648[0m
+✔ C5 (WEB-1) — forme réelle du fil `GET /messaging/conversations/:id/messages` : `data.messages`, pas `data.items` (32.9202ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 22.133 ms - 302[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 11.896 ms - 1103[0m
+✔ L1 — envoi par socket puis tirage : la ligne locale est fusionnée (ON CONFLICT(local_temp_id)), 1 seule ligne (94.3753ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 14.082 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S1DFNA32M80VP2MNJG8/messages [32m201[0m 17.959 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S1DFNA32M80VP2MNJG8/messages [32m201[0m 13.841 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S1DFNA32M80VP2MNJG8/messages [32m201[0m 14.646 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S1DFNA32M80VP2MNJG8/messages [32m201[0m 12.796 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S1DFNA32M80VP2MNJG8/messages [32m201[0m 12.245 ms - 366[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 6.182 ms - 2967[0m
+✔ L2 — même page relivrée deux fois (interruption, recouvrement) : aucune ligne en double (111.7275ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.893 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N0S4SHAP261F1N49C9NZA/messages [32m201[0m 9.521 ms - 364[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 7.647 ms - 1073[0m
+⚠ L3 (OFF-4b) — envoi par repli REST puis tirage : intégration du delta sans erreur, 1 seule ligne (45.1967ms) # ANOMALIE OFF-4b — UNIQUE(server_id) violée : applyServerDelta échoue après un envoi REST
+✔ P0 — niveau d’isolation du banc (37.8748ms)
+ℹ P0 : isolation read committed ; PostgreSQL 18.4 (banc embarqué, pas Supabase)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+✔ P1 — deux transactions, même clé : la seconde ATTEND la première, puis échoue en conflit d’unicité (P2002) (1013.3513ms)
+ℹ P1 : B pendant que A est ouverte = « en attente » ; B après validation de A = P2002 ; attente ≈ 796 ms
+✔ P2 — échec après l’écriture métier, avant validation : tout est annulé ; la reprise crée 1 ressource (25.3175ms)
+prisma:error Error in PostgreSQL connection: Error { kind: Db, cause: Some(DbError { severity: "FATAL", parsed_severity: Some(Fatal), code: SqlState(E57P01), message: "terminating connection due to administrator command", detail: None, hint: None, position: None, where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("postgres.c"), line: Some(3356), routine: Some("ProcessInterrupts") }) }
+prisma:error 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Server has closed the connection.
+prisma:error transaction failed to roll back
+✔ P3 — connexion de la transaction tuée côté serveur (pg_terminate_backend) : ni clé ni ressource (342.2993ms)
+ℹ P3 : transaction annulée (P1017)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+✔ P4 — clé expirée reprise par deux transactions concurrentes (×10) : toujours 1 clé et 1 ressource (811.285ms)
+ℹ P4 : ok/P2002→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f P2002/ok→1c/1f P2002/ok→1c/1f P2002/ok→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Raw query failed. Code: `25P02`. Message: `ERROR: current transaction is aborted, commands ignored until end of transaction block`
+✔ P5 — une violation d’unicité DANS la transaction l’annule entièrement (25P02) : le conflit se traite hors transaction (11.6065ms)
+ℹ P5 : Raw query failed. Code: `25P02`. Message: `ERROR: current transaction is aborted, commands ignored until end of transaction block`
+[0mPOST /api/v1/messaging/groups [32m201[0m 44.436 ms - 303[0m
+[0mPOST /api/v1/auth/logout [32m200[0m 11.499 ms - 53[0m
+[0mGET /api/v1/me [33m401[0m 3.288 ms - 128[0m
+⚠ W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer (5119.6311ms) # ANOMALIE W13 — le jeton n’est vérifié qu’à la poignée de main ; le socket survit à la révocation de session
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:56361/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 449.832 ms - 1087[0m
+[0mPOST /api/v1/auth/login [32m200[0m 90.892 ms - 927[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.549 ms - 1080[0m
+[0mPOST /api/v1/auth/login [32m200[0m 20.042 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 27.474 ms - 1091[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.694 ms - 930[0m
+[0mPOST /api/v1/auth/register [32m201[0m 23.212 ms - 1087[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.182 ms - 927[0m
+[0mPOST /api/v1/auth/register [32m201[0m 22.741 ms - 1087[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.439 ms - 927[0m
+[0mGET /api/v1/calls/config [32m200[0m 11.597 ms - 200[0m
+✔ Appels : configuration exposée sans secret, module actif dans cette recette (27724.5456ms)
+✔ RLS : les trois tables d’appel ont la sécurité au niveau des lignes activée (19.4864ms)
+[0mGET /api/v1/calls/eligible?conversationId=conv_appels_ouverte_0001 [32m200[0m 29.377 ms - 405[0m
+[0mGET /api/v1/calls/eligible?conversationId=conv_appels_ouverte_0001 [33m404[0m 5.801 ms - 124[0m
+✔ Invitables : membres actifs des organisations de la conversation, sans soi-même ni membre retiré (42.3457ms)
+[0mPOST /api/v1/calls [33m403[0m 18.387 ms - 220[0m
+[0mPOST /api/v1/calls [33m403[0m 17.572 ms - 220[0m
+[0mPOST /api/v1/calls [33m422[0m 11.581 ms - 143[0m
+✔ Création : invité étranger à la conversation ou membre retiré → refus serveur (61.7138ms)
+[0mPOST /api/v1/calls [33m409[0m 11.633 ms - 150[0m
+[0mPOST /api/v1/calls [33m404[0m 10.040 ms - 124[0m
+[0mPOST /api/v1/calls [33m422[0m 13.317 ms - 249[0m
+✔ Création : conversation bloquée → 409 ; conversation d’autrui → 404 ; salle imposée → 422 (49.9254ms)
+[0mPOST /api/v1/calls [32m201[0m 77.766 ms - 1398[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/token [33m403[0m 7.993 ms - 168[0m
+[0mGET /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF [33m404[0m 7.163 ms - 117[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/token [33m404[0m 5.690 ms - 117[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/accept [32m200[0m 28.658 ms - 1423[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/accept [32m200[0m 11.376 ms - 1423[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/leave [32m200[0m 22.505 ms - 663[0m
+[0mPOST /api/v1/calls/01M89N1YACD9PCTHWXB5GQWFQF/token [33m403[0m 7.881 ms - 168[0m
+✔ Appel individuel : jeton de l’hôte audio-only pour LA salle, invité sans jeton avant acceptation (196.3757ms)
+[0mPOST /api/v1/calls [32m201[0m 39.994 ms - 1547[0m
+[0mPOST /api/v1/calls/01M89N1YG9B5M24HJQYGNF8RWH/accept [32m200[0m 33.123 ms - 1572[0m
+[0mPOST /api/v1/calls/01M89N1YG9B5M24HJQYGNF8RWH/accept [32m200[0m 273.300 ms - 1574[0m
+[0mPOST /api/v1/calls/01M89N1YG9B5M24HJQYGNF8RWH/end [32m200[0m 62.171 ms - 801[0m
+✔ Conférence : deux acceptations simultanées → un seul passage RINGING → ACTIVE (442.5142ms)
+[0mPOST /api/v1/calls [32m201[0m 107.533 ms - 1398[0m
+[0mPOST /api/v1/calls/01M89N1YZ14PG3FNGF8QPY2V8N/cancel [32m200[0m 28.976 ms - 637[0m
+[0mPOST /api/v1/calls/01M89N1YZ14PG3FNGF8QPY2V8N/accept [33m409[0m 57.166 ms - 125[0m
+✔ Concurrence : annulation et acceptation simultanées → état final cohérent (188.029ms)
+[0mPOST /api/v1/calls [32m201[0m 37.201 ms - 1398[0m
+[0mPOST /api/v1/calls/01M89N1Z3Y5Q2DJJ0ERBPWKRSQ/decline [32m200[0m 32.120 ms - 639[0m
+[0mPOST /api/v1/calls/01M89N1Z3Y5Q2DJJ0ERBPWKRSQ/decline [32m200[0m 10.860 ms - 639[0m
+[0mPOST /api/v1/calls/01M89N1Z3Y5Q2DJJ0ERBPWKRSQ/accept [33m409[0m 16.722 ms - 165[0m
+✔ Refus : l’unique invité refuse → appel DECLINED, salle fermée (109.8925ms)
+[0mPOST /api/v1/calls [32m201[0m 42.452 ms - 1398[0m
+[0mPOST /api/v1/calls [32m201[0m 24.764 ms - 1414[0m
+[0mPOST /api/v1/calls/01M89N1Z7J64YPEJ1MZ03AV7BK/cancel [32m200[0m 27.066 ms - 637[0m
+✔ Création idempotente : double envoi pendant la sonnerie → le même appel, une seule salle (109.8173ms)
+[0mPOST /api/v1/calls [32m201[0m 34.862 ms - 1398[0m
+[0mPOST /api/v1/calls/01M89N1ZATVC7FA6QG8P6GXJH7/cancel [33m403[0m 9.582 ms - 140[0m
+[0mPOST /api/v1/calls/01M89N1ZATVC7FA6QG8P6GXJH7/cancel [32m200[0m 22.251 ms - 637[0m
+✔ Annulation : seul l’appelant annule ; les invités passent CANCELLED (76.1869ms)
+[0mPOST /api/v1/calls [32m201[0m 37.461 ms - 1398[0m
+[0mGET /api/v1/calls/01M89N1ZD8AXS7YG2DX23XEQCV [32m200[0m 41.044 ms - 611[0m
+[0mPOST /api/v1/calls/01M89N1ZD8AXS7YG2DX23XEQCV/accept [33m409[0m 13.084 ms - 161[0m
+✔ Appel manqué : sonnerie expirée → MISSED, invité MISSED, notification « manqué » (106.8219ms)
+[0mPOST /api/v1/calls [32m201[0m 38.795 ms - 1398[0m
+[0mPOST /api/v1/calls/01M89N1ZGR78HBH3735RSHA0CE/accept [32m200[0m 18.357 ms - 1423[0m
+[0mPOST /api/v1/webhooks/livekit [32m200[0m 30.339 ms - 56[0m
+prisma:error 
+Invalid `prisma.callEvent.create()` invocation:
+
+
+Unique constraint failed on the fields: (`source`,`external_id`)
+[0mPOST /api/v1/webhooks/livekit [32m200[0m 69.074 ms - 58[0m
+[0mPOST /api/v1/webhooks/livekit [32m200[0m 24.066 ms - 56[0m
+✔ Webhook : signature officielle, effet appliqué une seule fois, rejeu sans effet (209.5279ms)
+[0mPOST /api/v1/webhooks/livekit [33m401[0m 0.991 ms - 81[0m
+[0mPOST /api/v1/webhooks/livekit [33m401[0m 1.182 ms - 81[0m
+[0mPOST /api/v1/webhooks/livekit [33m401[0m 1.172 ms - 81[0m
+[0mPOST /api/v1/calls [32m201[0m 47.274 ms - 1398[0m
+[0mPOST /api/v1/webhooks/livekit [32m200[0m 11.863 ms - 57[0m
+[0mPOST /api/v1/calls/01M89N1ZQYX0V370J3DKM8P2GS/cancel [32m200[0m 29.301 ms - 637[0m
+✔ Webhook : faux secret, corps altéré ou identité non admise → refusé ou ignoré (123.0343ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:64501/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 747.505 ms - 1099[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 304.712 ms - 6276[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 91.260 ms - 468[0m
+[0mPOST /api/v1/auth/login [33m401[0m 18.197 ms - 188[0m
+✔ connexion — sans code, 401 et `details.mfaRequired` à true (21487.3026ms)
+[0mPOST /api/v1/auth/login [32m200[0m 33.986 ms - 1106[0m
+✔ connexion — avec un code valide, la session est délivrée (44.3141ms)
+[0mPOST /api/v1/auth/login [33m401[0m 18.356 ms - 143[0m
+✔ connexion — un code faux est refusé, sans session (24.2809ms)
+[0mPOST /api/v1/auth/login [33m401[0m 19.094 ms - 126[0m
+✔ connexion — un mauvais mot de passe ne révèle pas que la MFA est active (25.5747ms)
+[0mPOST /api/v1/auth/register [32m201[0m 47.157 ms - 1097[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 33.584 ms - 6286[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 20.139 ms - 468[0m
+[0mGET /api/v1/auth/mfa/status [32m200[0m 10.072 ms - 258[0m
+✔ codes de secours — renvoyés une seule fois, à l’activation (134.035ms)
+[0mPOST /api/v1/auth/register [32m201[0m 25.893 ms - 1093[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 29.455 ms - 6304[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 17.453 ms - 468[0m
+[0mPOST /api/v1/auth/login [32m200[0m 27.800 ms - 1102[0m
+✔ codes de secours — un code de secours ouvre une session (114.0749ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:56477/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 123.537 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 30.918 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 30.938 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.779 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 17.968 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.385 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 20.411 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.711 ms - 920[0m
+✔ R2 — charges utiles malformées : aucune exception non capturée, le serveur répond toujours (14393.7331ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 35.698 ms - 310[0m
+✔ R3 — compte suspendu après la connexion : envoi refusé et socket coupé (356.5583ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 28.042 ms - 307[0m
+[0mPOST /api/v1/messaging/conversations/01M89N39FKC6DXDQSXQR3BSW61/messages [32m201[0m 64.454 ms - 369[0m
+[0mDELETE /api/v1/messaging/conversations/01M89N39FKC6DXDQSXQR3BSW61/members/01M89N38ABHB8GS1MXERMYN16F [32m200[0m 15.703 ms - 279[0m
+[0mPOST /api/v1/messaging/conversations/01M89N39FKC6DXDQSXQR3BSW61/messages [32m201[0m 19.423 ms - 374[0m
+✔ R3 + D4 — organisation retirée du groupe : plus de messages reçus, ni de réadhésion à la room (897.0907ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.824 ms - 311[0m
+✔ R4 — événement émis dès la connexion : traité, avec accusé (file hors ligne mobile) (69.1665ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 23.460 ms - 336[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.956 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 11.861 ms - 336[0m
+✔ M3 — groupe homonyme : jamais réutilisé pour un autre administrateur ou d’autres membres (65.1594ms)
+[0mPOST /api/v1/messaging/conversations [33m422[0m 8.448 ms - 243[0m
+[0mPOST /api/v1/messaging/conversations [33m422[0m 7.455 ms - 251[0m
+[0mPOST /api/v1/messaging/conversations [33m422[0m 5.769 ms - 250[0m
+✔ M4 — conversation sur un objet sans modèle : 422 (VALIDATION_ERROR) et non 500 (35.0861ms)
+[0mPOST /api/v1/farms [32m201[0m 51.521 ms - 837[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 131.011 ms - 837[0m
+[0mPOST /api/v1/farms [32m201[0m 20.403 ms - 839[0m
+[0mPOST /api/v1/farms [32m201[0m 10.871 ms - 821[0m
+[0mPOST /api/v1/farms [32m201[0m 15.359 ms - 823[0m
+✔ I1 — création renvoyée après coupure (même Idempotency-Key) : rejouée, aucun doublon ; sans clé, inchangé (246.3434ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:62908/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 675.560 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 94.000 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 28.259 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.336 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 26.243 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.624 ms - 929[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.543 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.484 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 26.521 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.900 ms - 929[0m
+[0mPOST /api/v1/auth/register [32m201[0m 21.963 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.592 ms - 928[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 47.318 ms - 302[0m
+✔ W6 — adhésion révoquée après la connexion : envoi et adhésion à la room refusés (20895.9868ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.719 ms - 302[0m
+[0mGET /api/v1/messaging/conversations/01M89N421GCWAVD9TZER8KFHXD/messages [33m404[0m 12.412 ms - 124[0m
+✔ W7 — conversation d’un autre tenant : invisible en socket comme en REST (70.8723ms)
+[0mPOST /api/v1/organizations [32m201[0m 21.943 ms - 573[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 23.343 ms - 302[0m
+✔ W8 + W9 — organisation active : choisie parmi les participantes, jamais une organisation étrangère (109.974ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 17.670 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89N4270ZYMN2B7S9APQXMXF/messages [33m403[0m 6.590 ms - 135[0m
+✔ W10 — rôle sans `messages.write` (INVESTOR) : refus socket et REST (50.5541ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.395 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89N428HTSHYBHZ6B5WEPSDT/messages [32m201[0m 17.010 ms - 386[0m
+⚠ W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel (482.5801ms) # ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver
+[0mPOST /api/v1/messaging/groups [32m201[0m 20.001 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89N42QS516ZT6Z5TT24Z21W/messages [32m201[0m 15.252 ms - 386[0m
+⚠ W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel (467.9368ms) # ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages
+[0mPOST /api/v1/messaging/groups [32m201[0m 11.438 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N4363VF9PHP5GWJC0P6V4/messages [33m422[0m 5.605 ms - 275[0m
+✔ A1 — clé d’une autre organisation : refusée en REST et en socket (47.0704ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 17.207 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 6.596 ms - 253[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 9.602 ms - 258[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 5.875 ms - 250[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 11.208 ms - 252[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 14.136 ms - 245[0m
+[0mPOST /api/v1/messaging/conversations/01M89N437NTSN4M2P82GHY64PE/messages [33m422[0m 12.100 ms - 289[0m
+✔ A2 — clés malformées : toutes refusées (422) (113.1733ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 21.509 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N43BB1HCV1HGNNP1Z9ZRZ/messages [32m201[0m 28.464 ms - 454[0m
+⚠ A3 — traversée de chemin (`<org>/../<autre>/…`) refusée (58.305ms) # ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)
+[0mPOST /api/v1/messaging/groups [32m201[0m 14.511 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N43D06CCKW1J7JYQH4KZW/messages [32m201[0m 18.044 ms - 420[0m
+[0mGET /api/v1/messaging/conversations/01M89N43D06CCKW1J7JYQH4KZW/messages [32m200[0m 12.208 ms - 1056[0m
+[0mDELETE /api/v1/messaging/conversations/01M89N43D06CCKW1J7JYQH4KZW/members/01M89N41D2S2TN6XHCGNYVBPFZ [32m200[0m 10.151 ms - 274[0m
+[0mGET /api/v1/messaging/conversations/01M89N43D06CCKW1J7JYQH4KZW/messages [33m404[0m 6.118 ms - 124[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 11.361 ms - 112[0m
+✔ A4 — participant retiré : plus aucun accès au fil ni à ses pièces jointes (86.8629ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 12.233 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M89N43FPSCM6Y775RG1B184Q/messages [32m201[0m 20.232 ms - 496[0m
+[0mGET /api/v1/messaging/conversations/01M89N43FPSCM6Y775RG1B184Q/messages [32m200[0m 11.460 ms - 1132[0m
+[0mGET /api/v1/messaging/conversations/01M89N43FPSCM6Y775RG1B184Q/messages [32m200[0m 14.074 ms - 1132[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 30.594 ms - 1335[0m
+✔ A5 — URL signées : TTL de configuration, nouvelle signature à chaque lecture (103.6583ms)
+[0mPOST /api/v1/farms [32m201[0m 374.513 ms - 830[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 421.236 ms - 830[0m
+[0mPOST /api/v1/farms [32m201[0m 424.853 ms - 830[0m
+[0mPOST /api/v1/farms [32m201[0m 427.689 ms - 830[0m
+[0mPOST /api/v1/farms [32m201[0m 431.887 ms - 830[0m
+[0mPOST /api/v1/farms [32m201[0m 432.384 ms - 830[0m
+✔ I1 — requêtes simultanées avec la même clé : une seule création (453.4549ms)
+ℹ I1 : statuts 201, 201(rejoué), 201(rejoué), 201(rejoué), 201(rejoué), 201(rejoué) ; exploitations 1
+[0mPOST /api/v1/farms [32m201[0m 33.255 ms - 807[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 6.928 ms - 807[0m
+✔ I2 — rejeu après succès : même réponse, en-tête `Idempotent-Replayed` (48.4428ms)
+[0mPOST /api/v1/farms [32m201[0m 10.526 ms - 827[0m
+[0mPOST /api/v1/plots [33m404[0m 13.399 ms - 124[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/plots [33m404[0m 6.276 ms - 124[0m
+✔ I3 — rejeu après erreur métier : l’erreur est rejouée, aucune écriture (43.6941ms)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 8.014 ms - 159[0m
+✔ I4a — arrêt après réservation de la clé, avant la réponse : aucun doublon (409) (14.3233ms)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [33m409[0m 5.609 ms - 159[0m
+⚠ I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable (8.7989ms) # ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur
+[2026-11-25T15:27:55.036Z] [ERROR] IDEMPOTENCY_RESPONSE_PERSIST_FAILED panne simulée de persistance
+[2026-11-25T15:27:55.109Z] [ERROR] [52ceb668-6301-4037-99a6-348a10d7dafb] POST /api/v1/farms — {
+  name: 'ApiError',
+  message: 'Impossible de conserver la réponse idempotente',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Impossible de conserver la réponse idempotente\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/middleware/idempotency.js:102:30'
+}
+[0mPOST /api/v1/farms [31m500[0m 87.015 ms - 152[0m
+[0mPOST /api/v1/farms [32m201[0m 15.453 ms - 811[0m
+⚠ I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas (110.0855ms) # ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon
+[0mPOST /api/v1/farms [32m201[0m 20.220 ms - 807[0m
+[0mPOST /api/v1/farms [32m201[0m 22.008 ms - 809[0m
+✔ I5 — même clé, deux utilisateurs : jamais de rejeu croisé (48.117ms)
+[0mPOST /api/v1/farms [32m201[0m 21.094 ms - 807[0m
+[0mPOST /api/v1/plots [32m201[0m 105.382 ms - 627[0m
+✔ I6 — même clé, deux opérations différentes : portées indépendantes (140.4254ms)
+[0mPOST /api/v1/farms [32m201[0m 55.932 ms - 813[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 13.482 ms - 813[0m
+⚠ I6b — même clé, même opération, corps différent : refus explicite (80.948ms) # ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée
+[0mPOST /api/v1/farms [32m201[0m 24.824 ms - 807[0m
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+[0mPOST /api/v1/farms [32m201[0m 11.159 ms - 807[0m
+⚠ I7 — clé expirée après succès : traitée comme une nouvelle requête (46.5856ms) # ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.479 ms - 306[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 24.023 ms - 174002[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 33.894 ms - 282911[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 25.049 ms - 109606[0m
+✔ S1 + S3 + S5 — long hors ligne, > 500 messages, 650 à la même milliseconde : tout reçu une fois (402.5596ms)
+ℹ S1 : 1301 reçus / 1301 attendus ; pages 400, 650, 251 ; ids distincts 1301
+[0mPOST /api/v1/messaging/sync [32m200[0m 33.113 ms - 174002[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 61.010 ms - 282911[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 53.278 ms - 282911[0m
+✔ S6 — interruption entre deux pages : la même page est relivrée à l’identique (192.4691ms)
+[0mPOST /api/v1/messaging/sync [32m200[0m 44.685 ms - 112[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 6.205 ms - 112[0m
+⚠ S2 — transaction concurrente non validée pendant la lecture : message livré au tirage suivant (546.6612ms) # ANOMALIE S2 — curseur `Date.now()` : un message validé après la lecture mais horodaté avant est perdu définitivement
+✔ S-modèle — curseur à recouvrement L : 0 perte, 0 doublon appliqué, sur 2 000 scénarios aléatoires (1362.7322ms)
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:56475/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 615.177 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 150.112 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 24.706 ms - 1075[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.052 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 35.924 ms - 1086[0m
+[0mPOST /api/v1/auth/login [32m200[0m 21.080 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 21.476 ms - 1082[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.996 ms - 923[0m
+[0mPOST /api/v1/auth/register [32m201[0m 110.279 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 24.565 ms - 937[0m
+[0mPOST /api/v1/messaging/groups [33m403[0m 87.753 ms - 194[0m
+[0mPOST /api/v1/calls [33m403[0m 17.581 ms - 194[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 56.532 ms - 112[0m
+✔ H-07 — un compte non vérifié ne crée pas de groupe ; la synchronisation reste lisible (42102.1412ms)
+[0mPATCH /api/v1/organizations/01M89N5J91BC3BSKFRQDFHHTW5 [32m200[0m 33.600 ms - 320[0m
+[0mPATCH /api/v1/organizations/01M89N5JMSJMTW0W1WDSNJAF3A [33m404[0m 15.265 ms - 124[0m
+✔ Organisation — le responsable modifie SON organisation, jamais celle d’un autre (64.9889ms)
+[0mGET /api/v1/verifications/me [32m200[0m 130.646 ms - 600[0m
+[0mPOST /api/v1/verifications [33m404[0m 3.134 ms - 134[0m
+[0mPOST /api/v1/verifications [32m201[0m 47.692 ms - 459[0m
+✔ Vérification — un acheteur lit son statut ; personne ne dépose au nom d’autrui (201.3443ms)
+[2026-11-25T15:28:43.455Z] [ERROR] [3187f813-f3ba-4d22-845c-4897b8192f5d] POST /api/v1/media/upload-url — {
+  name: 'ApiError',
+  message: "Impossible de générer l'URL d'upload",
+  code: 'INTERNAL_ERROR',
+  stack: "ApiError: Impossible de générer l'URL d'upload\n" +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.createUploadUrl (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/media/media.service.js:101:36)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async createUploadUrl (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/media/media.controller.js:5:16)'
+}
+[0mPOST /api/v1/media/upload-url [31m500[0m 80.053 ms - 143[0m
+✔ Médias — un acheteur peut demander une URL d’envoi avec `kind: IMAGE` (91.689ms)
+[0mPOST /api/v1/messaging/conversations [32m201[0m 23.585 ms - 323[0m
+[0mPOST /api/v1/messaging/conversations/01M89N5KF1E4AEDP6VKGRK2EJZ/messages [33m422[0m 10.037 ms - 275[0m
+[0mPOST /api/v1/messaging/conversations/01M89N5KF1E4AEDP6VKGRK2EJZ/messages [32m201[0m 45.210 ms - 419[0m
+[0mGET /api/v1/messaging/conversations/01M89N5KF1E4AEDP6VKGRK2EJZ/messages [32m200[0m 14.779 ms - 697[0m
+✔ Pièces jointes — clé étrangère refusée, clé de l’expéditeur acceptée avec `attachmentUrls` (103.4275ms)
+[0mPOST /api/v1/farms [32m201[0m 20.664 ms - 824[0m
+[0mPOST /api/v1/plots [32m201[0m 53.808 ms - 626[0m
+[0mPOST /api/v1/farms [32m201[0m 9.168 ms - 827[0m
+[0mPOST /api/v1/plots [32m201[0m 10.688 ms - 624[0m
+[0mPOST /api/v1/organizations [32m201[0m 15.816 ms - 595[0m
+[0mPOST /api/v1/cooperatives/01M89N5KN7TT8VHMFNDZQXR0YA/members [32m201[0m 30.989 ms - 480[0m
+[0mPATCH /api/v1/cooperatives/01M89N5KN7TT8VHMFNDZQXR0YA/members/cmwwa3jdm001ofvdj99zcbet4 [32m200[0m 9.148 ms - 474[0m
+[0mGET /api/v1/cooperatives/01M89N5KN7TT8VHMFNDZQXR0YA/overview [32m200[0m 63.787 ms - 310[0m
+✔ Coopérative — l’agrégation ne lit que l’exploitation individuelle du membre consentant (235.0771ms)
+ℹ tests 92
+ℹ suites 0
+ℹ pass 80
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 12
+ℹ duration_ms 230368.9605
+
+✖ failing tests:
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:73:1
+⚠ C1 (OFF-1) — le tirage du Mobile (`POST /chat/sync`) atteint une route existante (15245.5364ms) # ANOMALIE OFF-1 — /chat/sync n’existe pas ; le backend expose /messaging/sync
+  AssertionError [ERR_ASSERTION]: observé 404 {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/chat/sync","requestId":"72882c99-f0e2-4295-8381-4c206c2f3b37"}
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:78:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:107:1
+⚠ C4 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : un seul message (84.474ms) # ANOMALIE OFF-4a — `localTempId` retiré par la validation Zod : doublon serveur, id ≠ localTempId
+  AssertionError [ERR_ASSERTION]: observé : 2 messages, id renvoyé 01M89N0RVC79YGTMRG0GKY8Y34 ≠ localTempId
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:118:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:194:1
+⚠ L3 (OFF-4b) — envoi par repli REST puis tirage : intégration du delta sans erreur, 1 seule ligne (45.1967ms) # ANOMALIE OFF-4b — UNIQUE(server_id) violée : applyServerDelta échoue après un envoi REST
+  AssertionError [ERR_ASSERTION]: observé : UNIQUE constraint failed: messages.server_id
+  + actual - expected
+  
+  + 'UNIQUE constraint failed: messages.server_id'
+  - null
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:210:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'UNIQUE constraint failed: messages.server_id',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:329:1
+⚠ W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer (5119.6311ms) # ANOMALIE W13 — le jeton n’est vérifié qu’à la poignée de main ; le socket survit à la révocation de session
+  Error: pas d'accusé pour send_message
+      at Timeout._onTimeout (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/support/socketClient.mjs:23:46)
+      at listOnTimeout (node:internal/timers:685:17)
+      at process.processTimers (node:internal/timers:618:7)
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:171:1
+⚠ W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel (482.5801ms) # ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver
+  AssertionError [ERR_ASSERTION]: observé : 1 message(s) reçu(s) avec leur contenu après révocation
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:181:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:185:1
+⚠ W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel (467.9368ms) # ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages
+  AssertionError [ERR_ASSERTION]: observé : 1 message(s) reçu(s) avec leur contenu après suspension
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:195:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:223:1
+⚠ A3 — traversée de chemin (`<org>/../<autre>/…`) refusée (58.305ms) # ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)
+  AssertionError [ERR_ASSERTION]: observé 201 pour 01M89N4134P6XNX719K97076HR/../01M89N41B593XBDZMYHSKFC7PC/documents/2026-11/secret.pdf ; clés transmises à la signature : ["01M89N4134P6XNX719K97076HR/../01M89N41B593XBDZMYHSKFC7PC/documents/2026-11/secret.pdf"]
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:237:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:345:1
+⚠ I4b — clé orpheline (arrêt du serveur) expirée : requête de nouveau traitable (8.7989ms) # ANOMALIE I4b — `expiresAt` jamais lu : 409 « en cours » indéfiniment après un arrêt du serveur
+  AssertionError [ERR_ASSERTION]: observé 409 {"success":false,"code":"CONFLICT","message":"Une requête avec cette clé idempotente est déjà en cours","requestId":"96e9086d-6594-4a67-ae48-6b53d181998e"}
+  
+  409 !== 201
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:354:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 409,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:358:1
+⚠ I4c — échec d’écriture de la réponse APRÈS la création métier : le renvoi ne duplique pas (110.0855ms) # ANOMALIE I4c — la clé est supprimée après l’échec de persistance ; le renvoi crée un doublon
+  AssertionError [ERR_ASSERTION]: 1er appel 500 (fermes : 1) ; renvoi 201 ; fermes finales : 2
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:374:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:399:1
+⚠ I6b — même clé, même opération, corps différent : refus explicite (80.948ms) # ANOMALIE I6b — aucune empreinte du corps : le second corps est ignoré et la réponse du premier rejouée
+  AssertionError [ERR_ASSERTION]: observé 201, rejoué=true, exploitation renvoyée « I6b-A »
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:406:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:410:1
+⚠ I7 — clé expirée après succès : traitée comme une nouvelle requête (46.5856ms) # ANOMALIE I7 — `expiresAt` jamais lu ni purgé : rejeu perpétuel, table sans limite de croissance
+  AssertionError [ERR_ASSERTION]: observé : rejoué=true, statut 201
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:418:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueContradictoireV1.e2e.test.mjs:488:1
+⚠ S2 — transaction concurrente non validée pendant la lecture : message livré au tirage suivant (546.6612ms) # ANOMALIE S2 — curseur `Date.now()` : un message validé après la lecture mais horodaté avant est perdu définitivement
+  AssertionError [ERR_ASSERTION]: perdu : créé à 1795620476050, curseur rendu pendant la transaction 1795620476394
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueContradictoireV1.e2e.test.mjs:511:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

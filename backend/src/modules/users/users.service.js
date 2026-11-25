@@ -11,6 +11,7 @@ import { ApiError } from '../../shared/errors/ApiError.js';
 import { PERMISSIONS, can } from '../../shared/permissions.js';
 import { audit } from '../../shared/audit.js';
 import { publicUser } from '../auth/auth.service.js';
+import { MOTIFS_REVOCATION, revoquerSessionsUtilisateur } from '../../realtime/bus.js';
 
 /**
  * PROF-03 — complétude du profil : liste explicite des critères manquants.
@@ -302,6 +303,9 @@ export const deleteMe = async (req) => {
     resourceId: req.user.id,
     req,
   });
+
+  // W12 : compte supprimé, coupure immédiate de ses sockets.
+  await revoquerSessionsUtilisateur(req.user.id, MOTIFS_REVOCATION.COMPTE_INACTIF);
 
   return { deleted: true };
 };

@@ -1,0 +1,141 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:52346/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 114.829 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 31.755 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.875 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 21.267 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 38.536 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.685 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 22.108 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.125 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 19.955 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.517 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 23.235 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.929 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 17.614 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 14.638 ms - 917[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 29.963 ms - 303[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.995 ms - 917[0m
+[0mPOST /api/v1/auth/logout [32m200[0m 10.549 ms - 53[0m
+✖ RV-1 (W13) — déconnexion d’une session : ses sockets sont coupés, l’autre appareil reste connecté (19119.7733ms)
+ℹ RV-1 : logout 200 ; appareil 1 coupé en null ms (motif undefined) ; appareil 2 connecté=true, envoi true
+[0mPOST /api/v1/messaging/groups [32m201[0m 25.052 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89MXR9FMW6DKQDSJXRJDQ1Z/messages [32m201[0m 25.790 ms - 372[0m
+✖ RV-2 (W12) — suspension : coupure immédiate de tous les sockets, plus aucun contenu, reconnexion refusée (1359.7231ms)
+ℹ RV-2 : service 39 ms ; 2 sockets coupés NON ; motif undefined ; reconnexion refusée (44{"message":"UNAUTHORIZED"})
+[0mDELETE /api/v1/me [32m204[0m 30.240 ms - -[0m
+✖ RV-2 bis — déconnexion forcée et suppression de compte (REST DELETE /me) : coupure immédiate (2105.3381ms)
+ℹ RV-2 bis : déconnexion forcée → coupé en null ms (undefined) ; DELETE /me 204 → coupé en null ms (undefined)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.790 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89MXVNGT530CWT2FPJ8EW31/messages [32m201[0m 17.168 ms - 371[0m
+[0mPOST /api/v1/messaging/conversations/01M89MXVNGT530CWT2FPJ8EW31/messages [32m201[0m 24.899 ms - 372[0m
+✖ RV-3 (W11) — rôle retiré : plus de contenu du fil, socket CONSERVÉ (pas de coupure) (410.291ms)
+ℹ RV-3 : reçu avant=true ; reçu après retrait=true ; socket connecté=true ; ping true
+[0mPOST /api/v1/messaging/groups [32m201[0m 24.589 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89MXW2FRQ2C3XSCG8G1C6H7/messages [32m201[0m 60.172 ms - 372[0m
+✖ RV-4 (W11/W12 hors API) — modification directe en base : appliquée par le filet en ≤ 400 ms (+ marge) (2742.6429ms)
+ℹ RV-4 : adhésion retirée en base → rooms quittées en null ms (socket conservé) ; contenu reçu après=true ; suspension en base → coupé en null ms ; filet undefined
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:52346/email : injoignable hors de cette machine.
+✖ RV-5 — multi-instances (deux processus, sans adaptateur) : immédiat sur l’instance qui traite, filet sur l’autre (1889.4771ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 35771.8978
+
+✖ failing tests:
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:82:1
+✖ RV-1 (W13) — déconnexion d’une session : ses sockets sont coupés, l’autre appareil reste connecté (19119.7733ms)
+  AssertionError [ERR_ASSERTION]: socket de la session déconnectée coupé
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revocationSocketsV1.e2e.test.mjs:93:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:101:1
+✖ RV-2 (W12) — suspension : coupure immédiate de tous les sockets, plus aucun contenu, reconnexion refusée (1359.7231ms)
+  AssertionError [ERR_ASSERTION]: coupure immédiate (pas le filet)
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revocationSocketsV1.e2e.test.mjs:114:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:121:1
+✖ RV-2 bis — déconnexion forcée et suppression de compte (REST DELETE /me) : coupure immédiate (2105.3381ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(coupeForce !== null && coupeForce < 200)
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revocationSocketsV1.e2e.test.mjs:130:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:136:1
+✖ RV-3 (W11) — rôle retiré : plus de contenu du fil, socket CONSERVÉ (pas de coupure) (410.291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revocationSocketsV1.e2e.test.mjs:149:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:155:1
+✖ RV-4 (W11/W12 hors API) — modification directe en base : appliquée par le filet en ≤ 400 ms (+ marge) (2742.6429ms)
+  AssertionError [ERR_ASSERTION]: délai null ms
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revocationSocketsV1.e2e.test.mjs:173:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revocationSocketsV1.e2e.test.mjs:180:1
+✖ RV-5 — multi-instances (deux processus, sans adaptateur) : immédiat sur l’instance qui traite, filet sur l’autre (1889.4771ms)
+  Error: 44{"message":"UNAUTHORIZED"}
+      at WebSocket.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/support/socketClient.mjs:38:45)
+      at WebSocket.emit (node:events:514:20)
+      at Receiver.receiverOnMessage (D:\AGRIKONNECT\Soupabase\Nouveau dossier\V1\agrikonnect-africa-final\backend\node_modules\ws\lib\websocket.js:1253:20)
+      at Receiver.emit (node:events:514:20)
+      at Receiver.dataMessage (D:\AGRIKONNECT\Soupabase\Nouveau dossier\V1\agrikonnect-africa-final\backend\node_modules\ws\lib\receiver.js:633:14)
+      at Receiver.getData (D:\AGRIKONNECT\Soupabase\Nouveau dossier\V1\agrikonnect-africa-final\backend\node_modules\ws\lib\receiver.js:532:10)
+      at Receiver.startLoop (D:\AGRIKONNECT\Soupabase\Nouveau dossier\V1\agrikonnect-africa-final\backend\node_modules\ws\lib\receiver.js:190:16)
+      at Receiver._write (D:\AGRIKONNECT\Soupabase\Nouveau dossier\V1\agrikonnect-africa-final\backend\node_modules\ws\lib\receiver.js:117:10)
+      at writeOrBuffer (node:internal/streams/writable:574:12)
+      at _write (node:internal/streams/writable:503:10)

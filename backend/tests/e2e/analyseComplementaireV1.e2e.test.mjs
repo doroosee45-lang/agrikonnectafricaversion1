@@ -327,18 +327,22 @@ test('P5 — une violation d’unicité DANS la transaction l’annule entièrem
 // ═══ W13 — session révoquée, socket existant ═══
 
 test(
-  'W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer',
-  { todo: 'ANOMALIE W13 — le jeton n’est vérifié qu’à la poignée de main ; le socket survit à la révocation de session' },
+  'W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer (coupé, ou envoi refusé)',
   async (t) => {
     const roomId = await groupe('awa', 'W13', ['ben']);
     const s = await connecterSocket(port, comptes.ben.token);
     const avant = await s.emitAck('send_message', { roomId, content: 'avant déconnexion' });
     const deco = await as('ben', 'POST', '/auth/logout');
     const rest = await as('ben', 'GET', '/me');
-    const apres = await s.emitAck('send_message', { roomId, content: 'après déconnexion' });
+    // Correctif W13 : la session déconnectée est COUPÉE (bus.revoquerSessionJeton).
+    // Sinon, un envoi doit au minimum être refusé.
+    for (let i = 0; i < 25 && !s.ferme; i += 1) await pause(20);
+    const apres = s.ferme ? { coupe: true } : await s.emitAck('send_message', { roomId, content: 'après déconnexion' }).catch((e) => ({ erreur: e.message }));
     s.fermer();
-    t.diagnostic(`W13 : socket avant=${avant.ok} ; logout ${deco.status} ; REST après ${rest.status} ; socket après=${JSON.stringify(apres)}`);
+    const persistes = await h.prisma.message.count({ where: { conversationId: roomId, body: 'après déconnexion' } });
+    t.diagnostic(`W13 : socket avant=${avant.ok} ; logout ${deco.status} ; REST après ${rest.status} ; socket après=${JSON.stringify(apres)} ; motif ${s.recus('session:revoked')[0]?.reason}`);
     assert.equal(rest.status, 401, 'le REST refuse le jeton révoqué');
-    assert.equal(apres.ok, false, 'le socket devrait refuser aussi');
+    assert.ok(apres.coupe === true || apres.ok === false, `le socket devrait être coupé ou refuser : ${JSON.stringify(apres)}`);
+    assert.equal(persistes, 0, 'aucun message persisté après la déconnexion');
   },
 );

@@ -170,7 +170,7 @@ const recoitApres = async (cle, nom, action, annuler) => {
 
 test(
   'W11 — adhésion révoquée après la connexion : plus aucun contenu reçu en temps réel',
-  { todo: 'ANOMALIE W11 — les rooms rejointes à la connexion ne sont pas quittées à la révocation : le contenu continue d’arriver' },
+  { todo: 'W11 HORS API — modification directe en base : appliquée par le filet en ≤ REALTIME_RECHECK_MS (60 s par défaut) ; ce test n’attend que 400 ms. Révocation par l’API immédiate : voir revocationSocketsV1 RV-3 et RV-4' },
   async () => {
     const recus = await recoitApres(
       'cleo',
@@ -184,7 +184,7 @@ test(
 
 test(
   'W12 — compte suspendu après la connexion : plus aucun contenu reçu en temps réel',
-  { todo: 'ANOMALIE W12 — un compte suspendu n’est déconnecté qu’à sa prochaine action ; il reçoit encore les messages' },
+  { todo: 'W12 HORS API — modification directe en base : appliquée par le filet en ≤ REALTIME_RECHECK_MS (60 s par défaut) ; ce test n’attend que 400 ms. Suspension par l’API immédiate : voir revocationSocketsV1 RV-2 et RV-4' },
   async () => {
     const recus = await recoitApres(
       'dan',

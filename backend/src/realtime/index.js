@@ -7,6 +7,8 @@ import { isOriginAllowed } from '../config/cors.js';
 import { logger } from '../shared/http/logger.js';
 import { contexteEnvoi, sendMessageSchema } from './sendGuard.js';
 import {
+  empreinteJeton,
+  passageFilet,
   setIo,
   roomForOrganization,
   roomForConversation,
@@ -113,7 +115,25 @@ const loadConversationRooms = async (organizationIds) => {
   return conversations.map((c) => c.id);
 };
 
-export const attachRealtime = (httpServer) => {
+/**
+ * Lit `exp` d'un JWT déjà vérifié par Supabase (`getUser`) : sert uniquement à
+ * COMPTER les sockets au jeton expiré (aucune coupure à ce stade, voir bus.js).
+ */
+const expirationJeton = (jeton) => {
+  try {
+    const charge = JSON.parse(Buffer.from(String(jeton).split('.')[1] ?? '', 'base64url').toString('utf8'));
+    return Number.isFinite(charge?.exp) ? charge.exp : null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * @param {import('node:http').Server} httpServer
+ * @param {{ intervalleFiletMs?: number }} [options] intervalle du filet de
+ *   révocation (défaut : `REALTIME_RECHECK_MS`) ; surchargeable pour les tests.
+ */
+export const attachRealtime = (httpServer, { intervalleFiletMs = env.REALTIME_RECHECK_MS } = {}) => {
   const io = new Server(httpServer, {
     path: '/realtime',
     cors: {
@@ -132,6 +152,9 @@ export const attachRealtime = (httpServer) => {
       if (!profile) return next(new Error('UNAUTHORIZED'));
 
       socket.data.userId = profile.id;
+      // W13 : empreinte du jeton (jamais le jeton) pour couper CETTE session à la déconnexion.
+      socket.data.jetonEmpreinte = empreinteJeton(token);
+      socket.data.expiration = expirationJeton(token);
       // Instantané de connexion : sert UNIQUEMENT à choisir les rooms initiales.
       // Les actions sensibles relisent le profil (`chargerProfilActif`).
       socket.data.organizationIds = profile.memberships.map((m) => m.organizationId);
@@ -281,6 +304,30 @@ export const attachRealtime = (httpServer) => {
   });
 
   setIo(io);
+
+  /*
+   * Filet de révocation (W11/W12) : relit périodiquement les droits des sockets
+   * de CETTE instance. Couvre les modifications hors API et les autres instances
+   * (aucun adaptateur partagé) ; délai maximal = intervalle.
+   */
+  let filetEnCours = false;
+  const minuterieFilet = setInterval(async () => {
+    if (filetEnCours) return;
+    filetEnCours = true;
+    try {
+      await passageFilet();
+    } catch (error) {
+      logger.warn('[realtime] filet de révocation en échec :', error?.message ?? error);
+    } finally {
+      filetEnCours = false;
+    }
+  }, intervalleFiletMs);
+  minuterieFilet.unref?.();
+  const fermer = io.close.bind(io);
+  io.close = (...args) => {
+    clearInterval(minuterieFilet);
+    return fermer(...args);
+  };
   logger.info(`[realtime] Socket.IO actif sur le chemin /realtime (${realtimeStats().connections} connexion(s))`);
 
   return io;

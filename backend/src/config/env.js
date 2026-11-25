@@ -96,6 +96,8 @@ const schema = z.object({
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   /** Temps réel Socket.IO (V2 §8.7) — désactivable pour les tests et scripts */
   REALTIME_ENABLED: z.enum(['true', 'false']).default('true'),
+  /** W11/W12 : intervalle du filet de révocation des sockets (délai maximal hors API). */
+  REALTIME_RECHECK_MS: z.coerce.number().int().min(1000).max(3_600_000).default(60_000),
   /** Tâches planifiées internes — désactivables pour les scripts et les tests */
   JOBS_ENABLED: z.enum(['true', 'false']).default('true'),
 

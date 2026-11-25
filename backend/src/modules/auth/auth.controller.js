@@ -1,5 +1,6 @@
 import * as service from './auth.service.js';
 import { success, created } from '../../shared/http/response.js';
+import { revoquerSessionJeton } from '../../realtime/bus.js';
 
 export const register = async (req, res) => {
   const result = await service.register(req.body, req);
@@ -18,6 +19,8 @@ export const refresh = async (req, res) => {
 
 export const logout = async (req, res) => {
   await service.logout(req.token);
+  // W13 : la session déconnectée ne garde aucun socket ouvert (autres appareils inchangés).
+  await revoquerSessionJeton(req.user?.id, req.token);
   return success(res, null, { message: 'Déconnecté' });
 };
 

@@ -7,6 +7,7 @@ import { audit } from '../../shared/audit.js';
 import { PERMISSIONS, GOVERNANCE_ROLES } from '../../shared/permissions.js';
 import { auditSeverity, severityWhere } from './admin.security.schema.js';
 import { assertMfa } from '../auth/mfa.service.js';
+import { MOTIFS_REVOCATION, reajusterDroitsUtilisateur, revoquerSessionsUtilisateur } from '../../realtime/bus.js';
 
 /**
  * Administration V1 (CDC §5.12).
@@ -335,6 +336,9 @@ export const updateUserStatus = async (id, { status, reason }, req) => {
     newValue: { status, reason: motif },
   });
 
+  // W12 : compte rendu inactif, coupure immédiate de ses sockets sur cette instance.
+  if (status !== 'ACTIVE') await revoquerSessionsUtilisateur(id, MOTIFS_REVOCATION.COMPTE_INACTIF);
+
   return updated;
 };
 
@@ -608,6 +612,9 @@ export const forceLogout = async (id, { reason }, req) => {
     newValue: { reason, sessionsRevoked: true },
   });
 
+  // W13 : toutes les sessions révoquées, temps réel compris.
+  await revoquerSessionsUtilisateur(id, MOTIFS_REVOCATION.DECONNEXION_FORCEE);
+
   return { id, sessionsRevoked: true };
 };
 
@@ -790,6 +797,9 @@ export const revokeRole = async (id, role, req) => {
     });
   }
 
+  // W11 : droits réduits, sortie des rooms non autorisées (sans coupure).
+  await reajusterDroitsUtilisateur(id);
+
   return { userId: id, role, memberships: resultats };
 };
 
@@ -826,6 +836,9 @@ export const deleteUser = async (id, { reason }, req) => {
     oldValue: { status: target.status },
     newValue: { status: 'DELETED', reason },
   });
+
+  // W12 : compte supprimé, coupure immédiate de ses sockets.
+  await revoquerSessionsUtilisateur(id, MOTIFS_REVOCATION.COMPTE_INACTIF);
 
   return updated;
 };
