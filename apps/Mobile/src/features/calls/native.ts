@@ -1,4 +1,3 @@
-const dynamicRequire = (id: string) => { try { return Function("m", "return require(m)")(id); } catch { return null; } };
 import { NativeModules, Platform } from 'react-native';
 
 /**
@@ -12,8 +11,15 @@ import { NativeModules, Platform } from 'react-native';
  * Sinon chaque fonction renvoie `null` et l'interface d'appel reste masquée.
  *
  * Les `require` sont volontairement paresseux : un `import` en tête de fichier
- * ferait planter Expo Go au démarrage.
+ * ferait planter Expo Go au démarrage. Ils DOIVENT rester STATIQUES
+ * (`require('nom-du-paquet')` littéral) : Metro les résout à la construction du
+ * bundle. L'ancien contournement `Function("m", "return require(m)")` ne
+ * trouvait aucun `require` global à l'exécution (Metro n'en expose pas) : tous
+ * les chargeurs renvoyaient `null` et les appels natifs ne démarraient jamais.
+ * Le code d'un module n'est exécuté qu'à l'appel de `require` : dans Expo Go,
+ * `essayer` ne l'appelle pas, aucun module natif absent n'est sollicité.
  */
+declare const require: (id: string) => any;
 export const APPELS_NATIFS_DEMANDES = process.env.EXPO_PUBLIC_NATIVE_CALLS === 'true';
 
 /**
@@ -50,25 +56,25 @@ let globalesWebRtc = false;
 /** SDK LiveKit + WebRTC natif (globales WebRTC enregistrées une seule fois). */
 export function chargerLiveKit(): { client: LiveKitClient; rn: LiveKitReactNative } | null {
   return essayer(() => {
-    const rn = dynamicRequire('@livekit/react-native') as LiveKitReactNative;
+    const rn = require('@livekit/react-native') as LiveKitReactNative;
     if (!globalesWebRtc) {
       rn.registerGlobals();
       globalesWebRtc = true;
     }
-    const client = dynamicRequire('livekit-client') as LiveKitClient;
+    const client = require('livekit-client') as LiveKitClient;
     return { client, rn };
   });
 }
 
 export function chargerCallKeep(): CallKeep | null {
-  return essayer(() => (dynamicRequire('react-native-callkeep') as { default: CallKeep }).default);
+  return essayer(() => (require('react-native-callkeep') as { default: CallKeep }).default);
 }
 
 export function chargerMessaging(): Messaging | null {
-  return essayer(() => dynamicRequire('@react-native-firebase/messaging') as Messaging);
+  return essayer(() => require('@react-native-firebase/messaging') as Messaging);
 }
 
 export function chargerVoipPush(): VoipPush | null {
   if (Platform.OS !== 'ios' || !IOS_VOIP_PRET) return null;
-  return essayer(() => (dynamicRequire('react-native-voip-push-notification') as { default: VoipPush }).default);
+  return essayer(() => (require('react-native-voip-push-notification') as { default: VoipPush }).default);
 }
