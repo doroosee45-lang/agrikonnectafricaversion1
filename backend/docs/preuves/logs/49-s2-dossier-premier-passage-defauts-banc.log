@@ -1,0 +1,80 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:52083/email : injoignable hors de cette machine.
+✔ S2-a — transaction en cours pendant la lecture : PERDUE avec le curseur temporel, LIVRÉE avec le curseur de transaction (22140.3351ms)
+ℹ S2-a : curseur temporel → reçu=false ; curseur de transaction → reçu=true (pendant : false, après : true)
+✔ S2-b — 300 écritures concurrentes (durées aléatoires) pendant des tirages répétés : 0 perte, 0 doublon (1504.0348ms)
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:57846/email : injoignable hors de cette machine.
+✔ S2-0 — version PostgreSQL du banc et disponibilité des fonctions (PostgreSQL ≥ 13) (15645.319ms)
+ℹ S2-0 : PostgreSQL 18.4 (180004) ; pg_current_xact_id → xid8 ; pg_current_snapshot → pg_snapshot
+✖ S2-c1 — ADD COLUMN xid8 NOT NULL DEFAULT pg_current_xact_id() sur 200000 lignes : RÉÉCRITURE, verrou exclusif (2013.919ms)
+ℹ S2-c1 : ALTER 2 ms ; réécriture=false (filenode 19757 → 19757) ; taille 55 MB → 55 MB ; lecture concurrente attendue 125 ms ; xid distincts des anciennes lignes=1 (toutes = xid de la migration)
+✔ S2-c2 — variante SANS réécriture : colonne nullable, SET DEFAULT, rattrapage par lots, NOT NULL validé (200000 lignes) (11162.892ms)
+ℹ S2-c2 : ADD COLUMN 2 ms, SET DEFAULT 1 ms, réécriture=false ; nouvelle ligne marquée=true ; rattrapage 20 lots en 7436 ms ; CHECK NOT VALID 9 ms, VALIDATE 28 ms, SET NOT NULL (s'appuie sur le CHECK validé) 19 ms ; CREATE INDEX CONCURRENTLY (xid,id) 620 ms ; taille 119 MB ; nuls restants 0
+✖ S2-d — pagination composite (xid, id), borne figée : 1 000 lignes d’UNE transaction + 200 concurrentes, pages de 37 → 0 perte, 0 doublon (1254.7742ms)
+ℹ S2-d : écrites 1200 ; pages 34 ; reçues 1114 ; perdues 86 ; doublons 0
+✔ S2-e — transaction longue : RETARD de livraison (pas de perte) ; une transaction en lecture seule ne retarde rien (1729.0607ms)
+ℹ S2-e : lecture seule longue → ligne livrée immédiatement=true ; écriture longue ouverte → 'apres-longue' livrée pendant=false ; après fin de la transaction longue (~1564 ms) → livrées ["longue","apres-longue"]
+✖ S2-f — lecture en UNE instruction (CTE) : 300 écritures concurrentes, 0 perte, 0 doublon (1188.0294ms)
+ℹ S2-f : écrites 300 ; reçues 286 ; perdues 14 ; doublons 0
+✔ S2-g — reprise après interruption : curseur non enregistré → page relivrée, absorbée par l’upsert local (0 perte) (44.1744ms)
+ℹ S2-g : 100 lignes ; livraisons 115 (dont 15 relivrées) ; base locale 100
+✔ S2-h — curseur incohérent (restauration logique, autre base) : détectable, déclenche une resynchronisation complète (5.6196ms)
+ℹ S2-h : xmax actuel 1425 ; curseur 1001425 → incohérent=true ; curseur 1425 → incohérent=false
+ℹ tests 10
+ℹ suites 0
+ℹ pass 7
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84171.4754
+
+✖ failing tests:
+
+test at tests\e2e\curseurStableS2Dossier.e2e.test.mjs:90:1
+✖ S2-c1 — ADD COLUMN xid8 NOT NULL DEFAULT pg_current_xact_id() sur 200000 lignes : RÉÉCRITURE, verrou exclusif (2013.919ms)
+  AssertionError [ERR_ASSERTION]: défaut volatil : la table est réécrite
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/curseurStableS2Dossier.e2e.test.mjs:104:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '19757',
+    expected: '19757',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\curseurStableS2Dossier.e2e.test.mjs:138:1
+✖ S2-d — pagination composite (xid, id), borne figée : 1 000 lignes d’UNE transaction + 200 concurrentes, pages de 37 → 0 perte, 0 doublon (1254.7742ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  86 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/curseurStableS2Dossier.e2e.test.mjs:176:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 86,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\curseurStableS2Dossier.e2e.test.mjs:216:1
+✖ S2-f — lecture en UNE instruction (CTE) : 300 écritures concurrentes, 0 perte, 0 doublon (1188.0294ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  14 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/curseurStableS2Dossier.e2e.test.mjs:246:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 14,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

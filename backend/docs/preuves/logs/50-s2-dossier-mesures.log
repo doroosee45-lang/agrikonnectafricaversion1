@@ -1,0 +1,38 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:51033/email : injoignable hors de cette machine.
+✔ S2-a — transaction en cours pendant la lecture : PERDUE avec le curseur temporel, LIVRÉE avec le curseur de transaction (18527.1275ms)
+ℹ S2-a : curseur temporel → reçu=false ; curseur de transaction → reçu=true (pendant : false, après : true)
+✔ S2-b — 300 écritures concurrentes (durées aléatoires) pendant des tirages répétés : 0 perte, 0 doublon (1491.5481ms)
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:50462/email : injoignable hors de cette machine.
+✔ S2-0 — version PostgreSQL du banc et disponibilité des fonctions (PostgreSQL ≥ 13) (15711.0568ms)
+ℹ S2-0 : PostgreSQL 18.4 (180004) ; pg_current_xact_id → xid8 ; pg_current_snapshot → pg_snapshot
+✔ S2-c1 — ADD COLUMN xid8 NOT NULL DEFAULT pg_current_xact_id() sur 200000 lignes : PAS de réécriture (défaut STABLE) (1935.3871ms)
+ℹ S2-c1 : provolatile(pg_current_xact_id)=s ; atthasmissing=true ; nouvelle ligne xid > xid de migration=true
+ℹ S2-c1 : ALTER 3 ms ; réécriture=false (filenode 19757 → 19757) ; taille 55 MB → 55 MB ; lecture concurrente attendue 219 ms ; xid distincts des anciennes lignes=1 (toutes = xid de la migration)
+prisma:error 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `55P03`. Message: `ERROR: canceling statement due to lock timeout`
+✔ S2-c3 — ALTER (ACCESS EXCLUSIVE) derrière une transaction ouverte : lock_timeout borne l’attente (953.4126ms)
+ℹ S2-c3 : ALTER derrière une lecture ouverte → abandon après 871 ms (ERROR: canceling statement due to lock timeout) ; relancé seul : 4 ms
+✔ S2-c2 — variante SANS réécriture : colonne nullable, SET DEFAULT, rattrapage par lots, NOT NULL validé (200000 lignes) (8446.9547ms)
+ℹ S2-c2 : ADD COLUMN 2 ms, SET DEFAULT 2 ms, réécriture=false ; nouvelle ligne marquée=true ; rattrapage 20 lots en 5533 ms ; CHECK NOT VALID 2 ms, VALIDATE 40 ms, SET NOT NULL (s'appuie sur le CHECK validé) 21 ms ; CREATE INDEX CONCURRENTLY (xid,id) 450 ms ; taille 119 MB ; nuls restants 0
+✔ S2-d — pagination composite (xid, id), borne figée : 1 000 lignes d’UNE transaction + 200 concurrentes, pages de 37 → 0 perte, 0 doublon (874.0544ms)
+ℹ S2-d : écrites 1200 ; pages 29 ; reçues 1200 ; perdues 0 ; doublons 0
+✔ S2-e — transaction longue : RETARD de livraison (pas de perte) ; une transaction en lecture seule ne retarde rien (1771.4384ms)
+ℹ S2-e : lecture seule longue → ligne livrée immédiatement=true ; écriture longue ouverte → 'apres-longue' livrée pendant=false ; après fin de la transaction longue (~1563 ms) → livrées ["longue","apres-longue"]
+✔ S2-f — lecture en UNE instruction (CTE) : 300 écritures concurrentes, 0 perte, 0 doublon (1234.7992ms)
+ℹ S2-f : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+✔ S2-g — reprise après interruption : curseur non enregistré → page relivrée, absorbée par l’upsert local (0 perte) (78.4095ms)
+ℹ S2-g : 100 lignes ; livraisons 115 (dont 15 relivrées) ; base locale 100
+✔ S2-h — curseur incohérent (restauration logique, autre base) : détectable, déclenche une resynchronisation complète (7.0622ms)
+ℹ S2-h : xmax actuel 1430 ; curseur 1001430 → incohérent=true ; curseur 1430 → incohérent=false
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76142.4157

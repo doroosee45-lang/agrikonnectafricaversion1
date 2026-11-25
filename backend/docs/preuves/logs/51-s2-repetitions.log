@@ -1,0 +1,18 @@
+=== passage 1
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ S2-d : écrites 1200 ; pages 37 ; reçues 1200 ; perdues 0 ; doublons 0
+ℹ S2-f : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ pass 3
+ℹ fail 0
+=== passage 2
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ S2-d : écrites 1200 ; pages 36 ; reçues 1200 ; perdues 0 ; doublons 0
+ℹ S2-f : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ pass 3
+ℹ fail 0
+=== passage 3
+ℹ S2-b : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ S2-d : écrites 1200 ; pages 36 ; reçues 1200 ; perdues 0 ; doublons 0
+ℹ S2-f : écrites 300 ; reçues 300 ; perdues 0 ; doublons 0
+ℹ pass 3
+ℹ fail 0
