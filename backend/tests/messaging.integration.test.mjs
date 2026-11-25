@@ -185,10 +185,16 @@ test('MSG-02 : pièce jointe invalide refusée (URL http(s) ou clé de stockage)
 
     const accepted = await messaging.postMessage(
       conversation.id,
-      { body: 'Photo du lot', attachments: ['https://storage.example/lot.jpg', 'org/media/2026-10/photo.jpg'] },
+      { body: 'Photo du lot', attachments: ['https://storage.example/lot.jpg', `${BUYER}/media/2026-10/photo.jpg`] },
       reqAs(BUYER),
     );
     assert.equal(accepted.attachments.length, 2);
+
+    // Stabilisation V1 : une clé de stockage doit appartenir à l'organisation de l'expéditeur.
+    await assert.rejects(
+      () => messaging.postMessage(conversation.id, { body: 'Pièce d’autrui', attachments: [`${SELLER}/documents/2026-10/kyc.pdf`] }, reqAs(BUYER)),
+      (error) => error.status === 422 && error.errors?.[0]?.code === 'foreign_storage_key',
+    );
   } finally {
     restore();
   }
