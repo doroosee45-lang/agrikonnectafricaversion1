@@ -91,7 +91,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           android: { usesCleartextTraffic: (process.env.EXPO_PUBLIC_API_BASE_URL ?? '').startsWith('http://') },
         },
       ],
-      ['expo-notifications', { color: '#174D35', icon: './assets/android-icon-monochrome.png' }],
+      // Pas d'option `color` : expo-notifications déclarerait
+      // com.google.firebase.messaging.default_notification_color, déjà déclaré par
+      // @react-native-firebase/messaging → échec de fusion du manifeste (build EAS).
+      ['expo-notifications', { icon: './assets/android-icon-monochrome.png' }],
       ...(appels
         ? [
             '@livekit/react-native-expo-plugin',
