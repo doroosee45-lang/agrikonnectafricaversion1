@@ -1,8 +1,9 @@
-import { Alert, NativeModules, PermissionsAndroid, Platform } from 'react-native';
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
 
 import { identifiantInstallation } from '@/features/calls/pushDevices';
 import { useI18nStore } from '@/i18n';
 import { APP } from '@/lib/config';
+import { MODULES_NATIFS, estExpoGo, moduleNatifPresent } from '@/lib/nativeEnv';
 import { api } from '@/services/api/http';
 
 import { cheminPourNotification, contenuPremierPlan, type DonneesPush, type MessagePush } from './pushRoutage';
@@ -39,12 +40,15 @@ declare const require: (id: string) => any;
 export const PUSH_DEMANDE =
   process.env.EXPO_PUBLIC_PUSH === 'true' || process.env.EXPO_PUBLIC_NATIVE_CALLS === 'true';
 
+/**
+ * Push utilisable : drapeau de build, iOS/Android, pas Expo Go, et Firebase
+ * réellement compilé dans ce binaire (sinon : reconstruire le build natif).
+ */
 export function pushPossible(): boolean {
   if (!PUSH_DEMANDE) return false;
   if (Platform.OS !== 'ios' && Platform.OS !== 'android') return false;
-  const environnement =
-    NativeModules.ExponentConstants?.executionEnvironment ?? NativeModules.ExpoConstants?.executionEnvironment;
-  return environnement !== 'storeClient'; // Expo Go
+  if (estExpoGo()) return false;
+  return moduleNatifPresent(...MODULES_NATIFS.firebase);
 }
 
 let moduleMessaging: any | null | undefined;

@@ -1,4 +1,6 @@
-import { NativeModules, Platform } from 'react-native';
+import { Platform } from 'react-native';
+
+import { MODULES_NATIFS, estExpoGo, moduleNatifPresent } from '@/lib/nativeEnv';
 
 /**
  * Accès PROTÉGÉ aux modules natifs des appels (iOS / Android).
@@ -28,12 +30,16 @@ export const APPELS_NATIFS_DEMANDES = process.env.EXPO_PUBLIC_NATIVE_CALLS === '
  */
 export const IOS_VOIP_PRET = process.env.EXPO_PUBLIC_IOS_VOIP_READY === 'true';
 
+/**
+ * Appels natifs utilisables : drapeau de build, iOS/Android, pas Expo Go, et
+ * LiveKit + WebRTC réellement compilés dans ce binaire (un build produit avant
+ * l'installation des paquets d'appel doit être reconstruit).
+ */
 export function appelsNatifsPossibles(): boolean {
   if (!APPELS_NATIFS_DEMANDES) return false;
   if (Platform.OS !== 'ios' && Platform.OS !== 'android') return false;
-  const executionEnvironment = NativeModules.ExponentConstants?.executionEnvironment
-    ?? NativeModules.ExpoConstants?.executionEnvironment;
-  return executionEnvironment !== 'storeClient';
+  if (estExpoGo()) return false;
+  return moduleNatifPresent(...MODULES_NATIFS.liveKit) && moduleNatifPresent(...MODULES_NATIFS.webRtc);
 }
 
 type LiveKitClient = typeof import('livekit-client');
@@ -42,8 +48,10 @@ export type CallKeep = typeof import('react-native-callkeep').default;
 type Messaging = typeof import('@react-native-firebase/messaging');
 type VoipPush = typeof import('react-native-voip-push-notification').default;
 
-function essayer<T>(charger: () => T): T | null {
+/** Charge une bibliothèque seulement si ses modules natifs sont présents (aucune exception native). */
+function essayer<T>(modulesNatifs: readonly string[], charger: () => T): T | null {
   if (!appelsNatifsPossibles()) return null;
+  if (modulesNatifs.length > 0 && !moduleNatifPresent(...modulesNatifs)) return null;
   try {
     return charger();
   } catch {
@@ -55,7 +63,7 @@ let globalesWebRtc = false;
 
 /** SDK LiveKit + WebRTC natif (globales WebRTC enregistrées une seule fois). */
 export function chargerLiveKit(): { client: LiveKitClient; rn: LiveKitReactNative } | null {
-  return essayer(() => {
+  return essayer(MODULES_NATIFS.liveKit, () => {
     const rn = require('@livekit/react-native') as LiveKitReactNative;
     if (!globalesWebRtc) {
       rn.registerGlobals();
@@ -67,14 +75,14 @@ export function chargerLiveKit(): { client: LiveKitClient; rn: LiveKitReactNativ
 }
 
 export function chargerCallKeep(): CallKeep | null {
-  return essayer(() => (require('react-native-callkeep') as { default: CallKeep }).default);
+  return essayer(MODULES_NATIFS.callKeep, () => (require('react-native-callkeep') as { default: CallKeep }).default);
 }
 
 export function chargerMessaging(): Messaging | null {
-  return essayer(() => require('@react-native-firebase/messaging') as Messaging);
+  return essayer(MODULES_NATIFS.firebase, () => require('@react-native-firebase/messaging') as Messaging);
 }
 
 export function chargerVoipPush(): VoipPush | null {
   if (Platform.OS !== 'ios' || !IOS_VOIP_PRET) return null;
-  return essayer(() => (require('react-native-voip-push-notification') as { default: VoipPush }).default);
+  return essayer(MODULES_NATIFS.voipPush, () => (require('react-native-voip-push-notification') as { default: VoipPush }).default);
 }
