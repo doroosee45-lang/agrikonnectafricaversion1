@@ -5,9 +5,9 @@ import { router } from 'expo-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { AppHeader } from '@/components/app/AppHeader';
-import { AuthGate, Button, Card, Chip, EmptyState, ErrorState, Input, LoadingState, Screen, Section, Text } from '@/components/ui';
+import { AuthGate, Button, Card, EmptyState, ErrorState, Input, LoadingState, PressableScale, Screen, Section, Text } from '@/components/ui';
+import { AvatarContact, BarreRecherche, Onglets, PastilleNonLus, apercuMessage, drapeau, heureListe, libelleTypeOrg } from '@/features/messaging/ui/ListeUi';
 import { useI18n } from '@/i18n';
-import { formatDate } from '@/lib/format';
 import { messagingApi } from '@/services/api/endpoints';
 import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
@@ -38,6 +38,8 @@ export default function MessagesScreen() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'DIRECT' | 'GROUP'>('DIRECT');
   const [search, setSearch] = useState('');
+  // Filtre d'affichage local (aucun appel serveur).
+  const [listSearch, setListSearch] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groupDesc, setGroupDesc] = useState('');
   const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
@@ -95,58 +97,105 @@ export default function MessagesScreen() {
   const calls = callsQuery.data ?? [];
   const toggleOrg = (id: string) => setSelectedOrgs((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
+  const fr = locale !== 'en';
+  const unreadTotal = directItems.reduce((n, c) => n + (c.unread ?? 0), 0);
+  const unreadGroups = groupItems.reduce((n, c) => n + (c.unread ?? 0), 0);
+  const q = listSearch.trim().toLowerCase();
+  const visibleItems = (tab === 'DIRECT' ? directItems : groupItems).filter(
+    (c) => !q || [c.title ?? '', c.subtitle ?? '', c.lastMessage?.body ?? ''].join(' ').toLowerCase().includes(q),
+  );
+  const subtitleLabel = (subtitle?: string) => {
+    if (!subtitle) return null;
+    const [type, country] = subtitle.split(' · ');
+    const typeLabel = libelleTypeOrg(type, locale);
+    return typeLabel ? `${typeLabel}${country ? ` · ${drapeau(country)} ${country}` : ''}` : subtitle;
+  };
+
   return (
     <Screen background={COLORS.naturalWhite}>
-      <AppHeader title={t('ui.messagerie')} subtitle="Discussions · Groupes · Appels" />
+      <AppHeader title={t('ui.messagerie')} subtitle={fr ? 'Discussions · Groupes · Appels' : 'Chats · Groups · Calls'} />
       <Section bare contentStyle={styles.section}>
         <AuthGate isAuthenticated={isAuthenticated} title={t('ui.messagerie')} icon="chatbubbles-outline">
           <View style={styles.topRow}>
-            <View style={styles.tabs}>
-              {([
-                { key: 'DIRECT', label: `Discussions (${directItems.length})` },
-                { key: 'GROUP', label: `Groupes (${groupItems.length})` },
-                { key: 'CALLS', label: 'Appels' },
-              ] as const).map((item) => (
-                <Pressable key={item.key} onPress={() => setTab(item.key)} style={[styles.tabBtn, tab === item.key ? styles.tabBtnActive : null]}>
-                  <Text preset="caption" color={tab === item.key ? COLORS.pureWhite : COLORS.forestGreen} style={styles.tabText}>
-                    {item.label}
-                  </Text>
-                </Pressable>
-              ))}
+            <View style={styles.flex}>
+              <BarreRecherche
+                valeur={listSearch}
+                onChange={setListSearch}
+                placeholder={tab === 'CALLS' ? (fr ? 'Rechercher un appel' : 'Search calls') : fr ? 'Rechercher une discussion' : 'Search conversations'}
+              />
             </View>
             {canWrite ? (
-              <Pressable onPress={() => router.push(('/messages/new?mode=' + (tab === 'GROUP' ? 'GROUP' : 'DIRECT')) as never)} accessibilityLabel="Nouvelle conversation" style={styles.plusBtn}>
-                <Ionicons name="add" size={24} color={COLORS.pureWhite} />
-              </Pressable>
+              <PressableScale
+                onPress={() => router.push(('/messages/new?mode=' + (tab === 'GROUP' ? 'GROUP' : 'DIRECT')) as never)}
+                accessibilityRole="button"
+                accessibilityLabel="Nouvelle conversation"
+                style={styles.plusBtn}
+              >
+                <Ionicons name={tab === 'GROUP' ? 'people' : 'create-outline'} size={21} color={COLORS.pureWhite} />
+              </PressableScale>
             ) : null}
           </View>
 
+          <Onglets
+            valeur={tab}
+            onChange={setTab}
+            options={[
+              { cle: 'DIRECT', libelle: fr ? 'Discussions' : 'Chats', icone: 'chatbubble-ellipses-outline', compteur: unreadTotal },
+              { cle: 'GROUP', libelle: fr ? 'Groupes' : 'Groups', icone: 'people-outline', compteur: unreadGroups },
+              { cle: 'CALLS', libelle: fr ? 'Appels' : 'Calls', icone: 'call-outline' },
+            ]}
+          />
+
           {tab === 'CALLS' ? (
-            <View style={{ gap: SPACING.sm }}>
-              {callsQuery.isLoading ? <LoadingState count={3} height={68} /> : calls.length === 0 ? (
-                <EmptyState title="Aucun appel enregistré" description="Vos appels entrants, sortants et manqués apparaîtront ici." icon="call-outline" />
-              ) : (
-                calls.map((call) => {
-                  const durationSec = call.startedAt && call.endedAt ? Math.max(1, Math.round((new Date(call.endedAt).getTime() - new Date(call.startedAt).getTime()) / 1000)) : null;
-                  const missed = call.status === 'MISSED' || call.status === 'DECLINED';
-                  return (
-                    <Pressable key={call.id} onPress={() => router.push(('/messages/' + call.conversationId) as never)}>
-                      <Card tone="white" style={styles.card}>
-                        <View style={styles.row}>
-                          <Text preset="bodyMedium" color={COLORS.forestGreen}>
-                            {call.initiator ? `${call.initiator.firstName ?? ''} ${call.initiator.lastName ?? ''}`.trim() : 'Appel audio'}
-                          </Text>
-                          <Chip label={call.status} tone={missed ? 'warning' : 'success'} size="sm" />
+            callsQuery.isLoading ? (
+              <LoadingState count={3} height={68} />
+            ) : calls.length === 0 ? (
+              <EmptyState title="Aucun appel enregistré" description="Vos appels entrants, sortants et manqués apparaîtront ici." icon="call-outline" />
+            ) : (
+              <Card tone="white" padded={false} style={styles.listCard}>
+                {calls
+                  .filter((call) => {
+                    const who = call.initiator ? `${call.initiator.firstName ?? ''} ${call.initiator.lastName ?? ''}` : '';
+                    return !q || who.toLowerCase().includes(q);
+                  })
+                  .map((call, index) => {
+                    const durationSec = call.startedAt && call.endedAt ? Math.max(1, Math.round((new Date(call.endedAt).getTime() - new Date(call.startedAt).getTime()) / 1000)) : null;
+                    const missed = call.status === 'MISSED' || call.status === 'DECLINED';
+                    const who = call.initiator ? `${call.initiator.firstName ?? ''} ${call.initiator.lastName ?? ''}`.trim() : '';
+                    const name = who || (fr ? 'Appel audio' : 'Audio call');
+                    const status =
+                      call.status === 'MISSED' ? (fr ? 'Manqué' : 'Missed')
+                        : call.status === 'DECLINED' ? (fr ? 'Refusé' : 'Declined')
+                          : call.status === 'ACTIVE' ? (fr ? 'En cours' : 'Ongoing')
+                            : call.status === 'RINGING' ? (fr ? 'Sonnerie' : 'Ringing')
+                              : fr ? 'Terminé' : 'Ended';
+                    return (
+                      <Pressable
+                        key={call.id}
+                        onPress={() => router.push(('/messages/' + call.conversationId) as never)}
+                        android_ripple={{ color: 'rgba(18,76,52,0.06)' }}
+                        accessibilityRole="button"
+                        style={({ pressed }) => [styles.rowItem, index > 0 && styles.rowDivider, pressed && styles.rowPressed]}
+                      >
+                        <AvatarContact nom={name} cle={call.conversationId} taille={46} />
+                        <View style={styles.rowBody}>
+                          <Text preset="bodyMedium" color={missed ? COLORS.error : COLORS.textPrimary} numberOfLines={1}>{name}</Text>
+                          <View style={styles.inline}>
+                            <Ionicons name={missed ? 'arrow-down' : 'call'} size={13} color={missed ? COLORS.error : COLORS.livingGreen} />
+                            <Text preset="caption" color={COLORS.slateGray} numberOfLines={1}>
+                              {status}{durationSec !== null ? ` · ${Math.floor(durationSec / 60)}:${String(durationSec % 60).padStart(2, '0')}` : ''}
+                            </Text>
+                          </View>
                         </View>
-                        <Text preset="caption" color={COLORS.slateGray}>
-                          {formatDate(call.startedAt, locale)}{durationSec !== null ? ` · Durée : ${durationSec}s` : ''}
-                        </Text>
-                      </Card>
-                    </Pressable>
-                  );
-                })
-              )}
-            </View>
+                        <View style={styles.rowMeta}>
+                          <Text preset="caption" color={COLORS.slateGray}>{heureListe(call.startedAt, locale)}</Text>
+                          <Ionicons name="call-outline" size={18} color={COLORS.forestGreen} />
+                        </View>
+                      </Pressable>
+                    );
+                  })}
+              </Card>
+            )
           ) : query.isLoading ? (
             <LoadingState count={4} height={78} />
           ) : query.isError ? (
@@ -154,41 +203,56 @@ export default function MessagesScreen() {
           ) : (tab === 'DIRECT' ? directItems : groupItems).length === 0 ? (
             <EmptyState
               title={tab === 'GROUP' ? 'Aucun groupe professionnel' : t('ui.aucuneConversation')}
-              description="Appuyez sur le bouton + en haut à droite pour démarrer un échange."
+              description="Appuyez sur le bouton de création en haut à droite pour démarrer un échange."
               icon={tab === 'GROUP' ? 'people-outline' : 'chatbubbles-outline'}
             />
+          ) : visibleItems.length === 0 ? (
+            <EmptyState
+              title={fr ? 'Aucun résultat' : 'No results'}
+              description={fr ? `Aucune discussion ne correspond à « ${listSearch} ».` : `No conversation matches “${listSearch}”.`}
+              icon="search-outline"
+            />
           ) : (
-            <View style={{ gap: SPACING.sm }}>
-              {(tab === 'DIRECT' ? directItems : groupItems).map((item) => {
+            <Card tone="white" padded={false} style={styles.listCard}>
+              {visibleItems.map((item, index) => {
                 const title = item.title ?? item.subjectType ?? 'Discussion';
+                const unread = item.unread ?? 0;
+                const preview = apercuMessage(item.lastMessage?.body);
+                const meta = subtitleLabel(item.subtitle);
                 return (
-                  <Pressable key={item.id} onPress={() => router.push(('/messages/' + item.id) as never)}>
-                    <Card tone="white" style={styles.convCard}>
-                      <View style={styles.avatar}>
-                        <Text preset="bodyMedium" color={COLORS.pureWhite}>{title.slice(0, 2).toUpperCase()}</Text>
+                  <Pressable
+                    key={item.id}
+                    onPress={() => router.push(('/messages/' + item.id) as never)}
+                    android_ripple={{ color: 'rgba(18,76,52,0.06)' }}
+                    accessibilityRole="button"
+                    accessibilityLabel={`${title}${unread > 0 ? `, ${unread} non lus` : ''}`}
+                    style={({ pressed }) => [styles.rowItem, index > 0 && styles.rowDivider, pressed && styles.rowPressed]}
+                  >
+                    <AvatarContact nom={title} cle={item.id} groupe={item.subjectType === 'GROUP'} />
+                    <View style={styles.rowBody}>
+                      <View style={styles.rowHead}>
+                        <Text preset="bodyMedium" color={COLORS.textPrimary} numberOfLines={1} style={[styles.flex, unread > 0 && styles.bold]}>
+                          {title}
+                        </Text>
+                        <Text preset="caption" color={unread > 0 ? COLORS.livingGreen : COLORS.slateGray} style={unread > 0 ? styles.bold : undefined}>
+                          {heureListe(item.lastMessage?.createdAt ?? item.updatedAt, locale)}
+                        </Text>
                       </View>
-                      <View style={{ flex: 1, gap: 2 }}>
-                        <View style={styles.row}>
-                          <Text preset="h3" color={COLORS.forestGreen} numberOfLines={1} style={{ flex: 1 }}>{title}</Text>
-                          <Text preset="caption" color={COLORS.slateGray}>{formatDate(item.updatedAt, locale)}</Text>
-                        </View>
-                        {item.subtitle ? <Text preset="caption" color={COLORS.slateGray}>{item.subtitle}</Text> : null}
-                        <View style={styles.row}>
-                          <Text preset="bodySm" color={COLORS.slateGray} numberOfLines={1} style={{ flex: 1 }}>
-                            {item.lastMessage?.body ?? 'Nouvelle conversation'}
+                      {meta ? <Text preset="caption" color={COLORS.slateGray} numberOfLines={1}>{meta}</Text> : null}
+                      <View style={styles.rowHead}>
+                        <View style={[styles.inline, styles.flex]}>
+                          {preview.icone ? <Ionicons name={preview.icone} size={14} color={COLORS.slateGray} /> : null}
+                          <Text preset="bodySm" color={unread > 0 ? COLORS.textPrimary : COLORS.slateGray} numberOfLines={1} style={styles.flex}>
+                            {preview.texte || (fr ? 'Nouvelle conversation' : 'New conversation')}
                           </Text>
-                          {(item.unread ?? 0) > 0 ? (
-                            <View style={styles.unreadPill}>
-                              <Text preset="caption" color={COLORS.pureWhite} style={{ fontSize: 11, fontWeight: '700' }}>{String(item.unread)}</Text>
-                            </View>
-                          ) : null}
                         </View>
+                        <PastilleNonLus n={unread} />
                       </View>
-                    </Card>
+                    </View>
                   </Pressable>
                 );
               })}
-            </View>
+            </Card>
           )}
         </AuthGate>
       </Section>
@@ -243,22 +307,28 @@ export default function MessagesScreen() {
 }
 
 const styles = StyleSheet.create({
-  section: { paddingTop: SPACING.sm, paddingBottom: 96, gap: SPACING.md },
-  topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
-  tabs: { flex: 1, flexDirection: 'row', backgroundColor: COLORS.paleGreen, borderRadius: RADIUS.pill, padding: 3, gap: 4 },
+  section: { paddingTop: SPACING.sm, paddingBottom: 110, gap: SPACING.md },
+  flex: { flex: 1 },
+  bold: { fontWeight: '700' },
+  topRow: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm },
+  plusBtn: { width: 46, height: 46, borderRadius: 23, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
+  listCard: { overflow: 'hidden' },
+  rowItem: { flexDirection: 'row', alignItems: 'center', gap: SPACING.md, paddingHorizontal: SPACING.lg, paddingVertical: SPACING.md },
+  rowDivider: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: COLORS.lightBorder },
+  rowPressed: { backgroundColor: '#F4F8F5' },
+  rowBody: { flex: 1, gap: 2 },
+  rowHead: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm },
+  rowMeta: { alignItems: 'flex-end', gap: 6 },
+  inline: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  // Fenêtre de création (code conservé tel quel).
+  tabs: { flexDirection: 'row', backgroundColor: COLORS.paleGreen, borderRadius: RADIUS.pill, padding: 3, gap: 4 },
   tabBtn: { flex: 1, paddingVertical: 8, paddingHorizontal: 8, borderRadius: RADIUS.pill, alignItems: 'center' },
   tabBtnActive: { backgroundColor: COLORS.forestGreen },
-  tabText: { fontWeight: '600', fontSize: 11 },
-  plusBtn: { width: 42, height: 42, borderRadius: 21, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
-  card: { gap: 4 },
-  convCard: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  avatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
   avatarSm: { width: 34, height: 34, borderRadius: 17, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
-row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 8 },
-unreadPill: { backgroundColor: '#dc2626', borderRadius: 10, minWidth: 20, height: 20, paddingHorizontal: 6, alignItems: 'center', justifyContent: 'center' },
-modalBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'flex-end' },
-modalBox: { backgroundColor: COLORS.pureWhite, borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 18, gap: 12, maxHeight: '88%' },
-searchInput: { borderWidth: 1, borderColor: COLORS.lightBorder, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 10, backgroundColor: COLORS.naturalWhite },
-contactItem: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, paddingHorizontal: 8, borderBottomWidth: 1, borderBottomColor: COLORS.lightBorder },
-contactPicked: { backgroundColor: COLORS.paleGreen, borderRadius: 8 },
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 8 },
+  modalBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'flex-end' },
+  modalBox: { backgroundColor: COLORS.pureWhite, borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 18, gap: 12, maxHeight: '88%' },
+  searchInput: { borderWidth: 1, borderColor: COLORS.lightBorder, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 10, backgroundColor: COLORS.naturalWhite },
+  contactItem: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10, paddingHorizontal: 8, borderBottomWidth: 1, borderBottomColor: COLORS.lightBorder },
+  contactPicked: { backgroundColor: COLORS.paleGreen, borderRadius: 8 },
 });

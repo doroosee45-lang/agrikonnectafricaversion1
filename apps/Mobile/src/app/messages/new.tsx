@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Image, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { AppHeader } from '@/components/app/AppHeader';
-import { AuthGate, Button, Card, Chip, EmptyState, ErrorState, Input, LoadingState, Screen, Section, Text } from '@/components/ui';
+import { AuthGate, Button, Card, EmptyState, ErrorState, Input, LoadingState, Screen, Section, Text } from '@/components/ui';
+import { AvatarContact, BarreRecherche, Onglets, drapeau } from '@/features/messaging/ui/ListeUi';
 import { messagingApi } from '@/services/api/endpoints';
 import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
@@ -95,55 +96,74 @@ export default function NewConversationScreen() {
     setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   };
 
+  // Présentation : tri alphabétique et regroupement par initiale (affichage seulement).
+  const sorted = [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+  const sections: Array<{ letter: string; items: DirectoryContact[] }> = [];
+  for (const c of sorted) {
+    const letter = (c.name.trim()[0] ?? '#').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const key = /[A-Z]/.test(letter) ? letter : '#';
+    const last = sections[sections.length - 1];
+    if (last && last.letter === key) last.items.push(c);
+    else sections.push({ letter: key, items: [c] });
+  }
+  const selectedContacts = allContacts.filter((c) => selectedIds.includes(c.id));
+
   return (
     <Screen background={COLORS.naturalWhite}>
       <AppHeader title="Nouvelle conversation" subtitle="Annuaire professionnel autorisé" />
       <Section bare contentStyle={styles.section}>
         <AuthGate isAuthenticated={isAuthenticated} title="Nouvelle conversation" icon="people-outline">
-          <Text preset="bodySm" color={COLORS.slateGray} style={styles.intro}>
-            Recherchez un collaborateur, une coopérative ou un partenaire autorisé dans votre périmètre pour démarrer un échange sécurisé.
-          </Text>
-
-          <View style={styles.modeSwitch}>
-            <Pressable onPress={() => setMode('DIRECT')} style={[styles.modeBtn, mode === 'DIRECT' ? styles.modeBtnActive : null]}>
-              <Ionicons name="person-outline" size={16} color={mode === 'DIRECT' ? COLORS.pureWhite : COLORS.forestGreen} />
-              <Text preset="caption" color={mode === 'DIRECT' ? COLORS.pureWhite : COLORS.forestGreen} style={styles.modeLabel}>
-                Discussion directe
-              </Text>
-            </Pressable>
-            <Pressable onPress={() => setMode('GROUP')} style={[styles.modeBtn, mode === 'GROUP' ? styles.modeBtnActive : null]}>
-              <Ionicons name="people-outline" size={16} color={mode === 'GROUP' ? COLORS.pureWhite : COLORS.forestGreen} />
-              <Text preset="caption" color={mode === 'GROUP' ? COLORS.pureWhite : COLORS.forestGreen} style={styles.modeLabel}>
-                Groupe professionnel
-              </Text>
-            </Pressable>
+          <View style={styles.intro}>
+            <View style={styles.introIcon}>
+              <Ionicons name="shield-checkmark" size={18} color={COLORS.forestGreen} />
+            </View>
+            <Text preset="bodySm" color={COLORS.slateGray} style={styles.flex}>
+              Échangez de façon sécurisée avec les collaborateurs, coopératives et partenaires autorisés de votre périmètre.
+            </Text>
           </View>
+
+          <Onglets
+            valeur={mode}
+            onChange={setMode}
+            options={[
+              { cle: 'DIRECT', libelle: 'Discussion directe', icone: 'person-outline' },
+              { cle: 'GROUP', libelle: 'Groupe', icone: 'people-outline', compteur: selectedIds.length },
+            ]}
+          />
 
           {mode === 'GROUP' ? (
             <Card tone="white" style={styles.groupCard}>
+              <View style={styles.groupHead}>
+                <AvatarContact nom={groupName || 'Groupe'} groupe taille={44} />
+                <View style={styles.flex}>
+                  <Text preset="bodyMedium" color={COLORS.textPrimary}>Nouveau groupe professionnel</Text>
+                  <Text preset="caption" color={COLORS.slateGray}>Nommez le groupe puis choisissez ses membres.</Text>
+                </View>
+              </View>
               <Input label="Nom du groupe" value={groupName} onChangeText={setGroupName} placeholder="Ex: Équipe Logistique · Agence Nord" />
               <Input label="Description ou service (optionnel)" value={groupDesc} onChangeText={setGroupDesc} placeholder="Ex: Suivi des livraisons et collectes" />
+              {selectedContacts.length > 0 ? (
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.selectedStrip}>
+                  {selectedContacts.map((c) => (
+                    <Pressable key={c.id} onPress={() => toggleSelect(c.id)} accessibilityRole="button" accessibilityLabel={`Retirer ${c.name}`} style={styles.selectedItem}>
+                      <View>
+                        <AvatarContact nom={c.name} cle={c.id} uri={c.avatarUrl} taille={44} />
+                        <View style={styles.removeBadge}>
+                          <Ionicons name="close" size={11} color={COLORS.pureWhite} />
+                        </View>
+                      </View>
+                      <Text preset="caption" color={COLORS.textPrimary} numberOfLines={1} style={styles.selectedName}>{c.name.split(' ')[0]}</Text>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              ) : null}
             </Card>
           ) : null}
 
-          <View style={styles.searchBar}>
-            <Ionicons name="search-outline" size={20} color={COLORS.slateGray} />
-            <TextInput
-              value={search}
-              onChangeText={setSearch}
-              placeholder="Rechercher par nom, fonction ou agence..."
-              placeholderTextColor={COLORS.slateGray}
-              style={styles.searchInput}
-            />
-            {search.length > 0 ? (
-              <Pressable onPress={() => setSearch('')} hitSlop={8}>
-                <Ionicons name="close-circle" size={18} color={COLORS.slateGray} />
-              </Pressable>
-            ) : null}
-          </View>
+          <BarreRecherche valeur={search} onChange={setSearch} placeholder="Rechercher par nom, fonction ou agence…" />
 
           {contactsQuery.isLoading ? (
-            <LoadingState count={4} height={92} />
+            <LoadingState count={4} height={72} />
           ) : contactsQuery.isError ? (
             <ErrorState error={contactsQuery.error} onRetry={() => void contactsQuery.refetch()} />
           ) : filtered.length === 0 ? (
@@ -154,55 +174,70 @@ export default function NewConversationScreen() {
             />
           ) : (
             <View style={styles.list}>
-              {filtered.map((contact) => {
-                const roleLabel = ROLE_LABELS[contact.role ?? contact.type] ?? contact.role ?? contact.type;
-                const initials = contact.name.slice(0, 2).toUpperCase();
-                const isSelected = selectedIds.includes(contact.id);
-                return (
-                  <Card key={contact.id} tone="white" style={[styles.contactCard, isSelected ? styles.contactCardSelected : null]}>
-                    <View style={styles.cardTop}>
-                      {contact.avatarUrl ? (
-                        <Image source={{ uri: contact.avatarUrl }} style={styles.avatarImg} />
-                      ) : (
-                        <View style={styles.avatarCircle}>
-                          <Text preset="bodyMedium" color={COLORS.pureWhite}>{initials}</Text>
-                        </View>
-                      )}
-                      <View style={styles.cardInfo}>
-                        <Text preset="h3" color={COLORS.forestGreen} numberOfLines={1}>{contact.name}</Text>
-                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-                          <Chip label={roleLabel} tone="info" size="sm" />
-                          {contact.agency && contact.agency !== contact.name ? (
-                            <Text preset="caption" color={COLORS.slateGray} numberOfLines={1}>{contact.agency}</Text>
-                          ) : null}
-                        </View>
-                        <Text preset="caption" color={COLORS.slateGray}>Pays : {contact.countryCode}</Text>
-                      </View>
-                    </View>
-                    <View style={styles.cardAction}>
-                      {mode === 'DIRECT' ? (
-                        <Button
-                          label="Démarrer la discussion"
-                          loading={startDirect.isPending && pendingId === contact.id}
-                          onPress={() => startDirect.mutate(contact.id)}
-                        />
-                      ) : (
-                        <Button
-                          label={isSelected ? 'Retirer du groupe' : 'Ajouter au groupe'}
-                          variant={isSelected ? 'primary' : 'outline'}
-                          onPress={() => toggleSelect(contact.id)}
-                        />
-                      )}
-                    </View>
+              <Text preset="caption" color={COLORS.slateGray} style={styles.count}>
+                {filtered.length} contact{filtered.length > 1 ? 's' : ''}{search ? ' trouvé' + (filtered.length > 1 ? 's' : '') : ' disponible' + (filtered.length > 1 ? 's' : '')}
+              </Text>
+              {sections.map((section) => (
+                <View key={section.letter} style={styles.sectionBlock}>
+                  <Text preset="caption" color={COLORS.forestGreen} style={styles.letter}>{section.letter}</Text>
+                  <Card tone="white" padded={false} style={styles.listCard}>
+                    {section.items.map((contact, index) => {
+                      const roleLabel = ROLE_LABELS[contact.role ?? contact.type] ?? contact.role ?? contact.type;
+                      const isSelected = selectedIds.includes(contact.id);
+                      const isPending = startDirect.isPending && pendingId === contact.id;
+                      const onRowPress = () => (mode === 'DIRECT' ? startDirect.mutate(contact.id) : toggleSelect(contact.id));
+                      return (
+                        <Pressable
+                          key={contact.id}
+                          onPress={onRowPress}
+                          disabled={mode === 'DIRECT' && startDirect.isPending}
+                          android_ripple={{ color: 'rgba(18,76,52,0.06)' }}
+                          accessibilityRole={mode === 'GROUP' ? 'checkbox' : 'button'}
+                          accessibilityState={mode === 'GROUP' ? { checked: isSelected } : undefined}
+                          accessibilityLabel={mode === 'DIRECT' ? `Démarrer la discussion avec ${contact.name}` : `${isSelected ? 'Retirer' : 'Ajouter'} ${contact.name}`}
+                          style={({ pressed }) => [styles.rowItem, index > 0 && styles.rowDivider, (pressed || isSelected) && styles.rowActive]}
+                        >
+                          <AvatarContact nom={contact.name} cle={contact.id} uri={contact.avatarUrl} taille={48} selectionne={mode === 'GROUP' && isSelected} />
+                          <View style={styles.rowBody}>
+                            <Text preset="bodyMedium" color={COLORS.textPrimary} numberOfLines={1}>{contact.name}</Text>
+                            <View style={styles.metaRow}>
+                              <View style={styles.roleBadge}>
+                                <Text preset="caption" color={COLORS.forestGreen} style={styles.roleText} numberOfLines={1}>{roleLabel}</Text>
+                              </View>
+                              <Text preset="caption" color={COLORS.slateGray}>{drapeau(contact.countryCode)} {contact.countryCode}</Text>
+                            </View>
+                            {contact.agency && contact.agency !== contact.name ? (
+                              <Text preset="caption" color={COLORS.slateGray} numberOfLines={1}>{contact.agency}</Text>
+                            ) : null}
+                          </View>
+                          {mode === 'DIRECT' ? (
+                            <View style={styles.actionBtn}>
+                              {isPending ? (
+                                <ActivityIndicator size="small" color={COLORS.pureWhite} />
+                              ) : (
+                                <Ionicons name="chatbubble-ellipses" size={18} color={COLORS.pureWhite} />
+                              )}
+                            </View>
+                          ) : (
+                            <Ionicons
+                              name={isSelected ? 'checkmark-circle' : 'add-circle-outline'}
+                              size={28}
+                              color={isSelected ? COLORS.forestGreen : COLORS.slateGray}
+                            />
+                          )}
+                        </Pressable>
+                      );
+                    })}
                   </Card>
-                );
-              })}
+                </View>
+              ))}
             </View>
           )}
 
           {mode === 'GROUP' ? (
             <Button
               label={'Créer le groupe (' + selectedIds.length + ' membre(s))'}
+              icon="people"
               disabled={groupName.trim().length < 2 || selectedIds.length === 0}
               loading={createGroup.isPending}
               onPress={() => createGroup.mutate()}
@@ -214,21 +249,48 @@ export default function NewConversationScreen() {
   );
 }
 const styles = StyleSheet.create({
-section: { paddingTop: SPACING.sm, paddingBottom: 110, gap: SPACING.md },
-intro: { lineHeight: 20 },
-modeSwitch: { flexDirection: 'row', backgroundColor: COLORS.paleGreen, borderRadius: RADIUS.lg, padding: 4, gap: 6 },
-modeBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10, borderRadius: RADIUS.md },
-modeBtnActive: { backgroundColor: COLORS.forestGreen },
-modeLabel: { fontWeight: '600', fontSize: 13 },
-groupCard: { gap: SPACING.sm, padding: SPACING.md },
-searchBar: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: COLORS.pureWhite, borderWidth: 1, borderColor: COLORS.lightBorder, borderRadius: RADIUS.lg, paddingHorizontal: 14, height: 48 },
-searchInput: { flex: 1, fontSize: 14, color: COLORS.forestGreen },
-list: { gap: SPACING.sm },
-contactCard: { padding: SPACING.md, gap: SPACING.sm, borderWidth: 1, borderColor: COLORS.lightBorder },
-contactCardSelected: { borderColor: COLORS.forestGreen, backgroundColor: COLORS.paleGreen },
-cardTop: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-avatarCircle: { width: 48, height: 48, borderRadius: 24, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
-avatarImg: { width: 48, height: 48, borderRadius: 24 },
-cardInfo: { flex: 1, gap: 3 },
-cardAction: { alignItems: 'stretch' },
+  section: { paddingTop: SPACING.sm, paddingBottom: 110, gap: SPACING.md },
+  flex: { flex: 1 },
+  intro: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.md,
+    backgroundColor: '#F2F8F4',
+    borderRadius: RADIUS.xl,
+    padding: SPACING.md,
+    borderWidth: 1,
+    borderColor: 'rgba(18,76,52,0.08)',
+  },
+  introIcon: { width: 34, height: 34, borderRadius: 17, backgroundColor: COLORS.pureWhite, alignItems: 'center', justifyContent: 'center' },
+  groupCard: { gap: SPACING.md },
+  groupHead: { flexDirection: 'row', alignItems: 'center', gap: SPACING.md },
+  selectedStrip: { gap: SPACING.md, paddingTop: SPACING.xs },
+  selectedItem: { alignItems: 'center', width: 56, gap: 4 },
+  selectedName: { maxWidth: 56, textAlign: 'center' },
+  removeBadge: {
+    position: 'absolute',
+    right: -2,
+    top: -2,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: COLORS.slateGray,
+    borderWidth: 2,
+    borderColor: COLORS.pureWhite,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  list: { gap: SPACING.md },
+  count: { marginLeft: SPACING.xs },
+  sectionBlock: { gap: SPACING.xs },
+  letter: { fontWeight: '700', marginLeft: SPACING.sm, letterSpacing: 0.6 },
+  listCard: { overflow: 'hidden' },
+  rowItem: { flexDirection: 'row', alignItems: 'center', gap: SPACING.md, paddingHorizontal: SPACING.lg, paddingVertical: SPACING.md },
+  rowDivider: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: COLORS.lightBorder },
+  rowActive: { backgroundColor: '#F2F8F4' },
+  rowBody: { flex: 1, gap: 3 },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm, flexWrap: 'wrap' },
+  roleBadge: { backgroundColor: '#E6F3EC', borderRadius: RADIUS.pill, paddingHorizontal: SPACING.sm, paddingVertical: 2, maxWidth: 200 },
+  roleText: { fontSize: 11, fontWeight: '600' },
+  actionBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: COLORS.forestGreen, alignItems: 'center', justifyContent: 'center' },
 });
