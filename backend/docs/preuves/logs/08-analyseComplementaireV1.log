@@ -1,0 +1,208 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:55035/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 2594.553 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 83.227 ms - 932[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.154 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.490 ms - 932[0m
+[0mPOST /api/v1/auth/register [32m201[0m 10.646 ms - 1094[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.875 ms - 932[0m
+[0mPOST /api/v1/chat/sync [33m404[0m 0.636 ms - 142[0m
+⚠ C1 (OFF-1) — le tirage du Mobile (`POST /chat/sync`) atteint une route existante (61173.1333ms) # ANOMALIE OFF-1 — /chat/sync n’existe pas ; le backend expose /messaging/sync
+[0mPOST /api/v1/messaging/groups [32m201[0m 67.609 ms - 302[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 42.834 ms - 602[0m
+✔ C2 — `POST /messaging/sync` avec le corps du Mobile : champs attendus par applyServerDelta présents (116.3611ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.978 ms - 302[0m
+✔ C3 — envoi socket avec un UUID v4 (format du Mobile) renvoyé deux fois : un seul message, id = localTempId (87.3794ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.887 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNQP2M6EXWM3A6H2ARWR/messages [32m201[0m 12.111 ms - 364[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNQP2M6EXWM3A6H2ARWR/messages [32m201[0m 14.941 ms - 364[0m
+⚠ C4 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : un seul message (44.7702ms) # ANOMALIE OFF-4a — `localTempId` retiré par la validation Zod : doublon serveur, id ≠ localTempId
+ℹ C4 : statuts 201/201 ; ids 01M899PNR24A91ZR14KZX4FY03 / 01M899PNRHGKJ1ZD068QEC0Z59 ; localTempId 14b91770-54e3-4aac-b51f-2842447bf9cf ; messages en base 2
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.874 ms - 302[0m
+[0mGET /api/v1/messaging/conversations/01M899PNS2WYSB5T7Z0VVHDCW9/messages [32m200[0m 18.129 ms - 648[0m
+✔ C5 (WEB-1) — forme réelle du fil `GET /messaging/conversations/:id/messages` : `data.messages`, pas `data.items` (31.9512ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.141 ms - 302[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 5.858 ms - 1103[0m
+✔ L1 — envoi par socket puis tirage : la ligne locale est fusionnée (ON CONFLICT(local_temp_id)), 1 seule ligne (53.2235ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.942 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNVR6TVSFMRVMX43SXW8/messages [32m201[0m 11.538 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNVR6TVSFMRVMX43SXW8/messages [32m201[0m 13.446 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNVR6TVSFMRVMX43SXW8/messages [32m201[0m 10.113 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNVR6TVSFMRVMX43SXW8/messages [32m201[0m 10.280 ms - 366[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNVR6TVSFMRVMX43SXW8/messages [32m201[0m 11.342 ms - 366[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 4.859 ms - 2967[0m
+✔ L2 — même page relivrée deux fois (interruption, recouvrement) : aucune ligne en double (84.5046ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.310 ms - 302[0m
+[0mPOST /api/v1/messaging/conversations/01M899PNYC59FV8NPTVK1EZHXE/messages [32m201[0m 11.919 ms - 364[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 5.134 ms - 1073[0m
+⚠ L3 (OFF-4b) — envoi par repli REST puis tirage : intégration du delta sans erreur, 1 seule ligne (32.979ms) # ANOMALIE OFF-4b — UNIQUE(server_id) violée : applyServerDelta échoue après un envoi REST
+✔ P0 — niveau d’isolation du banc (10.1667ms)
+ℹ P0 : isolation read committed ; PostgreSQL 18.4 (banc embarqué, pas Supabase)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+✔ P1 — deux transactions, même clé : la seconde ATTEND la première, puis échoue en conflit d’unicité (P2002) (1016.7156ms)
+ℹ P1 : B pendant que A est ouverte = « en attente » ; B après validation de A = P2002 ; attente ≈ 792 ms
+✔ P2 — échec après l’écriture métier, avant validation : tout est annulé ; la reprise crée 1 ressource (18.3712ms)
+prisma:error 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Server has closed the connection.
+prisma:error transaction failed to roll back
+prisma:error Error in PostgreSQL connection: Error { kind: Db, cause: Some(DbError { severity: "FATAL", parsed_severity: Some(Fatal), code: SqlState(E57P01), message: "terminating connection due to administrator command", detail: None, hint: None, position: None, where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("postgres.c"), line: Some(3356), routine: Some("ProcessInterrupts") }) }
+✔ P3 — connexion de la transaction tuée côté serveur (pg_terminate_backend) : ni clé ni ressource (359.6182ms)
+ℹ P3 : transaction annulée (P1017)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+✔ P4 — clé expirée reprise par deux transactions concurrentes (×10) : toujours 1 clé et 1 ressource (779.3452ms)
+ℹ P4 : P2002/ok→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f ok/P2002→1c/1f P2002/ok→1c/1f ok/P2002→1c/1f P2002/ok→1c/1f P2002/ok→1c/1f ok/P2002→1c/1f
+prisma:error 
+Invalid `prisma.idempotencyKey.create()` invocation:
+
+
+Unique constraint failed on the fields: (`key`,`scope`)
+prisma:error 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Raw query failed. Code: `25P02`. Message: `ERROR: current transaction is aborted, commands ignored until end of transaction block`
+✔ P5 — une violation d’unicité DANS la transaction l’annule entièrement (25P02) : le conflit se traite hors transaction (28.7097ms)
+ℹ P5 : Raw query failed. Code: `25P02`. Message: `ERROR: current transaction is aborted, commands ignored until end of transaction block`
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.377 ms - 303[0m
+[0mPOST /api/v1/auth/logout [32m200[0m 7.682 ms - 53[0m
+[0mGET /api/v1/me [33m401[0m 3.542 ms - 128[0m
+⚠ W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer (71.5579ms) # ANOMALIE W13 — le jeton n’est vérifié qu’à la poignée de main ; le socket survit à la révocation de session
+ℹ W13 : socket avant=true ; logout 200 ; REST après 401 ; socket après={"ok":true,"serverId":"01M899PR6872FNS9VP4NA2R803","serverTimestamp":1795608502474}
+ℹ tests 15
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 4
+ℹ duration_ms 70175.2242
+
+✖ failing tests:
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:73:1
+⚠ C1 (OFF-1) — le tirage du Mobile (`POST /chat/sync`) atteint une route existante (61173.1333ms) # ANOMALIE OFF-1 — /chat/sync n’existe pas ; le backend expose /messaging/sync
+  AssertionError [ERR_ASSERTION]: observé 404 {"success":false,"code":"NOT_FOUND","message":"Route introuvable : POST /api/v1/chat/sync","requestId":"d2f17268-e5d9-4b6b-93de-8fe0412fc03d"}
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:78:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:107:1
+⚠ C4 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : un seul message (44.7702ms) # ANOMALIE OFF-4a — `localTempId` retiré par la validation Zod : doublon serveur, id ≠ localTempId
+  AssertionError [ERR_ASSERTION]: observé : 2 messages, id renvoyé 01M899PNR24A91ZR14KZX4FY03 ≠ localTempId
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:118:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:194:1
+⚠ L3 (OFF-4b) — envoi par repli REST puis tirage : intégration du delta sans erreur, 1 seule ligne (32.979ms) # ANOMALIE OFF-4b — UNIQUE(server_id) violée : applyServerDelta échoue après un envoi REST
+  AssertionError [ERR_ASSERTION]: observé : UNIQUE constraint failed: messages.server_id
+  + actual - expected
+  
+  + 'UNIQUE constraint failed: messages.server_id'
+  - null
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:210:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'UNIQUE constraint failed: messages.server_id',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\analyseComplementaireV1.e2e.test.mjs:329:1
+⚠ W13 — session révoquée (déconnexion) : le socket déjà ouvert ne peut plus envoyer (71.5579ms) # ANOMALIE W13 — le jeton n’est vérifié qu’à la poignée de main ; le socket survit à la révocation de session
+  AssertionError [ERR_ASSERTION]: le socket devrait refuser aussi
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/analyseComplementaireV1.e2e.test.mjs:342:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
