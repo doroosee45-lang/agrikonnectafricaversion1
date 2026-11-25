@@ -1,0 +1,142 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:54608/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 85.713 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.568 ms - 919[0m
+[0mPOST /api/v1/auth/register [32m201[0m 12.153 ms - 1077[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.114 ms - 919[0m
+[2026-11-25T14:33:16.384Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'Error',
+  message: 'panne injectée après la transaction',
+  code: null,
+  stack: 'Error: panne injectée après la transaction\n' +
+    '    at Proxy.panne (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:47:40)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:154:26)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[2026-11-25T14:33:16.385Z] [ERROR] [d13168f6-3765-4476-98bf-a7fb6169741e] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:229:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 9.931 ms - 154[0m
+prisma:error 
+Invalid `prisma.profile.create()` invocation:
+
+
+Unique constraint failed on the fields: (`email`)
+[2026-11-25T14:33:16.399Z] [ERROR] Échec de création du profil après inscription : {
+  name: 'PrismaClientKnownRequestError',
+  message: '\n' +
+    'Invalid `prisma.profile.create()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Unique constraint failed on the fields: (`email`)',
+  code: 'P2002',
+  stack: 'PrismaClientKnownRequestError: \n' +
+    'Invalid `prisma.profile.create()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Unique constraint failed on the fields: (`email`)\n' +
+    '    at $n.handleRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:7315)\n' +
+    '    at $n.handleAndLogRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+    '    at $n.request (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+    '    at async l (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+    '    at async file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:102:23\n' +
+    '    at async Proxy._transactionWithCallback (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:8000)\n' +
+    '    at async Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:101:20)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[2026-11-25T14:33:16.399Z] [ERROR] [a082ea93-29a1-47c0-866d-e4fd4f74814e] POST /api/v1/auth/register — {
+  name: 'ApiError',
+  message: 'Inscription impossible, réessaie dans un instant',
+  code: 'INTERNAL_ERROR',
+  stack: 'ApiError: Inscription impossible, réessaie dans un instant\n' +
+    '    at ApiError.internal (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/shared/errors/ApiError.js:76:12)\n' +
+    '    at Module.register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.service.js:229:20)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async register (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/auth/auth.controller.js:5:18)'
+}
+[0mPOST /api/v1/auth/register [31m500[0m 9.931 ms - 154[0m
+⚠ TX-1 — échec après la transaction d’inscription : aucune trace, et la même adresse peut se réinscrire (9940.319ms) # ANOMALIE TX-1 — profil orphelin validé ; utilisateur Supabase supprimé ; adresse bloquée
+ℹ TX-1 : 1re inscription 500 (INTERNAL_ERROR) ; profils en base après échec : 1 ; réinscription 500 (INTERNAL_ERROR Inscription impossible, réessaie dans un instant)
+[0mPOST /api/v1/messaging/conversations [32m200[0m 173.324 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 175.718 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 178.752 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 166.822 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 182.434 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 181.066 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 181.268 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 191.075 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 182.236 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 182.109 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 191.611 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 182.322 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 184.238 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 179.867 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 183.915 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 186.754 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 183.470 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 183.314 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 190.479 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 187.722 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 202.876 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 185.988 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 185.694 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 189.203 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 185.626 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m201[0m 192.036 ms - 328[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 222.299 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 222.185 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 232.710 ms - 343[0m
+[0mPOST /api/v1/messaging/conversations [32m200[0m 228.168 ms - 343[0m
+⚠ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (264.3379ms) # ANOMALIE TX-2 — lecture puis création sans contrainte d’unicité : fils en double
+ℹ TX-2 : statuts 201,200,201,201,200,200,201,200,200,201,200,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201 ; fils créés 21
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 2
+ℹ duration_ms 11855.3726
+
+✖ failing tests:
+
+test at tests\e2e\transactionsV1.e2e.test.mjs:42:1
+⚠ TX-1 — échec après la transaction d’inscription : aucune trace, et la même adresse peut se réinscrire (9940.319ms) # ANOMALIE TX-1 — profil orphelin validé ; utilisateur Supabase supprimé ; adresse bloquée
+  AssertionError [ERR_ASSERTION]: observé : 1 profil(s) orphelin(s) après l’échec
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:62:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\transactionsV1.e2e.test.mjs:67:1
+⚠ TX-2 — trente ouvertures simultanées du même fil DIRECT : un seul fil (264.3379ms) # ANOMALIE TX-2 — lecture puis création sans contrainte d’unicité : fils en double
+  AssertionError [ERR_ASSERTION]: observé : 21 fils
+  
+  21 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/transactionsV1.e2e.test.mjs:78:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 21,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
