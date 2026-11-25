@@ -72,6 +72,13 @@ export const CREATE_TABLES_SQL: readonly string[] = [
   );`,
   `CREATE INDEX IF NOT EXISTS idx_media_queue_status ON media_upload_queue (status, created_at ASC);`,
 
+  // Accusés « reçu » (coches ✓✓ grises) relayés en temps réel : additif, sans migration.
+  `CREATE TABLE IF NOT EXISTS message_delivery (
+    message_id TEXT PRIMARY KEY NOT NULL,
+    delivered_at INTEGER NOT NULL
+  );`,
+  `CREATE INDEX IF NOT EXISTS idx_messages_room_created_desc ON messages (room_id, created_at DESC, local_temp_id DESC);`,
+
   `CREATE TABLE IF NOT EXISTS sync_meta (
     key TEXT PRIMARY KEY NOT NULL,
     value TEXT NOT NULL

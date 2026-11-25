@@ -27,6 +27,8 @@ export interface RealtimeEvent {
 type Listener = (payload: RealtimeEvent) => void;
 
 let socket: Socket | null = null;
+/** Utilisateur du socket (événement serveur `ready`) : sert à ne pas acquitter ses propres messages. */
+let utilisateurSocket: string | null = null;
 const listeners = new Map<string, Set<Listener>>();
 
 export const REALTIME_EVENTS = [
@@ -34,6 +36,8 @@ export const REALTIME_EVENTS = [
   'typing',
   'message:new',
   'message:read',
+  'message:delivered',
+  'presence:update',
   'conversation:new',
   'conversation:blocked',
   'order:new',
@@ -80,6 +84,16 @@ export const realtime = {
     // Un événement serveur invalide le cache concerné : l'UI recharge la donnée
     // fraîche plutôt que de faire confiance au payload poussé.
     socket.on('message:new', (payload: RealtimeEvent) => {
+      // Accusé de RÉCEPTION dès l'arrivée sur l'appareil, écran ouvert ou non (coches ✓✓ grises).
+      const recu = payload.message as { id?: unknown; senderId?: unknown } | undefined;
+      if (
+        typeof payload.conversationId === 'string' &&
+        typeof recu?.id === 'string' &&
+        utilisateurSocket &&
+        recu.senderId !== utilisateurSocket
+      ) {
+        socket?.emit('message:delivered', { conversationId: payload.conversationId, messageIds: [recu.id] });
+      }
       queryClient.invalidateQueries({ queryKey: queryKeys.messaging.conversations });
       if (typeof payload.conversationId === 'string') {
         queryClient.invalidateQueries({
@@ -124,11 +138,19 @@ export const realtime = {
     socket.on('call:incoming', (payload: RealtimeEvent) => emitLocal('call:incoming', payload));
     socket.on('call:updated', (payload: RealtimeEvent) => emitLocal('call:updated', payload));
 
-    socket.on('ready', (payload: RealtimeEvent) => emitLocal('ready', payload));
+    socket.on('ready', (payload: RealtimeEvent) => {
+      if (typeof payload.userId === 'string') utilisateurSocket = payload.userId;
+      emitLocal('ready', payload);
+    });
     socket.on('typing', (payload: RealtimeEvent) => emitLocal('typing', payload));
+    socket.on('message:delivered', (payload: RealtimeEvent) => emitLocal('message:delivered', payload));
+    socket.on('presence:update', (payload: RealtimeEvent) => emitLocal('presence:update', payload));
+    // Reconnexion : l'écran ouvert relit la présence et resynchronise.
+    socket.on('connect', () => emitLocal('ready', {} as RealtimeEvent));
   },
 
   disconnect(): void {
+    utilisateurSocket = null;
     socket?.disconnect();
     socket?.removeAllListeners();
     socket = null;
@@ -143,6 +165,25 @@ export const realtime = {
   /** Indicateur de saisie : accepté par le serveur uniquement dans nos fils. */
   setTyping(conversationId: string, isTyping: boolean): void {
     socket?.emit('typing', { conversationId, isTyping });
+  },
+
+  /** Accusé de RÉCEPTION des messages arrivés sur cet appareil (coches ✓✓ de l'expéditeur). */
+  sendDelivered(conversationId: string, messageIds: string[]): void {
+    if (messageIds.length === 0) return;
+    socket?.emit('message:delivered', { conversationId, messageIds: messageIds.slice(0, 100) });
+  },
+
+  /** Présence des interlocuteurs d'un fil (« En ligne » / « Vu récemment »). Null hors ligne. */
+  queryPresence(conversationId: string): Promise<Array<{ organizationId: string; online: boolean; lastSeenAt: string | null }> | null> {
+    const s = socket;
+    if (!s?.connected) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      const delai = setTimeout(() => resolve(null), 5000);
+      s.emit('presence:query', { conversationId }, (reponse: { ok?: boolean; presence?: Array<{ organizationId: string; online: boolean; lastSeenAt: string | null }> }) => {
+        clearTimeout(delai);
+        resolve(reponse?.ok ? reponse.presence ?? [] : null);
+      });
+    });
   },
 
   /** Rejoint un fil ouvert après la connexion (nouvelle commande, par exemple). */

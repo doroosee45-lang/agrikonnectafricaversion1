@@ -1,5 +1,18 @@
 # Proposition : écran de discussion 1-à-1 (Mobile), architecture et modèle de données
 
+> **Mise à jour : écran implémenté SANS migration** (branche `feature/push-fcm`), sur le code
+> `apps/Mobile/src/features/messaging/conversation/`. Ce qui a été fait, et ce qui reste soumis à la
+> migration du §4 :
+>
+> | Spécification | Réalisé | Limite sans migration |
+> |---|---|---|
+> | En-tête : retour, avatar et nom → fiche contact, présence, appel vocal, appel vidéo | Oui. Fiche : `GET /messaging/conversations/:id/peers`. Présence : Socket.IO `presence:query` / `presence:update` | « Vu à » en mémoire du serveur (perdu au redémarrage, une seule instance). Vidéo : bouton présent, **désactivé** (V1 audio) |
+> | Séparateurs de dates, bulles asymétriques, heure, coches | Oui (`timeline.ts`, testé) | « Reçu » relayé en temps réel (`message:delivered`) et mémorisé sur l'appareil de l'expéditeur, **non persisté au serveur** : un expéditeur hors ligne au moment de la réception ne voit que ✓ jusqu'à la lecture. « Lu » est persisté (`readBy`) |
+> | Cartes d'appel (durée, manqué, rappel) | Oui. `GET /calls/history?conversationId=` | — |
+> | Cartes parcelle et GPS cliquables | Oui. Texte lisible partout et reconnu par le Mobile (`messageContent.ts`, testé). Aperçu vectoriel, ouverture dans Cartes ou sur la fiche parcelle | Pas de type ni de métadonnées en base (migration §4) |
+> | « + » (Parcelle, Position GPS, PDF, Galerie), champ multilignes, caméra, micro | Oui. Note vocale AAC 32 kb/s : maintenir (glisser pour annuler) ou toucher pour verrouiller | Taille maximale 5 Mo par média (serveur) |
+> | `FlatList` inversée paginée, hors ligne, temps réel | Oui. SQLite d'abord, puis pages serveur ; file d'envoi existante ; frappe, lecture, réception | Fiabilité de la synchronisation concurrente : S2 et SYNC-U toujours ouverts |
+
 **Statut :** proposition à valider. Aucun code d'écran n'est écrit et aucune migration n'est créée.
 **Périmètre :** V1, application Mobile (React Native / Expo, TypeScript) et backend (Prisma / PostgreSQL).
 

@@ -24,6 +24,7 @@ class LocalCommsDatabase {
   private memOutbox = new Map<string, OutboxQueueItem>();
   private memMedia = new Map<string, MediaUploadQueueItem>();
   private memMeta = new Map<string, string>();
+  private memDelivered = new Map<string, number>();
 
   subscribe(listener: DbListener): () => void {
     this.listeners.add(listener);
@@ -348,6 +349,106 @@ class LocalCommsDatabase {
       await sqlite.runAsync('UPDATE messages SET deleted_at = ? WHERE id = ? OR server_id = ?', [Date.now(), delId, delId]);
     }
     this.notify();
+  }
+
+  /* ───────── Écran de discussion ───────── */
+
+  private static lireLigne(m: Omit<LocalMessage, 'attachments' | 'read_by'> & { attachments: string; read_by: string }): LocalMessage {
+    return { ...m, attachments: JSON.parse(m.attachments || '[]') as string[], read_by: JSON.parse(m.read_by || '[]') as string[] };
+  }
+
+  /** Les `limit` messages les plus récents d'un fil, du plus récent au plus ancien (FlatList inversée). */
+  async getLatestMessages(roomId: string, limit: number): Promise<LocalMessage[]> {
+    await this.ensureInitialized();
+    if (!this.sqliteDb) {
+      return [...this.memMessages.values()]
+        .filter((m) => m.room_id === roomId && m.deleted_at === null)
+        .sort((a, b) => b.created_at - a.created_at || (a.local_temp_id < b.local_temp_id ? 1 : -1))
+        .slice(0, limit);
+    }
+    const rows = await this.sqliteDb.getAllAsync<Omit<LocalMessage, 'attachments' | 'read_by'> & { attachments: string; read_by: string }>(
+      'SELECT * FROM messages WHERE room_id = ? AND deleted_at IS NULL ORDER BY created_at DESC, local_temp_id DESC LIMIT ?',
+      [roomId, limit],
+    );
+    return rows.map(LocalCommsDatabase.lireLigne);
+  }
+
+  /** Renvoi immédiat d'un message en échec (toucher « Renvoyer »). */
+  async retryNow(localTempId: string): Promise<void> {
+    await this.ensureInitialized();
+    const now = Date.now();
+    if (!this.sqliteDb) {
+      const o = this.memOutbox.get(localTempId);
+      if (o) this.memOutbox.set(localTempId, { ...o, status: 'PENDING', next_retry_at: now });
+      const m = this.memMessages.get(localTempId);
+      if (m) this.memMessages.set(localTempId, { ...m, sync_status: m.local_media_uri && !m.remote_media_url ? 'UPLOADING' : 'PENDING', error_message: null });
+      this.persistWebStorage();
+      this.notify();
+      return;
+    }
+    await this.sqliteDb.runAsync("UPDATE outbox_queue SET status = 'PENDING', next_retry_at = ? WHERE local_temp_id = ?", [now, localTempId]);
+    await this.sqliteDb.runAsync("UPDATE media_upload_queue SET status = 'PENDING' WHERE local_temp_id = ?", [localTempId]);
+    await this.sqliteDb.runAsync(
+      "UPDATE messages SET sync_status = CASE WHEN local_media_uri IS NOT NULL AND remote_media_url IS NULL THEN 'UPLOADING' ELSE 'PENDING' END, error_message = NULL WHERE local_temp_id = ?",
+      [localTempId],
+    );
+    this.notify();
+  }
+
+  /** `message:read` reçu : mes messages du fil sont lus par `lecteur` (coches vertes). */
+  async markReadByPeer(roomId: string, lecteur: string, moi: string): Promise<void> {
+    await this.ensureInitialized();
+    if (!this.sqliteDb) {
+      let change = false;
+      for (const [k, m] of this.memMessages.entries()) {
+        if (m.room_id === roomId && m.sender_id === moi && m.sync_status === 'SENT' && !m.read_by.includes(lecteur)) {
+          this.memMessages.set(k, { ...m, read_by: [...m.read_by, lecteur] });
+          change = true;
+        }
+      }
+      if (change) { this.persistWebStorage(); this.notify(); }
+      return;
+    }
+    const rows = await this.sqliteDb.getAllAsync<{ local_temp_id: string; read_by: string }>(
+      "SELECT local_temp_id, read_by FROM messages WHERE room_id = ? AND sender_id = ? AND sync_status = 'SENT'",
+      [roomId, moi],
+    );
+    let change = false;
+    for (const r of rows) {
+      const lus = JSON.parse(r.read_by || '[]') as string[];
+      if (lus.includes(lecteur)) continue;
+      await this.sqliteDb.runAsync('UPDATE messages SET read_by = ? WHERE local_temp_id = ?', [JSON.stringify([...lus, lecteur]), r.local_temp_id]);
+      change = true;
+    }
+    if (change) this.notify();
+  }
+
+  /** Accusés « reçu » (identifiants serveur). */
+  async markDelivered(messageIds: string[]): Promise<void> {
+    if (messageIds.length === 0) return;
+    await this.ensureInitialized();
+    const now = Date.now();
+    if (!this.sqliteDb) {
+      messageIds.forEach((id) => this.memDelivered.set(id, now));
+      this.notify();
+      return;
+    }
+    for (const id of messageIds) {
+      await this.sqliteDb.runAsync('INSERT OR IGNORE INTO message_delivery (message_id, delivered_at) VALUES (?, ?)', [id, now]);
+    }
+    this.notify();
+  }
+
+  async getDeliveredIds(messageIds: string[]): Promise<Set<string>> {
+    await this.ensureInitialized();
+    if (messageIds.length === 0) return new Set();
+    if (!this.sqliteDb) return new Set(messageIds.filter((id) => this.memDelivered.has(id)));
+    const marques = messageIds.map(() => '?').join(',');
+    const rows = await this.sqliteDb.getAllAsync<{ message_id: string }>(
+      `SELECT message_id FROM message_delivery WHERE message_id IN (${marques})`,
+      messageIds,
+    );
+    return new Set(rows.map((r) => r.message_id));
   }
 }
 export const localDb = new LocalCommsDatabase();

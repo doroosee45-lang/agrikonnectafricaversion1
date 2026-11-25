@@ -51,6 +51,25 @@
           "resizeMode": "contain",
           "backgroundColor": "#174D35"
         }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "AgriKonnect utilise le micro pour enregistrer les notes vocales que vous envoyez."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "AgriKonnect accède à vos photos pour les partager dans vos discussions.",
+          "cameraPermission": "AgriKonnect utilise la caméra pour photographier un problème sur le terrain et l'envoyer."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "La localisation sert à partager votre position et à délimiter vos parcelles."
+        }
       ]
     ],
     "extra": {

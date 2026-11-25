@@ -175,13 +175,13 @@ class OfflineSyncEngine {
         if (!putRes.ok) throw new Error('Échec upload média R2 (' + putRes.status + ')');
 
         const confirmed = await api.post<{ publicUrl?: string; storageKey: string }>('/media/' + presign.data.media.id + '/confirm');
-        const remoteUrl = confirmed.data.publicUrl || presign.data.media.publicUrl || presign.data.media.storageKey;
+        // A3 : le serveur n'accepte QUE la clé de stockage (une URL, même
+        // publique, est refusée « external_url_refused »). Jamais publicUrl.
+        const remoteUrl = confirmed.data.storageKey || presign.data.media.storageKey;
 
         await localDb.markMediaUploaded(item.local_temp_id, remoteUrl);
-
-        if (Platform.OS !== 'web' && item.local_uri.includes('/offline_media/')) {
-          await FileSystem.deleteAsync(item.local_uri, { idempotent: true });
-        }
+        // Le fichier local est CONSERVÉ : photo et note vocale restent
+        // lisibles hors ligne sur l'appareil de l'expéditeur.
       } catch (err) {
         const nextRetry = item.retry_count + 1;
         const backoff = computeExponentialBackoffMs(nextRetry);

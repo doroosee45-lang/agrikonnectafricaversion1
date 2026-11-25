@@ -30,6 +30,8 @@ export function RolePersistentNav() {
 
   if (status !== 'authenticated' || !user) return null;
   if (pathname.startsWith('/auth') || pathname.startsWith('/farmer')) return null;
+  // Dans une discussion, la barre de saisie occupe le bas de l'écran (comme une messagerie).
+  if (pathname.startsWith('/messages/')) return null;
 
   const has = (p: string) => permissions.includes(p) || permissions.includes("*");
   const homeRoute = has("admin.dashboard")
