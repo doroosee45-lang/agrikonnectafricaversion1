@@ -1,0 +1,52 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:53917/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 292.566 ms - 1094[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 288.221 ms - 6277[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 46.701 ms - 468[0m
+[0mPOST /api/v1/auth/register [32m201[0m 24.487 ms - 1097[0m
+[0mPOST /api/v1/auth/login [32m200[0m 22.141 ms - 941[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.332 ms - 1088[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.192 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.687 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 11.383 ms - 929[0m
+[0mPOST /api/v1/auth/login [33m401[0m 14.845 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 18.060 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 11.261 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 12.310 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 12.129 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m429[0m 2.873 ms - 190[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.208 ms - 1108[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 176.714 ms - 4561[0m
+[0mPOST /api/v1/admin/users/017509d4-9045-4e3f-8c22-0d5517efde68/unlock [32m200[0m 21.097 ms - 146[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 24.363 ms - 4315[0m
+[0mGET /api/v1/admin/audit?actorId=017509d4-9045-4e3f-8c22-0d5517efde68&limit=50 [32m200[0m 17.609 ms - 3050[0m
+[0mGET /api/v1/admin/audit?action=admin.user.unlock&limit=10 [32m200[0m 7.769 ms - 591[0m
+✔ AC-M6 : échecs répétés → verrou visible dans M6 → déverrouillage audité (20747.4603ms)
+[0mPOST /api/v1/admin/users/017509d4-9045-4e3f-8c22-0d5517efde68/roles [33m403[0m 8.830 ms - 249[0m
+✔ RG-S1 : mutation de gouvernance refusée sans MFA (`mfaRequired`) (14.3471ms)
+[0mPOST /api/v1/auth/login [32m200[0m 33.194 ms - 1108[0m
+[0mGET /api/v1/admin/audit?severity=haute&limit=20 [32m200[0m 15.094 ms - 492[0m
+[0mGET /api/v1/admin/audit?from=2020-01-01&to=2020-01-02&limit=10 [32m200[0m 11.313 ms - 80[0m
+[0mGET /api/v1/admin/audit/export?format=csv&limit=50 [32m200[0m 15.685 ms - 3790[0m
+[0mGET /api/v1/admin/audit?action=admin.audit.export&limit=5 [32m200[0m 11.350 ms - 600[0m
+✔ U-M6-1 : recherche par gravité et export CSV audité (105.8467ms)
+[0mPOST /api/v1/auth/login [32m200[0m 18.948 ms - 1108[0m
+[0mGET /api/v1/admin/security/overview [32m200[0m 29.281 ms - 4673[0m
+✔ U-M6-2 : la vue sécurité alerte sur les comptes de gouvernance sans MFA (56.9434ms)
+[0mGET /api/v1/admin/security/policy [33m401[0m 1.009 ms - 136[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 15.201 ms - 150[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 7.332 ms - 249[0m
+[0mPOST /api/v1/auth/login [32m200[0m 21.989 ms - 1108[0m
+[0mGET /api/v1/admin/security/policy [32m200[0m 6.646 ms - 1165[0m
+[0mPUT /api/v1/admin/security/policy [32m200[0m 21.637 ms - 1250[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 7.423 ms - 359[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 5.131 ms - 204[0m
+[0mGET /api/v1/admin/audit?action=admin.setting.update&limit=20 [32m200[0m 10.985 ms - 540[0m
+✔ U-M6-3 : politique — 401/403/mfa_required, puis lecture et écriture (122.2754ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23543.8141

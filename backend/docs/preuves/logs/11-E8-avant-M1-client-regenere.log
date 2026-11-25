@@ -1,0 +1,144 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:54579/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 573.391 ms - 1094[0m
+[0mPOST /api/v1/auth/mfa/setup [32m200[0m 454.859 ms - 6309[0m
+[0mPOST /api/v1/auth/mfa/confirm [32m200[0m 39.911 ms - 468[0m
+[0mPOST /api/v1/auth/register [32m201[0m 25.023 ms - 1097[0m
+[0mPOST /api/v1/auth/login [32m200[0m 15.362 ms - 941[0m
+[0mPOST /api/v1/auth/register [32m201[0m 16.434 ms - 1088[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.290 ms - 926[0m
+[0mPOST /api/v1/auth/register [32m201[0m 26.281 ms - 1090[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.893 ms - 929[0m
+[0mPOST /api/v1/auth/login [33m401[0m 16.534 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 24.519 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 12.206 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 7.263 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m401[0m 10.846 ms - 126[0m
+[0mPOST /api/v1/auth/login [33m429[0m 3.832 ms - 190[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.450 ms - 1108[0m
+prisma:error 
+Invalid `prisma.membership.findMany()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"Role\": \"ACADEMIA_ADMIN\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })
+[2026-11-25T15:08:41.432Z] [ERROR] [89a89cf6-4f08-486f-bd2c-0ae73a8d4c88] GET /api/v1/admin/security/overview — {
+  name: 'PrismaClientUnknownRequestError',
+  message: '\n' +
+    'Invalid `prisma.membership.findMany()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Error occurred during query execution:\n' +
+    'ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \\"Role\\": \\"ACADEMIA_ADMIN\\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })',
+  code: null,
+  stack: 'PrismaClientUnknownRequestError: \n' +
+    'Invalid `prisma.membership.findMany()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Error occurred during query execution:\n' +
+    'ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \\"Role\\": \\"ACADEMIA_ADMIN\\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })\n' +
+    '    at $n.handleRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:7505)\n' +
+    '    at $n.handleAndLogRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+    '    at $n.request (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+    '    at async l (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+    '    at async Promise.all (index 4)\n' +
+    '    at async Module.securityOverview (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/admin/admin.security.service.js:133:7)\n' +
+    '    at async overview (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/admin/admin.security.controller.js:17:59)'
+}
+[0mGET /api/v1/admin/security/overview [31m500[0m 353.894 ms - 130[0m
+✖ AC-M6 : échecs répétés → verrou visible dans M6 → déverrouillage audité (23884.6135ms)
+[0mPOST /api/v1/admin/users/d38cfa38-8783-4585-a87f-314b657c4a83/roles [33m403[0m 24.052 ms - 249[0m
+✔ RG-S1 : mutation de gouvernance refusée sans MFA (`mfaRequired`) (31.3189ms)
+[0mPOST /api/v1/auth/login [32m200[0m 25.941 ms - 1108[0m
+[0mGET /api/v1/admin/audit?severity=haute&limit=20 [32m200[0m 25.054 ms - 492[0m
+[0mGET /api/v1/admin/audit?from=2020-01-01&to=2020-01-02&limit=10 [32m200[0m 11.840 ms - 80[0m
+[0mGET /api/v1/admin/audit/export?format=csv&limit=50 [32m200[0m 26.873 ms - 3471[0m
+[0mGET /api/v1/admin/audit?action=admin.audit.export&limit=5 [32m200[0m 9.908 ms - 600[0m
+✔ U-M6-1 : recherche par gravité et export CSV audité (118.7391ms)
+[0mPOST /api/v1/auth/login [32m200[0m 26.245 ms - 1108[0m
+prisma:error 
+Invalid `prisma.membership.findMany()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \"Role\": \"ACADEMIA_ADMIN\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })
+[2026-11-25T15:08:41.646Z] [ERROR] [fe1c40d7-90aa-4b0d-9155-27fe73c12e1d] GET /api/v1/admin/security/overview — {
+  name: 'PrismaClientUnknownRequestError',
+  message: '\n' +
+    'Invalid `prisma.membership.findMany()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Error occurred during query execution:\n' +
+    'ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \\"Role\\": \\"ACADEMIA_ADMIN\\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })',
+  code: null,
+  stack: 'PrismaClientUnknownRequestError: \n' +
+    'Invalid `prisma.membership.findMany()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Error occurred during query execution:\n' +
+    'ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "22P02", message: "invalid input value for enum \\"Role\\": \\"ACADEMIA_ADMIN\\"", severity: "ERROR", detail: None, column: None, hint: None }), transient: false })\n' +
+    '    at $n.handleRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:7505)\n' +
+    '    at $n.handleAndLogRequestError (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6623)\n' +
+    '    at $n.request (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:121:6307)\n' +
+    '    at async l (D:\\AGRIKONNECT\\Soupabase\\Nouveau dossier\\V1\\agrikonnect-africa-final\\backend\\node_modules\\@prisma\\client\\runtime\\library.js:130:9633)\n' +
+    '    at async Promise.all (index 4)\n' +
+    '    at async Module.securityOverview (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/admin/admin.security.service.js:133:7)\n' +
+    '    at async overview (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/src/modules/admin/admin.security.controller.js:17:59)'
+}
+[0mGET /api/v1/admin/security/overview [31m500[0m 21.805 ms - 130[0m
+✖ U-M6-2 : la vue sécurité alerte sur les comptes de gouvernance sans MFA (56.7638ms)
+[0mGET /api/v1/admin/security/policy [33m401[0m 0.685 ms - 136[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 5.149 ms - 150[0m
+[0mGET /api/v1/admin/security/policy [33m403[0m 5.504 ms - 249[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.634 ms - 1108[0m
+[0mGET /api/v1/admin/security/policy [32m200[0m 14.659 ms - 1165[0m
+[0mPUT /api/v1/admin/security/policy [32m200[0m 23.159 ms - 1250[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 8.756 ms - 359[0m
+[0mPUT /api/v1/admin/security/policy [33m422[0m 9.506 ms - 204[0m
+[0mGET /api/v1/admin/audit?action=admin.setting.update&limit=20 [32m200[0m 11.990 ms - 540[0m
+✔ U-M6-3 : politique — 401/403/mfa_required, puis lecture et écriture (134.1223ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26707.3915
+
+✖ failing tests:
+
+test at tests\e2e\adminSecurity.e2e.test.mjs:113:1
+✖ AC-M6 : échecs répétés → verrou visible dans M6 → déverrouillage audité (23884.6135ms)
+  AssertionError [ERR_ASSERTION]: {"success":false,"code":"INTERNAL_ERROR","message":"Erreur interne du serveur","requestId":"89a89cf6-4f08-486f-bd2c-0ae73a8d4c88"}
+  
+  500 !== 200
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/adminSecurity.e2e.test.mjs:127:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 500,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\adminSecurity.e2e.test.mjs:226:1
+✖ U-M6-2 : la vue sécurité alerte sur les comptes de gouvernance sans MFA (56.7638ms)
+  AssertionError [ERR_ASSERTION]: {"success":false,"code":"INTERNAL_ERROR","message":"Erreur interne du serveur","requestId":"fe1c40d7-90aa-4b0d-9155-27fe73c12e1d"}
+  
+  500 !== 200
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/adminSecurity.e2e.test.mjs:229:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 500,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
