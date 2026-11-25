@@ -19,6 +19,14 @@ const startSchema = z.object({
 const messageSchema = z.object({
   body: z.string().trim().min(1, 'Message vide').max(3000),
   attachments: z.array(z.string().max(500)).max(5).default([]),
+  /**
+   * OFF-4a — identifiant local du client hors ligne (même format que le socket
+   * `send_message`). Sans ce champ, la validation le retirait : un renvoi REST
+   * après réponse perdue créait un doublon, et l'identifiant serveur différait
+   * de l'identifiant local (OFF-4b côté Mobile). `postMessage` rejoue déjà un
+   * message existant du même expéditeur dans le même fil (D2).
+   */
+  localTempId: z.string().min(20).max(40).regex(/^[A-Za-z0-9_-]+$/).optional(),
 });
 
 const listSchema = paginationSchema.omit({ sort: true, order: true });

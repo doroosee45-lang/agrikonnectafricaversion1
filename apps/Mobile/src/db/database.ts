@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { CREATE_TABLES_SQL, DB_NAME } from './schema';
 import type { LocalMessage, LocalRoom, MediaUploadQueueItem, MessageContentType, MessageSyncStatus, OutboxQueueItem } from './models';
+import { appliquerMessageServeur, cleLocaleExistante, type ExecuteurSql } from './deltaPlan';
 
 export function generateUuidV4(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -319,8 +320,10 @@ class LocalCommsDatabase {
 
     if (!this.sqliteDb) {
       for (const m of incoming) {
-        const key = m.local_temp_id || m.server_id || m.id;
-        this.memMessages.set(key, { ...m, local_temp_id: key, server_id: m.server_id ?? m.id, sync_status: 'SENT' });
+        // OFF-4b : fusion sur la ligne existante (server_id OU local_temp_id), jamais de doublon.
+        const key = cleLocaleExistante(this.memMessages.values(), m) ?? (m.local_temp_id || m.server_id || m.id);
+        const precedent = this.memMessages.get(key);
+        this.memMessages.set(key, { ...precedent, ...m, local_temp_id: key, server_id: m.server_id ?? m.id, sync_status: 'SENT' });
       }
       for (const delId of deletedIds) {
         for (const [k, msg] of this.memMessages.entries()) {
@@ -332,17 +335,19 @@ class LocalCommsDatabase {
       return;
     }
 
+    const sqlite = this.sqliteDb;
+    const executeur: ExecuteurSql = {
+      premier: <T,>(sql: string, params: unknown[]) => sqlite.getFirstAsync<T>(sql, params as never[]),
+      executer: (sql: string, params: unknown[]) => sqlite.runAsync(sql, params as never[]),
+    };
     for (const m of incoming) {
-      const key = m.local_temp_id || m.server_id || m.id;
-      await this.sqliteDb.runAsync(
-        `INSERT INTO messages (id, server_id, local_temp_id, room_id, sender_id, sender_org_id, type, content, local_media_uri, remote_media_url, attachments, read_by, sync_status, retry_count, error_message, created_at, updated_at, deleted_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, 'SENT', 0, NULL, ?, ?, ?) ON CONFLICT(local_temp_id) DO UPDATE SET server_id = excluded.server_id, content = excluded.content, remote_media_url = excluded.remote_media_url, attachments = excluded.attachments, read_by = excluded.read_by, sync_status = 'SENT', updated_at = excluded.updated_at, deleted_at = excluded.deleted_at`,
-[m.id, m.server_id ?? m.id, key, m.room_id, m.sender_id, m.sender_org_id, m.type ?? 'TEXT', m.content, m.remote_media_url ?? null, JSON.stringify(m.attachments ?? []), JSON.stringify(m.read_by ?? []), m.created_at, m.updated_at, m.deleted_at ?? null],
-);
-}
-for (const delId of deletedIds) {
-await this.sqliteDb.runAsync('UPDATE messages SET deleted_at = ? WHERE id = ? OR server_id = ?', [Date.now(), delId, delId]);
-}
-this.notify();
-}
+      // OFF-4b : logique partagée et testée (db/deltaPlan.ts).
+      await appliquerMessageServeur(executeur, m);
+    }
+    for (const delId of deletedIds) {
+      await sqlite.runAsync('UPDATE messages SET deleted_at = ? WHERE id = ? OR server_id = ?', [Date.now(), delId, delId]);
+    }
+    this.notify();
+  }
 }
 export const localDb = new LocalCommsDatabase();

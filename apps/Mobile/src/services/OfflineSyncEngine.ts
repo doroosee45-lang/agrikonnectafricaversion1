@@ -7,6 +7,7 @@ import type { LocalMessage, MessageContentType } from '@/db/models';
 import { api } from '@/services/api/http';
 import { realtime } from '@/services/realtime';
 import { useAuthStore } from '@/store/auth';
+import { ROUTE_TIRAGE_MESSAGES, tirerToutesLesPages, type ReponseTirage } from '@/services/syncPull';
 
 const MAX_BACKOFF_MS = 60_000;
 const BASE_BACKOFF_MS = 2_000;
@@ -139,6 +140,10 @@ class OfflineSyncEngine {
       await this.processMediaUploadQueue();
       await this.processOutboxQueueFifo();
       await this.pullServerDelta();
+    } catch (err) {
+      // Un échec de tirage (réseau, serveur) ne doit pas devenir un rejet non géré :
+      // il sera retenté au prochain déclenchement (réseau, premier plan, minuterie).
+      console.warn('[sync] tirage différé en échec :', err instanceof Error ? err.message : err);
     } finally {
       this.isSyncing = false;
       this.emitStatus();
@@ -255,27 +260,26 @@ class OfflineSyncEngine {
 
   /**
    * Delta Sync : ne télécharge que les créations, mises à jour et suppressions
-   * survenues depuis lastPulledAt.
+   * survenues depuis lastPulledAt. OFF-1 : route `/messaging/sync` ;
+   * OFF-6 : toutes les pages (`hasMore`), curseur enregistré après chaque page.
    */
   async pullServerDelta(): Promise<void> {
     if (!this.isOnline) return;
     const rooms = await localDb.getRooms();
     const roomIds = rooms.map((r) => r.id);
-    const rawLast = await localDb.getMeta(LAST_PULLED_KEY);
-    const lastPulledAt = rawLast ? Number(rawLast) : 0;
+    await tirerToutesLesPages({
+      tirer: async (lastPulledAt) =>
+        (await api.post<ReponseTirage>(ROUTE_TIRAGE_MESSAGES, { lastPulledAt, roomIds })).data,
+      appliquer: (page) => localDb.applyServerDelta(page),
+      lireCurseur: async () => {
+        const brut = await localDb.getMeta(LAST_PULLED_KEY);
+        return brut ? Number(brut) : 0;
+      },
+      ecrireCurseur: (curseur) => localDb.setMeta(LAST_PULLED_KEY, String(curseur)),
+    });
+  }
 
-    const res = await api.post<{
-      created: LocalMessage[];
-      updated: LocalMessage[];
-      deleted: string[];
-serverTimestamp: number;
-}>('/chat/sync', { lastPulledAt, roomIds });
-await localDb.applyServerDelta(res.data);
-if (res.data.serverTimestamp) {
-await localDb.setMeta(LAST_PULLED_KEY, String(res.data.serverTimestamp));
-}
-}
-private scheduleNextRetryIfNeeded(): void {
+  private scheduleNextRetryIfNeeded(): void {
 if (this.retryTimer) {
 clearTimeout(this.retryTimer);
 this.retryTimer = null;

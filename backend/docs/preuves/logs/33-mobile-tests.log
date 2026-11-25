@@ -1,0 +1,234 @@
+▶ appels — phase d’interface depuis l’état serveur
+  ✔ invité qui n’a pas répondu → sonnerie (7.6128ms)
+  ✔ hôte pendant la sonnerie → appel sortant (1.9924ms)
+  ✔ appel actif : connexion puis en communication (0.5834ms)
+  ✔ états terminaux → écran de fin (0.3383ms)
+  ✔ sans place dans l’appel → rien à afficher (0.2537ms)
+✔ appels — phase d’interface depuis l’état serveur (12.5229ms)
+▶ appels — transitions d’interface
+  ✔ un second appel n’écrase pas l’appel en cours (0.6654ms)
+  ✔ reconnexion réseau puis retour (0.2917ms)
+  ✔ fin d’appel conserve le statut final pour l’affichage (0.2753ms)
+  ✔ micro coupé / réactivé (0.1873ms)
+✔ appels — transitions d’interface (1.8808ms)
+▶ appels — codes d’erreur
+  ✔ permission micro refusée (0.4703ms)
+  ✔ service indisponible (module désactivé) (0.1698ms)
+  ✔ réseau (0.7851ms)
+✔ appels — codes d’erreur (1.8009ms)
+▶ navigation producteur
+  ✔ exige un rôle producteur et la permission du module (1.0324ms)
+  ✔ ne montre pas les entrées réservées au producteur à un autre rôle (0.2432ms)
+✔ navigation producteur (2.7689ms)
+▶ espace producteur — routes
+  ✔ le groupe (tabs) contient exactement les cinq onglets, tous déclarés et sans href: null (2.1108ms)
+  ✔ l’espace producteur est une pile (Stack), pas des onglets (3.4684ms)
+  ✔ les formulaires de création existent hors des onglets (accessibles par la pile) (2.5098ms)
+✔ espace producteur — routes (14.5002ms)
+▶ barre d’onglets producteur — filtrage des routes
+  ✔ relevé réel : 47 routes reçues, 5 onglets affichés dans l’ordre de travail (3.8864ms)
+  ✔ aucun écran de détail, de création ou de réglage n’apparaît comme onglet (0.475ms)
+  ✔ « Exploitations » est actif sur la liste et sur le détail d’une exploitation (1.4496ms)
+  ✔ écran hors onglets → aucun onglet actif (pas d’indicateur sur un mauvais onglet) (0.2765ms)
+  ✔ une route d’onglet absente n’est pas inventée (0.2265ms)
+✔ barre d’onglets producteur — filtrage des routes (8.4319ms)
+▶ barre d’onglets producteur — appui (props réelles d’Expo Router 58)
+  ✔ non-régression : sans objet `navigation`, l’appui navigue via navigateToTab au lieu de planter (1.645ms)
+  ✔ onglet déjà actif → aucune navigation (0.314ms)
+  ✔ tabPress annulé par un écran → aucune navigation (0.2035ms)
+  ✔ repli sur navigation.navigate si une version le fournit encore ; jamais d’exception sinon (0.3017ms)
+✔ barre d’onglets producteur — appui (props réelles d’Expo Router 58) (2.9937ms)
+▶ navigation — liens statiques
+  ✖ sépare le profil personnel du profil et des paramètres de l’organisation (4.2074ms)
+  ✖ oriente les profils et paramètres individuels selon le métier (0.5577ms)
+  ✔ n’ouvre les paramètres plateforme qu’avec la permission admin dédiée (0.2653ms)
+  ✖ chaque lien statique mène à un écran existant (542.5819ms)
+  ✔ les boutons « Nouvelle parcelle » de l’accueil ouvrent le formulaire, pas la liste (0.9223ms)
+  ✖ rend accessibles depuis le menu mobile les routes Farmer de la navigation Web (0.8667ms)
+✖ navigation — liens statiques (551.0559ms)
+▶ navigation publique
+  ✖ propose les pages principales et conserve les destinations existantes (20.399ms)
+  ✔ réserve la barre au-dessus du contenu et centre le menu sur mobile, tablette et desktop (0.5793ms)
+  ✔ respecte les zones de sécurité latérales et les écrans courts (2.1633ms)
+✖ navigation publique (25.5656ms)
+▶ push — jetons déclarés au serveur
+  ✔ Android : FCM seulement (2.1806ms)
+  ✔ iOS sans raccord PushKit → CallKit : aucun jeton VoIP (repli alerte) (21.6884ms)
+  ✔ iOS avec raccord natif : APNs + VoIP (0.8259ms)
+  ✔ jetons invalides ou plateforme web ignorés (5.4651ms)
+✔ push — jetons déclarés au serveur (34.2114ms)
+▶ push — lecture des invitations
+  ✔ invitation valide (4.4353ms)
+  ✔ sonnerie expirée → aucun écran d’appel (0.3958ms)
+  ✔ autre genre ou identifiant invalide → ignoré (0.2227ms)
+  ✔ fin d’appel (0.2667ms)
+✔ push — lecture des invitations (5.8312ms)
+▶ push — UUID CallKit / ConnectionService
+  ✔ déterministe et au format UUID v4 (1.2767ms)
+  ✔ appels différents → UUID différents (0.4579ms)
+✔ push — UUID CallKit / ConnectionService (2.107ms)
+▶ Reanimated — pas d’écriture de valeur partagée pendant le rendu
+  ✔ aucun `x.value = …` au niveau du corps d’un composant (170.8118ms)
+✔ Reanimated — pas d’écriture de valeur partagée pendant le rendu (172.7693ms)
+▶ SVG — props compatibles web
+  ✔ pas de `origin` / `originX` / `originY` (deviennent l’attribut DOM invalide `transform-origin` sur le web) (129.1423ms)
+✔ SVG — props compatibles web (129.3827ms)
+▶ Reveal — visibilité
+  ✔ élément dans l’écran → visible (0.8486ms)
+  ✔ élément sous la ligne de flottaison → pas encore visible (0.1957ms)
+  ✔ élément entièrement au-dessus de l’écran → non visible (0.1733ms)
+✔ Reveal — visibilité (2.5567ms)
+▶ Reveal — décision d’animation
+  ✔ premier passage visible → apparition (0.2777ms)
+  ✔ non-régression : une animation lancée n’est PAS relancée à chaque image de défilement (0.1568ms)
+  ✔ sortie de l’écran sans « repeat » → reste affiché (0.1463ms)
+  ✔ sortie de l’écran avec « repeat » → masqué, puis réaffiché au retour (0.1489ms)
+✔ Reveal — décision d’animation (1.8909ms)
+ℹ tests 54
+ℹ suites 16
+ℹ pass 49
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 906.0309
+
+✖ failing tests:
+
+test at tests\navigation-links.test.mts:34:3
+✖ sépare le profil personnel du profil et des paramètres de l’organisation (4.2074ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '/profil'
+  - '/professional/profile'
+          ^
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/apps/Mobile/tests/navigation-links.test.mts:36:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '/profil',
+    expected: '/professional/profile',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\navigation-links.test.mts:40:3
+✖ oriente les profils et paramètres individuels selon le métier (0.5577ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '/profil'
+  - '/professional/profile'
+          ^
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/apps/Mobile/tests/navigation-links.test.mts:43:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '/profil',
+    expected: '/professional/profile',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\navigation-links.test.mts:52:3
+✖ chaque lien statique mène à un écran existant (542.5819ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   '/prices (app/actualites.tsx)',
+  +   '/tenders (app/actualites.tsx)',
+  +   '/farmer/season-feedback (app/farmer/(tabs)/index.tsx)',
+  +   '/ventes (app/producteurs/index.tsx)',
+  +   '/marches (components/public-site/home/Hero.tsx)',
+  +   '/marches (components/public-site/home/ServicesSection.tsx)',
+  +   '/reviewer (components/public-site/home/ServicesSection.tsx)',
+  +   '/agent (components/public-site/home/ServicesSection.tsx)',
+  +   '/public-site/lot (components/public-site/home/WebHomeSections.tsx)',
+  +   '/marches (components/public-site/Navbar.tsx)',
+  +   '/public-site/data (components/public-site/Navbar.tsx)',
+  +   '/marches (components/public-site/PublicFooter.tsx)',
+  +   '/public-site/lot (components/public-site/PublicFooter.tsx)',
+  +   '/public-site/lot (lib/platform.ts)',
+  +   '/prices (lib/platform.ts)',
+  +   '/weather (lib/platform.ts)',
+  +   '/marches (lib/platform.ts)',
+  +   '/marches (lib/platform.ts)',
+  +   '/tenders (lib/platform.ts)'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/apps/Mobile/tests/navigation-links.test.mts:62:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ '/prices (app/actualites.tsx)', '/tenders (app/actualites.tsx)', '/farmer/season-feedback (app/farmer/(tabs)/index.tsx)', '/ventes (app/producteurs/index.tsx)', '/marches (components/public-site/home/Hero.tsx)', '/marches (components/public-site/home/ServicesSection.tsx)', '/reviewer (components/public-site/home/ServicesSection.tsx)', '/agent (components/public-site/home/ServicesSection.tsx)', '/public-site/lot (components/public-site/home/WebHomeSections.tsx)', '/marches (components/public-site/Navbar.tsx)', '/public-site/data (components/public-site/Navbar.tsx)', '/marches (components/public-site/PublicFooter.tsx)', '/public-site/lot (components/public-site/PublicFooter.tsx)', '/public-site/lot (lib/platform.ts)', '/prices (lib/platform.ts)', '/weather (lib/platform.ts)', '/marches (lib/platform.ts)', '/marches (lib/platform.ts)', '/tenders (lib/platform.ts)' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\navigation-links.test.mts:72:3
+✖ rend accessibles depuis le menu mobile les routes Farmer de la navigation Web (0.8667ms)
+  AssertionError [ERR_ASSERTION]: entrées du menu Farmer manquantes
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/apps/Mobile/tests/navigation-links.test.mts:75:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\public-navigation.test.mts:8:3
+✖ propose les pages principales et conserve les destinations existantes (20.399ms)
+  AssertionError [ERR_ASSERTION]: /tenders est absente de la navigation
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/apps/Mobile/tests/public-navigation.test.mts:12:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

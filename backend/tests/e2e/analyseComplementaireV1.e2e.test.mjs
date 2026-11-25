@@ -4,7 +4,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { startHarness } from './support/harness.mjs';
 import { connecterSocket } from './support/socketClient.mjs';
@@ -71,10 +71,10 @@ after(async () => {
 // ═══ C — contrat Mobile ↔ API (requêtes exactes d'OfflineSyncEngine.ts) ═══
 
 test(
-  'C1 (OFF-1) — le tirage du Mobile (`POST /chat/sync`) atteint une route existante',
-  { todo: 'ANOMALIE OFF-1 — /chat/sync n’existe pas ; le backend expose /messaging/sync' },
+  'C1 (OFF-1, corrigé) — la route de tirage du Mobile (`ROUTE_TIRAGE_MESSAGES`) atteint une route existante',
   async () => {
-    const r = await as('awa', 'POST', '/chat/sync', { body: { lastPulledAt: 0, roomIds: [] } });
+    const pull = await import(pathToFileURL(path.join(racine, 'apps/Mobile/src/services/syncPull.ts')).href);
+    const r = await as('awa', 'POST', pull.ROUTE_TIRAGE_MESSAGES, { body: { lastPulledAt: 0, roomIds: [] } });
     assert.equal(r.status, 200, `observé ${r.status} ${JSON.stringify(r.body)}`);
   },
 );
@@ -106,7 +106,6 @@ test('C3 — envoi socket avec un UUID v4 (format du Mobile) renvoyé deux fois 
 
 test(
   'C4 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : un seul message',
-  { todo: 'ANOMALIE OFF-4a — `localTempId` retiré par la validation Zod : doublon serveur, id ≠ localTempId' },
   async (t) => {
     const roomId = await groupe('awa', 'C4', ['ben']);
     const localTempId = randomUUID();
@@ -141,7 +140,6 @@ const sqlMobile = (() => {
     creerTable: extraire(schema, /`(CREATE TABLE IF NOT EXISTS messages \([\s\S]*?\);)`/, 'CREATE TABLE messages'),
     insererOptimiste: extraire(db, /`(INSERT INTO messages \(id, server_id[^`]*?VALUES \(\?, NULL,[^`]*?\))`/, 'enqueueOptimisticMessage'),
     marquerEnvoye: extraire(db, /"(UPDATE messages SET server_id = \?, sync_status = 'SENT'[^"]*)"/, 'markMessageSent'),
-    appliquerDelta: extraire(db, /`(INSERT INTO messages \([^`]*ON CONFLICT\(local_temp_id\)[^`]*)`/, 'applyServerDelta'),
   };
 })();
 
@@ -157,10 +155,13 @@ const baseLocale = () => {
       d.prepare(sqlMobile.insererOptimiste).run(uuid, uuid, room, 'u', null, 'TEXT', content, null, '[]', '[]', 'PENDING', now, now),
     // markMessageSent : [serverId, serverTimestamp, localTempId]
     envoye: (uuid, serverId) => d.prepare(sqlMobile.marquerEnvoye).run(serverId, now, uuid),
-    // applyServerDelta : clé = local_temp_id || server_id || id
-    delta: (m) => {
-      const cle = m.local_temp_id || m.server_id || m.id;
-      d.prepare(sqlMobile.appliquerDelta).run(m.id, m.server_id ?? m.id, cle, m.room_id, m.sender_id, m.sender_org_id, m.type ?? 'TEXT', m.content, m.remote_media_url ?? null, JSON.stringify(m.attachments ?? []), JSON.stringify(m.read_by ?? []), m.created_at, m.updated_at, m.deleted_at ?? null);
+    // applyServerDelta : logique RÉELLE et partagée du Mobile (db/deltaPlan.ts, OFF-4b).
+    delta: async (m) => {
+      const plan = await import(pathToFileURL(path.join(racine, 'apps/Mobile/src/db/deltaPlan.ts')).href);
+      await plan.appliquerMessageServeur({
+        premier: async (sql, params) => d.prepare(sql).get(...params) ?? null,
+        executer: async (sql, params) => d.prepare(sql).run(...params),
+      }, m);
     },
     compte: () => d.prepare('SELECT count(*) n FROM messages').get().n,
   };
@@ -177,7 +178,7 @@ test('L1 — envoi par socket puis tirage : la ligne locale est fusionnée (ON C
   const loc = baseLocale();
   loc.optimiste(uuid, roomId, 'l1');
   loc.envoye(uuid, ack.serverId);
-  for (const m of (await tirerDelta('awa', roomId)).filter((x) => x.content === 'l1')) loc.delta(m);
+  for (const m of (await tirerDelta('awa', roomId)).filter((x) => x.content === 'l1')) await loc.delta(m);
   assert.equal(loc.compte(), 1);
 });
 
@@ -186,14 +187,13 @@ test('L2 — même page relivrée deux fois (interruption, recouvrement) : aucun
   for (let i = 0; i < 5; i += 1) await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: `l2-${i}` } });
   const page = await tirerDelta('ben', roomId);
   const loc = baseLocale();
-  page.forEach(loc.delta);
-  page.forEach(loc.delta);
+  for (const m of page) await loc.delta(m);
+  for (const m of page) await loc.delta(m);
   assert.equal(loc.compte(), page.length);
 });
 
 test(
   'L3 (OFF-4b) — envoi par repli REST puis tirage : intégration du delta sans erreur, 1 seule ligne',
-  { todo: 'ANOMALIE OFF-4b — UNIQUE(server_id) violée : applyServerDelta échoue après un envoi REST' },
   async () => {
     const roomId = await groupe('awa', 'L3', ['ben']);
     const uuid = randomUUID();
@@ -203,7 +203,7 @@ test(
     loc.envoye(uuid, r.body.data.id);
     let erreur = null;
     try {
-      for (const m of (await tirerDelta('awa', roomId)).filter((x) => x.content === 'l3')) loc.delta(m);
+      for (const m of (await tirerDelta('awa', roomId)).filter((x) => x.content === 'l3')) await loc.delta(m);
     } catch (e) {
       erreur = e.message;
     }

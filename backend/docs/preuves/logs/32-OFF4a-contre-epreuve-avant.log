@@ -1,0 +1,37 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:53115/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 319.783 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 64.779 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 24.544 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.358 ms - 917[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 41.973 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89PCZN4YTZ3XK0RNHQDVJH0/messages [32m201[0m 24.848 ms - 365[0m
+[0mPOST /api/v1/messaging/conversations/01M89PCZN4YTZ3XK0RNHQDVJH0/messages [32m201[0m 13.530 ms - 365[0m
+✖ SM-2 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : 1 message, id = localTempId (18463.5846ms)
+ℹ SM-2 : 201/201 ; ids 01M89PCZNZFGBHB0VFXA8VM926 / 01M89PCZPXC18DX2SCX5JJZHPS ; messages 2
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20689.9662
+
+✖ failing tests:
+
+test at tests\e2e\syncMobileV1.e2e.test.mjs:89:1
+✖ SM-2 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : 1 message, id = localTempId (18463.5846ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/syncMobileV1.e2e.test.mjs:97:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

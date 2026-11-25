@@ -1,0 +1,45 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:59427/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 218.421 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 31.668 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.525 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.719 ms - 917[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 23.905 ms - 303[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 15.253 ms - 603[0m
+✔ SM-1 (OFF-1) — la route de tirage du Mobile existe et répond (20829.5096ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 9.040 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBX7W9TN7S46Q908GT7QT/messages [32m201[0m 22.456 ms - 375[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBX7W9TN7S46Q908GT7QT/messages [32m201[0m 4.759 ms - 355[0m
+✔ SM-2 (OFF-4a) — repli REST du Mobile renvoyé deux fois (réponse perdue) : 1 message, id = localTempId (67.2506ms)
+ℹ SM-2 : 201/201 ; ids 61cdf45b-5e2a-455b-a6c8-1139376e928e / 61cdf45b-5e2a-455b-a6c8-1139376e928e ; messages 1
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.598 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXA0H1TZFFE9S1HAH9J4/messages [32m201[0m 9.528 ms - 365[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 5.272 ms - 1075[0m
+✔ SM-3 (OFF-4b) — ligne locale portant un id serveur ≠ id local (données d’avant correctif) : intégration sans erreur, 1 ligne (54.4092ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 16.994 ms - 303[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 11.375 ms - 219000[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 11.880 ms - 219110[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 8.976 ms - 88403[0m
+✔ SM-4 (OFF-6) — longue absence : 1 200 messages, toutes les pages tirées, chacun présent une seule fois (241.9912ms)
+ℹ SM-4 : bilan {"pages":3,"messages":1201,"complet":true} ; lignes locales 1201 / 1201 attendus
+[0mPOST /api/v1/messaging/groups [32m201[0m 11.015 ms - 303[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 10.359 ms - 219000[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 11.473 ms - 219110[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 20.990 ms - 44503[0m
+✔ SM-5 — interruption réseau à la page 2 puis reprise : rien perdu, rien en double, curseur repris (213.6701ms)
+ℹ SM-5 : après coupure {"lignes":500,"curseur":1795618179562} ; reprise {"pages":2,"messages":601,"complet":true} ; lignes 1101 / 1101
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.472 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXSZP8K8P1BEX86VF1S0/messages [32m201[0m 11.902 ms - 367[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXSZP8K8P1BEX86VF1S0/messages [32m201[0m 11.695 ms - 367[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXSZP8K8P1BEX86VF1S0/messages [32m201[0m 9.574 ms - 367[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXSZP8K8P1BEX86VF1S0/messages [32m201[0m 11.112 ms - 367[0m
+[0mPOST /api/v1/messaging/conversations/01M89PBXSZP8K8P1BEX86VF1S0/messages [32m201[0m 12.136 ms - 367[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 4.348 ms - 2973[0m
+✔ SM-6 — page relivrée (même curseur) : absorbée, aucune ligne en double (86.1349ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23690.9352
