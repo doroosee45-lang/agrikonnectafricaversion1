@@ -51,7 +51,9 @@ describe('navigation — liens statiques', () => {
 
   it('chaque lien statique mène à un écran existant', () => {
     const casses: string[] = [];
-    const motif = /(?:router\.(?:push|replace|navigate)\(\s*|href[:=]\s*\{?\s*|pathname:\s*)(['"`])(\/[^'"`$]*)\1/g;
+    // Aussi les propriétés de navigation `route:` / `ctaHref:` (menus, carrousels, sections) :
+    // elles ont laissé passer des liens vers des écrans V2-V5 retirés.
+    const motif = /(?:router\.(?:push|replace|navigate)\(\s*|href[:=]\s*\{?\s*|pathname:\s*|\b(?:route|ctaHref):\s*)(['"`])(\/[^'"`$]*)\1/g;
     for (const f of fichiers(SRC)) {
       const s = readFileSync(f, 'utf8');
       for (const m of s.matchAll(motif)) {
@@ -72,8 +74,11 @@ describe('navigation — liens statiques', () => {
   it('rend accessibles depuis le menu mobile les routes Farmer de la navigation Web', () => {
     const header = readFileSync(join(SRC, 'components', 'farmer', 'FarmerHeader.tsx'), 'utf8');
     const destinations = [...header.matchAll(/route:\s*'(\/farmer(?:\/[^']*)?)'/g)].map((match) => match[1]);
-    assert.ok(destinations.length >= 18, 'entrées du menu Farmer manquantes');
-    assert.ok(destinations.includes('/farmer/sync/conflicts'), 'la route mobile des conflits de synchro manque');
+    // Navigation Farmer de la V1 (apps/web/src/lib/space-nav.ts) ; la création de
+    // parcelle est ouverte par les boutons « Nouvelle parcelle ». Lots, export,
+    // projets, capteurs et synchronisation (V2-V5) ont été retirés avec leurs écrans.
+    const V1 = ['/farmer', '/farmer/farms', '/farmer/plots', '/farmer/productions', '/farmer/soil', '/farmer/profile', '/farmer/public-profile', '/farmer/verification', '/farmer/settings'];
+    for (const route of V1) assert.ok(destinations.includes(route), `entrée du menu Farmer manquante : ${route}`);
     for (const destination of destinations) assert.ok(existe(destination), `route Farmer absente : ${destination}`);
   });
 });

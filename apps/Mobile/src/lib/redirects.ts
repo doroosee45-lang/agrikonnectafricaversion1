@@ -181,8 +181,22 @@ export function resolveActiveContext(
 export function getUserProfileRoute(roles: readonly string[]): string {
   if (roles.includes('INVESTOR')) return '/investment/profile';
   if (roles.includes('FARMER')) return '/farmer/profile';
+  // Métiers professionnels (agronome, coopérative, acheteur…) : profil professionnel,
+  // cohérent avec leurs paramètres. Les autres comptes gardent le profil général.
+  if (roles.some((role) => ROLES_PROFIL_PROFESSIONNEL.includes(role))) return '/professional/profile';
   return '/profil';
 }
+
+const ROLES_PROFIL_PROFESSIONNEL: readonly string[] = [
+  'AGRONOMIST',
+  'LAB_PARTNER',
+  'BUYER',
+  'SUPPLIER',
+  'TRANSPORTER',
+  'COOPERATIVE_ADMIN',
+  'COOPERATIVE_MEMBER',
+  'AGRICULTURAL_COMPANY',
+];
 
 /** Paramètres personnels; la configuration plateforme exige sa permission dédiée. */
 export function getUserSettingsRoute(roles: readonly string[], permissions: readonly string[] = []): string {

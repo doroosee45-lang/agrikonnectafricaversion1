@@ -33,10 +33,8 @@ export const PUBLIC_NAV: NavItem[] = [
   { key: 'accueil', href: '/accueil', labelKey: 'nav.home' },
   { key: 'a-propos', href: '/a-propos', labelKey: 'nav.about' },
   { key: 'services', href: '/services', labelKey: 'nav.services' },
-  { key: 'marches', href: '/marches', labelKey: 'nav.markets' },
   { key: 'farmers', href: '/farmers', labelKey: 'nav.farmers' },
   { key: 'projets', href: '/projets', labelKey: 'nav.projects' },
-  { key: 'data', href: '/public-site/data', labelKey: 'ui.donnees' },
   { key: 'actualites', href: '/actualites', labelKey: 'nav.news' },
   { key: 'contact', href: '/contact', labelKey: 'nav.contact' },
 ];

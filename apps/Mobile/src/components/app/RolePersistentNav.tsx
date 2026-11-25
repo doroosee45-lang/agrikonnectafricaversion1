@@ -38,9 +38,7 @@ export function RolePersistentNav() {
     ? "/admin"
     : has("cooperatives.write") || has("organizations.write")
       ? "/organization"
-      : has("verifications.review")
-        ? "/reviewer"
-        : "/profil";
+      : "/profil";
 
   const unread = (convQuery.data as { totalUnread?: number } | undefined)?.totalUnread ?? 0;
 

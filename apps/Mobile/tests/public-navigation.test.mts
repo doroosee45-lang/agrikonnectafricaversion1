@@ -8,8 +8,12 @@ describe('navigation publique', () => {
   it('propose les pages principales et conserve les destinations existantes', () => {
     const navbar = readFileSync(new URL('../src/components/public-site/Navbar.tsx', import.meta.url), 'utf8');
     const destinations = [...navbar.matchAll(/href:\s*'(\/[^']+)'/g)].map((match) => match[1]);
-    for (const route of ['/accueil', '/a-propos', '/services', '/marches', '/farmers', '/projets', '/public-site/data', '/actualites', '/contact', '/tenders']) {
+    for (const route of ['/accueil', '/a-propos', '/services', '/farmers', '/projets', '/actualites', '/contact']) {
       assert.ok(destinations.includes(route), `${route} est absente de la navigation`);
+    }
+    // Écrans V2-V5 retirés en V1 : la barre ne doit plus y mener (page introuvable).
+    for (const route of ['/marches', '/public-site/data', '/tenders', '/prices']) {
+      assert.ok(!destinations.includes(route), `${route} mène à un écran retiré`);
     }
   });
 

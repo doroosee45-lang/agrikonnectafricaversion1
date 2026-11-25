@@ -70,7 +70,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
             <View style={[styles.ctaRow, wide ? styles.ctaRowWide : null]}>
               <Button
                 label={t('home.heroCtaPrimary')}
-                onPress={() => router.push('/marches')}
+                onPress={() => router.push('/explore')}
                 variant="gold"
                 size="lg"
                 iconRight="arrow-forward"

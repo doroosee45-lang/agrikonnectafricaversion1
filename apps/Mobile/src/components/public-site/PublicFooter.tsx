@@ -206,7 +206,6 @@ function useColumns(t: Translator): FooterColumn[] {
       title: tr('ui.plateforme'),
       links: [
         { label: t('nav.services' as never), href: '/services' },
-        { label: t('nav.markets' as never), href: '/marches' },
         { label: t('nav.projects' as never), href: '/projets' },
         { label: t('nav.explore' as never), href: '/explore' },
       ],
@@ -215,7 +214,6 @@ function useColumns(t: Translator): FooterColumn[] {
       title: tr('ui.donnees'),
       links: [
         { label: tr('ui.statistiquesDeSol'), href: '/public-site/sols' },
-        { label: tr('ui.tracabiliteDUnLot'), href: '/public-site/lot' },
         { label: tr('ui.carteAgricole'), href: '/explore' },
       ],
     },

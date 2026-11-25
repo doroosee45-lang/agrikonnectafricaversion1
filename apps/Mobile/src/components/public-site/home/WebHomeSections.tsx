@@ -571,12 +571,6 @@ export function TraceabilityCtaSection() {
             size="lg"
             onPress={() => router.push('/auth/register' as never)}
           />
-          <Button
-            label={t('ui.voirUnExemple')}
-            variant="outline"
-            size="lg"
-            onPress={() => router.push('/public-site/lot' as never)}
-          />
         </View>
       </Reveal>
     </Section>

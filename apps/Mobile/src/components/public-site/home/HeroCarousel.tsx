@@ -32,12 +32,10 @@ export interface HeroCarouselSlide {
  * ──────────────────────────────────────────────────────────── */
 const champsManioc = require('../../../../assets/hero/champs-manioc.jpg');
 const cooperative = require('../../../../assets/hero/cooperative.jpg');
-const marche = require('../../../../assets/hero/marche.jpg');
 const terresAeriennes = require('../../../../assets/hero/terres-aeriennes.jpg');
 const solAnalyse = require('../../../../assets/hero/sol-analyse.jpg');
 const technologieCapteurs = require('../../../../assets/hero/technologie-capteurs.jpg');
 const investissementProjet = require('../../../../assets/hero/investissement-projet.jpg');
-const tracabiliteLot = require('../../../../assets/hero/tracabilite-lot.jpg');
 const elevage = require('../../../../assets/hero/elevage.jpg');
 const recolte = require('../../../../assets/hero/recolte.jpg');
 
@@ -57,18 +55,11 @@ const SLIDES: HeroCarouselSlide[] = [
     ctaHref: '/public-site/cooperatives',
   },
   {
-    image: marche,
-    get titre() { return tr('ui.opportunitesDeMarche'); },
-    get sousTitre() { return tr('ui.publiezVosAnnoncesRecevezDesOffres'); },
-    get ctaLabel() { return tr('ui.voirLesOpportunites'); },
-    ctaHref: '/public-site/tenders',
-  },
-  {
     image: terresAeriennes,
     get titre() { return tr('ui.cartographieAgricole'); },
     get sousTitre() { return tr('ui.localisezVosExploitationsSurUneCarte'); },
     get ctaLabel() { return tr('ui.ouvrirLaCarte'); },
-    ctaHref: '/public-site/map',
+    ctaHref: '/explore',
   },
   {
     image: solAnalyse,
@@ -85,18 +76,11 @@ const SLIDES: HeroCarouselSlide[] = [
     ctaHref: '/auth/register',
   },
   {
-    image: tracabiliteLot,
-    get titre() { return tr('ui.tracabiliteDeLaParcelleAuMarche'); },
-    get sousTitre() { return tr('ui.chaqueLotRecoitUnQrCode'); },
-    get ctaLabel() { return tr('ui.voirUnLotExemple'); },
-    ctaHref: '/public-site/lot/demo',
-  },
-  {
     image: investissementProjet,
     get titre() { return tr('ui.investisseursEtProjetsAgricoles'); },
     get sousTitre() { return tr('ui.deposezUnProjetDeDeveloppementTrouvez'); },
     get ctaLabel() { return tr('ui.deposerUnProjet'); },
-    ctaHref: '/public-site/projects',
+    ctaHref: '/projets',
   },
   {
     image: elevage,

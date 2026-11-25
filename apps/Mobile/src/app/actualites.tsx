@@ -60,8 +60,6 @@ export default function Actualites() {
               <Text preset="bodyMedium" color={COLORS.textPrimary}>{t('ui.lesPublicationsOperationnellesSontDansVotre')}</Text>
               <Text preset="bodySm" color={COLORS.slateGray} style={styles.lineHeight}>{t('ui.relevesDePrixAppelsDOffres')}</Text>
               <View style={styles.noteActions}>
-                <Button label={t('ui.prixDeMarche')} onPress={() => router.push('/prices')} variant="outline" size="sm" />
-                <Button label={t('ui.appelsDOffres')} onPress={() => router.push('/tenders')} variant="outline" size="sm" />
                 <Button label={t('ui.projets')} onPress={() => router.push('/projets')} variant="outline" size="sm" />
               </View>
             </View>

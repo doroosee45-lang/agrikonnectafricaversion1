@@ -136,25 +136,13 @@ export function RolesSection() {
       icon: 'cart-outline' as const,
       role: 'Acheteur & transformateur',
       body: t('ui.sourcerParFiliereEtParSaison'),
-      href: '/marches',
+      href: '/farmers',
     },
     {
       icon: 'briefcase-outline' as const,
       role: 'Investisseur',
       body: t('ui.consulterDesDossiersDeProjetAcceder'),
       href: '/projets',
-    },
-    {
-      icon: 'shield-checkmark-outline' as const,
-      role: 'Vérificateur',
-      body: t('ui.instruireLesDemandesDeVerificationTerrain'),
-      href: '/reviewer',
-    },
-    {
-      icon: 'walk-outline' as const,
-      role: 'Agent de terrain',
-      body: t('ui.saisirDesObservationsHorsLigneRelever'),
-      href: '/agent',
     },
   ];
 

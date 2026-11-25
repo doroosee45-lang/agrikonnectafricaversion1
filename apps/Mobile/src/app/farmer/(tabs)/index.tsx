@@ -130,7 +130,6 @@ export default function FarmerHome() {
                 <Button label={t('farmer.newPlot')} onPress={() => router.push('/farmer/plots/create')} variant="primary" size="sm" icon="add" />
                 <Button label={t('ui.declarerRecolte')} onPress={() => router.push('/farmer/productions')} variant="outline" size="sm" icon="leaf-outline" />
                 <Button label={t('ui.diagnosticSol')} onPress={() => router.push('/farmer/soil')} variant="outline" size="sm" icon="flask-outline" />
-                <Button label={t('ui.rendementsReels')} onPress={() => router.push('/farmer/season-feedback')} variant="ghost" size="sm" icon="stats-chart-outline" />
               </View>
             </Card>
 

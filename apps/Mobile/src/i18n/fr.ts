@@ -73,7 +73,7 @@ export const fr = {
     heroTitleLine3: 'la confiance.',
     heroSubtitle:
       'AGRIKONNECT AFRICA connecte producteurs, coopératives, acheteurs et investisseurs autour de données agricoles vérifiables : parcelles géolocalisées, lots tracés, prix de marché datés.',
-    heroCtaPrimary: 'Explorer les marchés',
+    heroCtaPrimary: 'Explorer la carte agricole',
     heroCtaSecondary: 'Je suis producteur',
     heroBadge: 'Données sourcées, jamais inventées',
     heroScroll: 'Faites défiler',

@@ -70,7 +70,7 @@ export const en: Dictionary = {
     heroTitleLine3: 'trust.',
     heroSubtitle:
       'AGRIKONNECT AFRICA links farmers, cooperatives, buyers and investors around verifiable agricultural data: geolocated plots, traced lots, dated market prices.',
-    heroCtaPrimary: 'Explore markets',
+    heroCtaPrimary: 'Explore the farm map',
     heroCtaSecondary: "I'm a farmer",
     heroBadge: 'Sourced data, never invented',
     heroScroll: 'Scroll',

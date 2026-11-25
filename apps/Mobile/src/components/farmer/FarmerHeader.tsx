@@ -54,12 +54,6 @@ export function FarmerHeader({ title, subtitle }: { title: string; subtitle?: st
       ],
     },
     {
-      title: t('ui.capteursTerrain'),
-      items: [
-        { label: t('ui.galerieMedias'), route: '/farmer/gallery' },
-      ],
-    },
-    {
       title: t('ui.compteConformite'),
       items: [
         { label: t('ui.monProfil'), route: '/farmer/profile' },

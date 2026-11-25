@@ -4,6 +4,11 @@ import { tr } from '@/i18n';
 /**
  * Catalogue des services de la plateforme.
  *
+ * V1 : seuls les modules dont l'écran existe sont listés (cartographie, sol,
+ * projets). Traçabilité, prix, météo, marché, transport et appels d'offres
+ * (V2-V5) ont été retirés avec leurs écrans : leurs liens menaient à une page
+ * introuvable.
+ *
  * Source : le périmètre fonctionnel du cahier des charges (V1 → V5) et le
  * routage réel du backend. `requiresAuth` reflète la présence du middleware
  * `authenticate` sur la route correspondante — ce n'est pas une intention,
@@ -23,17 +28,6 @@ export interface PlatformService {
 }
 
 export const PLATFORM_SERVICES: PlatformService[] = [
-  {
-    id: 'traceability',
-    icon: 'qr-code-outline',
-    get title() { return tr('ui.tracabiliteDesLots'); },
-    get body() { return tr('ui.unCodeUniqueParLotDe'); },
-    get detail() { return tr('ui.chaqueLotPorteUnCodeEx'); },
-    href: '/public-site/lot',
-    requiresAuth: false,
-    tone: 'forest',
-    cdc: ['TRC-01', 'TRC-02', 'TRC-03'],
-  },
   {
     id: 'mapping',
     icon: 'map-outline',
@@ -57,50 +51,6 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     cdc: ['SOIL-01', 'SOIL-15', 'SOIL-16', 'AI-10'],
   },
   {
-    id: 'prices',
-    icon: 'pricetags-outline',
-    get title() { return tr('ui.prixDeMarche'); },
-    get body() { return tr('ui.relevesDatesEtSourcesMarchePar'); },
-    get detail() { return tr('ui.chaqueRelevePorteSonMarcheSa'); },
-    href: '/prices',
-    requiresAuth: true,
-    tone: 'gold',
-    cdc: ['PRC-01', 'PRC-02', 'PRC-10'],
-  },
-  {
-    id: 'weather',
-    icon: 'partly-sunny-outline',
-    get title() { return tr('ui.meteoAgricole'); },
-    get body() { return tr('ui.observationsRattacheesALaParcelle'); },
-    get detail() { return tr('ui.lesDonneesMeteoSontRattacheesA'); },
-    href: '/weather',
-    requiresAuth: true,
-    tone: 'info',
-    cdc: ['WX-01', 'WX-02'],
-  },
-  {
-    id: 'market',
-    icon: 'storefront-outline',
-    get title() { return tr('ui.marcheMiseEnRelation'); },
-    get body() { return tr('ui.annoncesDemandesOffresCommandes'); },
-    get detail() { return tr('ui.lesAnnoncesEtDemandesDAchat'); },
-    href: '/marches',
-    requiresAuth: true,
-    tone: 'forest',
-    cdc: ['MKT-01', 'MKT-02', 'ORD-01'],
-  },
-  {
-    id: 'transport',
-    icon: 'car-outline',
-    get title() { return tr('ui.transportLogistique'); },
-    get body() { return tr('ui.demandesDeTransportEtPreuveDe'); },
-    get detail() { return tr('ui.lesDemandesDeTransportSontRattachees'); },
-    href: '/marches',
-    requiresAuth: true,
-    tone: 'info',
-    cdc: ['TRP-01', 'TRP-02'],
-  },
-  {
     id: 'invest',
     icon: 'trending-up-outline',
     get title() { return tr('ui.investissementProjets'); },
@@ -110,17 +60,6 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     requiresAuth: true,
     tone: 'living',
     cdc: ['INV-01', 'DDR-01', 'RPT-01'],
-  },
-  {
-    id: 'tenders',
-    icon: 'globe-outline',
-    get title() { return tr('ui.appelsDOffres'); },
-    get body() { return tr('ui.avisInternationauxVolumesEtExigences'); },
-    get detail() { return tr('ui.lesAcheteursPublientDesAvisAvec'); },
-    href: '/tenders',
-    requiresAuth: true,
-    tone: 'gold',
-    cdc: ['TND-01', 'TND-02'],
   },
 ];
 

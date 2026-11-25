@@ -31,7 +31,6 @@ const MODULES = [
   { href: '/farmer/plots', get label() { return tr('ui.parcelles'); }, icon: 'map-outline', get hint() { return tr('ui.surfaceEtLocalisation'); } },
   { href: '/farmer/productions', get label() { return tr('ui.recoltes'); }, icon: 'leaf-outline', get hint() { return tr('ui.volumesParSaison'); } },
   { href: '/farmer/soil', get label() { return tr('ui.sol'); }, icon: 'flask-outline', get hint() { return tr('ui.analysesEtProfil'); } },
-  { href: '/ventes', get label() { return tr('ui.mesVentes'); }, icon: 'pricetag-outline', get hint() { return tr('ui.annoncesEtCommandes'); } },
   { href: '/cooperatives', get label() { return tr('ui.cooperative'); }, icon: 'people-outline', get hint() { return tr('ui.membresEtVolumes'); } },
 ] as const;
 
