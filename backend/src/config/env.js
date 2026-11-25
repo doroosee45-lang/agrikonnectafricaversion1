@@ -131,6 +131,11 @@ const schema = z.object({
   FCM_PROJECT_ID: z.preprocess(emptyToUndefined, z.string().min(1).optional()),
   FCM_CLIENT_EMAIL: z.preprocess(emptyToUndefined, z.string().email().optional()),
   FCM_PRIVATE_KEY: z.preprocess(emptyToUndefined, z.string().min(1).optional()),
+  /**
+   * Alternative aux trois variables FCM_* : chemin du fichier JSON du compte de
+   * service Firebase Admin (relatif à `backend/` ou absolu). Voir src/config/firebase.js.
+   */
+  FIREBASE_SERVICE_ACCOUNT_PATH: z.preprocess(emptyToUndefined, z.string().min(1).optional()),
   /** iOS — APNs, authentification par jeton (clé .p8). */
   APNS_TEAM_ID: z.preprocess(emptyToUndefined, z.string().min(1).optional()),
   APNS_KEY_ID: z.preprocess(emptyToUndefined, z.string().min(1).optional()),

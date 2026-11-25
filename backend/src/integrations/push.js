@@ -27,13 +27,15 @@ import crypto from 'node:crypto';
 import http2 from 'node:http2';
 
 import { env } from '../config/env.js';
+import { identifiantsFcm } from '../config/firebase.js';
 import { prisma } from '../config/prisma.js';
 import { logger } from '../shared/http/logger.js';
 
 /* ─────────────────────── configuration ─────────────────────── */
 
+/** FCM actif : PUSH_ENABLED=true ET identifiants (variables FCM_* ou fichier FIREBASE_SERVICE_ACCOUNT_PATH). */
 export const fcmConfigure = (cfg = env) =>
-  cfg.PUSH_ENABLED === 'true' && Boolean(cfg.FCM_PROJECT_ID && cfg.FCM_CLIENT_EMAIL && cfg.FCM_PRIVATE_KEY);
+  cfg.PUSH_ENABLED === 'true' && Boolean(identifiantsFcm(cfg));
 
 export const apnsConfigure = (cfg = env) =>
   cfg.PUSH_ENABLED === 'true'
@@ -203,10 +205,8 @@ let cacheApns = null; // { jeton, emisA }
 
 const jetonAccesFcm = async () => {
   if (cacheFcm && cacheFcm.expireA - 60_000 > Date.now()) return cacheFcm.jeton;
-  const { status, body } = await transport.oauth(assertionGoogle({
-    clientEmail: env.FCM_CLIENT_EMAIL,
-    privateKey: env.FCM_PRIVATE_KEY,
-  }));
+  const { clientEmail, privateKey } = identifiantsFcm();
+  const { status, body } = await transport.oauth(assertionGoogle({ clientEmail, privateKey }));
   if (status !== 200 || !body?.access_token) throw new Error(`jeton OAuth FCM refusé (HTTP ${status})`);
   cacheFcm = { jeton: body.access_token, expireA: Date.now() + Number(body.expires_in ?? 3600) * 1000 };
   return cacheFcm.jeton;
@@ -252,7 +252,7 @@ const envoyerA = async (appareil, plan, envoi) => {
       notification: plan.notification ? { titre: envoi.titre, corps: envoi.corps } : null,
       collapseKey: envoi.collapseId ?? null,
     });
-    return transport.fcm({ projectId: env.FCM_PROJECT_ID, accessToken: await jetonAccesFcm(), message });
+    return transport.fcm({ projectId: identifiantsFcm().projectId, accessToken: await jetonAccesFcm(), message });
   }
   if (!apnsConfigure()) return { ignore: 'APNS_NOT_CONFIGURED' };
   const requete = requeteApns({
@@ -313,7 +313,7 @@ export const envoyerAuxAppareils = async (userId, envoi) => {
 export const avertissementPush = (cfg = env) => {
   if (cfg.PUSH_ENABLED !== 'true') return null;
   if (!fcmConfigure(cfg) && !apnsConfigure(cfg)) {
-    return 'PUSH_ENABLED=true mais ni FCM (FCM_PROJECT_ID, FCM_CLIENT_EMAIL, FCM_PRIVATE_KEY) ni APNs '
+    return 'PUSH_ENABLED=true mais ni FCM (FCM_PROJECT_ID, FCM_CLIENT_EMAIL, FCM_PRIVATE_KEY, ou FIREBASE_SERVICE_ACCOUNT_PATH) ni APNs '
       + '(APNS_TEAM_ID, APNS_KEY_ID, APNS_PRIVATE_KEY, APNS_BUNDLE_ID) n\'est complet : aucun push ne partira.';
   }
   return null;

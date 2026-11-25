@@ -14,3 +14,6 @@ dist/
 # Fichiers géospatiaux déposés (GEOSPATIAL_STORAGE_DIR par défaut).
 # Contenu d'utilisateurs : jamais versionné, jamais livré dans une archive.
 storage/
+
+# Clé de compte de service Firebase Admin : SECRET, jamais versionnée.
+*firebase-adminsdk*.json

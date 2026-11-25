@@ -9,10 +9,13 @@
  *  - plafond d'appareils actifs par compte (les plus anciens sont révoqués) ;
  *  - le jeton n'est JAMAIS renvoyé en clair (seulement ses 6 derniers caractères).
  */
+import crypto from 'node:crypto';
+
 import { prisma } from '../../config/prisma.js';
 import { ApiError } from '../../shared/errors/ApiError.js';
 import { resolveId } from '../../shared/ids.js';
 import { audit } from '../../shared/audit.js';
+import { sendPushNotification } from './sendPushNotification.js';
 
 export const APPAREILS_ACTIFS_MAX = 10;
 
@@ -91,4 +94,60 @@ export const retirer = async (id, req) => {
   if (count === 0) throw ApiError.notFound('Appareil introuvable');
   await audit({ actorId: req.user.id, action: 'push.device.remove', resource: 'push_devices', resourceId: id, req });
   return { removed: true };
+};
+
+/* ───────── /notifications/register-token et /notifications/send-test ───────── */
+
+/**
+ * Identifiant d'installation dérivé du jeton, pour un client qui n'en fournit
+ * pas. Sans identifiant stable, la rotation d'un jeton ne révoque pas
+ * l'ancien : il le sera au premier refus de FCM ou par le plafond d'appareils.
+ */
+export const installationDepuisJeton = (token) =>
+  `fcm-${crypto.createHash('sha256').update(String(token)).digest('hex').slice(0, 32)}`;
+
+/**
+ * Enregistre le jeton FCM de l'appareil (Android ou iOS) pour l'utilisateur
+ * connecté. Le jeton FCM vaut pour les deux plateformes (sur iOS, Firebase
+ * relaie vers APNs avec la clé APNs déposée dans la console Firebase).
+ */
+export const enregistrerJetonFcm = ({ token, platform, installationId, appVersion, locale }, req) =>
+  enregistrer(
+    { provider: 'FCM', token, installationId: installationId ?? installationDepuisJeton(token), appVersion, locale },
+    req,
+  ).then((appareil) => ({ ...appareil, platform: platform.toUpperCase() }));
+
+const ROLES_ENVOI_TIERS = ['ADMIN', 'SUPER_ADMIN'];
+
+/**
+ * Notification de test. Cible : l'utilisateur connecté, ou `userId` — réservé
+ * aux administrateurs (sinon n'importe quel compte pourrait solliciter les
+ * appareils d'un autre).
+ */
+export const envoyerTest = async ({ title, body, data, userId }, req) => {
+  const cible = userId ?? req.user.id;
+  if (cible !== req.user.id) {
+    const roles = req.tenant?.effectiveRoles ?? req.user?.roles ?? [];
+    if (!roles.some((r) => ROLES_ENVOI_TIERS.includes(r))) {
+      throw ApiError.forbidden('Seul un administrateur peut envoyer une notification de test à un autre utilisateur');
+    }
+    const existe = await prisma.profile.findUnique({ where: { id: cible }, select: { id: true } });
+    if (!existe) throw ApiError.notFound('Utilisateur introuvable');
+  }
+  const appareilsActifs = await prisma.pushDevice.count({ where: { userId: cible, revokedAt: null } });
+  const bilan = await sendPushNotification(
+    cible,
+    title ?? 'AgriKonnect — notification de test',
+    body ?? 'Si tu lis ceci, les notifications push fonctionnent sur cet appareil.',
+    { type: 'PUSH_TEST', ...(data ?? {}) },
+  );
+  await audit({
+    actorId: req.user.id,
+    action: 'push.test.send',
+    resource: 'push_devices',
+    resourceId: cible,
+    req,
+    newValue: { appareilsActifs, ...bilan },
+  });
+  return { targetUserId: cible, appareilsActifs, ...bilan };
 };
