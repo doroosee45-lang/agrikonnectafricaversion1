@@ -183,16 +183,21 @@ test('MSG-02 : pièce jointe invalide refusée (URL http(s) ou clé de stockage)
       (error) => error.status === 422 && /Pièce jointe invalide/.test(error.message),
     );
 
+    // A3 : URL externe refusée ; seule une clé de stockage conforme de l'expéditeur est acceptée.
+    await assert.rejects(
+      () => messaging.postMessage(conversation.id, { body: 'Lien', attachments: ['https://storage.example/lot.jpg'] }, reqAs(BUYER)),
+      (error) => error.status === 422 && error.errors?.[0]?.code === 'external_url_refused',
+    );
     const accepted = await messaging.postMessage(
       conversation.id,
-      { body: 'Photo du lot', attachments: ['https://storage.example/lot.jpg', `${BUYER}/media/2026-10/photo.jpg`] },
+      { body: 'Photo du lot', attachments: [`${BUYER}/media/2026-10/0b6f1d2e-3c4a-4b5d-8e6f-7a8b9c0d1e2f.jpg`] },
       reqAs(BUYER),
     );
-    assert.equal(accepted.attachments.length, 2);
+    assert.equal(accepted.attachments.length, 1);
 
     // Stabilisation V1 : une clé de stockage doit appartenir à l'organisation de l'expéditeur.
     await assert.rejects(
-      () => messaging.postMessage(conversation.id, { body: 'Pièce d’autrui', attachments: [`${SELLER}/documents/2026-10/kyc.pdf`] }, reqAs(BUYER)),
+      () => messaging.postMessage(conversation.id, { body: 'Pièce d’autrui', attachments: [`${SELLER}/documents/2026-10/1c7e2f3a-4d5b-4c6e-9f70-8b9cad0e1f30.pdf`] }, reqAs(BUYER)),
       (error) => error.status === 422 && error.errors?.[0]?.code === 'foreign_storage_key',
     );
   } finally {

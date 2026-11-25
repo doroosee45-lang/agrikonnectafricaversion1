@@ -10,7 +10,7 @@ import { supabaseAdmin } from '../../config/supabase.js';
 import { env } from '../../config/env.js';
 import { ApiError } from '../../shared/errors/ApiError.js';
 import { isClientId, resolveId } from '../../shared/ids.js';
-import { storageKey as cleStockage } from '../../shared/crypto.js';
+import { estCleDeLOrganisation, estCleStockageConforme, prefixeStockage } from '../../shared/storageKeys.js';
 import { logger } from '../../shared/http/logger.js';
 import { audit } from '../../shared/audit.js';
 import { notifyMany } from '../../shared/events.js';
@@ -156,36 +156,37 @@ const loadSubject = async (subjectType, subjectId, organizationId, participantOr
 
 const estUrl = (valeur) => /^https?:\/\//i.test(valeur);
 
-/**
- * Préfixe des clés de stockage d'une organisation : même assainissement que
- * `media.service.js` (`storageKey(organizationId, 'media'|'documents', …)`).
- */
-export const prefixeStockage = (organizationId) => `${cleStockage(organizationId)}/`;
+export { prefixeStockage };
 
 /**
- * Validation des pièces jointes : URL http(s) ou clé de stockage interne.
+ * Validation des pièces jointes d'un NOUVEAU message (A3).
  *
- * Une clé de stockage doit appartenir à l'organisation de l'EXPÉDITEUR : la
- * lecture du fil signe ces clés pour les destinataires (`attachmentUrls`). Sans
- * cette règle, joindre la clé d'un document privé d'une autre organisation
- * suffirait à en obtenir une URL signée.
+ *  - seules les clés de stockage produites par le serveur sont acceptées
+ *    (`shared/storageKeys.js`) : `..`, segments vides, formes libres refusés ;
+ *  - URL externes refusées (hameçonnage, fuite d'adresse IP au préchargement,
+ *    contenu non contrôlé) : aucun client V1 n'en produit ;
+ *  - la clé doit appartenir à l'organisation de l'EXPÉDITEUR (D3) : la lecture
+ *    du fil signe ces clés pour les destinataires.
+ * Les pièces jointes déjà enregistrées ne sont pas modifiées (voir signature).
  */
 export const assertAttachments = (attachments = [], senderOrgId = null) => {
   if (!Array.isArray(attachments)) {
     throw ApiError.badRequest('Pièces jointes invalides (liste attendue)', [{ field: 'attachments', code: 'invalid' }]);
   }
   for (const attachment of attachments) {
-    const ok =
-      typeof attachment === 'string' &&
-      attachment.length <= 500 &&
-      (estUrl(attachment) || /^[A-Za-z0-9._\-/]+$/.test(attachment));
-    if (!ok) {
+    if (typeof attachment === 'string' && estUrl(attachment)) {
       throw ApiError.badRequest(
-        `Pièce jointe invalide : ${String(attachment).slice(0, 40)}… (URL http(s) ou clé de stockage attendue)`,
-        [{ field: 'attachments', code: 'invalid' }],
+        'Pièce jointe refusée : les liens externes ne sont pas acceptés (dépose le fichier sur la plateforme)',
+        [{ field: 'attachments', code: 'external_url_refused' }],
       );
     }
-    if (!estUrl(attachment) && senderOrgId && !attachment.startsWith(prefixeStockage(senderOrgId))) {
+    if (!estCleStockageConforme(attachment)) {
+      throw ApiError.badRequest(
+        `Pièce jointe invalide : ${String(attachment).slice(0, 40)}… (clé de stockage de la plateforme attendue)`,
+        [{ field: 'attachments', code: 'invalid_storage_key' }],
+      );
+    }
+    if (senderOrgId && !estCleDeLOrganisation(attachment, senderOrgId)) {
       throw ApiError.badRequest(
         'Pièce jointe refusée : ce fichier n\'appartient pas à ton organisation',
         [{ field: 'attachments', code: 'foreign_storage_key' }],
@@ -201,16 +202,17 @@ const bucketDeCle = (cle) =>
 
 /**
  * Ajoute `attachmentUrls` (aligné sur `attachments`) : URL signée fraîche pour
- * chaque clé de stockage appartenant à une organisation PARTICIPANTE, URL
- * inchangée pour un lien http(s), `null` sinon (clé étrangère ou stockage non
- * configuré). Ne fait jamais échouer la lecture du fil.
+ * chaque clé CONFORME appartenant à une organisation PARTICIPANTE ; `null`
+ * sinon. Compatibilité des données antérieures (A3) : `attachments` est
+ * renvoyé tel quel, mais une ancienne URL externe ou une clé non conforme
+ * (traversée, forme libre) n'est jamais signée ni relayée comme lien.
+ * Ne fait jamais échouer la lecture du fil.
  */
 export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
-  const prefixes = participantOrgIds.map(prefixeStockage);
   const parBucket = new Map();
   for (const message of messages) {
     for (const piece of message.attachments ?? []) {
-      if (estUrl(piece) || !prefixes.some((p) => piece.startsWith(p))) continue;
+      if (!participantOrgIds.some((org) => estCleDeLOrganisation(piece, org))) continue;
       const bucket = bucketDeCle(piece);
       if (!parBucket.has(bucket)) parBucket.set(bucket, new Set());
       parBucket.get(bucket).add(piece);
@@ -236,9 +238,7 @@ export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
 
   return messages.map((message) => ({
     ...message,
-    attachmentUrls: (message.attachments ?? []).map((piece) =>
-      estUrl(piece) ? piece : signees.get(piece) ?? null,
-    ),
+    attachmentUrls: (message.attachments ?? []).map((piece) => signees.get(piece) ?? null),
   }));
 };
 

@@ -200,7 +200,7 @@ test(
 
 test('A1 — clé d’une autre organisation : refusée en REST et en socket', async () => {
   const roomId = await groupe('awa', 'A1', ['ben']);
-  const cle = `${comptes.ben.organizationId}/documents/2026-11/secret.pdf`;
+  const cle = `${comptes.ben.organizationId}/documents/2026-11/0b6f1d2e-3c4a-4b5d-8e6f-7a8b9c0d1e2f.pdf`;
   const rest = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, { body: { body: 'x', attachments: [cle] } });
   assert.equal(rest.status, 422);
   assert.equal(rest.body.errors?.[0]?.code, 'foreign_storage_key');
@@ -222,7 +222,6 @@ test('A2 — clés malformées : toutes refusées (422)', async () => {
 
 test(
   'A3 — traversée de chemin (`<org>/../<autre>/…`) refusée',
-  { todo: 'ANOMALIE A3 — clé contenant « .. » acceptée et transmise à la signature (voir PREUVES_SECURITE_WEBSOCKET.md)' },
   async () => {
     const roomId = await groupe('awa', 'A3', ['ben']);
     const org = comptes.awa.organizationId;
@@ -245,7 +244,7 @@ test(
 test('A4 — participant retiré : plus aucun accès au fil ni à ses pièces jointes', async () => {
   const roomId = await groupe('awa', 'A4', ['cleo']);
   const post = await as('awa', 'POST', `/messaging/conversations/${roomId}/messages`, {
-    body: { body: 'pièce', attachments: [`${comptes.awa.organizationId}/media/2026-11/p.jpg`] },
+    body: { body: 'pièce', attachments: [`${comptes.awa.organizationId}/media/2026-11/1c7e2f3a-4d5b-4c6e-9f70-8b9cad0e1f30.jpg`] },
   });
   assert.equal(post.status, 201);
   assert.equal((await as('cleo', 'GET', `/messaging/conversations/${roomId}/messages`)).status, 200);
@@ -260,7 +259,7 @@ test('A4 — participant retiré : plus aucun accès au fil ni à ses pièces jo
 
 test('A5 — URL signées : TTL de configuration, nouvelle signature à chaque lecture', async () => {
   const roomId = await groupe('awa', 'A5', ['ben']);
-  const cle = `${comptes.awa.organizationId}/media/2026-11/photo.jpg`;
+  const cle = `${comptes.awa.organizationId}/media/2026-11/2d8f3a4b-5e6c-4d7f-a081-9cadbe1f2041.jpg`;
   const appels = [];
   let n = 0;
   Object.defineProperty(supabaseAdmin, 'storage', {

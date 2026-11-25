@@ -1,0 +1,92 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:53313/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 133.912 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 33.576 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 31.840 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 23.502 ms - 917[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 32.938 ms - 303[0m
+[0mPOST /api/v1/media/upload-url [32m201[0m 15.756 ms - 514[0m
+[0mPOST /api/v1/messaging/conversations/01M89NEK39W0XTHAZX2XZ61DR6/messages [32m201[0m 30.606 ms - 555[0m
+[0mGET /api/v1/messaging/conversations/01M89NEK39W0XTHAZX2XZ61DR6/messages [32m200[0m 10.744 ms - 1193[0m
+✔ PJ-1 — clé obtenue par le vrai `POST /media/upload-url` : conforme, acceptée, signée pour le destinataire (14429.3089ms)
+ℹ PJ-1 : clé 01M89NEJR798MEH7F8K8Z5S1XQ/media/2026-11/c3013edf-f5ee-418c-a337-c06c7ce2d13f.jpg ; envoi 201 ; URL destinataire https://stub.storage/01M89NEJR798MEH7F8K8Z5S1XQ/media/2026-11/c3013edf-f5ee-418c-a337-c06c7ce2d13f.jpg?t=1
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.962 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89NEK69W7A6BD8603S2ERAY/messages [32m201[0m 17.499 ms - 416[0m
+✖ PJ-2 — URL externe refusée pour un nouveau message, en REST comme en socket (42.1371ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 16.845 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89NEK7NN1811N4FTP5YDF64/messages [32m201[0m 16.192 ms - 623[0m
+✖ PJ-3 — formes non conformes refusées en `invalid_storage_key` (traversée, forme libre, catégorie, mois) (41.2862ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 15.612 ms - 303[0m
+[0mGET /api/v1/messaging/conversations/01M89NEK8ZTPH9YQBEZ3WYYA34/messages [32m200[0m 9.073 ms - 1306[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 7.297 ms - 1506[0m
+✖ PJ-4 — données antérieures (URL externe, traversée) : renvoyées INCHANGÉES, jamais signées (44.6097ms)
+ℹ PJ-4 : attachments ["https://ancien.exemple/a.png","01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf"] ; attachmentUrls ["https://ancien.exemple/a.png","https://stub.storage/01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf?t=1"] ; sync attachment_urls ["https://ancien.exemple/a.png","https://stub.storage/01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf?t=1"] ; clés transmises à la signature ["01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf","01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf"]
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16714.6432
+
+✖ failing tests:
+
+test at tests\e2e\piecesJointesV1.e2e.test.mjs:87:1
+✖ PJ-2 — URL externe refusée pour un nouveau message, en REST comme en socket (42.1371ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/piecesJointesV1.e2e.test.mjs:90:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\piecesJointesV1.e2e.test.mjs:100:1
+✖ PJ-3 — formes non conformes refusées en `invalid_storage_key` (traversée, forme libre, catégorie, mois) (41.2862ms)
+  AssertionError [ERR_ASSERTION]: 01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/c336e1d3-408c-424d-9bd7-8f8dac001de5.pdf
+  
+  201 !== 422
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/piecesJointesV1.e2e.test.mjs:106:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 201,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\piecesJointesV1.e2e.test.mjs:111:1
+✖ PJ-4 — données antérieures (URL externe, traversée) : renvoyées INCHANGÉES, jamais signées (44.6097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  +   'https://ancien.exemple/a.png',
+  +   'https://stub.storage/01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf?t=1'
+  -   null,
+  -   null
+    ]
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/piecesJointesV1.e2e.test.mjs:126:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'https://ancien.exemple/a.png', 'https://stub.storage/01M89NEJR798MEH7F8K8Z5S1XQ/../01M89NEJVGNAHYV9F1JTA60G7G/documents/2026-11/2f034821-449b-480c-afb5-338b71c5aac2.pdf?t=1' ],
+    expected: [ null, null ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

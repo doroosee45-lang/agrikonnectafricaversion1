@@ -116,12 +116,12 @@ test('Pièces jointes — clé étrangère refusée, clé de l’expéditeur acc
   const id = conv.body.data.id;
 
   const etrangere = await as('ben', 'POST', `/messaging/conversations/${id}/messages`, {
-    body: { body: 'doc', attachments: [`${comptes.awa.organizationId}/documents/2026-11/piece.pdf`] },
+    body: { body: 'doc', attachments: [`${comptes.awa.organizationId}/documents/2026-11/0b6f1d2e-3c4a-4b5d-8e6f-7a8b9c0d1e2f.pdf`] },
   });
   assert.equal(etrangere.status, 422, JSON.stringify(etrangere.body));
 
   const propre = await as('ben', 'POST', `/messaging/conversations/${id}/messages`, {
-    body: { body: 'photo', attachments: [`${comptes.ben.organizationId}/media/2026-11/p.jpg`] },
+    body: { body: 'photo', attachments: [`${comptes.ben.organizationId}/media/2026-11/1c7e2f3a-4d5b-4c6e-9f70-8b9cad0e1f30.jpg`] },
   });
   assert.equal(propre.status, 201, JSON.stringify(propre.body));
   assert.equal(propre.body.data.attachmentUrls.length, 1);

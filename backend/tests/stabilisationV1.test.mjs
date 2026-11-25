@@ -154,20 +154,30 @@ test('M1 — `localTempId` mal formé : 422', async () => {
 // ─── Pièces jointes ──────────────────────────────────────────────────────
 
 test('Pièces jointes — une clé de stockage d’une autre organisation est refusée', () => {
+  // Clés conformes à la grammaire A3 (shared/storageKeys.js) : seul l'appartenance diffère.
   assert.throws(
-    () => messaging.assertAttachments([`${B}/documents/2026-11/id.pdf`], A),
+    () => messaging.assertAttachments([`${B}/documents/2026-11/0b6f1d2e-3c4a-4b5d-8e6f-7a8b9c0d1e2f.pdf`], A),
     (e) => e.status === 422 && e.errors?.[0]?.code === 'foreign_storage_key',
   );
-  assert.deepEqual(messaging.assertAttachments([`${A}/media/2026-11/p.jpg`, 'https://exemple.cd/a.png'], A).length, 2);
+  assert.deepEqual(messaging.assertAttachments([`${A}/media/2026-11/1c7e2f3a-4d5b-4c6e-9f70-8b9cad0e1f30.jpg`], A).length, 1);
   assert.throws(() => messaging.assertAttachments('pas-une-liste', A), (e) => e.status === 422);
 });
 
-test('Pièces jointes — `attachmentUrls` aligné ; jamais de signature pour une clé étrangère', async () => {
+test('A3 — URL externe refusée pour un nouveau message (décision d’architecture)', () => {
+  assert.throws(
+    () => messaging.assertAttachments(['https://exemple.cd/a.png'], A),
+    (e) => e.status === 422 && e.errors?.[0]?.code === 'external_url_refused',
+  );
+});
+
+test('Pièces jointes — `attachmentUrls` aligné ; jamais de signature pour une clé étrangère ni une ancienne URL (A3)', async () => {
   const [m] = await messaging.signerPiecesJointes(
-    [{ id: 'm', attachments: ['https://exemple.cd/a.png', `${C}/media/2026-11/x.jpg`] }],
+    [{ id: 'm', attachments: ['https://exemple.cd/a.png', `${C}/media/2026-11/2d8f3a4b-5e6c-4d7f-a081-9cadbe1f2041.jpg`] }],
     [A, B],
   );
-  assert.deepEqual(m.attachmentUrls, ['https://exemple.cd/a.png', null]);
+  // A3 : une ancienne URL externe n'est plus relayée comme lien (null) ; `attachments` reste inchangé.
+  assert.deepEqual(m.attachmentUrls, [null, null]);
+  assert.deepEqual(m.attachments, ['https://exemple.cd/a.png', `${C}/media/2026-11/2d8f3a4b-5e6c-4d7f-a081-9cadbe1f2041.jpg`]);
 });
 
 // ─── M2 : synchronisation différée ───────────────────────────────────────

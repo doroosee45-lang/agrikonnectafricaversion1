@@ -1,0 +1,34 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:56784/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 1035.869 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 41.202 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 30.664 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 19.020 ms - 917[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 106.285 ms - 303[0m
+[0mPOST /api/v1/media/upload-url [32m201[0m 15.661 ms - 514[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDRZ49D247SMBQD00ZG3R/messages [32m201[0m 39.693 ms - 555[0m
+[0mGET /api/v1/messaging/conversations/01M89NDRZ49D247SMBQD00ZG3R/messages [32m200[0m 46.807 ms - 1193[0m
+✔ PJ-1 — clé obtenue par le vrai `POST /media/upload-url` : conforme, acceptée, signée pour le destinataire (24582.1588ms)
+ℹ PJ-1 : clé 01M89NDR1T53W12WG82NHSJKXR/media/2026-11/a8c283a2-213d-4660-8cef-930c1ce03783.jpg ; envoi 201 ; URL destinataire https://stub.storage/01M89NDR1T53W12WG82NHSJKXR/media/2026-11/a8c283a2-213d-4660-8cef-930c1ce03783.jpg?t=1
+[0mPOST /api/v1/messaging/groups [32m201[0m 16.678 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS3QCW1HSYPRPYBJ18NE/messages [33m422[0m 11.300 ms - 309[0m
+✔ PJ-2 — URL externe refusée pour un nouveau message, en REST comme en socket (115.7965ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.245 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS77223YTEHP8N6352FA/messages [33m422[0m 9.194 ms - 316[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS77223YTEHP8N6352FA/messages [33m422[0m 8.608 ms - 316[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS77223YTEHP8N6352FA/messages [33m422[0m 11.047 ms - 316[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS77223YTEHP8N6352FA/messages [33m422[0m 8.646 ms - 316[0m
+[0mPOST /api/v1/messaging/conversations/01M89NDS77223YTEHP8N6352FA/messages [33m422[0m 8.786 ms - 316[0m
+✔ PJ-3 — formes non conformes refusées en `invalid_storage_key` (traversée, forme libre, catégorie, mois) (79.8049ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 19.000 ms - 303[0m
+[0mGET /api/v1/messaging/conversations/01M89NDS9WB3Y4TWMBN5767N62/messages [32m200[0m 10.750 ms - 1142[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 33.369 ms - 1342[0m
+✔ PJ-4 — données antérieures (URL externe, traversée) : renvoyées INCHANGÉES, jamais signées (84.5887ms)
+ℹ PJ-4 : attachments ["https://ancien.exemple/a.png","01M89NDR1T53W12WG82NHSJKXR/../01M89NDRBQZKZACABD2D38B2TM/documents/2026-11/fc017883-4d9a-4078-b2ad-d1e0e174efbf.pdf"] ; attachmentUrls [null,null] ; sync attachment_urls [null,null] ; clés transmises à la signature []
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27551.7974

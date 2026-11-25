@@ -1,10 +1,9 @@
-import { randomUUID } from 'node:crypto';
 import { prisma } from '../../config/prisma.js';
 import { supabaseAdmin } from '../../config/supabase.js';
 import { env } from '../../config/env.js';
 import { ApiError } from '../../shared/errors/ApiError.js';
 import { resolveId } from '../../shared/ids.js';
-import { storageKey } from '../../shared/crypto.js';
+import { nouvelleCleStockage } from '../../shared/storageKeys.js';
 import { ALLOWED_MIME } from './media.schema.js';
 import { assertOwnership } from '../../middleware/tenant.js';
 import { audit } from '../../shared/audit.js';
@@ -57,12 +56,8 @@ export const createUploadUrl = async (payload, req) => {
   }
 
   const extension = ALLOWED_MIME[mimeType];
-  const key = storageKey(
-    req.tenant.organizationId,
-    isDocument ? 'documents' : 'media',
-    new Date().toISOString().slice(0, 7),
-    `${randomUUID()}.${extension}`,
-  );
+  // Forme unique des clés (A3) : `shared/storageKeys.js`.
+  const key = nouvelleCleStockage(req.tenant.organizationId, isDocument ? 'documents' : 'media', extension);
 
   const media = await prisma.media.create({
     data: {
