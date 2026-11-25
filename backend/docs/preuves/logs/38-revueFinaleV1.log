@@ -1,0 +1,71 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:49693/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 81.928 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 18.321 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 16.602 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.686 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.237 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.359 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.294 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.354 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.951 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.424 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.729 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.763 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.695 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.854 ms - 919[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 18.497 ms - 303[0m
+[0mGET /api/v1/messaging/conversations/01M89RDG380RRCVZVYW1HQ37FX/messages [32m200[0m 7.682 ms - 995[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 20.155 ms - 1252[0m
+✔ A3-X — message ANCIEN de A contenant une clé conforme de B (participant) : jamais signée pour personne (12501.2967ms)
+ℹ A3-X : attachmentUrls [null] ; sync [null] ; clé transmise au stockage : false
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.825 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89RDG4VR10D1K81BM90JXS7/messages [32m201[0m 20.577 ms - 556[0m
+[0mGET /api/v1/messaging/conversations/01M89RDG4VR10D1K81BM90JXS7/messages [32m200[0m 6.240 ms - 1194[0m
+✔ A3-Y — clé conforme de l’EXPÉDITEUR : signée pour les participants (non-régression) (43.6495ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 121.329 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 123.424 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 127.248 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 141.384 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 153.820 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 147.383 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 151.995 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 150.878 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 152.287 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 156.497 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 160.680 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 161.732 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 174.411 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 177.928 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 177.041 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 180.582 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 180.522 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 184.323 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 184.655 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 187.338 ms - 307[0m
+✔ TX3-1 — même nom « Famille », administrateurs et membres différents, en concurrence : DEUX groupes distincts (207.8591ms)
+ℹ TX3-1 : groupes « Famille » 2 ; administrateurs awa,cleo
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.439 ms - 306[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 8.028 ms - 306[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 5.765 ms - 306[0m
+✔ TX3-2 — même administrateur, même nom, membres différents : deux groupes (la déduplication exige des membres identiques) (31.772ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 8.863 ms - 303[0m
+✔ WH-1 — rôle retiré : `typing`, `conversation:join` et `send_message` sont refusés EN PLUS de la sortie des rooms (323.1275ms)
+ℹ WH-1 : typing relayé=false ; join {"ok":false,"error":"FORBIDDEN"} ; send {"ok":false,"error":"PERMISSION_DENIED"}
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.080 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89RDGQTPBPTWNQR8KSEW40R/messages [32m201[0m 14.704 ms - 375[0m
+[0mPOST /api/v1/messaging/conversations/01M89RDGQTPBPTWNQR8KSEW40R/messages [32m201[0m 11.124 ms - 375[0m
+[0mGET /api/v1/messaging/conversations/01M89RDGQTPBPTWNQR8KSEW40R/messages [33m403[0m 6.065 ms - 134[0m
+✔ WH-2 — compte sans `messages.read` (INVESTOR) : ne reçoit aucun contenu de fil, ni à la connexion ni après `conversation:join` (465.6992ms)
+ℹ WH-2 : REST lecture 403 ; reçu via socket dès la connexion=false ; join {"ok":false,"error":"FORBIDDEN"} ; reçu après join=false
+✔ WC-1 — client Socket.IO des applications : `session:revoked` reçu, coupure serveur, AUCUNE reconnexion automatique (1801.9514ms)
+ℹ WC-1 : socket.io-client 4.8.4 ; événements ["session:revoked:SESSIONS_REVOKED","disconnect:io server disconnect"] ; connecté après 1,5 s=false
+✔ WC-2 — comparaison : coupure RÉSEAU (non décidée par le serveur) → le client se reconnecte de lui-même (1523.3666ms)
+ℹ WC-2 : événements ["disconnect:forced close","reconnect"] ; connecté=true
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19239.063

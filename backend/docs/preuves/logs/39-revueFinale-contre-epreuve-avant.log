@@ -1,0 +1,131 @@
+⚠️  Messagerie : EMAIL_WEBHOOK_URL pointe vers http://127.0.0.1:61319/email : injoignable hors de cette machine.
+[0mPOST /api/v1/auth/register [32m201[0m 208.942 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 17.279 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.148 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 9.665 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.274 ms - 1078[0m
+[0mPOST /api/v1/auth/login [32m200[0m 7.092 ms - 920[0m
+[0mPOST /api/v1/auth/register [32m201[0m 9.839 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.976 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 14.256 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 12.355 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 12.413 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 10.883 ms - 917[0m
+[0mPOST /api/v1/auth/register [32m201[0m 11.036 ms - 1074[0m
+[0mPOST /api/v1/auth/login [32m200[0m 8.966 ms - 919[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 28.430 ms - 303[0m
+[0mGET /api/v1/messaging/conversations/01M89REE3VBNDZTKQ44DABFQ5X/messages [32m200[0m 9.391 ms - 1103[0m
+[0mPOST /api/v1/messaging/sync [32m200[0m 17.759 ms - 1360[0m
+✖ A3-X — message ANCIEN de A contenant une clé conforme de B (participant) : jamais signée pour personne (14968.4995ms)
+ℹ A3-X : attachmentUrls ["https://stub.storage/01M89REDPNWV2CDM3RTEMFX6V1/documents/2026-11/6d924739-fd03-4f38-9893-289c9043f09c.pdf?t=1"] ; sync ["https://stub.storage/01M89REDPNWV2CDM3RTEMFX6V1/documents/2026-11/6d924739-fd03-4f38-9893-289c9043f09c.pdf?t=1"] ; clé transmise au stockage : true
+[0mPOST /api/v1/messaging/groups [32m201[0m 10.984 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89REE5F50V3BQ76HQMZ3TQN/messages [32m201[0m 21.917 ms - 556[0m
+[0mGET /api/v1/messaging/conversations/01M89REE5F50V3BQ76HQMZ3TQN/messages [32m200[0m 7.178 ms - 1194[0m
+✔ A3-Y — clé conforme de l’EXPÉDITEUR : signée pour les participants (non-régression) (46.002ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 137.656 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 141.561 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 147.815 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 153.338 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 155.878 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 158.796 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 171.111 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 172.792 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 171.309 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 173.230 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 175.010 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 179.850 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 196.617 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 200.128 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 204.040 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 204.225 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 205.797 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 211.172 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 210.513 ms - 307[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 250.744 ms - 307[0m
+✔ TX3-1 — même nom « Famille », administrateurs et membres différents, en concurrence : DEUX groupes distincts (273.1016ms)
+ℹ TX3-1 : groupes « Famille » 2 ; administrateurs awa,cleo
+[0mPOST /api/v1/messaging/groups [32m201[0m 24.456 ms - 306[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 11.470 ms - 306[0m
+[0mPOST /api/v1/messaging/groups [32m201[0m 8.108 ms - 306[0m
+✔ TX3-2 — même administrateur, même nom, membres différents : deux groupes (la déduplication exige des membres identiques) (50.72ms)
+[0mPOST /api/v1/messaging/groups [32m201[0m 13.874 ms - 303[0m
+✖ WH-1 — rôle retiré : `typing`, `conversation:join` et `send_message` sont refusés EN PLUS de la sortie des rooms (297.1677ms)
+ℹ WH-1 : typing relayé=false ; join {"ok":true} ; send {"ok":false,"error":"PERMISSION_DENIED"}
+[0mPOST /api/v1/messaging/groups [32m201[0m 12.784 ms - 303[0m
+[0mPOST /api/v1/messaging/conversations/01M89REETART2FWAXJ8X45SYZW/messages [32m201[0m 19.374 ms - 375[0m
+[0mPOST /api/v1/messaging/conversations/01M89REETART2FWAXJ8X45SYZW/messages [32m201[0m 24.222 ms - 375[0m
+[0mGET /api/v1/messaging/conversations/01M89REETART2FWAXJ8X45SYZW/messages [33m403[0m 4.361 ms - 134[0m
+✖ WH-2 — compte sans `messages.read` (INVESTOR) : ne reçoit aucun contenu de fil, ni à la connexion ni après `conversation:join` (497.4002ms)
+ℹ WH-2 : REST lecture 403 ; reçu via socket dès la connexion=true ; join {"ok":true} ; reçu après join=true
+✔ WC-1 — client Socket.IO des applications : `session:revoked` reçu, coupure serveur, AUCUNE reconnexion automatique (1709.1331ms)
+ℹ WC-1 : socket.io-client 4.8.4 ; événements ["session:revoked:SESSIONS_REVOKED","disconnect:io server disconnect"] ; connecté après 1,5 s=false
+✔ WC-2 — comparaison : coupure RÉSEAU (non décidée par le serveur) → le client se reconnecte de lui-même (1519.6223ms)
+ℹ WC-2 : événements ["disconnect:forced close","reconnect"] ; connecté=true
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21132.7501
+
+✖ failing tests:
+
+test at tests\e2e\revueFinaleV1.e2e.test.mjs:84:1
+✖ A3-X — message ANCIEN de A contenant une clé conforme de B (participant) : jamais signée pour personne (14968.4995ms)
+  AssertionError [ERR_ASSERTION]: la clé d’un AUTRE tenant que l’expéditeur n’est jamais signée
+  + actual - expected
+  
+    [
+  +   'https://stub.storage/01M89REDPNWV2CDM3RTEMFX6V1/documents/2026-11/6d924739-fd03-4f38-9893-289c9043f09c.pdf?t=1'
+  -   null
+    ]
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueFinaleV1.e2e.test.mjs:96:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'https://stub.storage/01M89REDPNWV2CDM3RTEMFX6V1/documents/2026-11/6d924739-fd03-4f38-9893-289c9043f09c.pdf?t=1' ],
+    expected: [ null ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueFinaleV1.e2e.test.mjs:138:1
+✖ WH-1 — rôle retiré : `typing`, `conversation:join` et `send_message` sont refusés EN PLUS de la sortie des rooms (297.1677ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueFinaleV1.e2e.test.mjs:150:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\e2e\revueFinaleV1.e2e.test.mjs:157:1
+✖ WH-2 — compte sans `messages.read` (INVESTOR) : ne reçoit aucun contenu de fil, ni à la connexion ni après `conversation:join` (497.4002ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/AGRIKONNECT/Soupabase/Nouveau%20dossier/V1/agrikonnect-africa-final/backend/tests/e2e/revueFinaleV1.e2e.test.mjs:171:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

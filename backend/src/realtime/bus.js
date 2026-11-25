@@ -120,8 +120,11 @@ const couper = (socket, motif) => {
   socket.disconnect(true);
 };
 
-/** Organisations dont les adhésions ACTIVES donnent le droit de LIRE la messagerie. */
-const organisationsLisibles = (memberships = []) => {
+/**
+ * Organisations dont les adhésions ACTIVES donnent le droit de LIRE la messagerie.
+ * Règle UNIQUE pour la connexion, `conversation:join` et le filet (WH-1, WH-2).
+ */
+export const organisationsLisibles = (memberships = []) => {
   const tousRoles = [...new Set(memberships.flatMap((m) => m.roles ?? []))];
   return memberships
     .filter((m) => can(rolesEffectifs(m.roles ?? [], tousRoles), 'messages.read'))

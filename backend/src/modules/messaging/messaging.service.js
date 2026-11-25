@@ -212,7 +212,9 @@ export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
   const parBucket = new Map();
   for (const message of messages) {
     for (const piece of message.attachments ?? []) {
-      if (!participantOrgIds.some((org) => estCleDeLOrganisation(piece, org))) continue;
+      // A3-X : seule une clé de l'organisation EXPÉDITRICE (participante) est signée.
+      // Une clé d'un autre participant, présente dans un ancien message, ne l'est jamais.
+      if (!participantOrgIds.includes(message.senderOrgId) || !estCleDeLOrganisation(piece, message.senderOrgId)) continue;
       const bucket = bucketDeCle(piece);
       if (!parBucket.has(bucket)) parBucket.set(bucket, new Set());
       parBucket.get(bucket).add(piece);
@@ -238,7 +240,11 @@ export const signerPiecesJointes = async (messages, participantOrgIds = []) => {
 
   return messages.map((message) => ({
     ...message,
-    attachmentUrls: (message.attachments ?? []).map((piece) => signees.get(piece) ?? null),
+    attachmentUrls: (message.attachments ?? []).map((piece) =>
+      participantOrgIds.includes(message.senderOrgId) && estCleDeLOrganisation(piece, message.senderOrgId)
+        ? signees.get(piece) ?? null
+        : null,
+    ),
   }));
 };
 

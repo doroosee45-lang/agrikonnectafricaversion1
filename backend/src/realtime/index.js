@@ -7,6 +7,7 @@ import { isOriginAllowed } from '../config/cors.js';
 import { logger } from '../shared/http/logger.js';
 import { contexteEnvoi, sendMessageSchema } from './sendGuard.js';
 import {
+  organisationsLisibles,
   empreinteJeton,
   passageFilet,
   setIo,
@@ -157,7 +158,10 @@ export const attachRealtime = (httpServer, { intervalleFiletMs = env.REALTIME_RE
       socket.data.expiration = expirationJeton(token);
       // Instantané de connexion : sert UNIQUEMENT à choisir les rooms initiales.
       // Les actions sensibles relisent le profil (`chargerProfilActif`).
-      socket.data.organizationIds = profile.memberships.map((m) => m.organizationId);
+      // WH-2 : seules les organisations où l'utilisateur peut LIRE la messagerie
+      // (`messages.read`) donnent accès aux rooms. Un compte sans ce droit
+      // (ex. INVESTOR) recevait le contenu des fils alors que le REST le refusait.
+      socket.data.organizationIds = organisationsLisibles(profile.memberships);
       return next();
     } catch (error) {
       logger.warn('[realtime] échec d\'authentification :', error.message);
@@ -214,7 +218,8 @@ export const attachRealtime = (httpServer, { intervalleFiletMs = env.REALTIME_RE
 
       const profile = await profilCourant(ack);
       if (!profile) return undefined;
-      const organisationsActuelles = profile.memberships.map((m) => m.organizationId);
+      // WH-1 : même règle qu'à la connexion (droit `messages.read`), relue maintenant.
+      const organisationsActuelles = organisationsLisibles(profile.memberships);
 
       const conversation = await prisma.conversation
         .findUnique({ where: { id: conversationId }, select: { participantOrgIds: true } })
