@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef } from 'react';
-import { Animated, Linking, Pressable, StyleSheet, View } from 'react-native';
+import { Alert, Animated, Linking, Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { AppImage, Text } from '@/components/ui';
@@ -72,22 +72,43 @@ function BulleBrute({ message, mien, etat, heure, suiteDuPrecedent, onRenvoyer, 
     case 'AUDIO':
       contenu = <LecteurNoteVocale source={sourceMedia} dureeSec={lireDureeNoteVocale(message.content)} mien={mien} />;
       break;
-    case 'DOCUMENT':
+    case 'DOCUMENT': {
+      const nom = message.content.replace(/^📄\s*/, '');
+      const ext = /\.([A-Za-z0-9]{2,5})$/.exec(nom)?.[1]?.toUpperCase() ?? 'FICHIER';
+      // Ouverture par l'URL signée https (lecteur PDF, navigateur, lecteur vidéo).
+      // Un fichier local (file://) n'est pas ouvrable par une autre application
+      // sur Android : tant qu'il n'est pas envoyé, on l'explique.
+      const urlDistante = urlSigneePour(message.server_id);
+      const ouvrir = () => {
+        if (urlDistante) {
+          void Linking.openURL(urlDistante).catch(() =>
+            Alert.alert(fr ? 'Ouverture impossible' : 'Cannot open', fr ? 'Aucune application ne peut ouvrir ce fichier.' : 'No app can open this file.'),
+          );
+          return;
+        }
+        Alert.alert(
+          nom,
+          message.sync_status === 'SENT'
+            ? fr ? 'Le lien du fichier se charge, réessaie dans un instant.' : 'The file link is loading, try again shortly.'
+            : fr ? 'Le fichier sera disponible dès son envoi.' : 'The file will be available once sent.',
+        );
+      };
       contenu = (
-        <Pressable
-          onPress={() => sourceMedia && void Linking.openURL(sourceMedia)}
-          disabled={!sourceMedia}
-          accessibilityRole="link"
-          style={styles.document}
-        >
-          <Ionicons name="document-text" size={28} color={mien ? COLORS.pureWhite : COLORS.error} />
-          <Text preset="bodySm" color={couleurTexte} numberOfLines={2} style={styles.flex}>
-            {message.content.replace(/^📄\s*/, '')}
-          </Text>
-          <Ionicons name="download-outline" size={18} color={couleurTexte} />
+        <Pressable onPress={ouvrir} accessibilityRole="link" accessibilityLabel={`${fr ? 'Ouvrir' : 'Open'} ${nom}`} style={styles.document}>
+          <View style={[styles.docIcone, { backgroundColor: mien ? 'rgba(255,255,255,0.18)' : '#FDECEA' }]}>
+            <Ionicons name={ext === 'MP4' ? 'videocam' : 'document-text'} size={22} color={mien ? COLORS.pureWhite : COLORS.error} />
+          </View>
+          <View style={styles.flex}>
+            <Text preset="bodySm" color={couleurTexte} numberOfLines={2}>{nom}</Text>
+            <Text preset="caption" color={mien ? 'rgba(255,255,255,0.75)' : COLORS.slateGray}>
+              {ext} · {urlDistante ? (fr ? 'Toucher pour ouvrir' : 'Tap to open') : message.sync_status === 'SENT' ? '…' : fr ? 'En attente d’envoi' : 'Waiting to send'}
+            </Text>
+          </View>
+          <Ionicons name="open-outline" size={18} color={couleurTexte} />
         </Pressable>
       );
       break;
+    }
     case 'LOCATION': {
       const position = lirePosition(message.content);
       contenu = position ? <CartePosition position={position} mien={mien} /> : null;
@@ -221,7 +242,8 @@ const styles = StyleSheet.create({
   pied: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 4 },
   heure: { fontSize: 11 },
   image: { width: 220, height: 220 },
-  document: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm, minWidth: 200 },
+  document: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm, minWidth: 220 },
+  docIcone: { width: 40, height: 40, borderRadius: RADIUS.md, alignItems: 'center', justifyContent: 'center' },
   renvoyer: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4 },
   appelRangee: { alignItems: 'center', marginTop: SPACING.sm, paddingHorizontal: SPACING.md },
   appel: {

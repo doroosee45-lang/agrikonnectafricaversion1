@@ -7,7 +7,7 @@ import { offlineSyncEngine } from '@/services/OfflineSyncEngine';
 import { realtime } from '@/services/realtime';
 import { useAuthStore } from '@/store/auth';
 
-import { corpsParcelle, corpsPosition, mimeDepuisNom, TAILLE_MAX_MEDIA, type Parcelle, type Position } from './messageContent';
+import { corpsParcelle, corpsPosition, mimeDepuisNom, MIMES_ACCEPTES, TAILLE_MAX_MEDIA, type Parcelle, type Position } from './messageContent';
 
 export type GenreMedia = 'IMAGE' | 'AUDIO' | 'DOCUMENT';
 
@@ -60,8 +60,8 @@ export function useEnvoi(conversationId: string) {
   );
 
   const envoyerMedia = useCallback(
-    async ({ uri, nom, taille, genre, corps }: { uri: string; nom: string; taille: number; genre: GenreMedia; corps: string }) => {
-      const mime = mimeDepuisNom(nom);
+    async ({ uri, nom, taille, genre, corps, mime: mimeConnu }: { uri: string; nom: string; taille: number; genre: GenreMedia; corps: string; mime?: string }) => {
+      const mime = mimeConnu && MIMES_ACCEPTES[mimeConnu] ? mimeConnu : mimeDepuisNom(nom);
       if (!mime) throw new ErreurMedia('TYPE_REFUSE');
       // Le serveur exige la taille réelle (> 0) : lue sur le disque si le sélecteur ne la donne pas.
       let octets = taille;

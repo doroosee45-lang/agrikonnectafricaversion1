@@ -35,7 +35,7 @@ export interface Parcelle {
 
 const EXT_IMAGE = /\.(jpe?g|png|webp|heic)(\?|$)/i;
 const EXT_AUDIO = /\.(m4a|mp3|ogg|wav|webm|aac|caf)(\?|$)/i;
-const EXT_DOCUMENT = /\.(pdf)(\?|$)/i;
+const EXT_DOCUMENT = /\.(pdf|mp4)(\?|$)/i;
 const URL_CARTE = /https:\/\/maps\.google\.com\/\?q=(-?\d{1,2}(?:\.\d+)?),(-?\d{1,3}(?:\.\d+)?)(?:&ak_plot=([A-Za-z0-9_-]{6,64}))?/;
 
 const arrondi = (n: number) => Math.round(n * 1e5) / 1e5;
@@ -152,9 +152,54 @@ export function mimeDepuisNom(nom: string): string | null {
       return 'audio/ogg';
     case 'wav':
       return 'audio/wav';
+    case 'webm':
+      return 'audio/webm';
+    case 'mp4':
+      return 'video/mp4';
     default:
       return null;
   }
+}
+
+/** Types MIME acceptés par le serveur (backend/src/modules/media/media.schema.js). */
+export const MIMES_ACCEPTES: Readonly<Record<string, string>> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+  'application/pdf': 'pdf',
+  'video/mp4': 'mp4',
+  'audio/webm': 'webm',
+  'audio/mp4': 'm4a',
+  'audio/x-m4a': 'm4a',
+  'audio/m4a': 'm4a',
+  'audio/ogg': 'ogg',
+  'audio/mpeg': 'mp3',
+  'audio/wav': 'wav',
+};
+
+/** Filtres du sélecteur de fichiers natif (Android : types MIME ; iOS : convertis en UTI). */
+export const FILTRES_SELECTEUR = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'audio/*'];
+
+/** Libellé lisible des formats acceptés (messages d'erreur). */
+export const FORMATS_LISIBLES = 'PDF, JPEG, PNG, WebP, MP4, M4A, MP3, OGG, WAV';
+
+/**
+ * Fichier choisi dans le sélecteur natif → type MIME accepté, nom avec la
+ * bonne extension et genre d'envoi. Le type annoncé par le système est
+ * prioritaire (les noms Android « content:// » n'ont pas toujours d'extension) ;
+ * l'extension sert de repli. `null` = format refusé par le serveur.
+ */
+export function preparerFichier(nom: string | null | undefined, mimeSysteme: string | null | undefined):
+  | { nom: string; mime: string; genre: 'IMAGE' | 'AUDIO' | 'DOCUMENT' }
+  | null {
+  const brut = (nom ?? '').trim() || 'fichier';
+  const annonce = (mimeSysteme ?? '').toLowerCase();
+  const mime = MIMES_ACCEPTES[annonce] ? annonce : mimeDepuisNom(brut);
+  if (!mime || !MIMES_ACCEPTES[mime]) return null;
+  const ext = MIMES_ACCEPTES[mime];
+  const nomFinal = brut.toLowerCase().endsWith(`.${ext}`) ? brut : `${brut.replace(/\.[A-Za-z0-9]{1,5}$/, '')}.${ext}`;
+  const genre = mime.startsWith('image/') ? 'IMAGE' : mime.startsWith('audio/') ? 'AUDIO' : 'DOCUMENT';
+  return { nom: nomFinal, mime, genre };
 }
 
 /** Plafond serveur des médias (NFR-04). */

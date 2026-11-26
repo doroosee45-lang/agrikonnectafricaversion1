@@ -1,4 +1,4 @@
-import { AppState, Vibration } from 'react-native';
+import { AppState, PermissionsAndroid, Platform, Vibration } from 'react-native';
 import { create } from 'zustand';
 import type { Room } from 'livekit-client';
 
@@ -42,6 +42,22 @@ let salle: Room | null = null;
 let sondage: ReturnType<typeof setInterval> | null = null;
 let fermetureAuto: ReturnType<typeof setTimeout> | null = null;
 let nettoyages: Array<() => void> = [];
+
+/**
+ * Micro AVANT tout appel : sans l'autorisation Android RECORD_AUDIO, WebRTC
+ * n'obtient aucune piste et l'interlocuteur n'entend rien. Refus → erreur
+ * « micro » (aucun appel n'est lancé ni décroché). iOS : l'invite système est
+ * déclenchée par WebRTC à l'ouverture du micro (NSMicrophoneUsageDescription).
+ */
+async function assurerMicro(): Promise<void> {
+  if (Platform.OS !== 'android') return;
+  const deja = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO);
+  if (deja) return;
+  const reponse = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO);
+  if (reponse !== PermissionsAndroid.RESULTS.GRANTED) {
+    throw Object.assign(new Error('Autorisation du micro refusée'), { name: 'NotAllowedError' });
+  }
+}
 
 async function quitterSalle(): Promise<void> {
   const courante = salle;
@@ -194,6 +210,7 @@ export const useCalls = create<CallsStore>((set, get) => {
 
     async appeler(conversationId, inviteeUserIds) {
       try {
+        await assurerMicro();
         const { data } = await callsApi.create({ conversationId, inviteeUserIds });
         depuisServeur(data.call);
         await rejoindreSalle(data.livekit);
@@ -207,11 +224,14 @@ export const useCalls = create<CallsStore>((set, get) => {
       if (!id) return;
       Vibration.cancel();
       try {
+        await assurerMicro();
         const { data } = await callsApi.accept(id);
         depuisServeur(data.call);
         await rejoindreSalle(data.livekit);
       } catch (erreur) {
         retirerAppelSysteme(id, 'ended');
+        // Micro refusé : on refuse l'appel côté serveur (l'appelant cesse de sonner).
+        if (codeErreur(erreur) === 'microphone') await callsApi.decline(id).catch(() => undefined);
         await echec(erreur);
       }
     },

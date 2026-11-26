@@ -11,7 +11,7 @@ import { useI18n } from '@/i18n';
 import { COLORS } from '@/theme/colors';
 import { RADIUS, SPACING } from '@/theme/space';
 
-import { corpsDocument, corpsNoteVocale, corpsPhoto, formatDuree, type Parcelle } from '../messageContent';
+import { corpsDocument, corpsNoteVocale, corpsPhoto, FILTRES_SELECTEUR, formatDuree, FORMATS_LISIBLES, preparerFichier, type Parcelle } from '../messageContent';
 import { ErreurMedia, type useEnvoi } from '../useEnvoi';
 import { useNoteVocale } from '../useNoteVocale';
 import { ChoixParcelle } from './ChoixParcelle';
@@ -39,7 +39,7 @@ export function BarreSaisie({ envoi }: { envoi: Envoi }) {
   const erreur = (titre: string, corps: string) => Alert.alert(titre, corps);
   const erreurMedia = (e: unknown) => {
     if (e instanceof ErreurMedia && e.code === 'TROP_VOLUMINEUX') erreur(fr ? 'Fichier trop volumineux' : 'File too large', fr ? 'Maximum 5 Mo.' : 'Maximum 5 MB.');
-    else if (e instanceof ErreurMedia) erreur(fr ? 'Type non accepté' : 'Unsupported type', fr ? 'Photos JPEG/PNG/WebP, PDF et notes vocales seulement.' : 'JPEG/PNG/WebP photos, PDF and voice notes only.');
+    else if (e instanceof ErreurMedia) erreur(fr ? 'Format non accepté' : 'Unsupported format', `${fr ? 'Formats acceptés' : 'Accepted formats'} : ${FORMATS_LISIBLES}.`);
     else erreur(fr ? 'Envoi impossible' : 'Cannot send', fr ? 'Le fichier n’a pas pu être préparé.' : 'The file could not be prepared.');
   };
 
@@ -74,13 +74,33 @@ export function BarreSaisie({ envoi }: { envoi: Envoi }) {
     return envoyerPhoto(r.assets[0]).catch(erreurMedia);
   };
 
-  const document = async () => {
+  /**
+   * Bouton « Fichier » : sélecteur NATIF (Android : stockage, Téléchargements,
+   * Drive… ; iOS : app Fichiers). Aucune autorisation de stockage n'est
+   * nécessaire : le système donne accès au seul fichier choisi, copié dans le
+   * cache de l'application (lisible pour l'envoi, même hors ligne).
+   */
+  const fichier = async () => {
     setMenu(false);
-    const r = await DocumentPicker.getDocumentAsync({ type: 'application/pdf', copyToCacheDirectory: true, multiple: false });
-    if (r.canceled || !r.assets?.[0]) return undefined;
-    const a = r.assets[0];
+    let resultat: DocumentPicker.DocumentPickerResult;
+    try {
+      resultat = await DocumentPicker.getDocumentAsync({ type: FILTRES_SELECTEUR, copyToCacheDirectory: true, multiple: false });
+    } catch {
+      return erreur(fr ? 'Fichiers inaccessibles' : 'Files unavailable', fr ? 'Le sélecteur de fichiers n’a pas pu s’ouvrir.' : 'The file picker could not be opened.');
+    }
+    if (resultat.canceled || !resultat.assets?.[0]) return undefined; // annulation : rien à faire
+    const a = resultat.assets[0];
+    const prepare = preparerFichier(a.name, a.mimeType);
+    if (!prepare) return erreurMedia(new ErreurMedia('TYPE_REFUSE'));
     return envoi
-      .envoyerMedia({ uri: a.uri, nom: a.name, taille: a.size ?? 0, genre: 'DOCUMENT', corps: corpsDocument(a.name) })
+      .envoyerMedia({
+        uri: a.uri,
+        nom: prepare.nom,
+        mime: prepare.mime,
+        taille: a.size ?? 0,
+        genre: prepare.genre,
+        corps: prepare.genre === 'IMAGE' ? corpsPhoto() : corpsDocument(prepare.nom),
+      })
       .catch(erreurMedia);
   };
 
@@ -159,7 +179,7 @@ export function BarreSaisie({ envoi }: { envoi: Envoi }) {
   const optionsMenu: Array<{ icone: keyof typeof Ionicons.glyphMap; libelle: string; action: () => void; couleur: string }> = [
     { icone: 'leaf', libelle: fr ? 'Parcelle' : 'Plot', action: () => { setMenu(false); setChoixParcelle(true); }, couleur: COLORS.forestGreen },
     { icone: 'location', libelle: fr ? 'Position GPS' : 'GPS location', action: () => void position(), couleur: '#D08A33' },
-    { icone: 'document-text', libelle: fr ? 'Document PDF' : 'PDF document', action: () => void document(), couleur: COLORS.error },
+    { icone: 'document-attach', libelle: fr ? 'Fichier' : 'File', action: () => void fichier(), couleur: COLORS.error },
     { icone: 'images', libelle: fr ? 'Galerie' : 'Gallery', action: () => void galerie(), couleur: COLORS.info },
   ];
 

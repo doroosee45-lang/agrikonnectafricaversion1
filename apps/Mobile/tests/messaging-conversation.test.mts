@@ -106,3 +106,23 @@ describe('messagerie — fil (FlatList inversée)', () => {
     assert.deepEqual(aAcquitter([message({ created_at: 1, sender_id: 'autre' }), message({ created_at: 2 }), message({ created_at: 3, sender_id: 'autre', server_id: null })], 'moi'), ['s-1']);
   });
 });
+
+import { preparerFichier } from '../src/features/messaging/conversation/messageContent.ts';
+
+describe('messagerie — bouton « Fichier » (sélecteur natif)', () => {
+  it('type annoncé par le système prioritaire ; extension ajoutée si le nom n’en a pas (Android content://)', () => {
+    assert.deepEqual(preparerFichier('Rapport sol', 'application/pdf'), { nom: 'Rapport sol.pdf', mime: 'application/pdf', genre: 'DOCUMENT' });
+    assert.deepEqual(preparerFichier('IMG_2026.JPG', 'image/jpeg'), { nom: 'IMG_2026.JPG', mime: 'image/jpeg', genre: 'IMAGE' });
+    assert.deepEqual(preparerFichier('visite.mp4', 'video/mp4'), { nom: 'visite.mp4', mime: 'video/mp4', genre: 'DOCUMENT' });
+    assert.deepEqual(preparerFichier('memo.mp3', 'audio/mpeg'), { nom: 'memo.mp3', mime: 'audio/mpeg', genre: 'AUDIO' });
+  });
+  it('type système absent ou générique : repli sur l’extension', () => {
+    assert.deepEqual(preparerFichier('fiche.pdf', 'application/octet-stream'), { nom: 'fiche.pdf', mime: 'application/pdf', genre: 'DOCUMENT' });
+    assert.deepEqual(preparerFichier('photo.png', null), { nom: 'photo.png', mime: 'image/png', genre: 'IMAGE' });
+  });
+  it('formats refusés par le serveur : null (message « format non accepté »)', () => {
+    assert.equal(preparerFichier('contrat.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'), null);
+    assert.equal(preparerFichier('archive.zip', 'application/zip'), null);
+    assert.equal(preparerFichier(null, null), null);
+  });
+});
