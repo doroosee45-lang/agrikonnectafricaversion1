@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { usePathname, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useQuery } from '@tanstack/react-query';
 
+import { MenuEspace } from '@/components/app/MenuEspace';
 import { PressableScale, Text } from '@/components/ui';
+import { espaceCourant, type IdEspace } from '@/lib/space-nav';
 import { messagingApi } from '@/services/api/endpoints';
 import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
@@ -20,6 +23,7 @@ export function RolePersistentNav() {
   const permissions = useAuthStore((s) => s.permissions);
 
   const canMessage = permissions.includes('messages.read') || permissions.includes('*');
+  const [menuOuvert, setMenuOuvert] = useState(false);
 
   const convQuery = useQuery({
     queryKey: queryKeys.messaging.conversations,
@@ -40,6 +44,10 @@ export function RolePersistentNav() {
       ? "/organization"
       : "/profil";
 
+  // Espace du rôle (même partage que le Web : admin / organisation / espace membre).
+  const espaceDuRole: IdEspace = homeRoute === '/admin' ? 'admin' : homeRoute === '/organization' ? 'organization' : 'app';
+  const espace = espaceCourant(pathname, espaceDuRole);
+
   const unread = (convQuery.data as { totalUnread?: number } | undefined)?.totalUnread ?? 0;
 
   const items = [
@@ -49,6 +57,8 @@ export function RolePersistentNav() {
       : []),
     { key: 'notifs', label: 'Alertes', icon: 'notifications-outline' as const, route: '/notifications', active: pathname.startsWith('/notifications'), badge: 0 },
     { key: 'profil', label: 'Profil', icon: 'person-outline' as const, route: '/profil', active: pathname.startsWith('/profil'), badge: 0 },
+    // Menu = barre latérale Web de l'espace (toutes ses rubriques).
+    { key: 'menu', label: 'Menu', icon: 'menu-outline' as const, route: '', active: menuOuvert, badge: 0 },
   ];
 
   return (
@@ -57,7 +67,7 @@ export function RolePersistentNav() {
         {items.map((item) => (
           <PressableScale
             key={item.key}
-            onPress={() => router.push(item.route as never)}
+            onPress={() => (item.key === 'menu' ? setMenuOuvert(true) : router.push(item.route as never))}
             style={[styles.tab, item.active ? styles.tabActive : null]}
           >
             <View style={styles.iconWrap}>
@@ -76,6 +86,7 @@ export function RolePersistentNav() {
           </PressableScale>
         ))}
       </View>
+      <MenuEspace espace={espace} visible={menuOuvert} onFermer={() => setMenuOuvert(false)} />
     </View>
   );
 }

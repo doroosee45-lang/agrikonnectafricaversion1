@@ -26,6 +26,7 @@ import { formatDate, formatNumber } from '@/lib/format';
 import { DURATION } from '@/theme/motion';
 import { farmApi, plotApi, productionApi, referenceApi } from '@/services/api/endpoints';
 import { queryKeys } from '@/services/query';
+import { ENREGISTRE_HORS_LIGNE, ecrireOuMettreEnFile } from '@/services/ecrituresHorsLigne';
 import { COLORS, TINTS } from '@/theme/colors';
 import { RADIUS, SPACING } from '@/theme/space';
 
@@ -87,22 +88,29 @@ export default function Productions() {
       if (!season.trim()) throw new Error(t('ui.indiquezLaSaisonEx2026A'));
       if (!harvestedAt.trim()) throw new Error(t('ui.indiquezLaDateDeRecolte'));
 
-      return productionApi.create({
-        farmId: selectedFarm,
-        plotId: plotId ?? undefined,
-        cropId,
-        quantity: quantityValue,
-        unit: unit.trim(),
-        season: season.trim(),
-        harvestedAt: harvestedAt.trim(),
-        quality: quality.trim() || undefined,
-        destination: destination.trim() || undefined,
+      // Hors ligne : la récolte est gardée sur le téléphone et envoyée au retour du réseau.
+      return ecrireOuMettreEnFile<{ conversion?: { message?: string | null } }>({
+        methode: 'POST',
+        url: '/productions',
+        corps: {
+          farmId: selectedFarm,
+          plotId: plotId ?? undefined,
+          cropId,
+          quantity: quantityValue,
+          unit: unit.trim(),
+          season: season.trim(),
+          harvestedAt: harvestedAt.trim(),
+          quality: quality.trim() || undefined,
+          destination: destination.trim() || undefined,
+        },
+        libelle: `${t('ui.productionEnregistree')} — ${quantityValue} ${unit.trim()} (${season.trim()})`,
+        invalider: [queryKeys.productions.all as unknown as string[], queryKeys.me as unknown as string[]],
       });
     },
     onSuccess: (result) => {
       setCreating(false);
       setError(null);
-      setNotice(result.data.conversion.message ?? t('ui.productionEnregistree'));
+      setNotice(result.enFile ? ENREGISTRE_HORS_LIGNE : result.data.conversion?.message ?? t('ui.productionEnregistree'));
       setQuantity('');
       setSeason('');
       setHarvestedAt('');

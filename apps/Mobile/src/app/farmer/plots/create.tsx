@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { FarmerHeader } from '@/components/farmer/FarmerHeader';
-import { AuthGate, Button, Card, ErrorState, Input, Screen, Section, Text } from '@/components/ui';
-import { plotApi } from '@/services/api/endpoints';
+import { AuthGate, Button, Card, ChipRow, ErrorState, FilterChip, Input, Screen, Section, Text } from '@/components/ui';
+import { farmApi } from '@/services/api/endpoints';
+import { ENREGISTRE_HORS_LIGNE, ecrireOuMettreEnFile } from '@/services/ecrituresHorsLigne';
+import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
 import { COLORS } from '@/theme/colors';
 import { SPACING } from '@/theme/space';
@@ -19,9 +21,26 @@ export default function FarmerPlotCreate() {
   const [areaHa, setAreaHa] = useState('');
   const [error, setError] = useState<unknown>(null);
 
+  // Exploitations depuis le cache (disponibles hors ligne) : plus d'identifiant à taper.
+  const exploitations = useQuery({
+    queryKey: queryKeys.farms.list({ limit: 100 }),
+    queryFn: () => farmApi.list({ limit: 100 }).then((r) => r.data),
+  });
+  // Hors ligne : la parcelle est gardée sur le téléphone et envoyée au retour du réseau.
   const create = useMutation({
-    mutationFn: () => plotApi.create({ farmId: farmId.trim(), name: name.trim(), areaHa: areaHa ? Number(areaHa) : undefined }),
-    onSuccess: () => { setError(null); router.push('/farmer/plots'); },
+    mutationFn: () =>
+      ecrireOuMettreEnFile({
+        methode: 'POST',
+        url: '/plots',
+        corps: { farmId: farmId.trim(), name: name.trim(), areaHa: areaHa ? Number(areaHa) : undefined },
+        libelle: `${t('ui.nouvelleParcelle')} « ${name.trim()} »`,
+        invalider: [queryKeys.plots.all as unknown as string[], queryKeys.me as unknown as string[]],
+      }),
+    onSuccess: (resultat) => {
+      setError(null);
+      if (resultat.enFile) Alert.alert(t('ui.nouvelleParcelle'), ENREGISTRE_HORS_LIGNE);
+      router.push('/farmer/plots');
+    },
     onError: (caught) => setError(caught),
   });
 
@@ -32,7 +51,15 @@ export default function FarmerPlotCreate() {
         <AuthGate isAuthenticated={isAuthenticated} title={t('ui.nouvelleParcelle')} icon="add-circle-outline">
           <Card tone="white">
             <View style={styles.form}>
-              <Input label={t('ui.exploitationId')} value={farmId} onChangeText={setFarmId} />
+              {(exploitations.data ?? []).length > 0 ? (
+                <ChipRow>
+                  {(exploitations.data ?? []).map((ferme) => (
+                    <FilterChip key={ferme.id} label={ferme.name} active={farmId === ferme.id} onPress={() => setFarmId(ferme.id)} />
+                  ))}
+                </ChipRow>
+              ) : (
+                <Input label={t('ui.exploitationId')} value={farmId} onChangeText={setFarmId} />
+              )}
               <Input label={t('ui.nom')} value={name} onChangeText={setName} />
               <Input label={t('ui.surfaceHa')} value={areaHa} onChangeText={setAreaHa} keyboardType="numeric" />
               {error ? <ErrorState error={error} /> : null}

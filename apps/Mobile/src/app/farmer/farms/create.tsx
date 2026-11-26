@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
 
 import { FarmerHeader } from '@/components/farmer/FarmerHeader';
 import { AuthGate, Button, Card, ErrorState, Input, Screen, Section, Text } from '@/components/ui';
-import { farmApi } from '@/services/api/endpoints';
+import { ENREGISTRE_HORS_LIGNE, ecrireOuMettreEnFile } from '@/services/ecrituresHorsLigne';
+import { queryKeys } from '@/services/query';
 import { useAuthStore } from '@/store/auth';
 import { COLORS } from '@/theme/colors';
 import { SPACING } from '@/theme/space';
@@ -19,9 +20,21 @@ export default function FarmerFarmCreate() {
   const [province, setProvince] = useState('');
   const [error, setError] = useState<unknown>(null);
 
+  // Hors ligne : l'exploitation est gardée sur le téléphone et envoyée au retour du réseau.
   const create = useMutation({
-    mutationFn: () => farmApi.create({ name: name.trim(), countryCode, province: province.trim() || undefined }),
-    onSuccess: () => { setError(null); router.push('/farmer/farms'); },
+    mutationFn: () =>
+      ecrireOuMettreEnFile({
+        methode: 'POST',
+        url: '/farms',
+        corps: { name: name.trim(), countryCode, province: province.trim() || undefined },
+        libelle: `${t('ui.nouvelleExploitation')} « ${name.trim()} »`,
+        invalider: [queryKeys.farms.all as unknown as string[], queryKeys.me as unknown as string[]],
+      }),
+    onSuccess: (resultat) => {
+      setError(null);
+      if (resultat.enFile) Alert.alert(t('ui.nouvelleExploitation'), ENREGISTRE_HORS_LIGNE);
+      router.push('/farmer/farms');
+    },
     onError: (caught) => setError(caught),
   });
 

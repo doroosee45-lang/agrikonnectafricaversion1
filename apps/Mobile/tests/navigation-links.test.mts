@@ -52,8 +52,9 @@ const captureParUnMot = (url: string) => {
 
 describe('navigation — liens statiques', () => {
   it('sépare le profil personnel du profil et des paramètres de l’organisation', () => {
+    // Parité Web (getProfileRoute) : coopérative → profil de l'organisation.
     const roles = ['COOPERATIVE_ADMIN'];
-    assert.equal(getUserProfileRoute(roles), '/professional/profile');
+    assert.equal(getUserProfileRoute(roles), '/organization/profile');
     assert.equal(getUserSettingsRoute(roles), '/settings');
   });
 

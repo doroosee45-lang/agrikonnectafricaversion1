@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, View } from 'react-native';
+import { BandeauSynchro } from '@/components/app/BandeauSynchro';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -75,6 +76,7 @@ export function AppHeader({
             <IconButton icon="settings-outline" onPress={() => router.push(settingsRoute as never)} accessibilityLabel={t('ui.parametres_ef8f0')} />
           </View>
         </View>
+        <BandeauSynchro />
       </View>
     </SafeAreaView>
   );

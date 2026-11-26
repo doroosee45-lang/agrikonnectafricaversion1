@@ -181,6 +181,10 @@ export function resolveActiveContext(
 export function getUserProfileRoute(roles: readonly string[]): string {
   if (roles.includes('INVESTOR')) return '/investment/profile';
   if (roles.includes('FARMER')) return '/farmer/profile';
+  // Comme le Web (getProfileRoute) : coopératives et entreprises → profil de l'organisation.
+  if (roles.some((role) => ['COOPERATIVE_ADMIN', 'COOPERATIVE_MEMBER', 'AGRICULTURAL_COMPANY'].includes(role))) {
+    return '/organization/profile';
+  }
   // Métiers professionnels (agronome, coopérative, acheteur…) : profil professionnel,
   // cohérent avec leurs paramètres. Les autres comptes gardent le profil général.
   if (roles.some((role) => ROLES_PROFIL_PROFESSIONNEL.includes(role))) return '/professional/profile';

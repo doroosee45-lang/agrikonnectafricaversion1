@@ -27,7 +27,8 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60_000,
-      gcTime: 10 * 60_000,
+      // 24 h : le cache restauré hors ligne n'est pas jeté au bout de 10 min.
+      gcTime: 24 * 3600_000,
       retry: shouldRetry,
       refetchOnWindowFocus: IS_WEB,
       refetchOnReconnect: true,

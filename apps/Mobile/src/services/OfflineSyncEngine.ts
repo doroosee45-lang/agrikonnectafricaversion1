@@ -7,6 +7,7 @@ import type { LocalMessage, MessageContentType } from '@/db/models';
 import { api } from '@/services/api/http';
 import { realtime } from '@/services/realtime';
 import { useAuthStore } from '@/store/auth';
+import { rejouerEcritures } from '@/services/ecrituresHorsLigne';
 import { ROUTE_TIRAGE_MESSAGES, tirerToutesLesPages, type ReponseTirage } from '@/services/syncPull';
 
 const MAX_BACKOFF_MS = 60_000;
@@ -139,6 +140,8 @@ class OfflineSyncEngine {
     try {
       await this.processMediaUploadQueue();
       await this.processOutboxQueueFifo();
+      // Écritures métier faites hors ligne (exploitations, parcelles, récoltes…).
+      await rejouerEcritures();
       await this.pullServerDelta();
     } catch (err) {
       // Un échec de tirage (réseau, serveur) ne doit pas devenir un rejet non géré :

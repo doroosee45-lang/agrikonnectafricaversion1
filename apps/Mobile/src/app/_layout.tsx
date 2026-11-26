@@ -16,6 +16,7 @@ import { useAppFonts } from '@/theme/typography';
 import { queryClient } from '@/services/query';
 import { realtime } from '@/services/realtime';
 import { offlineSyncEngine } from '@/services/OfflineSyncEngine';
+import { brancherReseau, persisterCache, restaurerCache } from '@/services/cacheHorsLigne';
 import { useAuthStore } from '@/store/auth';
 import { useLocaleSync } from '@/hooks/useLocaleSync';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
@@ -52,10 +53,32 @@ export default function RootLayout() {
     void initAuth();
   }, [hydrateLocale, initAuth]);
 
+  // Hors ligne : réseau réel (NetInfo) pour React Query, cache restauré puis
+  // enregistré sur l'appareil (tableaux de bord et listes consultables sans réseau).
+  useEffect(() => {
+    const debrancher = brancherReseau();
+    let arreter: (() => void) | undefined;
+    void restaurerCache(queryClient).finally(() => {
+      arreter = persisterCache(queryClient);
+    });
+    return () => {
+      debrancher();
+      arreter?.();
+    };
+  }, []);
+
   // Le temps réel n'a de sens qu'avec une session (le serveur refuse l'anonyme).
   useEffect(() => {
     if (status === 'authenticated') realtime.connect();
     else realtime.disconnect();
+  }, [status]);
+
+  // Synchronisation hors ligne : le moteur n'était JAMAIS démarré (aucun appel à
+  // start()) → pas d'écoute du réseau, pas de renvoi automatique au retour de
+  // la connexion. Démarré avec la session, arrêté à la déconnexion.
+  useEffect(() => {
+    if (status === 'authenticated') offlineSyncEngine.start();
+    else if (status === 'anonymous') offlineSyncEngine.stop();
   }, [status]);
 
   // La langue est relue avant le premier écran : pas de bascule visible fr → en.

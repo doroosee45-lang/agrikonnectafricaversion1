@@ -13,6 +13,7 @@ import { LAYOUT, RADIUS, SPACING } from '@/theme/space';
 import { useAuthStore } from '@/store/auth';
 import { resolveActiveContext } from '@/lib/redirects';
 import { canShowFarmerNavigation } from '@/lib/farmer-navigation';
+import { BandeauSynchro } from '@/components/app/BandeauSynchro';
 
 /**
  * En-tête de l'espace producteur : identité, complétude du dossier et accès
@@ -165,11 +166,15 @@ export function FarmerHeader({ title, subtitle }: { title: string; subtitle?: st
           </SafeAreaView>
         </View>
       </Modal>
+      <View style={styles.bandeauSynchro}>
+        <BandeauSynchro />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  bandeauSynchro: { paddingHorizontal: LAYOUT.screenPadding },
   safe: { backgroundColor: COLORS.naturalWhite },
   header: {
     paddingHorizontal: LAYOUT.screenPadding,

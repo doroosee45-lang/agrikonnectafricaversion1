@@ -49,6 +49,11 @@ export default function FarmerHome() {
   const items = plots.data ?? [];
   const tiles = ((dashboard.data ?? {}).tiles ?? {}) as Record<string, unknown>;
   const totalAreaHa = Number(tiles.totalAreaHa ?? 0) || 0;
+  // Parité Web (tableau de bord producteur) : mêmes tuiles du même `GET /dashboard`.
+  const culturesEnPlace = Number(tiles.activeCrops ?? 0) || 0;
+  const productionKg = Number(tiles.productionKg ?? 0) || 0;
+  const vuesFiche = Number(tiles.profileViews ?? 0) || 0;
+  const criteresManquants = (me.data?.completeness?.criteria ?? []).filter((c) => !c.done);
 
   const plotTracks: MobileHorizonTrack[] = useMemo(
     () =>
@@ -105,8 +110,8 @@ export default function FarmerHome() {
                   id: 'productions',
                   label: t('farmer.productions'),
                   value: formatNumber(counts?.productions ?? 0, locale),
-                  subtitle: t('ui.campagnesSaisies'),
-                  badge: t('ui.lotsQr'),
+                  subtitle: productionKg > 0 ? `${formatNumber(productionKg, locale)} kg` : t('ui.campagnesSaisies'),
+                  badge: t('ui.recoltes'),
                   tone: 'amber',
                   icon: 'leaf-outline',
                   onPress: () => router.push('/farmer/productions'),
@@ -121,8 +126,45 @@ export default function FarmerHome() {
                   icon: 'notifications-outline',
                   onPress: () => router.push('/farmer/alerts'),
                 },
+                {
+                  id: 'crops',
+                  label: locale === 'en' ? 'Crops in the field' : 'Cultures en place',
+                  value: formatNumber(culturesEnPlace, locale),
+                  subtitle: locale === 'en' ? 'Active rotations' : 'Assolements actifs',
+                  tone: 'green',
+                  icon: 'nutrition-outline',
+                  onPress: () => router.push('/farmer/plots'),
+                },
+                {
+                  id: 'views',
+                  label: locale === 'en' ? 'Public profile' : 'Fiche publique',
+                  value: formatNumber(vuesFiche, locale),
+                  subtitle: locale === 'en' ? 'Views' : 'Consultations',
+                  tone: 'blue',
+                  icon: 'globe-outline',
+                  onPress: () => router.push('/farmer/public-profile'),
+                },
               ]}
             />
+
+            {criteresManquants.length > 0 ? (
+              <Card tone="white" style={styles.actions}>
+                <Text preset="h3" color={COLORS.textPrimary}>{locale === 'en' ? 'Recommended next steps' : 'Prochaines étapes recommandées'}</Text>
+                {criteresManquants.slice(0, 5).map((critere) => (
+                  <View key={critere.key} style={styles.etape}>
+                    <View style={styles.puceEtape} />
+                    <Text preset="bodySm" color={COLORS.textPrimary} style={styles.flexEtape}>{critere.label}</Text>
+                  </View>
+                ))}
+                <Button
+                  label={locale === 'en' ? 'Complete my file' : 'Compléter mon dossier'}
+                  onPress={() => router.push('/farmer/verification')}
+                  variant="outline"
+                  size="sm"
+                  icon="shield-checkmark-outline"
+                />
+              </Card>
+            ) : null}
 
             <Card tone="white" style={styles.actions}>
               <Text preset="h3" color={COLORS.textPrimary}>{t('ui.operationsRapides')}</Text>
@@ -173,4 +215,7 @@ const styles = StyleSheet.create({
   section: { paddingTop: SPACING.sm, paddingBottom: SPACING.xxl, gap: SPACING.md },
   actions: { gap: SPACING.sm },
   actionRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
+  etape: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm },
+  puceEtape: { width: 8, height: 8, borderRadius: 4, backgroundColor: COLORS.warning },
+  flexEtape: { flex: 1 },
 });
