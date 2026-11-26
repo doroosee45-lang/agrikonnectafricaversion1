@@ -747,7 +747,15 @@ export const verificationApi = {
   /** Demande de vérification d'un sujet (exploitation, parcelle, certification…). */
   request: (payload: Record<string, unknown>) => api.post<Verification>('/verifications', payload, { idempotent: true }),
   /** File de l'organisation active. */
-  mine: () => api.get<Verification[]>('/verifications/me'),
+  /**
+   * Le serveur renvoie `{ items, criteria }` (VER-05), pas un tableau : les écrans
+   * faisaient `.map` sur l'objet → « items.map is not a function ». Réponse
+   * normalisée ici (les deux écrans reçoivent un tableau).
+   */
+  mine: () =>
+    api
+      .get<Verification[] | { items?: Verification[] }>('/verifications/me')
+      .then((r) => ({ ...r, data: Array.isArray(r.data) ? r.data : r.data?.items ?? [] })),
   /** Queue administrateur / vérificateur. */
   adminQueue: (params: { status?: string; limit?: number } = {}) =>
     api.get<Verification[]>('/admin/verifications', { params: cleanQuery(params) }),

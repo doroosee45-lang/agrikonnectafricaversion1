@@ -1100,10 +1100,14 @@ export interface ConversationListResult {
   totalUnread: number;
 }
 
+/**
+ * Réponse RÉELLE de `GET /messaging/conversations/:id/messages` : `data` porte
+ * `{ conversation, messages }` ; `hasMore` / `nextCursor` sont dans `meta`.
+ * (L'ancien type annonçait `items`, absent de la réponse.)
+ */
 export interface ConversationThreadResult {
-  items: MessageItem[];
-  hasMore: boolean;
-  nextCursor: string | null;
+  conversation: { id: string; subjectType: string | null; subjectId: string | null; status: string; participants: string[] };
+  messages: Array<MessageItem & { attachmentUrls?: (string | null)[] }>;
 }
 
 // ─── Coopératives & organisations ─────────────────────────────
