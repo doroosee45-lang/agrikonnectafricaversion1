@@ -94,7 +94,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       // Pas d'option `color` : expo-notifications déclarerait
       // com.google.firebase.messaging.default_notification_color, déjà déclaré par
       // @react-native-firebase/messaging → échec de fusion du manifeste (build EAS).
-      ['expo-notifications', { icon: './assets/android-icon-monochrome.png' }],
+      // Icône de notification : silhouette blanche du logo (exigence Android), sans `color`.
+      ['expo-notifications', { icon: './assets/notification-icon.png' }],
       ...(appels
         ? [
             '@livekit/react-native-expo-plugin',
