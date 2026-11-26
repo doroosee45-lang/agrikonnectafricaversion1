@@ -1,4 +1,4 @@
-import { Alert, PermissionsAndroid, Platform } from 'react-native';
+import { Alert, AppState, PermissionsAndroid, Platform } from 'react-native';
 
 import { identifiantInstallation } from '@/features/calls/pushDevices';
 import { useI18nStore } from '@/i18n';
@@ -40,31 +40,83 @@ declare const require: (id: string) => any;
 export const PUSH_DEMANDE =
   process.env.EXPO_PUBLIC_PUSH === 'true' || process.env.EXPO_PUBLIC_NATIVE_CALLS === 'true';
 
+/* ───────────── diagnostic (visible dans Paramètres) ───────────── */
+
 /**
- * Push utilisable : drapeau de build, iOS/Android, pas Expo Go, et Firebase
- * réellement compilé dans ce binaire (sinon : reconstruire le build natif).
+ * Étape atteinte par l'enregistrement push. Chaque échec était silencieux
+ * (try/catch vides) : impossible de savoir, sur un APK, pourquoi aucun jeton
+ * n'arrivait au serveur. L'étape et sa raison sont désormais journalisées et
+ * affichées dans Paramètres → Notifications.
  */
-export function pushPossible(): boolean {
-  if (!PUSH_DEMANDE) return false;
-  if (Platform.OS !== 'ios' && Platform.OS !== 'android') return false;
-  if (estExpoGo()) return false;
-  return moduleNatifPresent(...MODULES_NATIFS.firebase);
+export type EtapePush =
+  | 'inactif' // drapeau de build absent
+  | 'non-natif' // web / Expo Go
+  | 'en-cours'
+  | 'permission-refusee'
+  | 'firebase-absent'
+  | 'jeton-absent'
+  | 'envoi-echoue'
+  | 'enregistre';
+
+export interface DiagnosticPush {
+  etape: EtapePush;
+  detail: string | null;
+  a: number;
 }
 
+let diagnostic: DiagnosticPush = { etape: 'inactif', detail: null, a: Date.now() };
+const ecouteursDiagnostic = new Set<(d: DiagnosticPush) => void>();
+
+function noter(etape: EtapePush, detail: string | null = null) {
+  diagnostic = { etape, detail, a: Date.now() };
+  if (etape !== 'enregistre' && etape !== 'en-cours') console.warn('[push]', etape, detail ?? '');
+  ecouteursDiagnostic.forEach((f) => f(diagnostic));
+}
+
+export const lireDiagnosticPush = () => diagnostic;
+export function abonnerDiagnosticPush(f: (d: DiagnosticPush) => void): () => void {
+  ecouteursDiagnostic.add(f);
+  return () => ecouteursDiagnostic.delete(f);
+}
+
+const messageErreur = (e: unknown) => {
+  const statut = (e as { status?: number })?.status;
+  const texte = e instanceof Error ? e.message : String(e);
+  return statut ? `HTTP ${statut} — ${texte}` : texte;
+};
+
+/* ───────────── modules natifs ───────────── */
+
+/** Build natif (Android/iOS, pas Expo Go) avec le drapeau push. */
+const pushNatifDemande = () =>
+  PUSH_DEMANDE && (Platform.OS === 'ios' || Platform.OS === 'android') && !estExpoGo();
+
 let moduleMessaging: any | null | undefined;
+let erreurChargement: string | null = null;
 let moduleNotifications: any | null | undefined;
 
-/** API modulaire de @react-native-firebase/messaging, ou `null`. */
+/**
+ * API modulaire de @react-native-firebase/messaging, ou `null`. La présence du
+ * module natif n'est plus un PRÉALABLE (un faux négatif désactivait tout le
+ * push en silence) : on tente le chargement, et l'échec est expliqué.
+ */
 export function chargerMessagingPush(): any | null {
-  if (!pushPossible()) return null;
-  if (moduleMessaging === undefined) {
-    try {
-      moduleMessaging = require('@react-native-firebase/messaging');
-    } catch {
-      moduleMessaging = null;
-    }
+  if (!pushNatifDemande()) return null;
+  if (moduleMessaging) return moduleMessaging;
+  try {
+    moduleMessaging = require('@react-native-firebase/messaging');
+    erreurChargement = null;
+  } catch (e) {
+    moduleMessaging = undefined; // nouvel essai possible plus tard
+    erreurChargement = `${messageErreur(e)} (module natif ${moduleNatifPresent(...MODULES_NATIFS.firebase) ? 'présent' : 'absent'})`;
+    return null;
   }
   return moduleMessaging;
+}
+
+/** Push utilisable sur cet appareil (Firebase chargé dans un build natif). */
+export function pushPossible(): boolean {
+  return Boolean(chargerMessagingPush());
 }
 
 function chargerNotifications(): any | null {
@@ -97,15 +149,31 @@ function chargerNotifications(): any | null {
 
 /* ───────────── permission et jeton ───────────── */
 
+/**
+ * Autorisation d'afficher des notifications.
+ * 1. Android 13+ : `POST_NOTIFICATIONS` demandée EN PREMIER, sans dépendre de
+ *    Firebase (avant, un échec Firebase empêchait l'invite de s'afficher) ;
+ * 2. Firebase `requestPermission()` (iOS : invite système ; Android : statut).
+ */
 export async function demanderPermissionPush(): Promise<boolean> {
-  const firebase = chargerMessagingPush();
-  if (!firebase) return false;
   if (Platform.OS === 'android' && Number(Platform.Version) >= 33) {
-    const resultat = await PermissionsAndroid.request('android.permission.POST_NOTIFICATIONS' as never);
-    if (resultat !== PermissionsAndroid.RESULTS.GRANTED) return false;
+    const resultat = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+    if (resultat !== PermissionsAndroid.RESULTS.GRANTED) {
+      noter('permission-refusee', resultat === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN
+        ? 'refusée définitivement : à réactiver dans les réglages Android de l’application'
+        : `réponse : ${resultat}`);
+      return false;
+    }
+  }
+  const firebase = chargerMessagingPush();
+  if (!firebase) {
+    noter('firebase-absent', erreurChargement ?? 'module Firebase introuvable dans ce build');
+    return false;
   }
   const statut = await firebase.requestPermission(firebase.getMessaging());
-  return statut === firebase.AuthorizationStatus.AUTHORIZED || statut === firebase.AuthorizationStatus.PROVISIONAL;
+  const ok = statut === firebase.AuthorizationStatus.AUTHORIZED || statut === firebase.AuthorizationStatus.PROVISIONAL;
+  if (!ok) noter('permission-refusee', `statut Firebase : ${statut}`);
+  return ok;
 }
 
 export async function enregistrerJetonPush(token: string): Promise<void> {
@@ -141,6 +209,53 @@ async function afficherAuPremierPlan(message: MessagePush): Promise<void> {
 /* ───────────── démarrage ───────────── */
 
 let notificationInitialeTraitee = false;
+let jetonEnregistre: string | null = null;
+
+/**
+ * Permission → jeton FCM → `POST /notifications/register-token`. Réutilisable
+ * (« Réessayer » dans Paramètres, retour au premier plan). Ne lève jamais.
+ */
+export async function enregistrerAppareilPush(): Promise<DiagnosticPush> {
+  if (!PUSH_DEMANDE) {
+    noter('inactif', 'EXPO_PUBLIC_PUSH absent de ce build');
+    return diagnostic;
+  }
+  if (!pushNatifDemande()) {
+    noter('non-natif', Platform.OS === 'web' ? 'version web' : 'Expo Go : un build de développement ou un APK est nécessaire');
+    return diagnostic;
+  }
+  noter('en-cours');
+  try {
+    if (!(await demanderPermissionPush())) return diagnostic;
+    const firebase = chargerMessagingPush();
+    if (!firebase) {
+      noter('firebase-absent', erreurChargement);
+      return diagnostic;
+    }
+    let jeton: string | null = null;
+    try {
+      jeton = await firebase.getToken(firebase.getMessaging());
+    } catch (e) {
+      noter('jeton-absent', messageErreur(e));
+      return diagnostic;
+    }
+    if (!jeton) {
+      noter('jeton-absent', 'Firebase n’a renvoyé aucun jeton (services Google Play ?)');
+      return diagnostic;
+    }
+    try {
+      await enregistrerJetonPush(jeton);
+    } catch (e) {
+      noter('envoi-echoue', messageErreur(e));
+      return diagnostic;
+    }
+    jetonEnregistre = jeton;
+    noter('enregistre', `jeton …${jeton.slice(-6)}`);
+  } catch (e) {
+    noter('envoi-echoue', messageErreur(e));
+  }
+  return diagnostic;
+}
 
 /**
  * Démarre les notifications pour l'utilisateur connecté. Renvoie la fonction
@@ -149,24 +264,39 @@ let notificationInitialeTraitee = false;
  * prochain démarrage ou à la prochaine connexion.
  */
 export async function demarrerPush(naviguer: (chemin: string) => void): Promise<() => void> {
-  const firebase = chargerMessagingPush();
-  if (!firebase) return () => undefined;
   const nettoyages: Array<() => void> = [];
   const ouvrir = (donnees?: DonneesPush | null) => {
     const chemin = cheminPourNotification(donnees);
     if (chemin) naviguer(chemin);
   };
 
+  // 1. Permission (invite système) puis enregistrement du jeton — en premier.
+  await enregistrerAppareilPush();
+
+  // Échec (serveur injoignable, permission accordée plus tard dans les
+  // réglages…) : nouvel essai à chaque retour au premier plan.
+  const reprise = AppState.addEventListener('change', (etat) => {
+    if (etat === 'active' && diagnostic.etape !== 'enregistre' && diagnostic.etape !== 'en-cours') {
+      void enregistrerAppareilPush();
+    }
+  });
+  nettoyages.push(() => reprise.remove());
+
+  const firebase = chargerMessagingPush();
+  if (!firebase) return () => nettoyages.forEach((retirer) => retirer());
+
   try {
     const messaging = firebase.getMessaging();
-    if (!(await demanderPermissionPush())) return () => undefined;
-
-    const jeton: string | null = await firebase.getToken(messaging).catch(() => null);
-    if (jeton) await enregistrerJetonPush(jeton).catch(() => undefined);
-
     nettoyages.push(
       firebase.onTokenRefresh(messaging, (nouveau: string) => {
-        void enregistrerJetonPush(nouveau).catch(() => undefined);
+        if (nouveau === jetonEnregistre) return;
+        void enregistrerJetonPush(nouveau).then(
+          () => {
+            jetonEnregistre = nouveau;
+            noter('enregistre', `jeton renouvelé …${nouveau.slice(-6)}`);
+          },
+          (e) => noter('envoi-echoue', messageErreur(e)),
+        );
       }),
       firebase.onMessage(messaging, (message: MessagePush) => {
         void afficherAuPremierPlan(message);
@@ -188,8 +318,8 @@ export async function demarrerPush(naviguer: (chemin: string) => void): Promise<
       const initiale: MessagePush | null = await firebase.getInitialNotification(messaging).catch(() => null);
       if (initiale) ouvrir(initiale.data);
     }
-  } catch {
-    /* jamais bloquant */
+  } catch (e) {
+    console.warn('[push] écouteurs non installés :', messageErreur(e));
   }
   return () => nettoyages.forEach((retirer) => retirer());
 }

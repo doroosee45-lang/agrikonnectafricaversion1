@@ -10,6 +10,10 @@
       "environment": "development",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_PUSH": "true",
+        "EXPO_PUBLIC_NATIVE_CALLS": "true"
       }
     },
     "preview": {
@@ -17,6 +21,10 @@
       "environment": "preview",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_PUSH": "true",
+        "EXPO_PUBLIC_NATIVE_CALLS": "true"
       }
     },
     "production": {

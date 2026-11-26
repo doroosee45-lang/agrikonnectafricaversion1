@@ -8,7 +8,7 @@ import { SUPPORTED_LOCALES, useI18n } from '@/i18n';
 import { authApi, notificationApi } from '@/services/api/endpoints';
 import type { NotificationPreference } from '@/services/api/types';
 import { queryKeys } from '@/services/query';
-import { envoyerNotificationTest, pushPossible } from '@/services/pushNotifications';
+import { EtatPush } from '@/components/settings/EtatPush';
 import { useAuthStore } from '@/store/auth';
 import { COLORS } from '@/theme/colors';
 import { SPACING } from '@/theme/space';
@@ -41,34 +41,6 @@ export function PersonalSettings({ profileRoute }: { profileRoute: string }) {
   const notifications = useQuery({
     queryKey: [...queryKeys.notifications.all, 'preferences'],
     queryFn: () => notificationApi.preferences().then((result) => result.data),
-  });
-
-  // Notifications push : envoi de test vers CET utilisateur (bouton discret, builds natifs seulement).
-  const testPush = useMutation({
-    mutationFn: envoyerNotificationTest,
-    onSuccess: (bilan) => {
-      if (bilan.disabled) {
-        Alert.alert(
-          label(locale, 'Push désactivé', 'Push disabled'),
-          label(locale, 'Le serveur n’a pas de configuration FCM active (PUSH_ENABLED).', 'The server has no active FCM configuration (PUSH_ENABLED).'),
-        );
-      } else if (bilan.appareilsActifs === 0) {
-        Alert.alert(
-          label(locale, 'Aucun appareil', 'No device'),
-          label(locale, 'Aucun jeton enregistré : autorise les notifications puis relance l’application.', 'No token registered: allow notifications, then restart the app.'),
-        );
-      } else {
-        Alert.alert(
-          label(locale, 'Notification envoyée', 'Notification sent'),
-          label(
-            locale,
-            `${bilan.sent} envoyée(s), ${bilan.failed} échec(s) sur ${bilan.appareilsActifs} appareil(s).`,
-            `${bilan.sent} sent, ${bilan.failed} failed on ${bilan.appareilsActifs} device(s).`,
-          ),
-        );
-      }
-    },
-    onError: () => Alert.alert(label(locale, 'Échec de l’envoi', 'Sending failed'), label(locale, 'Réessaie plus tard.', 'Try again later.')),
   });
 
   const changeLocale = useMutation({
@@ -227,17 +199,7 @@ export function PersonalSettings({ profileRoute }: { profileRoute: string }) {
           variant="outline"
           onPress={() => router.push('/notifications/preferences')}
         />
-        {pushPossible() ? (
-          <Button
-            label={label(locale, 'Envoyer une notification de test', 'Send a test notification')}
-            variant="ghost"
-            size="sm"
-            icon="notifications-outline"
-            loading={testPush.isPending}
-            onPress={() => testPush.mutate()}
-            testID="push-test-button"
-          />
-        ) : null}
+        <EtatPush />
       </Card>
 
       <Card tone="white">
