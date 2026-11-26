@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
+import { useKeyboardState } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text } from '@/components/ui';
@@ -26,6 +27,8 @@ export function BarreSaisie({ envoi }: { envoi: Envoi }) {
   const { locale } = useI18n();
   const fr = locale !== 'en';
   const insets = useSafeAreaInsets();
+  // Clavier ouvert : la barre est collée au clavier, sans la marge de la barre de gestes.
+  const clavierVisible = useKeyboardState((etat) => etat.isVisible);
   const [texte, setTexte] = useState('');
   const [hauteur, setHauteur] = useState(40);
   const [menu, setMenu] = useState(false);
@@ -186,7 +189,7 @@ export function BarreSaisie({ envoi }: { envoi: Envoi }) {
   const enregistrementVisible = note.enregistre;
 
   return (
-    <View style={[styles.racine, { paddingBottom: Math.max(insets.bottom, SPACING.sm) }]}>
+    <View style={[styles.racine, { paddingBottom: clavierVisible ? SPACING.sm : Math.max(insets.bottom, SPACING.sm) }]}>
       {enregistrementVisible ? (
         <View style={styles.ligne}>
           <View style={[styles.champ, styles.enregistrement]}>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack, useRouter, useSegments } from 'expo-router';
@@ -71,6 +72,8 @@ export default function RootLayout() {
   return (
     <AppErrorBoundary>
       <GestureHandlerRootView style={styles.root}>
+      {/* Clavier : insets réels en mode edge-to-edge (Android 15+/Expo 58), où la fenêtre n'est plus redimensionnée. */}
+      <KeyboardProvider>
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
           <StatusBar style="dark" />
@@ -90,6 +93,7 @@ export default function RootLayout() {
           <CallOverlay />
         </QueryClientProvider>
       </SafeAreaProvider>
+      </KeyboardProvider>
       </GestureHandlerRootView>
     </AppErrorBoundary>
   );

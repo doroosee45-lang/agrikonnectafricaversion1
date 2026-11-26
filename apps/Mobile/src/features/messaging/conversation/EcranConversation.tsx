@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, FlatList, KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Ionicons } from '@expo/vector-icons';
 
 import { AppImage, Text } from '@/components/ui';
@@ -72,7 +73,14 @@ export function EcranConversation({ conversationId, titreDeRepli }: { conversati
         onAppelVocal={() => void appel.lancer()}
         appelOccupe={appel.occupe}
       />
-      <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      {/*
+        Android edge-to-edge (Expo 58) : la fenêtre n'est plus redimensionnée à
+        l'ouverture du clavier, et `KeyboardAvoidingView` de React Native ne
+        faisait rien sur Android (behavior undefined) → clavier par-dessus la
+        barre de saisie. react-native-keyboard-controller lit les insets réels
+        du clavier et pousse la barre au-dessus, comme sur iOS.
+      */}
+      <KeyboardAvoidingView style={styles.flex} behavior="padding" keyboardVerticalOffset={0}>
         <FlatList
           data={conv.fil}
           inverted
@@ -91,17 +99,22 @@ export function EcranConversation({ conversationId, titreDeRepli }: { conversati
           ListFooterComponent={
             conv.chargementAncien ? <ActivityIndicator style={styles.chargement} color={COLORS.forestGreen} /> : undefined
           }
-          ListEmptyComponent={
-            <View style={styles.vide}>
-              <Ionicons name="chatbubbles-outline" size={36} color={COLORS.slateGray} />
-              <Text preset="bodySm" color={COLORS.slateGray} style={styles.videTexte}>
-                {fr
-                  ? 'Aucun message. Écris, envoie une note vocale, une photo du terrain ou partage une parcelle.'
-                  : 'No messages yet. Write, send a voice note, a field photo or share a plot.'}
-              </Text>
-            </View>
-          }
         />
+        {/*
+          État vide HORS de la liste inversée : selon la version de React Native,
+          ListEmptyComponent est déjà redressé ou non (un scaleY: -1 de plus le
+          retournait tête en bas). Superposé à la liste, il ne subit aucune inversion.
+        */}
+        {conv.fil.length === 0 ? (
+          <View style={styles.vide} pointerEvents="none">
+            <Ionicons name="chatbubbles-outline" size={36} color={COLORS.slateGray} />
+            <Text preset="bodySm" color={COLORS.slateGray} style={styles.videTexte}>
+              {fr
+                ? 'Aucun message. Écris, envoie une note vocale, une photo du terrain ou partage une parcelle.'
+                : 'No messages yet. Write, send a voice note, a field photo or share a plot.'}
+            </Text>
+          </View>
+        ) : null}
         <BarreSaisie envoi={envoi} />
       </KeyboardAvoidingView>
 
@@ -119,8 +132,8 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   contenu: { paddingVertical: SPACING.sm, flexGrow: 1 },
   chargement: { marginVertical: SPACING.md },
-  // Liste inversée : le contenu vide est retourné, on le redresse.
-  vide: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: SPACING.sm, padding: SPACING.xl, transform: [{ scaleY: -1 }] },
+  // Superposé à la liste (au-dessus de la barre de saisie), jamais inversé.
+  vide: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 96, alignItems: 'center', justifyContent: 'center', gap: SPACING.sm, padding: SPACING.xl },
   videTexte: { textAlign: 'center' },
   visionneuse: { flex: 1, backgroundColor: 'rgba(0,0,0,0.92)', justifyContent: 'center' },
   pleinEcran: { width: '100%', height: '80%' },
