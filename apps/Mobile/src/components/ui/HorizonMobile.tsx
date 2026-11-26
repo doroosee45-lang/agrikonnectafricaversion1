@@ -507,12 +507,18 @@ const styles = StyleSheet.create({
     borderColor: CREME[200],
     padding: SPACING.sm,
   },
+  // Mêmes propriétés détaillées dans les deux variantes : basculer entre
+  // `flex` (raccourci) et `flexGrow` au redimensionnement faisait retirer
+  // `flex` alors que `flexGrow` restait posé (avertissement React DOM).
   kpiCellMobile: {
-    width: '48%',
+    flexBasis: '48%',
     flexGrow: 1,
+    flexShrink: 1,
   },
   kpiCellWide: {
-    flex: 1,
+    flexBasis: 0,
+    flexGrow: 1,
+    flexShrink: 1,
   },
   kpiInner: {
     flexDirection: 'row',

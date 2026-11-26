@@ -30,6 +30,26 @@ const existe = (url: string) => {
   return routes.some((r) => r.length === segs.length && r.every((s, i) => /^\[.*\]$/.test(s) || s === segs[i]));
 };
 
+/**
+ * Lien « mot fixe » capturé par un segment dynamique : `/organization/offers`
+ * n'a pas d'écran `offers`, mais `organization/[id]` l'accepte → l'écran
+ * appelle `GET /organizations/offers` (422). Un identifiant réel n'est jamais
+ * un mot en minuscules : un tel lien est un écran manquant.
+ */
+const captureParUnMot = (url: string) => {
+  const segs = url.replace(/[?#].*$/, '').split('/').filter(Boolean);
+  const statique = routes.some((r) => r.length === segs.length && r.every((s, i) => s === segs[i]));
+  if (statique) return false;
+  return routes.some(
+    (r) =>
+      r.length === segs.length &&
+      r.every((s, i) => /^\[.*\]$/.test(s) || s === segs[i]) &&
+      // Seul le paramètre générique [id] (identifiant de base de données) : un
+      // [slug] ou un [serviceId] de catalogue est un mot par nature.
+      r.some((s, i) => s === '[id]' && /^[a-z]+(-[a-z]+)*$/.test(segs[i])),
+  );
+};
+
 describe('navigation — liens statiques', () => {
   it('sépare le profil personnel du profil et des paramètres de l’organisation', () => {
     const roles = ['COOPERATIVE_ADMIN'];
@@ -57,7 +77,7 @@ describe('navigation — liens statiques', () => {
     for (const f of fichiers(SRC)) {
       const s = readFileSync(f, 'utf8');
       for (const m of s.matchAll(motif)) {
-        if (!existe(m[2])) casses.push(`${m[2]} (${relative(SRC, f).split(sep).join('/')})`);
+        if (!existe(m[2]) || captureParUnMot(m[2])) casses.push(`${m[2]} (${relative(SRC, f).split(sep).join('/')})`);
       }
     }
     assert.ok(routes.length > 100, `relevé des écrans incomplet : ${routes.length}`);
